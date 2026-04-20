@@ -813,31 +813,58 @@ textarea:focus-visible {
 .rings {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 28px;
+  gap: 40px 24px;
 }
 
 .ring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.ring-value {
-  width: 154px;
-  height: 154px;
-  display: grid;
-  place-items: center;
-  margin: 0 auto 18px;
-  border-radius: 50%;
+.ring-svg {
+  position: relative;
+  width: 168px;
+  height: 168px;
+  margin-bottom: 22px;
+}
+
+.ring-svg svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-svg .track {
+  stroke: var(--g100);
+}
+
+.ring-svg .fill {
+  stroke: url(#copperGrad);
+  stroke-linecap: round;
+}
+
+.ring-val {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fb);
+  font-weight: 700;
+  font-size: 2.4rem;
   color: var(--copper-dark);
-  font-size: 2rem;
-  font-weight: 800;
-  background: conic-gradient(from 0deg, var(--copper) var(--progress), var(--g100) 0);
-  box-shadow: inset 0 0 0 9px var(--surface);
+  letter-spacing: -0.01em;
 }
 
 .ring h3 {
   margin: 0 0 6px;
   color: var(--g900);
-  font-size: 0.96rem;
+  font-family: var(--fb);
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.01em;
 }
 
 .ring p {
@@ -1769,7 +1796,8 @@ textarea:focus-visible {
 .document-card h3 {
   padding: 20px 22px;
   margin: 0;
-  background: var(--warm);
+  background: var(--slate-pale);
+  color: var(--slate-dark);
   font-size: 1rem;
 }
 
@@ -1781,10 +1809,15 @@ textarea:focus-visible {
   min-height: 62px;
   padding: 14px 22px;
   border-top: 1px solid var(--sand);
+  transition: background 0.2s ease;
+}
+
+.document-card a:hover {
+  background: var(--slate-pale);
 }
 
 .document-card .doc-icon {
-  color: var(--copper-dark);
+  color: var(--slate);
   font-size: 1.15rem;
 }
 
