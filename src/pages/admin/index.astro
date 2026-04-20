@@ -9,6 +9,15 @@ export const prerender = true;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <title>Argentina Metals CMS</title>
+    <script is:inline>
+      (() => {
+        const tokenPattern = /^#\/?(invite_token|confirmation_token|recovery_token|email_change_token|access_token)=/;
+        if (tokenPattern.test(window.location.hash) && window.location.hash.startsWith("#/")) {
+          const cleaned = "#" + window.location.hash.slice(2);
+          history.replaceState(null, "", window.location.pathname + window.location.search + cleaned);
+        }
+      })();
+    </script>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>

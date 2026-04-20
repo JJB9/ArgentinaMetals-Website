@@ -24,11 +24,11 @@ const {
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet" />
     <script is:inline>
       (() => {
-        const identityHash = window.location.hash;
-        const identityTokenPattern = /(invite_token|confirmation_token|recovery_token|email_change_token|access_token)=/;
+        const normalizedHash = window.location.hash.replace(/^#\//, "#");
+        const identityTokenPattern = /^#(invite_token|confirmation_token|recovery_token|email_change_token|access_token)=/;
 
-        if (!window.location.pathname.startsWith("/admin") && identityTokenPattern.test(identityHash)) {
-          window.location.replace(`/admin/${identityHash}`);
+        if (!window.location.pathname.startsWith("/admin") && identityTokenPattern.test(normalizedHash)) {
+          window.location.replace(`/admin/${normalizedHash}`);
         }
       })();
     </script>
