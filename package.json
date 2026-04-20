@@ -10,7 +10,6 @@
     "astro": "ASTRO_TELEMETRY_DISABLED=1 astro"
   },
   "dependencies": {
-    "astro": "^6.1.8",
-    "decap-cms-app": "^3.12.2"
+    "astro": "^6.1.8"
   }
 }
