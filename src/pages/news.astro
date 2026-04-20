@@ -7,10 +7,6 @@ const news = (await getCollection("news"))
   .filter((item) => !item.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const [featured, ...otherNews] = news;
-const recentNews = otherNews.slice(0, 3);
-const archiveNews = otherNews.slice(3);
-
 const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
   month: "long",
   day: "numeric",
@@ -43,40 +39,9 @@ const fallbackImage = "/assets/images/rock-quarry-geology.jpg";
         <button class="filter" type="button" data-filter="technical">Technical</button>
       </div>
 
-      {featured && (
-        <a class="news-link featured-news-link" href={`/news/${featured.id}`} data-category={filterSlug(featured.data.category)}>
-          <article class="featured-news">
-            <div class="split-image">
-              <img
-                src={featured.data.image ?? fallbackImage}
-                alt={featured.data.imageAlt ?? featured.data.title}
-                loading="lazy"
-              />
-            </div>
-            <div>
-              <span class:list={["tag", tagClass(featured.data.category)]}>{featured.data.category}</span>
-              <h2>{featured.data.title}</h2>
-              <p>{featured.data.excerpt}</p>
-              <div class="post-meta">
-                <time datetime={featured.data.date.toISOString()}>
-                  <span class="mi" aria-hidden="true">calendar_today</span>
-                  {formatDate(featured.data.date)}
-                </time>
-                {featured.data.readTime && (
-                  <span class="post-read-time">
-                    <span class="mi" aria-hidden="true">schedule</span>
-                    {featured.data.readTime}
-                  </span>
-                )}
-              </div>
-            </div>
-          </article>
-        </a>
-      )}
-
-      <div class="news-grid spaced">
-        {recentNews.map((item) => (
-          <a class="news-link" href={`/news/${item.id}`} data-category={filterSlug(item.data.category)}>
+      <div class="news-grid cards-grid">
+        {news.map((item) => (
+          <a class="news-link" href={`/news/${item.id}`} data-category={filterSlug(item.data.category)} data-order={news.indexOf(item)}>
             <article class="news-card">
               {item.data.image && (
                 <div class="news-card-img">
@@ -96,7 +61,7 @@ const fallbackImage = "/assets/images/rock-quarry-geology.jpg";
     </div>
   </section>
 
-  {archiveNews.length > 0 && (
+  {news.length > 6 && (
     <section class="section soft">
       <div class="wrap">
         <div class="section-header">
@@ -107,8 +72,8 @@ const fallbackImage = "/assets/images/rock-quarry-geology.jpg";
         </div>
 
         <div class="archive-list">
-          {archiveNews.map((item) => (
-            <a class="news-link archive-link" href={`/news/${item.id}`} data-category={filterSlug(item.data.category)}>
+          {news.slice(6).map((item, index) => (
+            <a class="news-link archive-link" href={`/news/${item.id}`} data-category={filterSlug(item.data.category)} data-archive-index={index}>
               <article class="archive-item">
                 <time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time>
                 <div>
@@ -120,6 +85,20 @@ const fallbackImage = "/assets/images/rock-quarry-geology.jpg";
             </a>
           ))}
         </div>
+
+        {news.slice(6).length > 10 && (
+          <div class="pagination">
+            <button class="pagination-btn prev" type="button" aria-label="Previous page" disabled>
+              <span class="mi" aria-hidden="true">chevron_left</span>
+            </button>
+            <span class="pagination-info">
+              <span class="current-page">1</span> / <span class="total-pages">1</span>
+            </span>
+            <button class="pagination-btn next" type="button" aria-label="Next page">
+              <span class="mi" aria-hidden="true">chevron_right</span>
+            </button>
+          </div>
+        )}
       </div>
     </section>
   )}
@@ -147,35 +126,174 @@ const fallbackImage = "/assets/images/rock-quarry-geology.jpg";
       text-decoration: none;
     }
 
-    .featured-news-link {
-      margin-bottom: 30px;
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
     }
 
-    .featured-news-link .featured-news {
-      margin-bottom: 0;
+    @media (max-width: 768px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .archive-link + .archive-link {
       margin-top: 0;
+    }
+
+    .archive-link.hidden {
+      display: none !important;
+    }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--color-sand);
+    }
+
+    .pagination-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 1px solid var(--color-sand);
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .pagination-btn:hover:not(:disabled) {
+      background: var(--color-sand);
+      border-color: var(--color-stone);
+    }
+
+    .pagination-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .pagination-info {
+      font-size: 14px;
+      color: var(--color-stone);
+    }
+
+    .current-page,
+    .total-pages {
+      font-weight: 600;
     }
   </style>
 
   <script is:inline>
     (() => {
       const buttons = document.querySelectorAll(".filter[data-filter]");
-      const items = document.querySelectorAll("[data-category]");
-      if (!buttons.length || !items.length) return;
+      const cardItems = document.querySelectorAll(".cards-grid .news-link");
+      const archiveItems = document.querySelectorAll(".archive-list .news-link");
+      const paginationPrev = document.querySelector(".pagination-btn.prev");
+      const paginationNext = document.querySelector(".pagination-btn.next");
+      const currentPageSpan = document.querySelector(".current-page");
+      const totalPagesSpan = document.querySelector(".total-pages");
+
+      if (!buttons.length || !cardItems.length) return;
+
+      let currentPage = 0;
+      let currentFilter = "all";
+      const itemsPerPage = 10;
+
+      const getFilteredArchiveItems = (filter) => {
+        return Array.from(archiveItems).filter((el) => {
+          const cat = el.getAttribute("data-category");
+          return filter === "all" || cat === filter;
+        });
+      };
+
+      const updateArchivePagination = () => {
+        const filteredItems = getFilteredArchiveItems(currentFilter);
+        const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+
+        filteredItems.forEach((el, index) => {
+          const pageIndex = Math.floor(index / itemsPerPage);
+          el.classList.toggle("hidden", pageIndex !== currentPage);
+        });
+
+        if (currentPageSpan && totalPagesSpan) {
+          currentPageSpan.textContent = currentPage + 1;
+          totalPagesSpan.textContent = Math.max(1, totalPages);
+        }
+
+        if (paginationPrev) paginationPrev.disabled = currentPage === 0;
+        if (paginationNext) paginationNext.disabled = currentPage >= totalPages - 1;
+      };
+
+      const updateDisplay = (filter) => {
+        const allItems = Array.from(cardItems);
+        let visibleCount = 0;
+
+        // Show/hide cards based on filter (max 6)
+        allItems.forEach((el) => {
+          const cat = el.getAttribute("data-category");
+          const matches = filter === "all" || cat === filter;
+
+          if (matches && visibleCount < 6) {
+            el.style.display = "";
+            visibleCount++;
+          } else {
+            el.style.display = "none";
+          }
+        });
+
+        currentFilter = filter;
+        currentPage = 0;
+        updateArchivePagination();
+      };
 
       buttons.forEach((btn) => {
         btn.addEventListener("click", () => {
           const filter = btn.getAttribute("data-filter");
           buttons.forEach((b) => b.classList.toggle("active", b === btn));
-          items.forEach((el) => {
-            const match = filter === "all" || el.getAttribute("data-category") === filter;
-            el.style.display = match ? "" : "none";
-          });
+          updateDisplay(filter);
         });
       });
+
+      if (paginationPrev) {
+        paginationPrev.addEventListener("click", () => {
+          if (currentPage > 0) {
+            currentPage--;
+            updateArchivePagination();
+            document.querySelector(".pagination")?.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      }
+
+      if (paginationNext) {
+        paginationNext.addEventListener("click", () => {
+          const filteredItems = getFilteredArchiveItems(currentFilter);
+          const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+          if (currentPage < totalPages - 1) {
+            currentPage++;
+            updateArchivePagination();
+            document.querySelector(".pagination")?.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      }
+
+      // Initialize with "all" filter
+      updateDisplay("all");
     })();
   </script>
 </BaseLayout>
