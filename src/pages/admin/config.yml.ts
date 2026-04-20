@@ -1,6 +1,5 @@
 const config = `backend:
-  name: github
-  repo: JJB9/ArgentinaMetals-Website
+  name: git-gateway
   branch: main
 
 local_backend: true

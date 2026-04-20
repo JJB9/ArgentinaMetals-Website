@@ -29,5 +29,15 @@ const {
       <slot />
     </main>
     <SiteFooter />
+    <script is:inline>
+      (() => {
+        const identityHash = window.location.hash;
+        const identityTokenPattern = /(invite_token|confirmation_token|recovery_token|email_change_token|access_token)=/;
+
+        if (!window.location.pathname.startsWith("/admin") && identityTokenPattern.test(identityHash)) {
+          window.location.replace(`/admin${identityHash}`);
+        }
+      })();
+    </script>
   </body>
 </html>
