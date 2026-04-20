@@ -1,20 +1,168 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PageHeader from "@components/PageHeader.astro";
+
+const highlights = [
+  ["category", "Pure-Play Copper", "Dedicated exposure to the critical metal driving electrification. Direct access to the geological extension of Chile's world-class copper corridor."],
+  ["flag", "First-Mover Advantage", "146,000+ hectares assembled ahead of institutional capital. 100+ GIS-identified targets in terrain never systematically explored."],
+  ["show_chart", "TSX-V Listing (VLLC)", "Clear path to public markets under ticker VLLC, providing liquidity and enhanced valuation metrics for shareholders."],
+  ["policy", "Milei Reform Tailwind", "RIGI 30-year tax stability, profit repatriation, and streamlined permitting are validated by Glencore, BHP, and Rio Tinto commitments."],
+  ["pie_chart", "Tight Capital Structure", "~60% insider ownership. Nil warrants. Top 10 shareholders own 75%+. Founder shares in 36-month escrow."],
+  ["public", "Proven LatAm Team", "Combined 100+ years of experience across exploration, public markets, M&A, and Argentine operations."]
+];
+
+const documents = [
+  {
+    title: "Corporate Documents",
+    items: [
+      ["Corporate Presentation", "PDF / 4.2 MB"],
+      ["Fact Sheet (1-Pager)", "PDF"],
+      ["NI 43-101 Technical Report", "PDF / 18.5 MB"],
+      ["Articles of Incorporation", "PDF"]
+    ]
+  },
+  {
+    title: "Financial Statements",
+    items: [
+      ["Annual Financial Statements (Audited)", "FY2025"],
+      ["Interim Financial Statements", "Q1 2026"],
+      ["Management Discussion & Analysis (MD&A)", "Q1 2026"],
+      ["Filing Archive", "SEDAR+ / All Years"]
+    ]
+  },
+  {
+    title: "Regulatory Filings",
+    items: [
+      ["Prospectus", "TSXV Listing"],
+      ["Material Change Reports", "SEDAR+"],
+      ["Information Circular (Proxy)", "AGM 2026"],
+      ["Insider Reports", "SEDI"]
+    ]
+  },
+  {
+    title: "Stock Information",
+    items: [
+      ["Exchange", "TSX Venture Exchange"],
+      ["Ticker Symbol", "VLLC"],
+      ["Shares Outstanding (Basic)", "20,526,881"],
+      ["Fully Diluted", "22,843,548"]
+    ]
+  }
+];
 ---
 
 <BaseLayout title="Investors - Argentina Metals Corp.">
   <PageHeader
     eyebrow="Investors"
-    title="A tight vehicle for Argentina's copper re-rating"
-    text="Investor materials, market updates, and technical reports will live here as the Astro and Decap structure expands."
+    title="Pure-play exposure to Argentina's copper re-rating"
+    text="High-grade copper exploration in one of the world's most prospective emerging jurisdictions. TSX Venture Exchange listed under ticker VLLC."
   />
   <section class="content-band">
     <div class="wrap stats-grid">
       <div class="stat"><span>Land Package</span><strong>146k</strong><p>Hectares controlled</p></div>
-      <div class="stat"><span>Project Areas</span><strong>26</strong><p>Across prospective districts</p></div>
-      <div class="stat"><span>Targets</span><strong>100+</strong><p>GIS-ranked opportunities</p></div>
+      <div class="stat"><span>Capital Raised</span><strong>C$4.8M</strong><p>Raised to date</p></div>
+      <div class="stat"><span>Ownership</span><strong>~60%</strong><p>Insider ownership</p></div>
       <div class="stat"><span>Ticker</span><strong>VLLC</strong><p>TSX Venture Exchange</p></div>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="wrap">
+      <div class="ticker-card">
+        <div>
+          <span>TSX-V: VLLC</span>
+          <strong>Listing Pending</strong>
+        </div>
+        <p>Live stock data will be activated upon successful listing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <div>
+          <h2 class="section-title">Investment Highlights</h2>
+          <p class="section-desc">Six core pillars defining the Argentina Metals value proposition.</p>
+        </div>
+      </div>
+
+      <div class="content-grid">
+        {highlights.map(([icon, title, text]) => (
+          <article class="card icon-card">
+            <span class="mi" aria-hidden="true">{icon}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft" id="offering">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <div>
+          <h2 class="section-title">Current Offering</h2>
+          <p class="section-desc">C$2M raise at $0.60/share to fund immediate technical programs, additional license acquisition, and TSXV listing requirements.</p>
+        </div>
+      </div>
+
+      <article class="offering-card">
+        <span>Series B / Pre-Listing</span>
+        <h2>C$ 2,000,000 at $0.60 / Share</h2>
+        <p>Pre-money valuation C$ 12.3M / Post-money C$ 14.3M / Nil warrants. Proceeds fund Phase 2 field programs, additional Mendoza licenses, and the path to public listing.</p>
+        <div class="offering-grid">
+          <div>
+            <h3>Terms</h3>
+            <dl class="terms-list">
+              <div><dt>Target Raise</dt><dd>C$ 2,000,000</dd></div>
+              <div><dt>Issue Price</dt><dd>$0.60 / Share</dd></div>
+              <div><dt>Pre-Money Valuation</dt><dd>C$ 12.3M</dd></div>
+              <div><dt>Post-Money Valuation</dt><dd>C$ 14.3M</dd></div>
+              <div><dt>Warrants</dt><dd>Nil</dd></div>
+            </dl>
+          </div>
+          <div>
+            <h3>Use of Proceeds</h3>
+            <div class="progress-list">
+              <div style="--value: 40%"><span>Additional Licenses &amp; Acquisition</span><strong>40%</strong><i></i></div>
+              <div style="--value: 35%"><span>Technical Work &amp; Drill Prep</span><strong>35%</strong><i></i></div>
+              <div style="--value: 15%"><span>TSXV Listing &amp; Legal</span><strong>15%</strong><i></i></div>
+              <div style="--value: 10%"><span>Working Capital</span><strong>10%</strong><i></i></div>
+            </div>
+          </div>
+        </div>
+        <a class="button primary" href="mailto:contact@argentinametals.com?subject=Subscription%20Agreement%20Request">Request Subscription Agreement <span class="mi" aria-hidden="true">arrow_forward</span></a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="docs">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <div>
+          <h2 class="section-title">Documents &amp; Filings</h2>
+          <p class="section-desc">All continuous disclosure documents are filed on <a href="https://www.sedarplus.ca" target="_blank" rel="noopener">SEDAR+</a>. Downloads and stock information are available below.</p>
+        </div>
+      </div>
+
+      <div class="document-grid">
+        {documents.map((group) => (
+          <article class="document-card">
+            <h3>{group.title}</h3>
+            {group.items.map(([name, meta]) => (
+              <a href={name.includes("SEDAR") || meta.includes("SEDAR") ? "https://www.sedarplus.ca" : "#"} target={meta.includes("SEDAR") ? "_blank" : undefined} rel={meta.includes("SEDAR") ? "noopener" : undefined}>
+                <span>{name}</span>
+                <strong>{meta}</strong>
+              </a>
+            ))}
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>

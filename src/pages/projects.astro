@@ -2,6 +2,66 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PageHeader from "@components/PageHeader.astro";
 const base = import.meta.env.BASE_URL;
+
+const projects = [
+  {
+    tag: "Satellite",
+    title: "El Burrero Group",
+    text: "Historic copper mining area within the Rio Damas Formation. Manto-type stratabound mineralization with high-grade potential at accessible depth.",
+    meta: ["Manto-type Cu", "W. Malargue"]
+  },
+  {
+    tag: "Satellite",
+    title: "Northern Cluster",
+    text: "Multiple GIS-defined anomalies across acquired concessions. Structural corridor aligned with regional NW-SE lineaments controlling hydrothermal fluid pathways.",
+    meta: ["Structural targets", "W. Malargue"]
+  },
+  {
+    tag: "Satellite",
+    title: "Porphyry Corridor",
+    text: "Targets defined by GIS modelling, analogous to the El Perdido system currently being drill-tested by Kobrea Exploration to the west.",
+    meta: ["Porphyry model", "W. Malargue"]
+  },
+  {
+    tag: "Early-Stage",
+    title: "Southern Extensions",
+    text: "Staked ground extending the land package south along strike of known copper-bearing formations. Early-stage reconnaissance confirms prospective geology.",
+    meta: ["Along-strike", "Reconnaissance"]
+  },
+  {
+    tag: "Early-Stage",
+    title: "Additional Concessions",
+    text: "Remaining project areas under GIS evaluation. Priority ranking is based on geochemical signatures, structural positioning, and proximity to confirmed mineralization.",
+    meta: ["GIS evaluation", "Pipeline"]
+  },
+  {
+    tag: "Early-Stage",
+    title: "Western Corridor",
+    text: "Acquired concessions along the western margin of the district. Prospective for both manto-type and deeper porphyry-style mineralization.",
+    meta: ["Cu-Au targets", "W. Malargue"]
+  }
+];
+
+const roadmap = [
+  {
+    phase: "Phase 01",
+    status: "Completed",
+    title: "Consolidation & Targeting",
+    text: "Land acquisition, historical data compilation, GIS target generation, and initial mapping. 100+ priority targets defined across 26 project areas."
+  },
+  {
+    phase: "Phase 02",
+    status: "Current",
+    title: "Surface Work & Geophysics",
+    text: "Detailed mapping, geochemical sampling, and magnetometric surveys at Las Estrellas. Pre-drill work and additional license acquisition in satellite areas."
+  },
+  {
+    phase: "Phase 03",
+    status: "Next",
+    title: "Drill Testing",
+    text: "Inaugural drill program testing highest-priority targets defined through Phase 2 magnetometric and geochemical anomalies at Las Estrellas."
+  }
+];
 ---
 
 <BaseLayout title="Projects - Argentina Metals Corp.">
@@ -10,17 +70,125 @@ const base = import.meta.env.BASE_URL;
     title="District-scale copper exploration"
     text="The portfolio spans 146,728 hectares across the Western Malargue Mining District, one of Argentina's most prospective copper-gold corridors."
   />
+  <section class="content-band compact">
+    <div class="wrap stats-grid">
+      <div class="stat"><span>Total Land Package</span><strong>146,728</strong><p>Hectares controlled</p></div>
+      <div class="stat"><span>Project Areas</span><strong>26</strong><p>Across Western Malargue</p></div>
+      <div class="stat"><span>GIS Targets</span><strong>100+</strong><p>Ranked exploration opportunities</p></div>
+      <div class="stat"><span>Title Status</span><strong>Clean</strong><p>No NSRs or earn-ins</p></div>
+    </div>
+  </section>
+
   <section class="content-band">
     <div class="wrap">
-      <div class="feature-grid">
-        <article class="feature">
-          <h3>Las Estrellas</h3>
-          <p>The flagship project anchors a growing exploration platform with multiple copper target styles and high-priority drill-ready areas.</p>
-          <a class="feature-link" href="/contact">Request project details <span class="mi" aria-hidden="true">arrow_forward</span></a>
-        </article>
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <div>
+          <h2 class="section-title">Flagship Project</h2>
+          <p class="section-desc">Our most advanced target has two distinct mineralization styles confirmed by surface geochemistry and magnetometric surveys.</p>
+        </div>
+      </div>
+
+      <article class="project-flagship" id="las-estrellas">
         <div class="split-image">
           <img src={`${base}assets/images/rock-quarry-geology.jpg`} alt="Western Malargue geological terrain" loading="lazy" />
         </div>
+        <div class="project-flagship-body">
+          <span class="tag press">Flagship</span>
+          <h2>Las Estrellas</h2>
+          <p>Manto-type copper oxides in the Rio Damas Formation and porphyry copper-gold signatures in the Huincan Formation. Surface sampling returned up to 9,978 ppm Cu. Magnetometric survey complete with drill-ready targets defined at 50-150 m depth.</p>
+          <div class="detail-list">
+            <span><span class="mi" aria-hidden="true">layers</span> Manto-type + Porphyry Cu-Au</span>
+            <span><span class="mi" aria-hidden="true">science</span> 144 rock chips collected</span>
+            <span><span class="mi" aria-hidden="true">my_location</span> 1.5 km to KBX drilling</span>
+          </div>
+          <a class="feature-link" href="/contact">Request project details <span class="mi" aria-hidden="true">arrow_forward</span></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <div>
+          <h2 class="section-title">Satellite &amp; Exploration Targets</h2>
+          <p class="section-desc">Priority targets across the district, each leveraging the same geological corridor that hosts Las Estrellas.</p>
+        </div>
+      </div>
+
+      <div class="project-grid">
+        {projects.map((project) => (
+          <article class="project-card">
+            <span class:list={["tag", { technical: project.tag === "Early-Stage" }]}>{project.tag}</span>
+            <h3>{project.title}</h3>
+            <p>{project.text}</p>
+            <div class="card-meta">
+              {project.meta.map((item) => <span>{item}</span>)}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <div>
+          <h2 class="section-title">Land Position Summary</h2>
+          <p class="section-desc">Consolidated tenure across acquired and staked project areas.</p>
+        </div>
+      </div>
+
+      <div class="data-card">
+        <table>
+          <tbody>
+            <tr><th scope="row">Projects Acquired</th><td>24 / 132,155 ha</td></tr>
+            <tr><th scope="row">Projects Staked</th><td>2 / 14,573 ha</td></tr>
+            <tr class="highlight"><th scope="row">Total Land Package</th><td>146,728 ha</td></tr>
+            <tr><th scope="row">Title Status</th><td>Clean / No NSRs or Earn-Ins</td></tr>
+            <tr><th scope="row">NI 43-101 Technical Report</th><td>Completed</td></tr>
+            <tr><th scope="row">Initial Mapping, Geophysics &amp; Geochemistry</th><td>Completed</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <div>
+          <h2 class="section-title">Roadmap</h2>
+          <p class="section-desc">Three phases from consolidation through discovery. Phase 2 is underway across Las Estrellas and priority satellite targets.</p>
+        </div>
+      </div>
+
+      <div class="timeline-grid">
+        {roadmap.map((item) => (
+          <article class="timeline-card">
+            <div class="timeline-top"><span>{item.phase}</span><strong>{item.status}</strong></div>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="callout">
+        <div>
+          <span>District Validation / Neighbor Activity</span>
+          <h2>Kobrea is drilling El Perdido, 1.5 km from our boundary.</h2>
+          <p>Kobrea Exploration (CSE: KBX) is actively drilling the El Perdido porphyry copper-gold-molybdenum target immediately west of Las Estrellas, providing third-party validation of the geological model and the district's potential.</p>
+        </div>
+        <strong>1.5 km</strong>
       </div>
     </div>
   </section>

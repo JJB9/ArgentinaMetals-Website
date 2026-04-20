@@ -7,6 +7,10 @@ const news = (await getCollection("news"))
   .filter((item) => !item.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
+const [featured, ...otherNews] = news;
+const recentNews = otherNews.slice(0, 3);
+const archiveNews = otherNews.slice(3);
+
 const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
   month: "long",
   day: "numeric",
@@ -18,18 +22,84 @@ const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
   <PageHeader
     eyebrow="News"
     title="Press releases and corporate updates"
-    text="The first Decap-ready content collection is wired here, so future news entries can be edited as Markdown."
+    text="Press releases, corporate updates, and exploration progress from Argentina Metals."
   />
   <section class="content-band">
-    <div class="wrap news-grid">
-      {news.map((item) => (
-        <article class="news-card">
-          <span class:list={["tag", { press: item.data.category === "Press Release", technical: item.data.category === "Technical" }]}>{item.data.category}</span>
-          <h3>{item.data.title}</h3>
-          <p>{item.data.excerpt}</p>
-          <time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time>
+    <div class="wrap">
+      <div class="filter-row" aria-label="News categories">
+        <span class="filter active">All</span>
+        <span class="filter">Press Releases</span>
+        <span class="filter">Corporate Updates</span>
+        <span class="filter">Technical</span>
+      </div>
+
+      {featured && (
+        <article class="featured-news">
+          <div class="split-image">
+            <img src="/assets/images/rock-quarry-geology.jpg" alt="Exploration field terrain" loading="lazy" />
+          </div>
+          <div>
+            <span class:list={["tag", { press: featured.data.category === "Press Release", technical: featured.data.category === "Technical" }]}>{featured.data.category}</span>
+            <h2>{featured.data.title}</h2>
+            <p>{featured.data.excerpt}</p>
+            <time datetime={featured.data.date.toISOString()}>{formatDate(featured.data.date)}</time>
+          </div>
         </article>
-      ))}
+      )}
+
+      <div class="news-grid spaced">
+        {recentNews.map((item) => (
+          <article class="news-card">
+            <span class:list={["tag", { press: item.data.category === "Press Release", technical: item.data.category === "Technical" }]}>{item.data.category}</span>
+            <h3>{item.data.title}</h3>
+            <p>{item.data.excerpt}</p>
+            <time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {archiveNews.length > 0 && (
+    <section class="section soft">
+      <div class="wrap">
+        <div class="section-header">
+          <span class="section-num">01</span>
+          <div>
+            <h2 class="section-title">Previous Releases</h2>
+            <p class="section-desc">Earlier corporate milestones and exploration updates.</p>
+          </div>
+        </div>
+
+        <div class="archive-list">
+          {archiveNews.map((item) => (
+            <article class="archive-item">
+              <time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time>
+              <div>
+                <h3>{item.data.title}</h3>
+                <p>{item.data.excerpt}</p>
+              </div>
+              <span class="mi" aria-hidden="true">arrow_forward</span>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="wrap">
+      <div class="newsletter">
+        <div>
+          <h2>Company Newsletter</h2>
+          <p>Sign up to receive periodic corporate milestones and exploration progress from Argentina Metals.</p>
+        </div>
+        <form class="newsletter-form" name="newsletter" method="post" data-netlify="true">
+          <input type="hidden" name="form-name" value="newsletter" />
+          <input class="form-input" type="email" name="email" placeholder="Your email address" aria-label="Email address" />
+          <button class="button primary" type="submit">Subscribe</button>
+        </form>
+      </div>
     </div>
   </section>
 </BaseLayout>

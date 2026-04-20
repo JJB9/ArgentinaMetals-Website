@@ -1,6 +1,78 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PageHeader from "@components/PageHeader.astro";
+
+const executives = [
+  {
+    name: "Raymond D. Harari",
+    initials: "RH",
+    role: "CEO & Director",
+    bio: "Founder of Canalis Capital. Native Spanish speaker with deep Latin America expertise. Led multiple TSXV and CSE listings including Westward Gold, Hercules Metals, and Sendero Resources."
+  },
+  {
+    name: "Dr. Titus Gebel",
+    initials: "TG",
+    role: "Chairman",
+    bio: "Over 20 years in the resource sector. Co-founder and former CEO of Deutsche Rohstoff AG. Former Director at Osisko Exploration. Instrumental in early financing for the Malartic gold mine."
+  },
+  {
+    name: "Gabriel Feliu",
+    initials: "GF",
+    role: "VP Exploration",
+    bio: "Senior exploration leader with 30+ years across major South American jurisdictions. Experience at Barrick Gold and Los Azules (McEwen Copper). Key contributor to multiple discoveries in the El Deseado Massif."
+  },
+  {
+    name: "Carlo Rigillo",
+    initials: "CR",
+    role: "Chief Financial Officer",
+    bio: "Over 20 years as CFO for TSX and CSE listed companies. Skilled in financial reporting, M&A transactions, investor relations, and growth-stage public company management."
+  },
+  {
+    name: "Martin Hoff",
+    initials: "MH",
+    role: "Director",
+    bio: "Over 20 years as a resource-focused investor and strategic advisor in Europe. Managing Partner at HuHo Capital. Head of Strategic Investment at Aumontis Holding AG. Board experience with TSXV-listed T2 Metals."
+  },
+  {
+    name: "Julio Pullisich",
+    initials: "JP",
+    role: "Director",
+    bio: "Mendoza-born entrepreneur with experience across mining, real estate, retail, and professional services. Co-Founder of Torre-Pullisich Accounting Firm. 30+ years working with mining companies in Argentina."
+  }
+];
+
+const advisors = [
+  {
+    name: "Pablo Cortegoso",
+    initials: "PC",
+    role: "Technical Advisor",
+    bio: "Co-Founder & CTO of Stardust. Co-Founder of Andina. Energy sector expertise."
+  },
+  {
+    name: "Zachary Goldenberg",
+    initials: "ZG",
+    role: "Capital Markets Advisor",
+    bio: "Corporate lawyer specializing in TSXV go-public transactions. Principal at Liberty Venture Partners."
+  },
+  {
+    name: "Peter Geerdts",
+    initials: "PG",
+    role: "Senior Geologist",
+    bio: "25+ years of exploration across Australia, Africa, and Europe. Co-founder of Alderan Resources."
+  },
+  {
+    name: "Joaquin Mignaquy",
+    initials: "JM",
+    role: "Argentina Advisor",
+    bio: "Co-founder of Andina. Bridge between foreign capital and Argentine mining projects."
+  },
+  {
+    name: "Chris Paul",
+    initials: "CP",
+    role: "Technical Advisor",
+    bio: "CEO of Hercules Metals. 15+ years discovery and capital markets experience. Founder of Ridgeline Exploration."
+  }
+];
 ---
 
 <BaseLayout title="Company - Argentina Metals Corp.">
@@ -11,9 +83,57 @@ import PageHeader from "@components/PageHeader.astro";
   />
   <section class="content-band">
     <div class="wrap content-grid">
-      <article class="card"><h3>Geological Symmetry</h3><p>The same Andean porphyry belt that produced many of the world's largest copper mines continues into Argentina.</p></article>
-      <article class="card"><h3>Policy Tailwind</h3><p>Reforms, permitting momentum, and major-company commitments are improving the operating backdrop for exploration.</p></article>
-      <article class="card"><h3>Capital Alignment</h3><p>A focused structure and significant insider ownership are designed for maximum leverage to discovery.</p></article>
+      <article class="card icon-card"><span class="mi" aria-hidden="true">public</span><h3>Geological Symmetry</h3><p>The same Andean porphyry belt that produced 7 of the world's top 20 copper mines continues across the border into Argentina.</p></article>
+      <article class="card icon-card"><span class="mi" aria-hidden="true">policy</span><h3>Milei Reform Tailwind</h3><p>RIGI 30-year tax stability, profit repatriation, and streamlined permitting are being validated by Glencore, BHP, and Rio Tinto commitments.</p></article>
+      <article class="card icon-card"><span class="mi" aria-hidden="true">pie_chart</span><h3>Tight Capital Structure</h3><p>~60% insider ownership, nil warrants, and top 10 shareholders owning 75%+ are designed for maximum leverage to discovery.</p></article>
+    </div>
+  </section>
+
+  <section class="section soft" id="team">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <div>
+          <h2 class="section-title">Executive Team &amp; Board</h2>
+          <p class="section-desc">Combined 100+ years of experience across exploration, public markets, M&amp;A, and Argentine operations.</p>
+        </div>
+      </div>
+
+      <div class="team-grid">
+        {executives.map((member) => (
+          <article class="team-card">
+            <div class="avatar" aria-hidden="true">{member.initials}</div>
+            <div class="team-card-body">
+              <h3>{member.name}</h3>
+              <p class="role">{member.role}</p>
+              <p>{member.bio}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <div>
+          <h2 class="section-title">Advisory Board</h2>
+          <p class="section-desc">Specialists supporting technical execution, capital markets strategy, and Argentina-side project development.</p>
+        </div>
+      </div>
+
+      <div class="advisor-grid">
+        {advisors.map((advisor) => (
+          <article class="advisor-card">
+            <div class="avatar small" aria-hidden="true">{advisor.initials}</div>
+            <h3>{advisor.name}</h3>
+            <p class="role">{advisor.role}</p>
+            <p>{advisor.bio}</p>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>

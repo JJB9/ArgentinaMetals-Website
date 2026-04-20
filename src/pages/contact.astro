@@ -6,14 +6,51 @@ import PageHeader from "@components/PageHeader.astro";
 <BaseLayout title="Contact - Argentina Metals Corp.">
   <PageHeader
     eyebrow="Contact"
-    title="Contact Argentina Metals"
-    text="For investor relations, project information, and corporate inquiries, use the contact points below."
+    title="Contact"
+    text="Whether you're an investor, partner, or journalist, we'd love to hear from you."
   />
   <section class="content-band">
-    <div class="wrap content-grid">
-      <article class="contact-card"><h2>Investor Relations</h2><p><a href="mailto:ir@argentinametals.com">ir@argentinametals.com</a></p></article>
-      <article class="contact-card"><h2>Corporate Office</h2><p>Argentina Metals Corp.<br />TSX-V: VLLC</p></article>
-      <article class="contact-card"><h2>Media</h2><p><a href="/news">View current news and company updates.</a></p></article>
+    <div class="wrap contact-layout">
+      <aside class="contact-card contact-panel">
+        <h2>Get in Touch</h2>
+        <div class="contact-detail">
+          <span class="mi" aria-hidden="true">location_on</span>
+          <p><strong>Corporate Office</strong>Vancouver, BC, Canada</p>
+        </div>
+        <div class="contact-detail">
+          <span class="mi" aria-hidden="true">alternate_email</span>
+          <p><strong>Investor Relations</strong><a href="mailto:ir@argentinametals.com">ir@argentinametals.com</a></p>
+        </div>
+        <div class="contact-detail">
+          <span class="mi" aria-hidden="true">schedule</span>
+          <p><strong>Response Time</strong>Within 2 business days</p>
+        </div>
+        <div class="contact-detail">
+          <span class="mi" aria-hidden="true">verified</span>
+          <p><strong>Listed Company</strong>TSX-V: VLLC</p>
+        </div>
+      </aside>
+
+      <form class="contact-form" name="contact" method="post" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact" />
+        <div class="form-grid">
+          <label>First Name<input class="form-input" type="text" name="first-name" placeholder="John" /></label>
+          <label>Last Name<input class="form-input" type="text" name="last-name" placeholder="Smith" /></label>
+          <label>Email<input class="form-input" type="email" name="email" placeholder="john@example.com" required /></label>
+          <label>Topic<select class="form-input" name="topic">
+            <option value="">Select a topic</option>
+            <option value="general">General Inquiry</option>
+            <option value="investment">Investment &amp; IR</option>
+            <option value="partnership">Partnership Opportunity</option>
+            <option value="media">Media &amp; Press</option>
+            <option value="technical">Technical / Projects</option>
+            <option value="other">Other</option>
+          </select></label>
+          <label class="full">Message<textarea class="form-input" name="message" placeholder="How can we help?" required></textarea></label>
+        </div>
+        <label class="check-row"><input type="checkbox" name="newsletter" checked /> Subscribe to our company newsletter</label>
+        <button class="button primary" type="submit">Send Message <span class="mi" aria-hidden="true">arrow_forward</span></button>
+      </form>
     </div>
   </section>
 </BaseLayout>
