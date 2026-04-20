@@ -1,7 +1,7 @@
 ---
 title: "Management Team Appointments Announced"
 date: 2025-06-10
-category: "Corporate"
+category: "Corporate Update"
 excerpt: "Argentina Metals names experienced LatAm mining executives to Board and Advisory Committee."
 draft: false
 ---
