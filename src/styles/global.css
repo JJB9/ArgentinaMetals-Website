@@ -872,6 +872,10 @@ textarea:focus-visible {
   font-weight: 700;
 }
 
+.news-all-link {
+  margin-top: 32px;
+}
+
 .feature-metrics {
   display: flex;
   flex-wrap: wrap;
