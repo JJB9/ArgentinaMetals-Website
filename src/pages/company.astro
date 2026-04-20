@@ -84,23 +84,23 @@ const advisors = [
   />
   <section class="content-band">
     <div class="wrap">
-      <div class="section-header">
+      <div class="section-header" data-reveal>
         <div>
           <h2 class="section-title">Three Pillars Define Our Approach</h2>
         </div>
       </div>
 
       <div class="content-grid">
-        <article class="card icon-card"><span class="mi" aria-hidden="true">public</span><h3>Geological Symmetry</h3><p>The same Andean porphyry belt that produced 7 of the world's top 20 copper mines continues across the border into Argentina.</p></article>
-        <article class="card icon-card"><span class="mi" aria-hidden="true">policy</span><h3>Milei Reform Tailwind</h3><p>RIGI 30-year tax stability, profit repatriation, and streamlined permitting are being validated by Glencore, BHP, and Rio Tinto commitments.</p></article>
-        <article class="card icon-card"><span class="mi" aria-hidden="true">pie_chart</span><h3>Tight Capital Structure</h3><p>~60% insider ownership, nil warrants, and top 10 shareholders owning 75%+ are designed for maximum leverage to discovery.</p></article>
+        <article class="card icon-card" data-reveal style="--i:0"><span class="mi" aria-hidden="true">public</span><h3>Geological Symmetry</h3><p>The same Andean porphyry belt that produced 7 of the world's top 20 copper mines continues across the border into Argentina.</p></article>
+        <article class="card icon-card" data-reveal style="--i:1"><span class="mi" aria-hidden="true">policy</span><h3>Milei Reform Tailwind</h3><p>RIGI 30-year tax stability, profit repatriation, and streamlined permitting are being validated by Glencore, BHP, and Rio Tinto commitments.</p></article>
+        <article class="card icon-card" data-reveal style="--i:2"><span class="mi" aria-hidden="true">pie_chart</span><h3>Tight Capital Structure</h3><p>~60% insider ownership, nil warrants, and top 10 shareholders owning 75%+ are designed for maximum leverage to discovery.</p></article>
       </div>
     </div>
   </section>
 
   <section class="section soft" id="team">
     <div class="wrap">
-      <div class="section-header">
+      <div class="section-header" data-reveal>
         <div>
           <h2 class="section-title">Executive Team &amp; Board</h2>
           <p class="section-desc">Combined 100+ years of experience across exploration, public markets, M&amp;A, and Argentine operations.</p>
@@ -108,8 +108,8 @@ const advisors = [
       </div>
 
       <div class="team-grid">
-        {executives.map((member) => (
-          <article class="team-card">
+        {executives.map((member, i) => (
+          <article class="team-card" data-reveal style={`--i:${i % 3}`}>
             <div class="avatar" aria-hidden="true">{member.initials}</div>
             <div class="team-card-body">
               <h3>{member.name}</h3>
@@ -124,7 +124,7 @@ const advisors = [
 
   <section class="section">
     <div class="wrap">
-      <div class="section-header">
+      <div class="section-header" data-reveal>
         <div>
           <h2 class="section-title">Advisory Board</h2>
           <p class="section-desc">Specialists supporting technical execution, capital markets strategy, and Argentina-side project development.</p>
@@ -132,8 +132,8 @@ const advisors = [
       </div>
 
       <div class="advisor-grid">
-        {advisors.map((advisor) => (
-          <article class="advisor-card">
+        {advisors.map((advisor, i) => (
+          <article class="advisor-card" data-reveal style={`--i:${i % 4}`}>
             <div class="avatar small" aria-hidden="true">{advisor.initials}</div>
             <h3>{advisor.name}</h3>
             <p class="role">{advisor.role}</p>

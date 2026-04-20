@@ -51,16 +51,16 @@ const kpi = [
 >
   <section class="hero">
     <div class="wrap">
-      <h1>A Pure-Play on Argentina's <em>Copper Boom</em></h1>
-      <p>Acquiring premium assets in the world's #7 copper region while the market re-prices the "Milei Effect."</p>
-      <div class="hero-actions">
+      <h1 data-reveal style="--i:0">A Pure-Play on Argentina's <em>Copper Boom</em></h1>
+      <p data-reveal style="--i:1">Acquiring premium assets in the world's #7 copper region while the market re-prices the "Milei Effect."</p>
+      <div class="hero-actions" data-reveal style="--i:2">
         <a class="button primary" href="#thesis">Explore the Opportunity <span class="mi" aria-hidden="true">arrow_forward</span></a>
         <a class="button secondary" href="/investor">View Investor Deck</a>
       </div>
     </div>
   </section>
 
-  <div class="hero-media">
+  <div class="hero-media" data-reveal style="--i:3">
     <div class="hero-media-frame">
       <video autoplay muted loop playsinline src={asset("assets/images/case-video.mp4")}></video>
     </div>
@@ -68,7 +68,7 @@ const kpi = [
 
   <section class="section" id="thesis">
     <div class="wrap">
-      <div class="section-header">
+      <div class="section-header" data-reveal>
         <span class="section-num">01</span>
         <div>
           <h2 class="section-title">The Thesis</h2>
@@ -77,8 +77,8 @@ const kpi = [
       </div>
 
       <div class="card-grid">
-        {thesis.map((item) => (
-          <article class="card">
+        {thesis.map((item, i) => (
+          <article class="card" data-reveal style={`--i:${i}`}>
             <h3>{item.title}</h3>
             <p>{item.text}</p>
           </article>
@@ -89,7 +89,7 @@ const kpi = [
 
   <section class="section soft">
     <div class="wrap">
-      <div class="section-header">
+      <div class="section-header" data-reveal>
         <span class="section-num">02</span>
         <div>
           <h2 class="section-title">From Overlooked to Essential</h2>
@@ -98,7 +98,7 @@ const kpi = [
       </div>
 
       <div class="split">
-        <div class="split-visual">
+        <div class="split-visual" data-reveal>
           <div class="split-image">
             <img src={asset("assets/images/rock-quarry-geology.jpg")} alt="Layered geology in a copper exploration district" loading="lazy" />
           </div>
@@ -118,7 +118,7 @@ const kpi = [
             </ul>
           </div>
         </div>
-        <div class="split-copy">
+        <div class="split-copy" data-reveal style="--i:1">
           <h2>Re-rating a century of missed opportunity.</h2>
           <p>For decades, political instability kept capital out of Argentina, creating a profound valuation gap compared to its neighbors. The "Milei Effect" is rapidly closing this gap — and the early movers capture the arbitrage.</p>
         </div>
@@ -128,7 +128,7 @@ const kpi = [
 
   <section class="section">
     <div class="wrap">
-      <div class="section-header">
+      <div class="section-header" data-reveal>
         <span class="section-num">03</span>
         <div>
           <h2 class="section-title">The Electrification Metal</h2>
@@ -187,7 +187,7 @@ const kpi = [
 
   <section class="section soft">
     <div class="wrap">
-      <div class="section-header">
+      <div class="section-header" data-reveal>
         <span class="section-num">04</span>
         <div>
           <h2 class="section-title">The Rocks Don't Know They Crossed a Border</h2>
@@ -196,7 +196,7 @@ const kpi = [
       </div>
 
       <div class="feature-grid">
-        <article class="feature">
+        <article class="feature" data-reveal style="--i:0">
           <h3>Elite prospects at entry-level pricing.</h3>
           <p>Acquiring highly prospective ground in Argentina today costs a fraction of similar ground in Chile — despite sharing the same geological belt, the same intrusive history, and the same copper-gold endowment.</p>
           <a class="feature-link" href="/projects">Read the technical report <span class="mi" aria-hidden="true">arrow_forward</span></a>
@@ -206,7 +206,7 @@ const kpi = [
           </div>
         </article>
 
-        <article class="feature alt">
+        <article class="feature alt" data-reveal style="--i:1">
           <h3>One of the largest private packages in the region.</h3>
           <p>We control district-scale ground across the most prospective belts in San Juan and Catamarca, giving us multi-decade exploration runway before the rush begins in earnest.</p>
           <a class="feature-link" href="/projects">Explore the projects <span class="mi" aria-hidden="true">arrow_forward</span></a>
@@ -222,8 +222,8 @@ const kpi = [
   <section class="section">
     <div class="wrap">
       <div class="stats-grid" aria-label="Company highlights">
-        {kpi.map(([lbl, val, caption]) => (
-          <div class="stat"><span>{lbl}</span><strong>{val}</strong><p>{caption}</p></div>
+        {kpi.map(([lbl, val, caption], i) => (
+          <div class="stat" data-reveal style={`--i:${i}`}><span>{lbl}</span><strong>{val}</strong><p>{caption}</p></div>
         ))}
       </div>
     </div>
@@ -231,7 +231,7 @@ const kpi = [
 
   <section class="section soft">
     <div class="wrap">
-      <div class="section-header">
+      <div class="section-header" data-reveal>
         <span class="section-num">05</span>
         <div>
           <h2 class="section-title">Latest News</h2>
@@ -240,8 +240,8 @@ const kpi = [
       </div>
 
       <div class="news-grid">
-        {news.map((item) => (
-          <a class="news-card" href="/news">
+        {news.map((item, i) => (
+          <a class="news-card" href="/news" data-reveal style={`--i:${i}`}>
             {item.data.image && (
               <div class="news-card-img">
                 <img src={item.data.image} alt={item.data.imageAlt ?? item.data.title} loading="lazy" />
@@ -263,7 +263,7 @@ const kpi = [
 
   <section class="section">
     <div class="wrap">
-      <div class="callout">
+      <div class="callout" data-reveal>
         <div>
           <span>Investor Access</span>
           <h2>Position yourself before the market catches up.</h2>

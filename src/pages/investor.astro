@@ -65,7 +65,7 @@ const documents = [
   />
   <section class="section soft">
     <div class="wrap">
-      <div class="ticker-card">
+      <div class="ticker-card" data-reveal>
         <div>
           <span>TSX-V: VLLC</span>
           <strong>Listing Pending</strong>
@@ -77,7 +77,7 @@ const documents = [
 
   <section class="section">
     <div class="wrap">
-      <div class="section-header">
+      <div class="section-header" data-reveal>
         <div>
           <h2 class="section-title">Investment Highlights</h2>
           <p class="section-desc">Six core pillars defining the Argentina Metals value proposition.</p>
@@ -85,8 +85,8 @@ const documents = [
       </div>
 
       <div class="content-grid">
-        {highlights.map(([icon, title, text]) => (
-          <article class="card icon-card">
+        {highlights.map(([icon, title, text], i) => (
+          <article class="card icon-card" data-reveal style={`--i:${i}`}>
             <span class="mi" aria-hidden="true">{icon}</span>
             <h3>{title}</h3>
             <p>{text}</p>
@@ -98,14 +98,14 @@ const documents = [
 
   <section class="section soft" id="offering">
     <div class="wrap">
-      <div class="section-header">
+      <div class="section-header" data-reveal>
         <div>
           <h2 class="section-title">Current Offering</h2>
           <p class="section-desc">C$2M raise at $0.60/share to fund immediate technical programs, additional license acquisition, and TSXV listing requirements.</p>
         </div>
       </div>
 
-      <article class="offering-card">
+      <article class="offering-card" data-reveal style="--i:1">
         <span>Series B / Pre-Listing</span>
         <h2>C$ 2,000,000 at $0.60 / Share</h2>
         <p>Pre-money valuation C$ 12.3M / Post-money C$ 14.3M / Nil warrants. Proceeds fund Phase 2 field programs, additional Mendoza licenses, and the path to public listing.</p>
@@ -122,7 +122,7 @@ const documents = [
           </div>
           <div>
             <h3>Use of Proceeds</h3>
-            <div class="progress-list">
+            <div class="progress-list" data-reveal>
               <div style="--value: 40%"><span>Additional Licenses &amp; Acquisition</span><strong>40%</strong><i></i></div>
               <div style="--value: 35%"><span>Technical Work &amp; Drill Prep</span><strong>35%</strong><i></i></div>
               <div style="--value: 15%"><span>TSXV Listing &amp; Legal</span><strong>15%</strong><i></i></div>
@@ -137,7 +137,7 @@ const documents = [
 
   <section class="section" id="docs">
     <div class="wrap">
-      <div class="section-header">
+      <div class="section-header" data-reveal>
         <div>
           <h2 class="section-title">Documents &amp; Filings</h2>
           <p class="section-desc">All continuous disclosure documents are filed on <a href="https://www.sedarplus.ca" target="_blank" rel="noopener">SEDAR+</a>. Downloads and stock information are available below.</p>
@@ -145,8 +145,8 @@ const documents = [
       </div>
 
       <div class="document-grid">
-        {documents.map((group) => (
-          <article class="document-card">
+        {documents.map((group, i) => (
+          <article class="document-card" data-reveal style={`--i:${i}`}>
             <h3>{group.title}</h3>
             {group.items.map(([icon, name, meta]) => (
               <a href={name.includes("SEDAR") || meta.includes("SEDAR") ? "https://www.sedarplus.ca" : "#"} target={meta.includes("SEDAR") ? "_blank" : undefined} rel={meta.includes("SEDAR") ? "noopener" : undefined}>

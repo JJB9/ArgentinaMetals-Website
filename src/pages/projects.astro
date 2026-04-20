@@ -41,7 +41,7 @@ const roadmap = [
   />
   <section class="content-band">
     <div class="wrap">
-      <div class="section-header">
+      <div class="section-header" data-reveal>
         <div>
           <h2 class="section-title">Flagship Project</h2>
           <p class="section-desc">Our most advanced target has two distinct mineralization styles confirmed by surface geochemistry and magnetometric surveys.</p>
@@ -92,8 +92,8 @@ const roadmap = [
       </div>
 
       <div class="project-grid">
-        {projects.map((project) => (
-          <article class="project-card">
+        {projects.map((project, i) => (
+          <article class="project-card" data-reveal style={`--i:${i % 3}`}>
             <div class="project-card-img">
               <img src={project.image} alt={project.imageAlt} loading="lazy" />
             </div>
@@ -118,14 +118,14 @@ const roadmap = [
 
   <section class="section">
     <div class="wrap">
-      <div class="section-header">
+      <div class="section-header" data-reveal>
         <div>
           <h2 class="section-title">Land Position Summary</h2>
           <p class="section-desc">Consolidated tenure across acquired and staked project areas.</p>
         </div>
       </div>
 
-      <div class="dtw">
+      <div class="dtw" data-reveal>
         <table class="dt">
           <tbody>
             <tr><th scope="row">Projects Acquired</th><td class="num">24 / 132,155 ha</td></tr>
@@ -142,7 +142,7 @@ const roadmap = [
 
   <section class="section soft">
     <div class="wrap">
-      <div class="section-header">
+      <div class="section-header" data-reveal>
         <div>
           <h2 class="section-title">Roadmap</h2>
           <p class="section-desc">Three phases from consolidation through discovery. Phase 2 is underway across Las Estrellas and priority satellite targets.</p>
@@ -150,8 +150,8 @@ const roadmap = [
       </div>
 
       <div class="timeline-grid">
-        {roadmap.map((item) => (
-          <article class="timeline-card">
+        {roadmap.map((item, i) => (
+          <article class="timeline-card" data-reveal style={`--i:${i}`}>
             <div class="timeline-top"><span>{item.phase}</span><strong>{item.status}</strong></div>
             <h3>{item.title}</h3>
             <p>{item.text}</p>
@@ -163,7 +163,7 @@ const roadmap = [
 
   <section class="section">
     <div class="wrap">
-      <div class="callout">
+      <div class="callout" data-reveal>
         <div>
           <span>District Validation / Neighbor Activity</span>
           <h2>Kobrea is drilling El Perdido — 1.5 km from our boundary.</h2>

@@ -41,6 +41,35 @@ const {
         }
       })();
     </script>
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        root.classList.add("has-motion");
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduced) {
+          root.classList.add("reveal-done");
+          return;
+        }
+        const observe = () => {
+          const targets = document.querySelectorAll("[data-reveal]:not(.is-visible)");
+          if (!targets.length) return;
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                io.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+          targets.forEach((el) => io.observe(el));
+        };
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", observe, { once: true });
+        } else {
+          observe();
+        }
+      })();
+    </script>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
