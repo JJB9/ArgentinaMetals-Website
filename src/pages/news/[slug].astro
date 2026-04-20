@@ -1,0 +1,213 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const news = await getCollection("news", ({ data }) => !data.draft);
+  return news.map((item) => ({
+    params: { slug: item.id },
+    props: { item }
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+
+const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric"
+});
+
+const tagClass = (category: string) => {
+  if (category === "Press Release") return "press";
+  if (category === "Technical") return "technical";
+  return "update";
+};
+---
+
+<BaseLayout title={`${item.data.title} - Argentina Metals Corp.`} description={item.data.excerpt}>
+  <article class="news-article">
+    <div class="article-column" style="width:min(100% - 48px,700px);margin-inline:auto">
+      <a class="back-link" href="/news">
+        <span class="mi" aria-hidden="true">arrow_back</span>
+        All news
+      </a>
+
+      <header class="article-head">
+        <span class:list={["tag", tagClass(item.data.category)]}>{item.data.category}</span>
+        <h1>{item.data.title}</h1>
+        <p class="article-excerpt">{item.data.excerpt}</p>
+        <div class="post-meta">
+          <time datetime={item.data.date.toISOString()}>
+            <span class="mi" aria-hidden="true">calendar_today</span>
+            {formatDate(item.data.date)}
+          </time>
+          {item.data.readTime && (
+            <span class="post-read-time">
+              <span class="mi" aria-hidden="true">schedule</span>
+              {item.data.readTime}
+            </span>
+          )}
+        </div>
+      </header>
+
+      {item.data.image && (
+        <figure class="article-hero">
+          <img src={item.data.image} alt={item.data.imageAlt ?? item.data.title} />
+        </figure>
+      )}
+
+      <div class="article-body">
+        <Content />
+      </div>
+
+      <a class="back-link bottom" href="/news">
+        <span class="mi" aria-hidden="true">arrow_back</span>
+        All news
+      </a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .news-article {
+    padding: 64px 0 112px;
+  }
+
+  .article-column {
+    width: min(100% - 48px, 700px);
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 32px;
+    color: var(--g500);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .back-link.bottom {
+    margin: 48px 0 0;
+  }
+
+  .back-link:hover {
+    color: var(--copper-dark);
+  }
+
+  .back-link .mi {
+    font-size: 1rem;
+  }
+
+  .article-head {
+    margin: 0 0 36px;
+  }
+
+  .article-head h1 {
+    margin: 14px 0 18px;
+    color: var(--g900);
+    font-size: clamp(1.9rem, 4vw, 2.9rem);
+    line-height: 1.15;
+  }
+
+  .article-excerpt {
+    margin: 0 0 24px;
+    color: var(--g500);
+    font-size: 1.08rem;
+    line-height: 1.7;
+  }
+
+  .article-head .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    color: var(--g400);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  .article-head .post-meta time,
+  .article-head .post-read-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-head .post-meta .mi {
+    font-size: 1rem;
+    color: var(--copper-dark);
+  }
+
+  .article-hero {
+    margin: 0 0 40px;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--sand);
+    box-shadow: var(--shadow-md);
+  }
+
+  .article-hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: cover;
+  }
+
+  .article-body {
+    color: var(--g700, var(--g500));
+    font-size: 1.02rem;
+    line-height: 1.85;
+  }
+
+  .article-body :global(p) {
+    margin: 0 0 20px;
+  }
+
+  .article-body :global(h2) {
+    margin: 40px 0 14px;
+    color: var(--g900);
+    font-size: 1.55rem;
+    line-height: 1.3;
+  }
+
+  .article-body :global(h3) {
+    margin: 32px 0 12px;
+    color: var(--g900);
+    font-size: 1.2rem;
+    line-height: 1.35;
+  }
+
+  .article-body :global(ul),
+  .article-body :global(ol) {
+    margin: 0 0 20px;
+    padding-left: 22px;
+  }
+
+  .article-body :global(li) {
+    margin-bottom: 6px;
+  }
+
+  .article-body :global(a) {
+    color: var(--copper-dark);
+    text-decoration: underline;
+  }
+
+  .article-body :global(blockquote) {
+    margin: 24px 0;
+    padding: 4px 0 4px 18px;
+    border-left: 3px solid var(--copper-dark);
+    color: var(--g600, var(--g500));
+    font-style: italic;
+  }
+
+  .article-body :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+  }
+</style>

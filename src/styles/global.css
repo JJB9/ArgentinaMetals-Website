@@ -166,7 +166,7 @@ textarea:focus-visible {
 
 .site-brand.site-brand-icon img {
   width: auto;
-  height: 80px;
+  height: 64px;
 }
 
 .site-header-feature .site-brand {
@@ -620,10 +620,6 @@ textarea:focus-visible {
 
 .section {
   padding: 112px 0;
-}
-
-.section.soft {
-  background: var(--warm);
 }
 
 .section-header {
