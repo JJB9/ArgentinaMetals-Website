@@ -1,4 +1,4 @@
-backend:
+const config = `backend:
   name: github
   repo: JJB9/ArgentinaMetals-Website
   branch: main
@@ -24,3 +24,12 @@ collections:
       - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Draft", name: "draft", widget: "boolean", default: false }
       - { label: "Body", name: "body", widget: "markdown" }
+`;
+
+export function GET() {
+  return new Response(config, {
+    headers: {
+      "Content-Type": "text/yaml; charset=utf-8"
+    }
+  });
+}
