@@ -15,7 +15,48 @@ export const prerender = true;
     <script>
       import CMS from "decap-cms-app";
 
-      CMS.init();
+      const identityTokenPattern = /(invite_token|confirmation_token|recovery_token|email_change_token)=/;
+      const hasIdentityToken = identityTokenPattern.test(window.location.hash);
+
+      let cmsStarted = false;
+
+      const startCms = () => {
+        if (!cmsStarted) {
+          cmsStarted = true;
+          CMS.init();
+        }
+      };
+
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", () => {
+          if (hasIdentityToken) {
+            window.netlifyIdentity.open();
+            return;
+          }
+
+          startCms();
+        });
+
+        window.netlifyIdentity.on("login", () => {
+          window.location.replace("/admin/");
+        });
+
+        window.netlifyIdentity.on("signup", () => {
+          window.location.replace("/admin/");
+        });
+
+        window.netlifyIdentity.on("confirm", () => {
+          window.location.replace("/admin/");
+        });
+
+        window.netlifyIdentity.on("close", () => {
+          if (!hasIdentityToken) {
+            startCms();
+          }
+        });
+      } else {
+        startCms();
+      }
     </script>
   </body>
 </html>
