@@ -9,6 +9,10 @@ const asset = (path: string) => `${base}${path}`;
 const normalize = (href: string) => href === "/" ? "/" : href.replace(/\/$/, "");
 const currentPath = normalize(pathname);
 
+const isHome = currentPath === "/" || currentPath === "/home2";
+const brandSrc = isHome ? "assets/images/logo-copper-green.png" : "assets/images/icon-copper-green.png";
+const brandDims = isHome ? { width: 1427, height: 882 } : { width: 666, height: 614 };
+
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Home v2", href: "/home2" },
@@ -20,9 +24,9 @@ const navItems = [
 ];
 ---
 
-<header class="site-header">
-  <a class="site-brand" href="/" aria-label="Argentina Metals home">
-    <img src={asset("assets/images/logo-copper-green.png")} alt="Argentina Metals Corp." />
+<header class:list={["site-header", { "site-header-feature": isHome }]}>
+  <a class:list={["site-brand", { "site-brand-icon": !isHome }]} href="/" aria-label="Argentina Metals home">
+    <img src={asset(brandSrc)} alt="Argentina Metals Corp." width={brandDims.width} height={brandDims.height} fetchpriority="high" decoding="async" />
   </a>
   <nav class="site-nav" aria-label="Primary navigation">
     {navItems.map((item) => (
