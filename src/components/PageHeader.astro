@@ -1,15 +1,42 @@
 ---
+interface Stat {
+  value: string;
+  label: string;
+}
+
 interface Props {
   title: string;
   text: string;
+  image?: string;
+  imageAlt?: string;
+  stats?: Stat[];
 }
 
-const { title, text } = Astro.props;
+const { title, text, image, imageAlt, stats } = Astro.props;
+const hasStats = Array.isArray(stats) && stats.length > 0;
+const split = Boolean(image);
 ---
 
-<section class="page-hero">
+<section class:list={["page-hero", { "page-hero--split": split }]}>
   <div class="wrap">
-    <h1>{title}</h1>
-    <p>{text}</p>
+    <div class="page-hero-text">
+      <h1>{title}</h1>
+      <p>{text}</p>
+      {hasStats && (
+        <div class="page-hero-stats">
+          {stats!.map((stat) => (
+            <div class="page-hero-stat">
+              <span class="page-hero-stat-value">{stat.value}</span>
+              <span class="page-hero-stat-label">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+    {image && (
+      <div class="page-hero-img">
+        <img src={image} alt={imageAlt ?? ""} width="1200" height="900" loading="eager" />
+      </div>
+    )}
   </div>
 </section>

@@ -79,17 +79,15 @@ const roadmap = [
 <BaseLayout title="Projects - Argentina Metals Corp.">
   <PageHeader
     title="Projects"
-    text="The portfolio spans 146,728 hectares across the Western Malargue Mining District, one of Argentina's most prospective copper-gold corridors."
+    text="Our exploration portfolio spans 146,728 hectares across the Western Malargue Mining District — one of Argentina's most prospective copper-gold corridors."
+    image={`${base}assets/images/rock-quarry-geology.jpg`}
+    imageAlt="Western Malargue Mining District, Mendoza Province"
+    stats={[
+      { value: "146,728 ha", label: "Total Land Package" },
+      { value: "26", label: "Project Areas" },
+      { value: "100+", label: "GIS Targets" }
+    ]}
   />
-  <section class="content-band compact">
-    <div class="wrap stats-grid">
-      <div class="stat"><span>Total Land Package</span><strong>146,728</strong><p>Hectares controlled</p></div>
-      <div class="stat"><span>Project Areas</span><strong>26</strong><p>Across Western Malargue</p></div>
-      <div class="stat"><span>GIS Targets</span><strong>100+</strong><p>Ranked exploration opportunities</p></div>
-      <div class="stat"><span>Title Status</span><strong>Clean</strong><p>No NSRs or earn-ins</p></div>
-    </div>
-  </section>
-
   <section class="content-band">
     <div class="wrap">
       <div class="section-header">
@@ -99,9 +97,9 @@ const roadmap = [
         </div>
       </div>
 
-      <article class="project-flagship" id="las-estrellas">
+      <a class="project-flagship" id="las-estrellas" href="/contact">
         <div class="split-image">
-          <img src={`${base}assets/images/rock-quarry-geology.jpg`} alt="Western Malargue geological terrain" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=80" alt="Las Estrellas project area in the Andes" loading="lazy" />
         </div>
         <div class="project-flagship-body">
           <span class="tag press">Flagship</span>
@@ -112,9 +110,9 @@ const roadmap = [
             <span><span class="mi" aria-hidden="true">science</span> 144 rock chips collected</span>
             <span><span class="mi" aria-hidden="true">my_location</span> 1.5 km to KBX drilling</span>
           </div>
-          <a class="feature-link" href="/contact">Request project details <span class="mi" aria-hidden="true">arrow_forward</span></a>
+          <span class="button primary" style="width:fit-content">View Project Details <span class="mi" aria-hidden="true">arrow_forward</span></span>
         </div>
-      </article>
+      </a>
     </div>
   </section>
 
