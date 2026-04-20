@@ -9,49 +9,18 @@ export const prerender = true;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <title>Argentina Metals CMS</title>
-    <script is:inline>
-      (() => {
-        const tokenPattern = /^#\/?(invite_token|confirmation_token|recovery_token|email_change_token|access_token)=/;
-        const hash = window.location.hash;
-        window.__hasIdentityToken = tokenPattern.test(hash);
-        if (window.__hasIdentityToken && hash.startsWith("#/")) {
-          const cleaned = "#" + hash.slice(2);
-          history.replaceState(null, "", window.location.pathname + window.location.search + cleaned);
-        }
-      })();
-    </script>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script is:inline>
-      (() => {
-        if (!window.netlifyIdentity) return;
-
-        const openIfToken = () => {
-          if (window.__hasIdentityToken) {
-            window.netlifyIdentity.open();
-          }
-        };
-
-        window.netlifyIdentity.on("init", openIfToken);
-
-        const goToAdmin = () => {
-          window.__hasIdentityToken = false;
-          window.location.replace("/admin/");
-        };
-        window.netlifyIdentity.on("login", goToAdmin);
-        window.netlifyIdentity.on("signup", goToAdmin);
-        window.netlifyIdentity.on("confirm", goToAdmin);
-
-        if (window.__hasIdentityToken) {
-          setTimeout(openIfToken, 0);
-        }
-      })();
-    </script>
   </head>
   <body>
-    <script>
-      if (!window.__hasIdentityToken) {
-        import("decap-cms-app").then(({ default: CMS }) => {
-          CMS.init();
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script is:inline>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
         });
       }
     </script>
