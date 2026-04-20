@@ -1,5 +1,5 @@
 ---
-title: "Field Program Returns Up to 9,978 ppm Copper at Las Estrellas"
+title: "Test: Field Program Returns Up to 9,978 ppm Copper at Las Estrellas"
 date: 2025-12-08
 category: "Press Release"
 excerpt: "144 rock chip samples and 14 stream sediment samples collected across the flagship project confirm multi-style copper mineralization."

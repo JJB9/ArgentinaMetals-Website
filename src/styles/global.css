@@ -1106,14 +1106,6 @@ textarea:focus-visible {
   padding: 78px 0 42px;
 }
 
-.page-hero .eyebrow {
-  margin: 0 0 12px;
-  color: var(--copper-dark);
-  font-size: 0.68rem;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
 .page-hero h1 {
   max-width: 780px;
   margin: 0 0 20px;

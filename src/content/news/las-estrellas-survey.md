@@ -1,5 +1,5 @@
 ---
-title: "Argentina Metals Reports Magnetometric Survey Results at Las Estrellas"
+title: "Test: Argentina Metals Reports Magnetometric Survey Results at Las Estrellas"
 date: 2026-01-15
 category: "Press Release"
 excerpt: "Strong magnetic amplitudes (-1050 to +800 nT) identify shallow-to-intermediate drill targets at 50–150 m depth across the flagship project area. Structural controls consistent with IOCG and porphyry copper-gold models."
