@@ -22,6 +22,16 @@ const {
     <meta name="description" content={description} />
     <title>{title}</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet" />
+    <script is:inline>
+      (() => {
+        const identityHash = window.location.hash;
+        const identityTokenPattern = /(invite_token|confirmation_token|recovery_token|email_change_token|access_token)=/;
+
+        if (!window.location.pathname.startsWith("/admin") && identityTokenPattern.test(identityHash)) {
+          window.location.replace(`/admin/${identityHash}`);
+        }
+      })();
+    </script>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
@@ -32,13 +42,23 @@ const {
     <SiteFooter />
     <script is:inline>
       if (window.netlifyIdentity) {
+        const goToAdmin = () => {
+          if (!window.location.pathname.startsWith("/admin")) {
+            document.location.href = "/admin/";
+          }
+        };
+
         window.netlifyIdentity.on("init", (user) => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
+          const hasIdentityToken = /(invite_token|confirmation_token|recovery_token|email_change_token|access_token)=/.test(window.location.hash);
+
+          if (user && hasIdentityToken) {
+            goToAdmin();
           }
         });
+
+        window.netlifyIdentity.on("login", goToAdmin);
+        window.netlifyIdentity.on("signup", goToAdmin);
+        window.netlifyIdentity.on("confirm", goToAdmin);
       }
     </script>
   </body>
