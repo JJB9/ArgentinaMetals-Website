@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PageHeader from "@components/PageHeader.astro";
+
+const news = (await getCollection("news"))
+  .filter((item) => !item.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric"
+});
+---
+
+<BaseLayout title="News - Argentina Metals Corp.">
+  <PageHeader
+    eyebrow="News"
+    title="Press releases and corporate updates"
+    text="The first Decap-ready content collection is wired here, so future news entries can be edited as Markdown."
+  />
+  <section class="content-band">
+    <div class="wrap news-grid">
+      {news.map((item) => (
+        <article class="news-card">
+          <span class:list={["tag", { press: item.data.category === "Press Release", technical: item.data.category === "Technical" }]}>{item.data.category}</span>
+          <h3>{item.data.title}</h3>
+          <p>{item.data.excerpt}</p>
+          <time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

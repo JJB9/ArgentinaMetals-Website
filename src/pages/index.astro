@@ -1,0 +1,205 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const base = import.meta.env.BASE_URL;
+const asset = (path: string) => `${base}${path}`;
+const news = (await getCollection("news"))
+  .filter((item) => !item.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric"
+});
+---
+
+<BaseLayout
+  title="Argentina Metals Corp. - A Pure-Play on Argentina's Copper Boom"
+  description="Argentina Metals Corp. is acquiring district-scale copper exploration assets across Argentina's underexplored Andean copper belts."
+>
+  <section class="hero">
+    <div class="wrap">
+      <h1>A Pure-Play on Argentina's <em>Copper Boom</em></h1>
+      <p>Acquiring premium assets in the world's #7 copper region while the market re-prices the Milei Effect.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#thesis">Explore the Opportunity <span class="mi" aria-hidden="true">arrow_forward</span></a>
+        <a class="button secondary" href="/investor">View Investor Deck</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="hero-media">
+    <div class="hero-media-frame">
+      <video autoplay muted loop playsinline src={asset("assets/images/case-video.mp4")}></video>
+    </div>
+  </div>
+
+  <section class="section" id="thesis">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <div>
+          <h2 class="section-title">The Thesis</h2>
+          <p class="section-desc">Three unshakeable pillars define our approach to the Argentine copper boom: geology, policy, and scale.</p>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>Same Geology</h3>
+          <p>Argentina shares the high-grade Andean belt with Chile, the world's #1 producer, yet remains chronically underexplored.</p>
+        </article>
+        <article class="card">
+          <h3>Mining Reset</h3>
+          <p>Pro-business reforms are sparking a structural re-rating of Argentine mining assets across every stage of development.</p>
+        </article>
+        <article class="card">
+          <h3>District Scale</h3>
+          <p>Argentina Metals controls 146,000+ hectares across prime districts before regional M&amp;A reshapes the opportunity set.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <div>
+          <h2 class="section-title">From Overlooked to Essential</h2>
+          <p class="section-desc">Decades of political instability kept capital out of Argentina, creating a profound valuation gap. That gap is closing fast.</p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="split-visual">
+          <div class="split-image">
+            <img src={asset("assets/images/rock-quarry-geology.jpg")} alt="Layered geology in a copper exploration district" loading="lazy" />
+          </div>
+          <div class="split-badge">
+            <strong>Top 10</strong>
+            <span>Global copper reserve potential</span>
+          </div>
+          <div class="policy-card">
+            <h3>The Milei Effect</h3>
+            <ul>
+              <li><span class="mi" aria-hidden="true">check_circle</span><div><strong>Capital Controls Lifted</strong>Free flow of capital incentivizes major foreign direct investment.</div></li>
+              <li><span class="mi" aria-hidden="true">check_circle</span><div><strong>RIGI Implementation</strong>Large Investment Incentive Regime targets long-term tax stability.</div></li>
+              <li><span class="mi" aria-hidden="true">check_circle</span><div><strong>Pro-Mining Provinces</strong>Key provinces are actively courting global copper developers.</div></li>
+            </ul>
+          </div>
+        </div>
+        <div class="split-copy">
+          <h2>Re-rating a century of missed opportunity.</h2>
+          <p>Argentina is one of the few jurisdictions where world-class Andean geology, underexploration, and a shifting investment regime meet at the same time. Early movers can capture the arbitrage before the region is fully repriced.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <div>
+          <h2 class="section-title">The Electrification Metal</h2>
+          <p class="section-desc">The world cannot decarbonize without copper. New supply remains structurally constrained while demand accelerates.</p>
+        </div>
+      </div>
+
+      <div class="rings">
+        <article class="ring" style="--progress: 80%">
+          <div class="ring-value">80</div>
+          <h3>New Mines Needed</h3>
+          <p>Required by 2030 to meet basic energy-transition demand.</p>
+        </article>
+        <article class="ring" style="--progress: 90%">
+          <div class="ring-value">3-4x</div>
+          <h3>Copper per EV</h3>
+          <p>Electric vehicles consume multiples of the copper used in ICE vehicles.</p>
+        </article>
+        <article class="ring" style="--progress: 64%">
+          <div class="ring-value">16y</div>
+          <h3>Discovery to Production</h3>
+          <p>The timeline to bring new supply online is longer than ever.</p>
+        </article>
+        <article class="ring" style="--progress: 28%">
+          <div class="ring-value">-20%</div>
+          <h3>Grade Decline</h3>
+          <p>Existing majors face sustained drops in ore quality across the board.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <div>
+          <h2 class="section-title">The Rocks Do Not Know They Crossed a Border</h2>
+          <p class="section-desc">The Andes host the world's greatest copper deposits. Chile has mined its side for a century. Argentina's side is still early.</p>
+        </div>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature">
+          <h3>Elite prospects at entry-level pricing.</h3>
+          <p>Highly prospective ground in Argentina can still be acquired at a fraction of comparable Chilean districts, despite sharing the same intrusive history and copper-gold endowment.</p>
+          <a class="feature-link" href="/projects">Read the technical overview <span class="mi" aria-hidden="true">arrow_forward</span></a>
+          <div class="feature-metrics">
+            <div><strong>#7</strong><span>Global copper rank</span></div>
+            <div><strong>146k+</strong><span>Hectares controlled</span></div>
+          </div>
+        </article>
+
+        <article class="feature alt">
+          <h3>One of the largest private packages in the region.</h3>
+          <p>District-scale ground across the most prospective belts gives Argentina Metals a multi-year exploration runway before the rush begins in earnest.</p>
+          <a class="feature-link" href="/projects">Explore the projects <span class="mi" aria-hidden="true">arrow_forward</span></a>
+          <div class="feature-metrics">
+            <div><strong>$30B+</strong><span>Investment pipeline</span></div>
+            <div><strong>~60%</strong><span>Core ownership</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="stats-grid" aria-label="Company highlights">
+        <div class="stat"><span>Global Potential</span><strong>#7</strong><p>Copper reserve ranking</p></div>
+        <div class="stat"><span>CAPEX Pipeline</span><strong>$30B</strong><p>Regional investment plans</p></div>
+        <div class="stat"><span>Land Controlled</span><strong>146k</strong><p>Hectares across prime districts</p></div>
+        <div class="stat"><span>Ownership</span><strong>~60%</strong><p>Core project interest</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <div>
+          <h2 class="section-title">Latest News</h2>
+          <p class="section-desc">Recent press releases and corporate updates from Argentina Metals.</p>
+        </div>
+      </div>
+
+      <div class="news-grid">
+        {news.map((item) => (
+          <a class="news-card" href="/news">
+            <span class:list={["tag", { press: item.data.category === "Press Release", technical: item.data.category === "Technical" }]}>{item.data.category}</span>
+            <h3>{item.data.title}</h3>
+            <p>{item.data.excerpt}</p>
+            <time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

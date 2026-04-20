@@ -1,0 +1,19 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PageHeader from "@components/PageHeader.astro";
+---
+
+<BaseLayout title="Contact - Argentina Metals Corp.">
+  <PageHeader
+    eyebrow="Contact"
+    title="Contact Argentina Metals"
+    text="For investor relations, project information, and corporate inquiries, use the contact points below."
+  />
+  <section class="content-band">
+    <div class="wrap content-grid">
+      <article class="contact-card"><h2>Investor Relations</h2><p><a href="mailto:ir@argentinametals.com">ir@argentinametals.com</a></p></article>
+      <article class="contact-card"><h2>Corporate Office</h2><p>Argentina Metals Corp.<br />TSX-V: VLLC</p></article>
+      <article class="contact-card"><h2>Media</h2><p><a href="/news">View current news and company updates.</a></p></article>
+    </div>
+  </section>
+</BaseLayout>

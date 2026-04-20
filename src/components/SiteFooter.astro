@@ -1,0 +1,35 @@
+---
+const base = import.meta.env.BASE_URL;
+const asset = (path: string) => `${base}${path}`;
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src={asset("assets/images/logo-copper-green.png")} alt="Argentina Metals Corp." />
+      <span>TSX-V: VLLC</span>
+    </div>
+    <div class="footer-links">
+      <div>
+        <h2>Company</h2>
+        <a href="/company">About Us</a>
+        <a href="/projects">Projects</a>
+        <a href="/news">News</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div>
+        <h2>Investors</h2>
+        <a href="/investor">Investor Relations</a>
+        <a href="/projects">Technical Reports</a>
+        <a href="/news">Press Releases</a>
+      </div>
+      <div>
+        <h2>Legal</h2>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 Argentina Metals Corp. All rights reserved.</p>
+  </div>
+</footer>

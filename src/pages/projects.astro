@@ -1,0 +1,27 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PageHeader from "@components/PageHeader.astro";
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Projects - Argentina Metals Corp.">
+  <PageHeader
+    eyebrow="Projects"
+    title="District-scale copper exploration"
+    text="The portfolio spans 146,728 hectares across the Western Malargue Mining District, one of Argentina's most prospective copper-gold corridors."
+  />
+  <section class="content-band">
+    <div class="wrap">
+      <div class="feature-grid">
+        <article class="feature">
+          <h3>Las Estrellas</h3>
+          <p>The flagship project anchors a growing exploration platform with multiple copper target styles and high-priority drill-ready areas.</p>
+          <a class="feature-link" href="/contact">Request project details <span class="mi" aria-hidden="true">arrow_forward</span></a>
+        </article>
+        <div class="split-image">
+          <img src={`${base}assets/images/rock-quarry-geology.jpg`} alt="Western Malargue geological terrain" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
