@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import KpiCounter from "../components/islands/KpiCounter";
 
 const base = import.meta.env.BASE_URL;
 const asset = (path: string) => `${base}${path}`;
@@ -146,50 +147,40 @@ const kpi = [
       </svg>
 
       <div class="rings">
-        <article class="ring">
-          <div class="ring-svg">
-            <svg viewBox="0 0 168 168" aria-hidden="true">
-              <circle class="track" cx="84" cy="84" r="76" fill="none" stroke-width="3" />
-              <circle class="fill" cx="84" cy="84" r="76" fill="none" stroke-width="8" stroke-dasharray="478" stroke-dashoffset="96" />
-            </svg>
-            <div class="ring-val">80</div>
-          </div>
-          <h3>New Mines Needed</h3>
-          <p>Required by 2030 to meet basic energy-transition demand.</p>
-        </article>
-        <article class="ring">
-          <div class="ring-svg">
-            <svg viewBox="0 0 168 168" aria-hidden="true">
-              <circle class="track" cx="84" cy="84" r="76" fill="none" stroke-width="3" />
-              <circle class="fill" cx="84" cy="84" r="76" fill="none" stroke-width="8" stroke-dasharray="478" stroke-dashoffset="48" />
-            </svg>
-            <div class="ring-val">3-4×</div>
-          </div>
-          <h3>Copper per EV</h3>
-          <p>Electric vehicles consume multiples of the copper used in ICE vehicles.</p>
-        </article>
-        <article class="ring">
-          <div class="ring-svg">
-            <svg viewBox="0 0 168 168" aria-hidden="true">
-              <circle class="track" cx="84" cy="84" r="76" fill="none" stroke-width="3" />
-              <circle class="fill" cx="84" cy="84" r="76" fill="none" stroke-width="8" stroke-dasharray="478" stroke-dashoffset="170" />
-            </svg>
-            <div class="ring-val">16y</div>
-          </div>
-          <h3>Discovery to Production</h3>
-          <p>The timeline to bring new supply online is longer than ever.</p>
-        </article>
-        <article class="ring">
-          <div class="ring-svg">
-            <svg viewBox="0 0 168 168" aria-hidden="true">
-              <circle class="track" cx="84" cy="84" r="76" fill="none" stroke-width="3" />
-              <circle class="fill" cx="84" cy="84" r="76" fill="none" stroke-width="8" stroke-dasharray="478" stroke-dashoffset="345" />
-            </svg>
-            <div class="ring-val">−20%</div>
-          </div>
-          <h3>Grade Decline</h3>
-          <p>Existing majors face sustained drops in ore quality across the board.</p>
-        </article>
+        <KpiCounter
+          client:visible
+          title="New Mines Needed"
+          description="Required by 2030 to meet basic energy-transition demand."
+          ringOffset={96}
+          label="80"
+          animateTo={80}
+        />
+        <KpiCounter
+          client:visible
+          title="Copper per EV"
+          description="Electric vehicles consume multiples of the copper used in ICE vehicles."
+          ringOffset={48}
+          label="3-4×"
+        />
+        <KpiCounter
+          client:visible
+          title="Discovery to Production"
+          description="The timeline to bring new supply online is longer than ever."
+          ringOffset={170}
+          label="16y"
+          animateTo={16}
+          animateSuffix="y"
+        />
+        <KpiCounter
+          client:visible
+          title="Grade Decline"
+          description="Existing majors face sustained drops in ore quality across the board."
+          ringOffset={345}
+          label="−20%"
+          animateTo={20}
+          animatePrefix="−"
+          animateSuffix="%"
+        />
       </div>
     </div>
   </section>
