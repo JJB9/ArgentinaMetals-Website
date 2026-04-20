@@ -15,37 +15,37 @@ const documents = [
   {
     title: "Corporate Documents",
     items: [
-      ["Corporate Presentation", "PDF / 4.2 MB"],
-      ["Fact Sheet (1-Pager)", "PDF"],
-      ["NI 43-101 Technical Report", "PDF / 18.5 MB"],
-      ["Articles of Incorporation", "PDF"]
+      ["picture_as_pdf", "Corporate Presentation", "PDF / 4.2 MB"],
+      ["description", "Fact Sheet (1-Pager)", "PDF"],
+      ["science", "NI 43-101 Technical Report", "PDF / 18.5 MB"],
+      ["gavel", "Articles of Incorporation", "PDF"]
     ]
   },
   {
     title: "Financial Statements",
     items: [
-      ["Annual Financial Statements (Audited)", "FY2025"],
-      ["Interim Financial Statements", "Q1 2026"],
-      ["Management Discussion & Analysis (MD&A)", "Q1 2026"],
-      ["Filing Archive", "SEDAR+ / All Years"]
+      ["analytics", "Annual Financial Statements (Audited)", "FY2025"],
+      ["monitoring", "Interim Financial Statements", "Q1 2026"],
+      ["article", "Management Discussion & Analysis (MD&A)", "Q1 2026"],
+      ["history", "Filing Archive", "SEDAR+ / All Years"]
     ]
   },
   {
     title: "Regulatory Filings",
     items: [
-      ["Prospectus", "TSXV Listing"],
-      ["Material Change Reports", "SEDAR+"],
-      ["Information Circular (Proxy)", "AGM 2026"],
-      ["Insider Reports", "SEDI"]
+      ["verified", "Prospectus", "TSXV Listing"],
+      ["swap_horiz", "Material Change Reports", "SEDAR+"],
+      ["how_to_vote", "Information Circular (Proxy)", "AGM 2026"],
+      ["person_search", "Insider Reports", "SEDI"]
     ]
   },
   {
     title: "Stock Information",
     items: [
-      ["Exchange", "TSX Venture Exchange"],
-      ["Ticker Symbol", "VLLC"],
-      ["Shares Outstanding (Basic)", "20,526,881"],
-      ["Fully Diluted", "22,843,548"]
+      ["show_chart", "Exchange", "TSX Venture Exchange"],
+      ["tag", "Ticker Symbol", "VLLC"],
+      ["pie_chart", "Shares Outstanding (Basic)", "20,526,881"],
+      ["donut_large", "Fully Diluted", "22,843,548"]
     ]
   }
 ];
@@ -154,8 +154,9 @@ const documents = [
         {documents.map((group) => (
           <article class="document-card">
             <h3>{group.title}</h3>
-            {group.items.map(([name, meta]) => (
+            {group.items.map(([icon, name, meta]) => (
               <a href={name.includes("SEDAR") || meta.includes("SEDAR") ? "https://www.sedarplus.ca" : "#"} target={meta.includes("SEDAR") ? "_blank" : undefined} rel={meta.includes("SEDAR") ? "noopener" : undefined}>
+                <span class="mi doc-icon" aria-hidden="true">{icon}</span>
                 <span>{name}</span>
                 <strong>{meta}</strong>
               </a>

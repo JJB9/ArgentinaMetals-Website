@@ -7,38 +7,50 @@ const projects = [
   {
     tag: "Satellite",
     title: "El Burrero Group",
-    text: "Historic copper mining area within the Rio Damas Formation. Manto-type stratabound mineralization with high-grade potential at accessible depth.",
-    meta: ["Manto-type Cu", "W. Malargue"]
+    text: "Historic copper mining area within the Río Damas Formation. Manto-type stratabound mineralization with high-grade potential at accessible depth.",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+    imageAlt: "El Burrero project terrain",
+    meta: [["layers", "Manto-type Cu"], ["location_on", "W. Malargüe"]]
   },
   {
     tag: "Satellite",
     title: "Northern Cluster",
     text: "Multiple GIS-defined anomalies across acquired concessions. Structural corridor aligned with regional NW-SE lineaments controlling hydrothermal fluid pathways.",
-    meta: ["Structural targets", "W. Malargue"]
+    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
+    imageAlt: "Northern cluster project terrain",
+    meta: [["hub", "Structural targets"], ["location_on", "W. Malargüe"]]
   },
   {
     tag: "Satellite",
     title: "Porphyry Corridor",
     text: "Targets defined by GIS modelling, analogous to the El Perdido system currently being drill-tested by Kobrea Exploration to the west.",
-    meta: ["Porphyry model", "W. Malargue"]
+    image: "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80",
+    imageAlt: "Porphyry corridor terrain",
+    meta: [["volcano", "Porphyry model"], ["location_on", "W. Malargüe"]]
   },
   {
     tag: "Early-Stage",
     title: "Southern Extensions",
     text: "Staked ground extending the land package south along strike of known copper-bearing formations. Early-stage reconnaissance confirms prospective geology.",
-    meta: ["Along-strike", "Reconnaissance"]
+    image: "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=800&q=80",
+    imageAlt: "Southern extensions terrain",
+    meta: [["south", "Along-strike"], ["explore", "Reconnaissance"]]
   },
   {
     tag: "Early-Stage",
     title: "Additional Concessions",
     text: "Remaining project areas under GIS evaluation. Priority ranking is based on geochemical signatures, structural positioning, and proximity to confirmed mineralization.",
-    meta: ["GIS evaluation", "Pipeline"]
+    image: "https://images.unsplash.com/photo-1542224566-6e85f2e6772f?auto=format&fit=crop&w=800&q=80",
+    imageAlt: "Additional concessions terrain",
+    meta: [["grid_view", "GIS evaluation"], ["schedule", "Pipeline"]]
   },
   {
     tag: "Early-Stage",
     title: "Western Corridor",
     text: "Acquired concessions along the western margin of the district. Prospective for both manto-type and deeper porphyry-style mineralization.",
-    meta: ["Cu-Au targets", "W. Malargue"]
+    image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
+    imageAlt: "Western corridor terrain",
+    meta: [["terrain", "Cu-Au targets"], ["location_on", "W. Malargüe"]]
   }
 ];
 
@@ -121,11 +133,21 @@ const roadmap = [
       <div class="project-grid">
         {projects.map((project) => (
           <article class="project-card">
-            <span class:list={["tag", { technical: project.tag === "Early-Stage" }]}>{project.tag}</span>
-            <h3>{project.title}</h3>
-            <p>{project.text}</p>
-            <div class="card-meta">
-              {project.meta.map((item) => <span>{item}</span>)}
+            <div class="project-card-img">
+              <img src={project.image} alt={project.imageAlt} loading="lazy" />
+            </div>
+            <div class="project-card-body">
+              <span class:list={["tag", { technical: project.tag === "Early-Stage" }]}>{project.tag}</span>
+              <h3>{project.title}</h3>
+              <p>{project.text}</p>
+              <div class="card-meta">
+                {project.meta.map(([icon, label]) => (
+                  <span>
+                    <span class="mi" aria-hidden="true">{icon}</span>
+                    {label}
+                  </span>
+                ))}
+              </div>
             </div>
           </article>
         ))}
@@ -149,7 +171,7 @@ const roadmap = [
             <tr><th scope="row">Projects Acquired</th><td>24 / 132,155 ha</td></tr>
             <tr><th scope="row">Projects Staked</th><td>2 / 14,573 ha</td></tr>
             <tr class="highlight"><th scope="row">Total Land Package</th><td>146,728 ha</td></tr>
-            <tr><th scope="row">Title Status</th><td>Clean / No NSRs or Earn-Ins</td></tr>
+            <tr><th scope="row">Title Status</th><td><span class="chk">Clean / No NSRs or Earn-Ins <span class="mi" aria-hidden="true">check_circle</span></span></td></tr>
             <tr><th scope="row">NI 43-101 Technical Report</th><td>Completed</td></tr>
             <tr><th scope="row">Initial Mapping, Geophysics &amp; Geochemistry</th><td>Completed</td></tr>
           </tbody>
@@ -185,10 +207,16 @@ const roadmap = [
       <div class="callout">
         <div>
           <span>District Validation / Neighbor Activity</span>
-          <h2>Kobrea is drilling El Perdido, 1.5 km from our boundary.</h2>
-          <p>Kobrea Exploration (CSE: KBX) is actively drilling the El Perdido porphyry copper-gold-molybdenum target immediately west of Las Estrellas, providing third-party validation of the geological model and the district's potential.</p>
+          <h2>Kobrea is drilling El Perdido — 1.5 km from our boundary.</h2>
+          <p>Kobrea Exploration (CSE: KBX) is actively drilling the El Perdido porphyry copper-gold-molybdenum target immediately west of Las Estrellas. Their program provides direct third-party validation of the geological model and the district's potential.</p>
         </div>
-        <strong>1.5 km</strong>
+        <div class="callout-metric">
+          <span class="mi" aria-hidden="true">my_location</span>
+          <div>
+            <div class="sv">1.5 km</div>
+            <div class="sl">To KBX Drilling</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>

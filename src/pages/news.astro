@@ -16,6 +16,17 @@ const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
   day: "numeric",
   year: "numeric"
 });
+
+const tagClass = (category: string) => {
+  if (category === "Press Release") return "press";
+  if (category === "Technical") return "technical";
+  return "update";
+};
+
+const filterSlug = (category: string) =>
+  category.toLowerCase().replace(/\s+/g, "-");
+
+const fallbackImage = "/assets/images/rock-quarry-geology.jpg";
 ---
 
 <BaseLayout title="News - Argentina Metals Corp.">
@@ -26,34 +37,56 @@ const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
   />
   <section class="content-band">
     <div class="wrap">
-      <div class="filter-row" aria-label="News categories">
-        <span class="filter active">All</span>
-        <span class="filter">Press Releases</span>
-        <span class="filter">Corporate Updates</span>
-        <span class="filter">Technical</span>
+      <div class="filter-row" role="tablist" aria-label="News categories">
+        <button class="filter active" type="button" data-filter="all">All</button>
+        <button class="filter" type="button" data-filter="press-release">Press Releases</button>
+        <button class="filter" type="button" data-filter="corporate-update">Corporate Updates</button>
+        <button class="filter" type="button" data-filter="technical">Technical</button>
       </div>
 
       {featured && (
-        <article class="featured-news">
+        <article class="featured-news" data-category={filterSlug(featured.data.category)}>
           <div class="split-image">
-            <img src="/assets/images/rock-quarry-geology.jpg" alt="Exploration field terrain" loading="lazy" />
+            <img
+              src={featured.data.image ?? fallbackImage}
+              alt={featured.data.imageAlt ?? featured.data.title}
+              loading="lazy"
+            />
           </div>
           <div>
-            <span class:list={["tag", { press: featured.data.category === "Press Release", technical: featured.data.category === "Technical" }]}>{featured.data.category}</span>
+            <span class:list={["tag", tagClass(featured.data.category)]}>{featured.data.category}</span>
             <h2>{featured.data.title}</h2>
             <p>{featured.data.excerpt}</p>
-            <time datetime={featured.data.date.toISOString()}>{formatDate(featured.data.date)}</time>
+            <div class="post-meta">
+              <time datetime={featured.data.date.toISOString()}>
+                <span class="mi" aria-hidden="true">calendar_today</span>
+                {formatDate(featured.data.date)}
+              </time>
+              {featured.data.readTime && (
+                <span class="post-read-time">
+                  <span class="mi" aria-hidden="true">schedule</span>
+                  {featured.data.readTime}
+                </span>
+              )}
+            </div>
           </div>
         </article>
       )}
 
       <div class="news-grid spaced">
         {recentNews.map((item) => (
-          <article class="news-card">
-            <span class:list={["tag", { press: item.data.category === "Press Release", technical: item.data.category === "Technical" }]}>{item.data.category}</span>
-            <h3>{item.data.title}</h3>
-            <p>{item.data.excerpt}</p>
-            <time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time>
+          <article class="news-card" data-category={filterSlug(item.data.category)}>
+            {item.data.image && (
+              <div class="news-card-img">
+                <img src={item.data.image} alt={item.data.imageAlt ?? item.data.title} loading="lazy" />
+              </div>
+            )}
+            <div class="news-card-body">
+              <span class:list={["tag", tagClass(item.data.category)]}>{item.data.category}</span>
+              <h3>{item.data.title}</h3>
+              <p>{item.data.excerpt}</p>
+              <time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time>
+            </div>
           </article>
         ))}
       </div>
@@ -73,7 +106,7 @@ const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
 
         <div class="archive-list">
           {archiveNews.map((item) => (
-            <article class="archive-item">
+            <article class="archive-item" data-category={filterSlug(item.data.category)}>
               <time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time>
               <div>
                 <h3>{item.data.title}</h3>
@@ -102,4 +135,23 @@ const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    (() => {
+      const buttons = document.querySelectorAll(".filter[data-filter]");
+      const items = document.querySelectorAll("[data-category]");
+      if (!buttons.length || !items.length) return;
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const filter = btn.getAttribute("data-filter");
+          buttons.forEach((b) => b.classList.toggle("active", b === btn));
+          items.forEach((el) => {
+            const match = filter === "all" || el.getAttribute("data-category") === filter;
+            el.style.display = match ? "" : "none";
+          });
+        });
+      });
+    })();
+  </script>
 </BaseLayout>

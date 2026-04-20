@@ -14,6 +14,61 @@ const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
   day: "numeric",
   year: "numeric"
 });
+
+const heroStats = [
+  ["146k+", "Hectares Controlled"],
+  ["26", "Project Areas", "copper"],
+  ["#7", "Global Copper Rank"],
+  ["~60%", "Insider Ownership", "copper"]
+];
+
+const tickerItems = [
+  ["Copper Price", "$4.85/lb"],
+  ["146,000+ Hectares", ""],
+  ["26 Project Areas", ""],
+  ["San Juan & Catamarca Provinces", ""],
+  ["Andean Copper Belt", ""],
+  ["NI 43-101 Technical Report Filed", ""],
+  ["Up to", "9,978 ppm Cu at Las Estrellas"]
+];
+
+const thesisCards = [
+  {
+    icon: "landscape",
+    title: "Same Geology",
+    text: "Argentina shares the high-grade Andean belt with Chile — the world's #1 producer — yet remains chronically underexplored with a fraction of the capital invested."
+  },
+  {
+    icon: "trending_up",
+    title: "Mining Reset",
+    text: "President Milei's pro-business reforms are sparking a structural re-rating of Argentine mining assets across every stage of development.",
+    variant: "dark"
+  },
+  {
+    icon: "zoom_out_map",
+    title: "District Scale",
+    text: "Amassing 146,000+ hectares across prime districts before the surge in major M&A activity reshapes the region.",
+    variant: "copper"
+  }
+];
+
+const mileiSteps = [
+  {
+    year: "Capital Controls Lifted",
+    title: "Free Flow of Investment",
+    desc: "Elimination of capital controls incentivizes major foreign direct investment into Argentine mining for the first time in a generation."
+  },
+  {
+    year: "RIGI Implementation",
+    title: "30-Year Tax Stability",
+    desc: "The Large Investment Incentive Regime (RIGI) guarantees fiscal predictability — a transformational shift for long-cycle mining projects."
+  },
+  {
+    year: "Provincial Alignment",
+    title: "Pro-Mining Governance",
+    desc: "Key provinces like San Juan and Catamarca are actively courting developers with streamlined permitting and infrastructure support."
+  }
+];
 ---
 
 <BaseLayout
@@ -22,6 +77,7 @@ const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
 >
   <section class="hero">
     <div class="wrap">
+      <span class="hero-tag">TSX-V: VLLC</span>
       <h1>A Pure-Play on Argentina's <em>Copper Boom</em></h1>
       <p>Acquiring premium assets in the world's #7 copper region while the market re-prices the Milei Effect.</p>
       <div class="hero-actions">
@@ -37,30 +93,60 @@ const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
     </div>
   </div>
 
+  <div class="wrap hero-stats-wrap">
+    <div class="hero-stats">
+      {heroStats.map(([val, lbl, variant]) => (
+        <div>
+          <span class:list={["hero-stat-val", variant]}>{val}</span>
+          <span class="hero-stat-lbl">{lbl}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      {[...tickerItems, ...tickerItems].map(([a, b]) => (
+        <span class="ticker-item">
+          <span class="ticker-dot" aria-hidden="true"></span>
+          {a}{b && <> <strong>{b}</strong></>}
+        </span>
+      ))}
+    </div>
+  </div>
+
   <section class="section" id="thesis">
     <div class="wrap">
       <div class="section-header">
         <span class="section-num">01</span>
         <div>
-          <h2 class="section-title">The Thesis</h2>
-          <p class="section-desc">Three unshakeable pillars define our approach to the Argentine copper boom: geology, policy, and scale.</p>
+          <h2 class="section-title">Three pillars define our approach to the Argentine copper boom.</h2>
+          <p class="section-desc">A strategy built on geology, policy, and scale — before the rush begins.</p>
         </div>
       </div>
 
-      <div class="card-grid">
-        <article class="card">
-          <h3>Same Geology</h3>
-          <p>Argentina shares the high-grade Andean belt with Chile, the world's #1 producer, yet remains chronically underexplored.</p>
+      <div class="bento">
+        {thesisCards.map((card) => (
+          <article class:list={["bento-card", card.variant]}>
+            <span class="mi bento-ic" aria-hidden="true">{card.icon}</span>
+            <h3>{card.title}</h3>
+            <p>{card.text}</p>
+          </article>
+        ))}
+        <article class="bento-card span2">
+          <div class="bento-split">
+            <div>
+              <span class="bento-val copper">$30B+</span>
+              <p>Regional investment pipeline announced by majors for Argentine copper-gold projects over the coming decade.</p>
+            </div>
+            <div>
+              <span class="bento-val">#7</span>
+              <p>Argentina's global ranking for copper reserve potential — virtually untouched compared to #1 neighbor Chile.</p>
+            </div>
+          </div>
         </article>
-        <article class="card">
-          <h3>Mining Reset</h3>
-          <p>Pro-business reforms are sparking a structural re-rating of Argentine mining assets across every stage of development.</p>
-        </article>
-        <article class="card">
-          <h3>District Scale</h3>
-          <p>Argentina Metals controls 146,000+ hectares across prime districts before regional M&amp;A reshapes the opportunity set.</p>
-        </article>
-        <article class="card">
+        <article class="bento-card">
+          <span class="mi bento-ic" aria-hidden="true">verified</span>
           <h3>NI 43-101 Filed</h3>
           <p>Independent technical report completed covering the full 146,728-hectare land package across 26 project areas.</p>
         </article>
@@ -70,36 +156,29 @@ const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
 
   <section class="section soft">
     <div class="wrap">
-      <div class="section-header">
-        <span class="section-num">02</span>
-        <div>
-          <h2 class="section-title">From Overlooked to Essential</h2>
-          <p class="section-desc">Decades of political instability kept capital out of Argentina, creating a profound valuation gap. That gap is closing fast.</p>
+      <div class="milei-header">
+        <div class="section-header">
+          <span class="section-num">02</span>
+          <div>
+            <h2 class="section-title">From overlooked to essential.</h2>
+            <p class="section-desc">Decades of political instability kept capital out of Argentina, creating a profound valuation gap. That gap is closing fast — and early movers capture the arbitrage.</p>
+          </div>
+        </div>
+        <div class="milei-badge">
+          <strong>Top 10</strong>
+          <span>Global Copper Reserves</span>
         </div>
       </div>
 
-      <div class="split">
-        <div class="split-visual">
-          <div class="split-image">
-            <img src={asset("assets/images/rock-quarry-geology.jpg")} alt="Layered geology in a copper exploration district" loading="lazy" />
-          </div>
-          <div class="split-badge">
-            <strong>Top 10</strong>
-            <span>Global copper reserve potential</span>
-          </div>
-          <div class="policy-card">
-            <h3>The Milei Effect</h3>
-            <ul>
-              <li><span class="mi" aria-hidden="true">check_circle</span><div><strong>Capital Controls Lifted</strong>Free flow of capital incentivizes major foreign direct investment.</div></li>
-              <li><span class="mi" aria-hidden="true">check_circle</span><div><strong>RIGI Implementation</strong>Large Investment Incentive Regime targets long-term tax stability.</div></li>
-              <li><span class="mi" aria-hidden="true">check_circle</span><div><strong>Pro-Mining Provinces</strong>Key provinces are actively courting global copper developers.</div></li>
-            </ul>
-          </div>
-        </div>
-        <div class="split-copy">
-          <h2>Re-rating a century of missed opportunity.</h2>
-          <p>Argentina is one of the few jurisdictions where world-class Andean geology, underexploration, and a shifting investment regime meet at the same time. Early movers can capture the arbitrage before the region is fully repriced.</p>
-        </div>
+      <div class="milei-timeline">
+        {mileiSteps.map((step) => (
+          <article class="tl-item">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <span class="tl-year">{step.year}</span>
+            <h3 class="tl-title">{step.title}</h3>
+            <p class="tl-desc">{step.desc}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
@@ -109,8 +188,8 @@ const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
       <div class="section-header">
         <span class="section-num">03</span>
         <div>
-          <h2 class="section-title">The Electrification Metal</h2>
-          <p class="section-desc">The world cannot decarbonize without copper. New supply remains structurally constrained while demand accelerates.</p>
+          <h2 class="section-title">The world cannot decarbonize without copper.</h2>
+          <p class="section-desc">A structural deficit driven by unprecedented demand and anemic new supply. The squeeze is here.</p>
         </div>
       </div>
 
@@ -144,52 +223,30 @@ const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
       <div class="section-header">
         <span class="section-num">04</span>
         <div>
-          <h2 class="section-title">The Rocks Do Not Know They Crossed a Border</h2>
-          <p class="section-desc">The Andes host the world's greatest copper deposits. Chile has mined its side for a century. Argentina's side is still early.</p>
+          <h2 class="section-title">The rocks don't know they crossed a border.</h2>
+          <p class="section-desc">Chile has mined their side of the Andes for a century. Argentina's side is virtually untouched — yet shares the same geological belt, the same intrusive history, and the same copper-gold endowment.</p>
         </div>
       </div>
 
-      <div class="feature-grid">
-        <article class="feature">
-          <h3>Elite prospects at entry-level pricing.</h3>
-          <p>Highly prospective ground in Argentina can still be acquired at a fraction of comparable Chilean districts, despite sharing the same intrusive history and copper-gold endowment.</p>
-          <a class="feature-link" href="/projects">Read the technical overview <span class="mi" aria-hidden="true">arrow_forward</span></a>
-          <div class="feature-metrics">
-            <div><strong>#7</strong><span>Global copper rank</span></div>
-            <div><strong>146k+</strong><span>Hectares controlled</span></div>
+      <div class="split">
+        <div class="split-visual">
+          <div class="split-image">
+            <img src={asset("assets/images/rock-quarry-geology.jpg")} alt="Andean copper belt landscape" loading="lazy" />
           </div>
-        </article>
-
-        <article class="feature alt">
-          <h3>One of the largest private packages in the region.</h3>
-          <p>District-scale ground across the most prospective belts gives Argentina Metals a multi-year exploration runway before the rush begins in earnest.</p>
-          <a class="feature-link" href="/projects">Explore the projects <span class="mi" aria-hidden="true">arrow_forward</span></a>
-          <div class="feature-metrics">
-            <div><strong>$30B+</strong><span>Investment pipeline</span></div>
-            <div><strong>~60%</strong><span>Core ownership</span></div>
+          <div class="split-badge">
+            <strong>146k+</strong>
+            <span>Hectares Controlled</span>
           </div>
-        </article>
-      </div>
-
-      <div class="check-panel">
-        <h3>Why this district matters now</h3>
-        <ul>
-          <li><span class="mi" aria-hidden="true">check_circle</span>Elite prospects at entry-level pricing</li>
-          <li><span class="mi" aria-hidden="true">check_circle</span>One of the largest private land packages in the region</li>
-          <li><span class="mi" aria-hidden="true">check_circle</span>Multi-year exploration runway across prime belts</li>
-          <li><span class="mi" aria-hidden="true">check_circle</span>Drill targets confirmed by magnetometric survey</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="stats-grid" aria-label="Company highlights">
-        <div class="stat"><span>Global Potential</span><strong>#7</strong><p>Copper reserve ranking</p></div>
-        <div class="stat"><span>CAPEX Pipeline</span><strong>$30B</strong><p>Regional investment plans</p></div>
-        <div class="stat"><span>Land Controlled</span><strong>146k</strong><p>Hectares across prime districts</p></div>
-        <div class="stat"><span>Ownership</span><strong>~60%</strong><p>Core project interest</p></div>
+        </div>
+        <div class="split-copy">
+          <ul class="checklist">
+            <li><span class="mi" aria-hidden="true">check_circle</span>Elite prospects at entry-level pricing</li>
+            <li><span class="mi" aria-hidden="true">check_circle</span>One of the largest private land packages in the region</li>
+            <li><span class="mi" aria-hidden="true">check_circle</span>Multi-decade exploration runway across prime belts</li>
+            <li><span class="mi" aria-hidden="true">check_circle</span>Drill targets confirmed by magnetometric survey</li>
+          </ul>
+          <a class="button secondary" href="/projects">Explore Our Projects <span class="mi" aria-hidden="true">arrow_forward</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -199,18 +256,25 @@ const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
       <div class="section-header">
         <span class="section-num">05</span>
         <div>
-          <h2 class="section-title">Latest News</h2>
-          <p class="section-desc">Recent press releases and corporate updates from Argentina Metals.</p>
+          <h2 class="section-title">Recent updates from Argentina Metals.</h2>
+          <p class="section-desc">Press releases and corporate developments.</p>
         </div>
       </div>
 
       <div class="news-grid">
         {news.map((item) => (
           <a class="news-card" href="/news">
-            <span class:list={["tag", { press: item.data.category === "Press Release", technical: item.data.category === "Technical" }]}>{item.data.category}</span>
-            <h3>{item.data.title}</h3>
-            <p>{item.data.excerpt}</p>
-            <time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time>
+            {item.data.image && (
+              <div class="news-card-img">
+                <img src={item.data.image} alt={item.data.imageAlt ?? item.data.title} loading="lazy" />
+              </div>
+            )}
+            <div class="news-card-body">
+              <span class:list={["tag", { press: item.data.category === "Press Release", technical: item.data.category === "Technical" }]}>{item.data.category}</span>
+              <h3>{item.data.title}</h3>
+              <p>{item.data.excerpt}</p>
+              <time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time>
+            </div>
           </a>
         ))}
       </div>
