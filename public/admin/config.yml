@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: REPLACE_WITH_OWNER/ArgentinaMetals-website
+  repo: JJB9/ArgentinaMetals-Website
   branch: main
 
 local_backend: true
