@@ -1004,17 +1004,19 @@ textarea:focus-visible {
   bottom: 16px;
   z-index: 3;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 16px;
-  padding: 10px 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  width: fit-content;
+  padding: 8px 10px;
   background: rgba(255, 248, 241, 0.88);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
   box-shadow: 0 4px 18px rgba(50, 30, 10, 0.12);
   max-width: calc(100% - 32px);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
+  line-height: 1.2;
   color: var(--g700);
 }
 
@@ -1063,23 +1065,21 @@ textarea:focus-visible {
 
 .andes-hero-legend-note {
   display: block;
-  flex-basis: 100%;
-  font-size: 0.58rem;
+  font-size: 0.56rem;
   font-weight: 500;
   color: var(--g500);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 @media (max-width: 640px) {
   .andes-hero-legend {
     left: 8px;
-    right: 8px;
     bottom: 8px;
-    padding: 8px 10px;
+    padding: 6px 9px;
     font-size: 0.62rem;
-    gap: 6px 10px;
+    gap: 3px;
   }
   .andes-hero-legend-note {
     font-size: 0.52rem;
@@ -3219,21 +3219,24 @@ textarea.form-input {
 
 .projects-map-legend {
   position: absolute;
-  right: 16px;
-  top: 16px;
+  left: 16px;
+  bottom: 16px;
   z-index: 500;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 4px;
   width: fit-content;
   padding: 8px 10px;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(6px);
-  border-radius: var(--r-md);
-  box-shadow: var(--s-sm);
-  font-size: 0.72rem;
-  color: var(--g700);
+  background: rgba(255, 248, 241, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(50, 30, 10, 0.12);
+  max-width: calc(100% - 32px);
+  font-size: 0.68rem;
   line-height: 1.2;
+  color: var(--g700);
 }
 
 .projects-map-legend span {
@@ -3262,10 +3265,10 @@ textarea.form-input {
   }
 
   .projects-map-legend {
-    right: 10px;
-    top: 10px;
-    gap: 4px;
-    padding: 8px 10px;
-    font-size: 0.72rem;
+    left: 8px;
+    bottom: 8px;
+    gap: 3px;
+    padding: 6px 9px;
+    font-size: 0.62rem;
   }
 }
