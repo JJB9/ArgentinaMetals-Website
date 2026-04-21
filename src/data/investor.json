@@ -1,15 +1,15 @@
 {
-  "corporatePresentation": "",
-  "factSheet": "",
-  "technicalReport": "",
-  "annualFinancialStatements": "",
-  "annualFinancialStatementsPeriod": "FY2025",
-  "interimFinancialStatements": "",
-  "interimFinancialStatementsPeriod": "Q1 2026",
+  "prospectus": "",
   "mda": "",
   "mdaPeriod": "Q1 2026",
-  "prospectus": "",
   "prospectusPeriod": "TSXV Listing",
   "informationCircular": "",
-  "informationCircularPeriod": "AGM 2026"
+  "informationCircularPeriod": "AGM 2026",
+  "interimFinancialStatements": "",
+  "annualFinancialStatements": "",
+  "interimFinancialStatementsPeriod": "Q1 2026",
+  "annualFinancialStatementsPeriod": "FY2025",
+  "technicalReport": "",
+  "factSheet": "",
+  "corporatePresentation": "/assets/documents/argentina-metals-corp-presentation.pdf"
 }
