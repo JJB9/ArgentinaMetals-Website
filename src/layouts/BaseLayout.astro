@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import SiteHeader from "@components/SiteHeader.astro";
 import SiteFooter from "@components/SiteFooter.astro";
 import "@styles/global.css";
@@ -21,6 +22,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <ClientRouter fallback="swap" />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/sora/sora-latin-300-normal.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/sora/sora-latin-400-normal.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/sora/sora-latin-500-normal.woff2" crossorigin />
@@ -63,10 +65,41 @@ const {
           }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
           targets.forEach((el) => io.observe(el));
         };
-        if (document.readyState === "loading") {
-          document.addEventListener("DOMContentLoaded", observe, { once: true });
-        } else {
+
+        const initParallax = () => {
+          if (typeof CSS !== "undefined" && CSS.supports && CSS.supports("animation-timeline: view()")) return;
+          const targets = document.querySelectorAll("[data-parallax]");
+          if (!targets.length) return;
+          let ticking = false;
+          const update = () => {
+            const vh = window.innerHeight;
+            targets.forEach((el) => {
+              const rect = el.getBoundingClientRect();
+              const center = rect.top + rect.height / 2;
+              const progress = center / vh;
+              const y = (0.5 - progress) * 12;
+              el.style.transform = `translateY(${y}%)`;
+            });
+            ticking = false;
+          };
+          window.addEventListener("scroll", () => {
+            if (!ticking) {
+              ticking = true;
+              requestAnimationFrame(update);
+            }
+          }, { passive: true });
+          window.addEventListener("resize", update, { passive: true });
+          update();
+        };
+
+        const init = () => {
           observe();
+          initParallax();
+        };
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", init, { once: true });
+        } else {
+          init();
         }
       })();
     </script>
