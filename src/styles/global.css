@@ -1728,6 +1728,10 @@ body > * {
   line-height: 1.8;
 }
 
+.page-hero-text {
+  max-width: 536px;
+}
+
 .page-hero--split {
   padding: 78px 0 42px;
 }
