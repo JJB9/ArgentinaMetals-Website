@@ -62,8 +62,8 @@ const kpi = [
   </section>
 
   <div class="hero-media" data-reveal style="--i:3">
-    <div class="hero-media-frame hero-media-frame--map">
-      <AndesHero client:visible />
+    <div class="hero-media-frame">
+      <video data-parallax autoplay muted loop playsinline src={asset("assets/images/case-video.mp4")}></video>
     </div>
   </div>
 
@@ -196,26 +196,32 @@ const kpi = [
         </div>
       </div>
 
-      <div class="feature-grid">
-        <article class="feature" data-reveal style="--i:0">
-          <h3>Elite prospects at entry-level pricing.</h3>
-          <p>Acquiring highly prospective ground in Argentina today costs a fraction of similar ground in Chile — despite sharing the same geological belt, the same intrusive history, and the same copper-gold endowment.</p>
-          <a class="feature-link" href="/projects">Read the technical report <span class="mi" aria-hidden="true">arrow_forward</span></a>
-          <div class="feature-metrics">
-            <div><strong>#7</strong><span>Global Copper Rank</span></div>
-            <div><strong>146k+</strong><span>Hectares Controlled</span></div>
-          </div>
-        </article>
+      <div class="rocks-layout">
+        <div class="rocks-features">
+          <article class="feature" data-reveal style="--i:0">
+            <h3>Elite prospects at entry-level pricing.</h3>
+            <p>Acquiring highly prospective ground in Argentina today costs a fraction of similar ground in Chile — despite sharing the same geological belt, the same intrusive history, and the same copper-gold endowment.</p>
+            <a class="feature-link" href="/projects">Read the technical report <span class="mi" aria-hidden="true">arrow_forward</span></a>
+            <div class="feature-metrics">
+              <div><strong>#7</strong><span>Global Copper Rank</span></div>
+              <div><strong>146k+</strong><span>Hectares Controlled</span></div>
+            </div>
+          </article>
 
-        <article class="feature alt" data-reveal style="--i:1">
-          <h3>One of the largest private packages in the region.</h3>
-          <p>We control district-scale ground across the most prospective belts in San Juan and Catamarca, giving us multi-decade exploration runway before the rush begins in earnest.</p>
-          <a class="feature-link" href="/projects">Explore the projects <span class="mi" aria-hidden="true">arrow_forward</span></a>
-          <div class="feature-metrics">
-            <div><strong>$30B+</strong><span>Investment Pipeline</span></div>
-            <div><strong>~60%</strong><span>Core Ownership</span></div>
-          </div>
-        </article>
+          <article class="feature alt" data-reveal style="--i:1">
+            <h3>One of the largest private packages in the region.</h3>
+            <p>We control district-scale ground across the most prospective belts in San Juan and Catamarca, giving us multi-decade exploration runway before the rush begins in earnest.</p>
+            <a class="feature-link" href="/projects">Explore the projects <span class="mi" aria-hidden="true">arrow_forward</span></a>
+            <div class="feature-metrics">
+              <div><strong>$30B+</strong><span>Investment Pipeline</span></div>
+              <div><strong>~60%</strong><span>Core Ownership</span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="rocks-map" data-reveal style="--i:2">
+          <AndesHero client:visible />
+        </div>
       </div>
     </div>
   </section>

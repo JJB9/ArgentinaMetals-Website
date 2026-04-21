@@ -111,6 +111,7 @@ export default function AndesHero() {
           pitch: CAMERA.start.pitch,
           bearing: CAMERA.start.bearing,
           interactive: false,
+          cooperativeGestures: true,
           attributionControl: { compact: true },
           maxPitch: 80,
           antialias: true,
