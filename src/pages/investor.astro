@@ -1,6 +1,31 @@
 ---
+import { statSync } from "node:fs";
+import { resolve } from "node:path";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PageHeader from "@components/PageHeader.astro";
+import investorData from "../data/investor.json";
+
+type DocItem = { icon: string; name: string; meta: string; href: string; external: boolean };
+
+function formatSize(bytes: number): string {
+  const mb = bytes / (1024 * 1024);
+  return `${mb >= 10 ? mb.toFixed(0) : mb.toFixed(1)} MB`;
+}
+
+function pdfItem(icon: string, name: string, path: string | undefined, baseLabel = "PDF"): DocItem {
+  if (!path) return { icon, name, meta: baseLabel, href: "#", external: false };
+  try {
+    const diskPath = resolve(process.cwd(), "public", path.replace(/^\//, ""));
+    const bytes = statSync(diskPath).size;
+    return { icon, name, meta: `${baseLabel} / ${formatSize(bytes)}`, href: path, external: true };
+  } catch {
+    return { icon, name, meta: baseLabel, href: path, external: true };
+  }
+}
+
+function linkItem(icon: string, name: string, meta: string, href: string): DocItem {
+  return { icon, name, meta, href, external: true };
+}
 
 const highlights = [
   ["category", "Pure-Play Copper", "Dedicated exposure to the critical metal driving electrification. Direct access to the geological extension of Chile's world-class copper corridor."],
@@ -11,41 +36,31 @@ const highlights = [
   ["public", "Proven LatAm Team", "Combined 100+ years of experience across exploration, public markets, M&A, and Argentine operations."]
 ];
 
-const documents = [
+const documents: { title: string; items: DocItem[] }[] = [
   {
     title: "Corporate Documents",
     items: [
-      ["picture_as_pdf", "Corporate Presentation", "PDF / 4.2 MB"],
-      ["description", "Fact Sheet (1-Pager)", "PDF"],
-      ["science", "NI 43-101 Technical Report", "PDF / 18.5 MB"],
-      ["gavel", "Articles of Incorporation", "PDF"]
+      pdfItem("picture_as_pdf", "Corporate Presentation", investorData.corporatePresentation),
+      pdfItem("description", "Fact Sheet (1-Pager)", investorData.factSheet),
+      pdfItem("science", "NI 43-101 Technical Report", investorData.technicalReport)
     ]
   },
   {
     title: "Financial Statements",
     items: [
-      ["analytics", "Annual Financial Statements (Audited)", "FY2025"],
-      ["monitoring", "Interim Financial Statements", "Q1 2026"],
-      ["article", "Management Discussion & Analysis (MD&A)", "Q1 2026"],
-      ["history", "Filing Archive", "SEDAR+ / All Years"]
+      pdfItem("analytics", "Annual Financial Statements (Audited)", investorData.annualFinancialStatements, investorData.annualFinancialStatementsPeriod || "FY2025"),
+      pdfItem("monitoring", "Interim Financial Statements", investorData.interimFinancialStatements, investorData.interimFinancialStatementsPeriod || "Q1 2026"),
+      pdfItem("article", "Management Discussion & Analysis (MD&A)", investorData.mda, investorData.mdaPeriod || "Q1 2026"),
+      linkItem("history", "Filing Archive", "SEDAR+ / All Years", "https://www.sedarplus.ca")
     ]
   },
   {
     title: "Regulatory Filings",
     items: [
-      ["verified", "Prospectus", "TSXV Listing"],
-      ["swap_horiz", "Material Change Reports", "SEDAR+"],
-      ["how_to_vote", "Information Circular (Proxy)", "AGM 2026"],
-      ["person_search", "Insider Reports", "SEDI"]
-    ]
-  },
-  {
-    title: "Stock Information",
-    items: [
-      ["show_chart", "Exchange", "TSX Venture Exchange"],
-      ["tag", "Ticker Symbol", "VLLC"],
-      ["pie_chart", "Shares Outstanding (Basic)", "20,526,881"],
-      ["donut_large", "Fully Diluted", "22,843,548"]
+      pdfItem("verified", "Prospectus", investorData.prospectus, investorData.prospectusPeriod || "TSXV Listing"),
+      linkItem("swap_horiz", "Material Change Reports", "SEDAR+", "https://www.sedarplus.ca"),
+      pdfItem("how_to_vote", "Information Circular (Proxy)", investorData.informationCircular, investorData.informationCircularPeriod || "AGM 2026"),
+      linkItem("person_search", "Insider Reports", "SEDI", "https://www.sedi.ca")
     ]
   }
 ];
@@ -148,11 +163,11 @@ const documents = [
         {documents.map((group, i) => (
           <article class="document-card" data-reveal style={`--i:${i}`}>
             <h3>{group.title}</h3>
-            {group.items.map(([icon, name, meta]) => (
-              <a href={name.includes("SEDAR") || meta.includes("SEDAR") ? "https://www.sedarplus.ca" : "#"} target={meta.includes("SEDAR") ? "_blank" : undefined} rel={meta.includes("SEDAR") ? "noopener" : undefined}>
-                <span class="mi doc-icon" aria-hidden="true">{icon}</span>
-                <span>{name}</span>
-                <strong>{meta}</strong>
+            {group.items.map((item) => (
+              <a href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener" : undefined}>
+                <span class="mi doc-icon" aria-hidden="true">{item.icon}</span>
+                <span>{item.name}</span>
+                <strong>{item.meta}</strong>
               </a>
             ))}
           </article>

@@ -95,6 +95,7 @@ export default function AndesHero() {
 
     let cancelled = false;
     let map: MlMap | null = null;
+    let flyObserver: IntersectionObserver | null = null;
 
     (async () => {
       try {
@@ -121,6 +122,64 @@ export default function AndesHero() {
         map.on("error", (e) => {
           console.warn("[AndesHero] map error:", e.error?.message ?? e);
         });
+
+        let loaded = false;
+        let visible = false;
+        let flown = false;
+        const runFly = () => {
+          if (flown || cancelled || !map || !loaded || !visible) return;
+          flown = true;
+
+          const enableInteraction = () => {
+            if (!map) return;
+            map.scrollZoom.enable();
+            map.dragPan.enable();
+            map.dragRotate.enable();
+            map.touchZoomRotate.enable();
+            map.keyboard.enable();
+            map.doubleClickZoom.enable();
+            map.getCanvas().style.cursor = "grab";
+          };
+
+          if (prefersReducedMotion()) {
+            map.jumpTo({
+              center: CAMERA.end.center,
+              zoom: CAMERA.end.zoom,
+              pitch: CAMERA.end.pitch,
+              bearing: CAMERA.end.bearing,
+            });
+            enableInteraction();
+          } else {
+            map.once("moveend", enableInteraction);
+            map.flyTo({
+              center: CAMERA.end.center,
+              zoom: CAMERA.end.zoom,
+              pitch: CAMERA.end.pitch,
+              bearing: CAMERA.end.bearing,
+              duration: CAMERA.flyDurationMs,
+              essential: true,
+            });
+          }
+        };
+
+        flyObserver = typeof IntersectionObserver !== "undefined"
+          ? new IntersectionObserver((entries) => {
+              for (const entry of entries) {
+                if (entry.isIntersecting) {
+                  visible = true;
+                  flyObserver?.disconnect();
+                  flyObserver = null;
+                  runFly();
+                  break;
+                }
+              }
+            }, { threshold: 0.35 })
+          : null;
+        if (flyObserver && containerRef.current) {
+          flyObserver.observe(containerRef.current);
+        } else {
+          visible = true;
+        }
 
         map.on("load", () => {
           if (cancelled || !map) return;
@@ -186,37 +245,8 @@ export default function AndesHero() {
           }
 
           setStatus("ready");
-
-          const enableInteraction = () => {
-            if (!map) return;
-            map.scrollZoom.enable();
-            map.dragPan.enable();
-            map.dragRotate.enable();
-            map.touchZoomRotate.enable();
-            map.keyboard.enable();
-            map.doubleClickZoom.enable();
-            map.getCanvas().style.cursor = "grab";
-          };
-
-          if (prefersReducedMotion()) {
-            map.jumpTo({
-              center: CAMERA.end.center,
-              zoom: CAMERA.end.zoom,
-              pitch: CAMERA.end.pitch,
-              bearing: CAMERA.end.bearing,
-            });
-            enableInteraction();
-          } else {
-            map.once("moveend", enableInteraction);
-            map.flyTo({
-              center: CAMERA.end.center,
-              zoom: CAMERA.end.zoom,
-              pitch: CAMERA.end.pitch,
-              bearing: CAMERA.end.bearing,
-              duration: CAMERA.flyDurationMs,
-              essential: true,
-            });
-          }
+          loaded = true;
+          runFly();
         });
       } catch (err) {
         console.warn("[AndesHero] init failed", err);
@@ -226,6 +256,8 @@ export default function AndesHero() {
 
     return () => {
       cancelled = true;
+      flyObserver?.disconnect();
+      flyObserver = null;
       for (const m of markersRef.current) m.remove();
       markersRef.current = [];
       if (mapRef.current) {

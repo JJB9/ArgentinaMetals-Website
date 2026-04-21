@@ -1,0 +1,39 @@
+---
+export interface KeyFact {
+  icon: string;
+  label: string;
+  value: string;
+  highlight?: boolean;
+}
+
+interface Props {
+  title?: string;
+  lede?: string;
+  facts: KeyFact[];
+  footnote?: string;
+  columns?: 2 | 3 | 4;
+}
+
+const { title = "Key Facts", lede, facts, footnote, columns = 4 } = Astro.props;
+---
+
+<aside class:list={["key-facts", `key-facts--cols-${columns}`]} data-reveal>
+  <div class="key-facts-head">
+    <h3>{title}</h3>
+    {lede && <p>{lede}</p>}
+  </div>
+  <dl class="key-facts-grid">
+    {facts.map((fact) => (
+      <div class:list={["kf-item", { "kf-item--hi": fact.highlight }]}>
+        <span class="kf-icon" aria-hidden="true">
+          <span class="mi">{fact.icon}</span>
+        </span>
+        <div class="kf-text">
+          <dt>{fact.label}</dt>
+          <dd>{fact.value}</dd>
+        </div>
+      </div>
+    ))}
+  </dl>
+  {footnote && <p class="key-facts-foot">{footnote}</p>}
+</aside>

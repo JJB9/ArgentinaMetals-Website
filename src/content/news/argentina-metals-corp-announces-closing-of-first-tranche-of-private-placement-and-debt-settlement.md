@@ -3,8 +3,6 @@ title: "Argentina Metals Corp. Announces Closing of First Tranche of Private Pla
 date: 2025-11-17
 category: "Corporate Update"
 excerpt: "Argentina Metals closes the first tranche of a non-brokered private placement raising C$2,490,600 through the issuance of 4,981,200 shares at C$0.50, and settles C$5,000 in debt via share issuance."
-image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80"
-imageAlt: "Capital markets and private placement activity"
 draft: false
 ---
 

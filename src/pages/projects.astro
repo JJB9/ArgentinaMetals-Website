@@ -4,27 +4,6 @@ import PageHeader from "@components/PageHeader.astro";
 import AndesHero from "../components/islands/AndesHero";
 import { projects } from "../data/projects";
 const base = import.meta.env.BASE_URL;
-
-const roadmap = [
-  {
-    phase: "Phase 01",
-    status: "Completed",
-    title: "Consolidation & Targeting",
-    text: "Land acquisition, historical data compilation, GIS target generation, and initial mapping. 100+ priority targets defined across 26 project areas."
-  },
-  {
-    phase: "Phase 02",
-    status: "Current",
-    title: "Surface Work & Geophysics",
-    text: "Detailed mapping, geochemical sampling, and magnetometric surveys at Las Estrellas. Pre-drill work and additional license acquisition in satellite areas."
-  },
-  {
-    phase: "Phase 03",
-    status: "Next",
-    title: "Drill Testing",
-    text: "Inaugural drill program testing highest-priority targets defined through Phase 2 magnetometric and geochemical anomalies at Las Estrellas."
-  }
-];
 ---
 
 <BaseLayout title="Projects - Argentina Metals Corp.">
@@ -53,7 +32,7 @@ const roadmap = [
         </div>
       </div>
 
-      <a class="project-flagship" id="las-estrellas" href="/contact">
+      <a class="project-flagship" id="las-estrellas" href="/projects/las-estrellas">
         <div class="split-image">
           <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=80" alt="Las Estrellas project area in the Andes" loading="lazy" />
         </div>
@@ -126,27 +105,6 @@ const roadmap = [
             <tr><th scope="row">Initial Mapping, Geophysics &amp; Geochemistry</th><td class="num">Completed</td></tr>
           </tbody>
         </table>
-      </div>
-    </div>
-  </section>
-
-  <section class="section soft">
-    <div class="wrap">
-      <div class="section-header" data-reveal>
-        <div>
-          <h2 class="section-title">Roadmap</h2>
-          <p class="section-desc">Three phases from consolidation through discovery. Phase 2 is underway across Las Estrellas and priority satellite targets.</p>
-        </div>
-      </div>
-
-      <div class="timeline-grid">
-        {roadmap.map((item, i) => (
-          <article class="timeline-card" data-reveal style={`--i:${i}`}>
-            <div class="timeline-top"><span>{item.phase}</span><strong>{item.status}</strong></div>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-          </article>
-        ))}
       </div>
     </div>
   </section>

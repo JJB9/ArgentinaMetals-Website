@@ -3,8 +3,6 @@ title: "Argentina Metals Corp. Announces Closing of Purchase of Mineral Rights i
 date: 2025-11-12
 category: "Corporate Update"
 excerpt: "Argentina Metals establishes its foundational exploration portfolio by acquiring a 100% interest in Las Estrellas, Zascar, Vecindario and La Herradura — four properties in Mendoza totalling the Company's first land package in Argentina."
-image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80"
-imageAlt: "Geological survey and mineral exploration in Argentina"
 draft: false
 ---
 

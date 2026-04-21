@@ -3,8 +3,6 @@ title: "Argentina Metals Announces Closing of Purchase of Mineral Rights in Mend
 date: 2026-01-26
 category: "Corporate Update"
 excerpt: "Argentina Metals closes the acquisition of 14 properties totalling 89,070 hectares in Mendoza from Mirasol Resources, significantly expanding its district-scale copper exploration land package."
-image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80"
-imageAlt: "Mountain terrain in the Mendoza region of Argentina"
 draft: false
 ---
 

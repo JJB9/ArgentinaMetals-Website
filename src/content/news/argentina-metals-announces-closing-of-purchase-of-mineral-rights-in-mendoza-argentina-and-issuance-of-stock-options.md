@@ -3,8 +3,6 @@ title: "Argentina Metals Announces Closing of Purchase of Mineral Rights in Mend
 date: 2026-02-26
 category: "Corporate Update"
 excerpt: "Argentina Metals completes the acquisition of a 100% interest in the El Salado and La Quimera properties in Mendoza — totalling 9,980 hectares — and issues 100,000 incentive stock options to a consultant."
-image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80"
-imageAlt: "Andean mountain landscape in Mendoza, Argentina"
 draft: false
 ---
 

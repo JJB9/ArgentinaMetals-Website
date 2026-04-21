@@ -1,21 +1,10 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import KpiCounter from "../components/islands/KpiCounter";
 import AndesHero from "../components/islands/AndesHero";
 
 const base = import.meta.env.BASE_URL;
 const asset = (path: string) => `${base}${path}`;
-const news = (await getCollection("news"))
-  .filter((item) => !item.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
-
-const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
-  month: "long",
-  day: "numeric",
-  year: "numeric"
-});
 
 const thesis = [
   {
@@ -236,48 +225,4 @@ const kpi = [
     </div>
   </section>
 
-  <section class="section soft">
-    <div class="wrap">
-      <div class="section-header" data-reveal>
-        <span class="section-num">05</span>
-        <div>
-          <h2 class="section-title">Latest News</h2>
-          <p class="section-desc">Recent press releases and corporate updates from Argentina Metals.</p>
-        </div>
-      </div>
-
-      <div class="news-grid">
-        {news.map((item, i) => (
-          <a class="news-card" href="/news" data-reveal style={`--i:${i}`}>
-            {item.data.image && (
-              <div class="news-card-img">
-                <img src={item.data.image} alt={item.data.imageAlt ?? item.data.title} loading="lazy" />
-              </div>
-            )}
-            <div class="news-card-body">
-              <span class:list={["tag", { press: item.data.category === "Press Release", technical: item.data.category === "Technical" }]}>{item.data.category}</span>
-              <h3>{item.data.title}</h3>
-              <p>{item.data.excerpt}</p>
-              <time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time>
-            </div>
-          </a>
-        ))}
-      </div>
-
-      <a class="feature-link news-all-link" href="/news">View All News <span class="mi" aria-hidden="true">arrow_forward</span></a>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="callout" data-reveal>
-        <div>
-          <span>Investor Access</span>
-          <h2>Position yourself before the market catches up.</h2>
-          <p>Explore the investor deck or get in touch to learn more about the Argentina copper opportunity.</p>
-        </div>
-        <a class="button primary" href="/investor">View Investor Materials</a>
-      </div>
-    </div>
-  </section>
 </BaseLayout>
