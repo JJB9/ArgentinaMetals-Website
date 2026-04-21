@@ -125,6 +125,12 @@ export default function AndesHero() {
         map.on("load", () => {
           if (cancelled || !map) return;
 
+          const attribEl = containerRef.current?.querySelector<HTMLDetailsElement>(".maplibregl-ctrl-attrib");
+          if (attribEl) {
+            attribEl.open = false;
+            attribEl.classList.remove("maplibregl-compact-show");
+          }
+
           if (!map.getSource("amc-terrain")) {
             map.addSource("amc-terrain", {
               type: "raster-dem",
