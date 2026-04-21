@@ -16,6 +16,7 @@
     "@types/react-dom": "^19.2.3",
     "astro": "^6.1.8",
     "leaflet": "^1.9.4",
+    "maplibre-gl": "^5.23.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-leaflet": "^5.0.0"

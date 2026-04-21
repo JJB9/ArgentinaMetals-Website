@@ -1,0 +1,52 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-70.291, -33.148] },
+      "properties": {
+        "id": "los-bronces",
+        "name": "Los Bronces",
+        "operator": "Anglo American",
+        "country": "Chile",
+        "type": "competitor",
+        "caption": "Anglo American · Chile"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-70.355, -34.083] },
+      "properties": {
+        "id": "el-teniente",
+        "name": "El Teniente",
+        "operator": "Codelco",
+        "country": "Chile",
+        "type": "competitor",
+        "caption": "Codelco · Chile"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-69.585, -35.475] },
+      "properties": {
+        "id": "malargue",
+        "name": "Malargüe",
+        "country": "Argentina",
+        "type": "city",
+        "caption": "Ciudad · Mendoza"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-70.100, -35.500] },
+      "properties": {
+        "id": "las-estrellas",
+        "name": "Las Estrellas",
+        "operator": "Argentina Metals",
+        "country": "Argentina",
+        "type": "flagship",
+        "caption": "Río Damas · Argentina"
+      }
+    }
+  ]
+}
