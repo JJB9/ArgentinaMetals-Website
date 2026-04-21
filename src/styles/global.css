@@ -1839,6 +1839,10 @@ body > * {
   padding-bottom: 24px;
 }
 
+.content-band--spacious {
+  padding-top: 128px;
+}
+
 .content-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
