@@ -4,8 +4,8 @@ const config = `backend:
 
 local_backend: true
 
-media_folder: "public/uploads"
-public_folder: "/uploads"
+media_folder: "public/assets/uploads"
+public_folder: "/assets/uploads"
 
 collections:
   - name: "news"
@@ -19,8 +19,11 @@ collections:
       - label: "Category"
         name: "category"
         widget: "select"
-        options: ["Press Release", "Corporate", "Technical"]
+        options: ["Press Release", "Corporate Update", "Technical"]
       - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Image", name: "image", widget: "string", required: false }
+      - { label: "Image Alt", name: "imageAlt", widget: "string", required: false }
+      - { label: "Read Time", name: "readTime", widget: "string", required: false }
       - { label: "Draft", name: "draft", widget: "boolean", default: false }
       - { label: "Body", name: "body", widget: "markdown" }
 `;
