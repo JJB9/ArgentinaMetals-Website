@@ -3,7 +3,9 @@ import { statSync } from "node:fs";
 import { resolve } from "node:path";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PageHeader from "@components/PageHeader.astro";
-import investorData from "../data/investor.json";
+import corporateDocs from "../data/investor/corporate.json";
+import financialDocs from "../data/investor/financial.json";
+import regulatoryDocs from "../data/investor/regulatory.json";
 
 type DocItem = { icon: string; name: string; meta: string; href: string; external: boolean };
 
@@ -40,26 +42,26 @@ const documents: { title: string; items: DocItem[] }[] = [
   {
     title: "Corporate Documents",
     items: [
-      pdfItem("picture_as_pdf", "Corporate Presentation", investorData.corporatePresentation),
-      pdfItem("description", "Fact Sheet (1-Pager)", investorData.factSheet),
-      pdfItem("science", "NI 43-101 Technical Report", investorData.technicalReport)
+      pdfItem("picture_as_pdf", "Corporate Presentation", corporateDocs.corporatePresentation),
+      pdfItem("description", "Fact Sheet (1-Pager)", corporateDocs.factSheet),
+      pdfItem("science", "NI 43-101 Technical Report", corporateDocs.technicalReport)
     ]
   },
   {
     title: "Financial Statements",
     items: [
-      pdfItem("analytics", "Annual Financial Statements (Audited)", investorData.annualFinancialStatements, investorData.annualFinancialStatementsPeriod || "FY2025"),
-      pdfItem("monitoring", "Interim Financial Statements", investorData.interimFinancialStatements, investorData.interimFinancialStatementsPeriod || "Q1 2026"),
-      pdfItem("article", "Management Discussion & Analysis (MD&A)", investorData.mda, investorData.mdaPeriod || "Q1 2026"),
+      pdfItem("analytics", "Annual Financial Statements (Audited)", financialDocs.annualFinancialStatements, financialDocs.annualFinancialStatementsPeriod || "FY2025"),
+      pdfItem("monitoring", "Interim Financial Statements", financialDocs.interimFinancialStatements, financialDocs.interimFinancialStatementsPeriod || "Q1 2026"),
+      pdfItem("article", "Management Discussion & Analysis (MD&A)", financialDocs.mda, financialDocs.mdaPeriod || "Q1 2026"),
       linkItem("history", "Filing Archive", "SEDAR+ / All Years", "https://www.sedarplus.ca")
     ]
   },
   {
     title: "Regulatory Filings",
     items: [
-      pdfItem("verified", "Prospectus", investorData.prospectus, investorData.prospectusPeriod || "TSXV Listing"),
+      pdfItem("verified", "Prospectus", regulatoryDocs.prospectus, regulatoryDocs.prospectusPeriod || "TSXV Listing"),
       linkItem("swap_horiz", "Material Change Reports", "SEDAR+", "https://www.sedarplus.ca"),
-      pdfItem("how_to_vote", "Information Circular (Proxy)", investorData.informationCircular, investorData.informationCircularPeriod || "AGM 2026"),
+      pdfItem("how_to_vote", "Information Circular (Proxy)", regulatoryDocs.informationCircular, regulatoryDocs.informationCircularPeriod || "AGM 2026"),
       linkItem("person_search", "Insider Reports", "SEDI", "https://www.sedi.ca")
     ]
   }
@@ -70,25 +72,22 @@ const documents: { title: string; items: DocItem[] }[] = [
   <PageHeader
     title="Investors"
     text="Pure-play exposure to high-grade copper exploration in the world's most prospective emerging jurisdiction. TSX Venture Exchange listed."
-    image="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80"
-    imageAlt="Argentina Metals corporate"
+    image="/assets/images/andes-argentina-clouds.jpg"
+    imageAlt="Andes mountains under clouds"
     stats={[
       { value: "TSX-V: VLLC", label: "Ticker Symbol" },
       { value: "C$4.8M", label: "Capital Raised" },
       { value: "~60%", label: "Insider Ownership" }
     ]}
-  />
-  <section class="section soft">
-    <div class="wrap">
-      <div class="ticker-card" data-reveal>
-        <div>
-          <span>TSX-V: VLLC</span>
-          <strong>Listing Pending</strong>
-        </div>
-        <p>Live stock data will be activated upon successful listing.</p>
+  >
+    <div class="ticker-card ticker-card--hero">
+      <div>
+        <span>TSX-V: VLLC</span>
+        <strong>Listing Pending</strong>
       </div>
+      <p>Live stock data will be activated upon successful listing.</p>
     </div>
-  </section>
+  </PageHeader>
 
   <section class="section">
     <div class="wrap">

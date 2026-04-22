@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import PageHeader from "@components/PageHeader.astro";
 
 const news = (await getCollection("news"))
   .filter((item) => !item.data.draft)
@@ -38,10 +37,36 @@ const years = Object.keys(groupedByYear)
 ---
 
 <BaseLayout title="News - Argentina Metals Corp.">
-  <PageHeader
-    title="News"
-    text="Press releases, corporate updates, and exploration progress from Argentina Metals."
-  />
+  <section class="page-hero page-hero--split page-hero--news">
+    <div class="wrap">
+      <div class="page-hero-text">
+        <h1 data-reveal style="--i:0">News</h1>
+        <p data-reveal style="--i:1">Press releases, corporate updates, and exploration progress from Argentina Metals.</p>
+      </div>
+      <aside class="page-hero-subscribe" data-reveal style="--i:2">
+        <div class="subscribe-head">
+          <span class="subscribe-icon mi" aria-hidden="true">mail_outline</span>
+          <h2>Company Newsletter</h2>
+        </div>
+        <form class="newsletter-form" name="newsletter" method="post" data-netlify="true">
+          <input type="hidden" name="form-name" value="newsletter" />
+          <label class="sr-only" for="newsletter-email">Email address</label>
+          <input
+            id="newsletter-email"
+            class="form-input"
+            type="email"
+            name="email"
+            placeholder="you@email.com"
+            required
+          />
+          <button class="button copper-grad" type="submit">
+            Subscribe
+            <span class="mi" aria-hidden="true">arrow_forward</span>
+          </button>
+        </form>
+      </aside>
+    </div>
+  </section>
   <section class="content-band">
     <div class="wrap">
       <div class="filter-row" role="tablist" aria-label="News categories">
@@ -99,22 +124,6 @@ const years = Object.keys(groupedByYear)
     </div>
   </section>
 
-  <section class="section newsletter-section">
-    <div class="wrap">
-      <div class="newsletter">
-        <div>
-          <h2>Company Newsletter</h2>
-          <p>Sign up to receive periodic corporate milestones and exploration progress from Argentina Metals.</p>
-        </div>
-        <form class="newsletter-form" name="newsletter" method="post" data-netlify="true">
-          <input type="hidden" name="form-name" value="newsletter" />
-          <input class="form-input" type="email" name="email" placeholder="Your email address" aria-label="Email address" />
-          <button class="button primary" type="submit">Subscribe</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
   <style>
     .news-list {
       display: flex;
@@ -123,8 +132,77 @@ const years = Object.keys(groupedByYear)
       margin-bottom: 48px;
     }
 
-    .newsletter-section {
-      padding-bottom: 72px;
+    .page-hero-subscribe {
+      justify-self: end;
+      width: 100%;
+      max-width: 420px;
+      padding: 32px;
+      border: 1px solid var(--g100);
+      border-radius: var(--r-xl);
+      background: var(--white);
+      box-shadow: var(--s-sm);
+      transition: box-shadow 220ms var(--ease), transform 220ms var(--ease);
+    }
+
+    .page-hero-subscribe:hover {
+      box-shadow: var(--s-md);
+    }
+
+    .subscribe-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .subscribe-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--r-md);
+      background: var(--copper-wash);
+      color: var(--copper-dark);
+      font-size: 1.05rem;
+    }
+
+    .page-hero-subscribe h2 {
+      margin: 0;
+      color: var(--g900);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .page-hero-subscribe .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .page-hero-subscribe .form-input {
+      width: 100%;
+    }
+
+    .page-hero-subscribe .button.copper-grad {
+      width: 100%;
+      padding: 13px 22px;
+    }
+
+    .page-hero-subscribe .button.copper-grad .mi {
+      font-size: 1.05rem;
+      transition: transform 220ms var(--ease);
+    }
+
+    .page-hero-subscribe .button.copper-grad:hover .mi {
+      transform: translateX(3px);
+    }
+
+    @media (max-width: 960px) {
+      .page-hero-subscribe {
+        justify-self: stretch;
+        max-width: none;
+      }
     }
 
     .news-year {

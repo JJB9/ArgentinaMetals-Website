@@ -32,9 +32,9 @@ collections:
     editor:
       preview: false
     files:
-      - name: "documents"
-        label: "Investor Documents"
-        file: "src/data/investor.json"
+      - name: "corporate"
+        label: "Corporate Documents"
+        file: "src/data/investor/corporate.json"
         fields:
           - label: "Corporate Presentation (PDF)"
             name: "corporatePresentation"
@@ -42,28 +42,33 @@ collections:
             required: false
             media_folder: "/public/assets/documents"
             public_folder: "/assets/documents"
-            hint: "Corporate Documents section. Leave empty to disable the download link."
+            hint: "Leave empty to disable the download link."
           - label: "Fact Sheet / 1-Pager (PDF)"
             name: "factSheet"
             widget: "file"
             required: false
             media_folder: "/public/assets/documents"
             public_folder: "/assets/documents"
-            hint: "Corporate Documents section. Leave empty to disable the download link."
+            hint: "Leave empty to disable the download link."
           - label: "NI 43-101 Technical Report (PDF)"
             name: "technicalReport"
             widget: "file"
             required: false
             media_folder: "/public/assets/documents"
             public_folder: "/assets/documents"
-            hint: "Corporate Documents section. Leave empty to disable the download link."
+            hint: "Leave empty to disable the download link."
+
+      - name: "financial"
+        label: "Financial Statements"
+        file: "src/data/investor/financial.json"
+        fields:
           - label: "Annual Financial Statements / Audited (PDF)"
             name: "annualFinancialStatements"
             widget: "file"
             required: false
             media_folder: "/public/assets/documents"
             public_folder: "/assets/documents"
-            hint: "Financial Statements section. Leave empty to disable the download link."
+            hint: "Leave empty to disable the download link."
           - label: "Annual Financial Statements – Period Label"
             name: "annualFinancialStatementsPeriod"
             widget: "string"
@@ -76,7 +81,7 @@ collections:
             required: false
             media_folder: "/public/assets/documents"
             public_folder: "/assets/documents"
-            hint: "Financial Statements section. Leave empty to disable the download link."
+            hint: "Leave empty to disable the download link."
           - label: "Interim Financial Statements – Period Label"
             name: "interimFinancialStatementsPeriod"
             widget: "string"
@@ -89,20 +94,25 @@ collections:
             required: false
             media_folder: "/public/assets/documents"
             public_folder: "/assets/documents"
-            hint: "Financial Statements section. Leave empty to disable the download link."
+            hint: "Leave empty to disable the download link."
           - label: "MD&A – Period Label"
             name: "mdaPeriod"
             widget: "string"
             required: true
             default: "Q1 2026"
             hint: "Shown next to the link, e.g. 'Q1 2026'."
+
+      - name: "regulatory"
+        label: "Regulatory Filings"
+        file: "src/data/investor/regulatory.json"
+        fields:
           - label: "Prospectus (PDF)"
             name: "prospectus"
             widget: "file"
             required: false
             media_folder: "/public/assets/documents"
             public_folder: "/assets/documents"
-            hint: "Regulatory Filings section. Leave empty to disable the download link."
+            hint: "Leave empty to disable the download link."
           - label: "Prospectus – Label"
             name: "prospectusPeriod"
             widget: "string"
@@ -115,7 +125,7 @@ collections:
             required: false
             media_folder: "/public/assets/documents"
             public_folder: "/assets/documents"
-            hint: "Regulatory Filings section. Leave empty to disable the download link."
+            hint: "Leave empty to disable the download link."
           - label: "Information Circular – AGM Label"
             name: "informationCircularPeriod"
             widget: "string"

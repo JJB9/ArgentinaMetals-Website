@@ -90,21 +90,67 @@ const base = import.meta.env.BASE_URL;
       <div class="section-header" data-reveal>
         <div>
           <h2 class="section-title">Land Position Summary</h2>
-          <p class="section-desc">Consolidated tenure across acquired and staked project areas.</p>
+          <p class="section-desc">Consolidated tenure across acquired and staked project areas — with the district-level work already on the ground.</p>
         </div>
       </div>
 
-      <div class="dtw" data-reveal>
-        <table class="dt">
-          <tbody>
-            <tr><th scope="row">Projects Acquired</th><td class="num">24 / 132,155 ha</td></tr>
-            <tr><th scope="row">Projects Staked</th><td class="num">2 / 14,573 ha</td></tr>
-            <tr><th scope="row" class="hi">Total Land Package</th><td class="num hi">146,728 ha</td></tr>
-            <tr><th scope="row">Title Status</th><td class="num"><span class="chk">Clean / No NSRs or Earn-Ins <span class="mi" aria-hidden="true">check_circle</span></span></td></tr>
-            <tr><th scope="row">NI 43-101 Technical Report</th><td class="num">Completed</td></tr>
-            <tr><th scope="row">Initial Mapping, Geophysics &amp; Geochemistry</th><td class="num">Completed</td></tr>
-          </tbody>
-        </table>
+      <div class="land-summary">
+        <article class="land-card land-card--primary" data-reveal style="--i:0">
+          <div class="land-hero">
+            <span class="land-hero-label">Consolidated Land Package</span>
+            <strong class="land-hero-value">146,728<span>ha</span></strong>
+            <span class="land-hero-sub">26 project areas across the Western Malargüe corridor</span>
+          </div>
+
+          <div class="land-bar" role="img" aria-label="Acquired: 132,155 hectares (90%). Staked: 14,573 hectares (10%).">
+            <span class="land-bar-seg land-bar-seg--acquired" style="--pct: 90.07%"></span>
+            <span class="land-bar-seg land-bar-seg--staked" style="--pct: 9.93%"></span>
+          </div>
+
+          <dl class="land-split">
+            <div class="land-split-item">
+              <span class="land-swatch land-swatch--acquired" aria-hidden="true"></span>
+              <div>
+                <dt>Acquired</dt>
+                <dd><strong>132,155 ha</strong><span>24 project areas</span></dd>
+              </div>
+            </div>
+            <div class="land-split-item">
+              <span class="land-swatch land-swatch--staked" aria-hidden="true"></span>
+              <div>
+                <dt>Staked</dt>
+                <dd><strong>14,573 ha</strong><span>2 project areas</span></dd>
+              </div>
+            </div>
+          </dl>
+        </article>
+
+        <article class="land-card land-card--status" data-reveal style="--i:1">
+          <h3 class="land-card-title">Project Readiness</h3>
+          <ul class="land-checklist">
+            <li>
+              <span class="land-check" aria-hidden="true"><span class="mi">verified</span></span>
+              <div>
+                <strong>Clean Title</strong>
+                <span>No NSRs or earn-in agreements</span>
+              </div>
+            </li>
+            <li>
+              <span class="land-check" aria-hidden="true"><span class="mi">description</span></span>
+              <div>
+                <strong>NI 43-101 Technical Report</strong>
+                <span>Completed</span>
+              </div>
+            </li>
+            <li>
+              <span class="land-check" aria-hidden="true"><span class="mi">explore</span></span>
+              <div>
+                <strong>Mapping, Geophysics &amp; Geochemistry</strong>
+                <span>Initial district program completed</span>
+              </div>
+            </li>
+          </ul>
+        </article>
       </div>
     </div>
   </section>
