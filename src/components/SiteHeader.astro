@@ -1,16 +1,18 @@
 ---
+import { Image } from "astro:assets";
+import logoCopperGreen from "@assets/images/logo-copper-green.png";
+import iconCopperGreen from "@assets/images/icon-copper-green.png";
+
 interface Props {
   pathname: string;
 }
 
 const { pathname } = Astro.props;
-const base = import.meta.env.BASE_URL;
-const asset = (path: string) => `${base}${path}`;
 const normalize = (href: string) => href === "/" ? "/" : href.replace(/\/$/, "");
 const currentPath = normalize(pathname);
 
 const isHome = currentPath === "/";
-const brandSrc = isHome ? "assets/images/logo-copper-green.png" : "assets/images/icon-copper-green.png";
+const brandImage = isHome ? logoCopperGreen : iconCopperGreen;
 const brandDims = isHome ? { width: 140, height: 87 } : { width: 69, height: 64 };
 
 const navItems = [
@@ -25,7 +27,7 @@ const navItems = [
 
 <header class:list={["site-header", { "site-header-feature": isHome }]}>
   <a class:list={["site-brand", { "site-brand-icon": !isHome }]} href="/" aria-label="Argentina Metals home">
-    <img src={asset(brandSrc)} alt="Argentina Metals Corp." width={brandDims.width} height={brandDims.height} fetchpriority="high" decoding="async" />
+    <Image src={brandImage} alt="Argentina Metals Corp." width={brandDims.width} height={brandDims.height} densities={[1, 2]} loading="eager" fetchpriority="high" decoding="async" />
   </a>
   <nav class="site-nav" aria-label="Primary navigation">
     {navItems.map((item) => (

@@ -11,6 +11,9 @@
       ],
       "@styles/*": [
         "src/styles/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
       ]
     },
     "jsx": "react-jsx",

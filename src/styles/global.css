@@ -87,17 +87,25 @@
   --r-2xl: 28px;
   --r-full: 9999px;
   --radius: var(--r-2xl);
-  --s-xs: 0 1px 2px rgba(10, 10, 9, 0.04);
-  --s-sm: 0 2px 8px rgba(10, 10, 9, 0.05);
-  --s-md: 0 6px 20px rgba(10, 10, 9, 0.06);
-  --s-lg: 0 12px 40px rgba(10, 10, 9, 0.08);
-  --s-xl: 0 24px 64px rgba(10, 10, 9, 0.1);
+  --s-xs: 0 0 0 1px rgba(10, 10, 9, 0.035), 0 1px 2px rgba(10, 10, 9, 0.04);
+  --s-sm: 0 0 0 1px rgba(10, 10, 9, 0.04), 0 2px 10px rgba(10, 10, 9, 0.045);
+  --s-md: 0 0 0 1px rgba(10, 10, 9, 0.045), 0 8px 24px rgba(10, 10, 9, 0.06);
+  --s-lg: 0 0 0 1px rgba(10, 10, 9, 0.05), 0 16px 44px rgba(10, 10, 9, 0.08);
+  --s-xl: 0 0 0 1px rgba(10, 10, 9, 0.055), 0 28px 72px rgba(10, 10, 9, 0.1);
   --shadow-sm: var(--s-sm);
   --shadow-md: var(--s-lg);
   --shadow-lg: var(--s-xl);
+  --hairline: color-mix(in srgb, var(--g900) 8%, transparent);
+  --hairline-strong: color-mix(in srgb, var(--g900) 14%, transparent);
+  --ring-focus-color: color-mix(in srgb, var(--green) 22%, transparent);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --copper-grad: linear-gradient(135deg, #c5642b 0%, #d4783f 40%, #fdb473 100%);
+  --copper-grad-soft: linear-gradient(135deg, rgba(197, 100, 43, 0.9), rgba(253, 180, 115, 0.9));
   --green-grad: linear-gradient(145deg, #003d1e 0%, #00562b 50%, #1a6a3a 100%);
+  --grad-hero-wash: linear-gradient(180deg, rgba(255, 214, 170, 0.38) 0%, rgba(255, 248, 241, 0) 70%);
+  --grad-surface-warm: linear-gradient(180deg, var(--cream) 0%, var(--warm) 100%);
+  --grad-border-copper: linear-gradient(135deg, rgba(197, 100, 43, 0.55), rgba(253, 180, 115, 0.08) 55%, rgba(197, 100, 43, 0.28));
   --fs-display: clamp(2.75rem, 4vw + 1rem, 4.75rem);
   --fs-h1: clamp(2rem, 3vw + 1rem, 3.75rem);
   --fs-h2: clamp(1.85rem, 1.6vw + 1rem, 2.6rem);
@@ -149,7 +157,7 @@ body :where(*):not(.mi) {
 .has-motion [data-reveal] {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease), filter 700ms var(--ease);
   transition-delay: calc(var(--i, 0) * 80ms);
   will-change: opacity, transform;
 }
@@ -158,6 +166,7 @@ body :where(*):not(.mi) {
 .reveal-done [data-reveal] {
   opacity: 1;
   transform: none;
+  filter: none;
 }
 
 .has-motion [data-reveal="fade"] {
@@ -168,10 +177,30 @@ body :where(*):not(.mi) {
   transform: translateY(40px);
 }
 
+.has-motion [data-reveal="slide-left"] {
+  transform: translateX(-28px);
+}
+
+.has-motion [data-reveal="slide-right"] {
+  transform: translateX(28px);
+}
+
+.has-motion [data-reveal="scale"] {
+  transform: scale(0.96);
+  transform-origin: center;
+}
+
+.has-motion [data-reveal="blur"] {
+  opacity: 0;
+  transform: none;
+  filter: blur(10px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .has-motion [data-reveal] {
     opacity: 1;
     transform: none;
+    filter: none;
     transition: none;
   }
 }
@@ -194,7 +223,7 @@ select:focus-visible,
 textarea:focus-visible {
   outline: 2px solid transparent;
   outline-offset: 3px;
-  box-shadow: 0 0 0 3px var(--green-pale), 0 0 0 4px var(--green);
+  box-shadow: 0 0 0 3px var(--ring-focus-color), 0 0 0 4px var(--green);
 }
 
 .wrap {
@@ -4148,3 +4177,368 @@ textarea.form-input {
     gap: 16px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   PREMIUM POLISH LAYER
+   Additive surface primitives, hover affordances, motion
+   extensions, and chrome refinements. Non-breaking.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ---- Balanced headline wrap ----------------------------- */
+h1, h2, h3,
+.section-title,
+.hero h1,
+.page-hero h1 {
+  text-wrap: balance;
+}
+
+/* ---- Surface primitive (card base) ---------------------- */
+.surface {
+  position: relative;
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--s-sm);
+  transition: transform 320ms var(--ease), box-shadow 320ms var(--ease);
+}
+
+.surface--raised {
+  box-shadow: var(--s-md);
+}
+
+.surface--hover:hover,
+a.surface:hover,
+button.surface:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--s-lg);
+}
+
+/* ---- Feature card with copper gradient hairline --------- */
+.surface--feature {
+  background: var(--white);
+}
+
+.surface--feature::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: var(--grad-border-copper);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 320ms var(--ease);
+}
+
+.surface--feature:hover::before {
+  opacity: 1;
+}
+
+/* ---- Auto hover-lift for existing card families --------- */
+.card,
+.team-card,
+.advisor-card,
+.timeline-card,
+.document-card,
+.offering-card,
+.contact-card,
+.data-card,
+.model-card {
+  transition: transform 320ms var(--ease), box-shadow 320ms var(--ease);
+}
+
+.card:hover,
+.team-card:hover,
+.advisor-card:hover,
+.timeline-card:hover,
+.offering-card:hover,
+.contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--s-lg);
+}
+
+/* Team card internal image zoom (matches news/project cards) */
+.team-card .avatar {
+  overflow: hidden;
+}
+
+.team-card .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 600ms var(--ease);
+}
+
+.team-card:hover .avatar img {
+  transform: scale(1.04);
+}
+
+/* ---- Document card: copper accent on row hover --------- */
+.document-card a {
+  position: relative;
+  transition: background 220ms var(--ease), padding-left 220ms var(--ease);
+}
+
+.document-card a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--copper);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 260ms var(--ease);
+}
+
+.document-card a:hover {
+  background: var(--copper-wash);
+  padding-left: 28px;
+}
+
+.document-card a:hover::before {
+  transform: scaleY(1);
+}
+
+.document-card a:hover .doc-icon {
+  color: var(--copper-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .document-card a:hover {
+    padding-left: 22px;
+  }
+}
+
+/* ---- Button shimmer (opt-in via .shimmer on primary) ---- */
+.button {
+  isolation: isolate;
+}
+
+.button.shimmer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.22) 45%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0.22) 55%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.button.shimmer:hover::before {
+  animation: btn-shimmer 900ms var(--ease-out);
+}
+
+@keyframes btn-shimmer {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button.shimmer:hover::before {
+    animation: none;
+  }
+}
+
+/* ---- Site header: stays flush with the page background --- */
+.site-header {
+  background: transparent;
+  transition: box-shadow 260ms var(--ease);
+}
+
+.site-header--scrolled {
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--g900) 5%, transparent);
+}
+
+body.has-sticky-header .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+/* Nav link animated underline (extends existing .link-underline) */
+.site-nav a {
+  position: relative;
+  overflow: visible;
+}
+
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--green);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 280ms var(--ease);
+}
+
+.site-nav a:hover::after,
+.site-nav a.active::after {
+  transform: scaleX(1);
+}
+
+/* Remove the baseline bottom border now handled by ::after */
+.site-nav a {
+  border-bottom: 0 !important;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+  border-bottom-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav a::after {
+    transition: none;
+  }
+}
+
+/* ---- Hero media: soft inner ring + richer shadow -------- */
+.hero-media-frame,
+.page-hero-img,
+.split-image,
+.lede-grid-img,
+.rocks-map {
+  box-shadow:
+    0 0 0 1px var(--hairline),
+    0 30px 70px -20px rgba(10, 10, 9, 0.22);
+}
+
+/* ---- Section tints (opt-in per page) -------------------- */
+.section-tint-copper {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 248, 241, 0.7) 0%, transparent 100%);
+}
+
+.section-tint-sunken {
+  background: linear-gradient(180deg, var(--warm) 0%, var(--cream) 100%);
+}
+
+/* ---- News card: year-group tile refinements ------------ */
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--s-lg);
+}
+
+.news-card time {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Archive item polish -------------------------------- */
+.archive-item {
+  transition: transform 280ms var(--ease), box-shadow 280ms var(--ease), border-color 280ms var(--ease);
+}
+
+.archive-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--s-md);
+}
+
+/* ---- Filter pill micro-hover ---------------------------- */
+.filter {
+  transition: border-color 220ms var(--ease), background 220ms var(--ease), color 220ms var(--ease);
+}
+
+.filter:hover:not(.active) {
+  border-color: var(--copper);
+  color: var(--copper-dark);
+  background: var(--copper-wash);
+}
+
+/* ---- Form input: richer focus state --------------------- */
+.form-input {
+  transition: border-color 200ms var(--ease), box-shadow 200ms var(--ease), background 200ms var(--ease);
+}
+
+.form-input:hover {
+  border-color: color-mix(in srgb, var(--g300) 70%, transparent);
+}
+
+/* ---- Link underline: already in system; tighter easing -- */
+.link-underline,
+.feature-link,
+.news-sec-link {
+  transition: background-size 420ms var(--ease-out), color 220ms var(--ease);
+}
+
+/* ---- Legal nav: active indicator ------------------------ */
+.legal-nav a {
+  transition: background 220ms var(--ease), color 220ms var(--ease), transform 220ms var(--ease);
+}
+
+.legal-nav a:not(.active):hover {
+  transform: translateX(3px);
+  color: var(--green);
+}
+
+/* ---- Footer refinements (warm hairline top) ------------- */
+.site-footer {
+  position: relative;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(253, 180, 115, 0.35) 50%,
+    transparent 100%
+  );
+}
+
+.footer-links a {
+  position: relative;
+  width: fit-content;
+}
+
+.footer-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 280ms var(--ease);
+}
+
+.footer-links a:hover::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-links a::after {
+    transition: none;
+  }
+}
+
+/* ---- Section spacing rhythm (tighter on small; breathier on large) */
+@media (min-width: 1200px) {
+  .content-band {
+    padding: 88px 0 128px;
+  }
+  .content-band--spacious {
+    padding-top: 144px;
+  }
+}
+

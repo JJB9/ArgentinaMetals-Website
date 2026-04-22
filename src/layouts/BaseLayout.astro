@@ -31,9 +31,7 @@ const {
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/sora/sora-latin-500-normal.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/sora/sora-latin-600-normal.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/sora/sora-latin-700-normal.woff2" crossorigin />
-    <link rel="preload" as="image" href="/assets/images/logo-copper-green.png" />
-    <link rel="preload" as="image" href="/assets/images/icon-copper-green.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://api.maptiler.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=block" rel="stylesheet" />
@@ -96,9 +94,27 @@ const {
           update();
         };
 
+        const initHeaderElevation = () => {
+          const header = document.querySelector(".site-header");
+          if (!header) return;
+          let ticking = false;
+          const update = () => {
+            header.classList.toggle("site-header--scrolled", window.scrollY > 8);
+            ticking = false;
+          };
+          update();
+          window.addEventListener("scroll", () => {
+            if (!ticking) {
+              ticking = true;
+              requestAnimationFrame(update);
+            }
+          }, { passive: true });
+        };
+
         const init = () => {
           observe();
           initParallax();
+          initHeaderElevation();
         };
         if (document.readyState === "loading") {
           document.addEventListener("DOMContentLoaded", init, { once: true });
