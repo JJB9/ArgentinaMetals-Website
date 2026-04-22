@@ -214,7 +214,7 @@ const years = Object.keys(groupedByYear)
 
     .news-year-title {
       position: sticky;
-      top: 92px;
+      top: calc(var(--header-h) - 28px);
       margin: 0;
       padding-top: 28px;
       color: var(--g400);
@@ -428,6 +428,22 @@ const years = Object.keys(groupedByYear)
         position: static;
         padding-top: 0;
         font-size: 1.6rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .news-row {
+        grid-template-columns: 56px minmax(0, 1fr);
+        gap: 18px;
+        padding-left: 14px;
+      }
+
+      .news-row-day {
+        font-size: 2rem;
+      }
+
+      .news-row-month {
+        font-size: 0.64rem;
       }
     }
 

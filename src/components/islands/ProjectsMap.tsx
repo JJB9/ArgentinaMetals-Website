@@ -1,5 +1,5 @@
 import "leaflet/dist/leaflet.css";
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import L from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import type { Project } from "../../data/projects";
@@ -42,9 +42,35 @@ export default function ProjectsMap({ flagship, projects }: ProjectsMapProps) {
     ];
   }, [all]);
 
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<L.Map | null>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const map = mapRef.current;
+    if (!container || !map) return;
+
+    let frame = 0;
+    const invalidate = () => {
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => map.invalidateSize());
+    };
+
+    const ro = new ResizeObserver(invalidate);
+    ro.observe(container);
+    window.addEventListener("resize", invalidate, { passive: true });
+
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      ro.disconnect();
+      window.removeEventListener("resize", invalidate);
+    };
+  }, []);
+
   return (
-    <div className="projects-map">
+    <div className="projects-map" ref={containerRef}>
       <MapContainer
+        ref={mapRef}
         bounds={bounds}
         scrollWheelZoom={false}
         style={{ height: "100%", width: "100%" }}

@@ -116,6 +116,7 @@
   --lh-body: 1.75;
   --track-tight: -0.02em;
   --track-normal: 0;
+  --header-h: 120px;
 }
 
 *,
@@ -239,7 +240,7 @@ textarea:focus-visible {
   justify-content: space-between;
   gap: 32px;
   width: min(100% - 48px, 1120px);
-  min-height: 120px;
+  min-height: var(--header-h);
   margin: 0 auto;
   padding: 16px 0;
   overflow: visible;
@@ -293,6 +294,50 @@ textarea:focus-visible {
 .site-nav a.active {
   color: var(--green);
   border-bottom-color: var(--green);
+}
+
+.nav-toggle,
+.nav-close {
+  display: none;
+  background: transparent;
+  border: 0;
+  padding: 10px;
+  color: var(--g700);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-toggle:hover,
+.nav-close:hover {
+  color: var(--green);
+  background: var(--warm);
+}
+
+.nav-toggle:focus-visible,
+.nav-close:focus-visible {
+  outline: 2px solid var(--ring-focus-color);
+  outline-offset: 2px;
+}
+
+.nav-toggle .nav-toggle-close {
+  display: none;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-open {
+  display: none;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-close {
+  display: inline-block;
+}
+
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 9, 0.45);
+  z-index: 55;
 }
 
 .hero {
@@ -2794,7 +2839,7 @@ textarea.form-input {
 
 .legal-nav {
   position: sticky;
-  top: 92px;
+  top: calc(var(--header-h) - 28px);
   display: grid;
   gap: 8px;
 }
@@ -2961,27 +3006,22 @@ textarea.form-input {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
-}
 
-@media (max-width: 1024px) {
-  .site-header {
-    position: relative;
-    align-items: flex-start;
-    flex-direction: column;
+  body::before,
+  body::after {
+    display: none;
+  }
+
+  [data-parallax] {
+    transform: none !important;
   }
 
   .site-nav {
-    width: 100%;
-    gap: 10px;
-    overflow-x: auto;
-    padding-bottom: 4px;
+    transition: none;
   }
+}
 
-  .site-nav a {
-    flex: 0 0 auto;
-    padding-right: 12px;
-  }
-
+@media (max-width: 1024px) {
   .card-grid,
   .news-grid,
   .content-grid,
@@ -3083,6 +3123,114 @@ textarea.form-input {
   }
 }
 
+@media (max-width: 768px) {
+  :root {
+    --header-h: 72px;
+  }
+
+  body.nav-open {
+    overflow: hidden;
+    touch-action: none;
+  }
+
+  .site-header {
+    z-index: 50;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .site-nav {
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: min(86vw, 360px);
+    padding: 88px 28px 32px;
+    background: var(--white);
+    box-shadow: var(--shadow-lg);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    transform: translateX(100%);
+    transition: transform 260ms var(--ease);
+    z-index: 60;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .site-nav a {
+    padding: 14px 12px;
+    min-height: 48px;
+    border-radius: var(--r-md);
+    border-bottom: 0;
+    font-size: 1rem;
+  }
+
+  .site-nav a:hover,
+  .site-nav a.active {
+    border-bottom-color: transparent;
+    background: var(--warm);
+  }
+
+  .nav-close {
+    display: inline-flex;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  body.nav-open .site-nav {
+    transform: translateX(0);
+  }
+
+  .site-brand img {
+    max-width: 120px;
+    height: auto;
+  }
+
+  .site-brand.site-brand-icon img {
+    height: 48px;
+    width: auto;
+  }
+
+  .site-header-feature .site-brand img {
+    width: clamp(100px, 28vw, 132px);
+    margin-bottom: -10px;
+  }
+
+  .footer-brand img {
+    width: clamp(112px, 22vw, 140px);
+  }
+
+  .projects-map,
+  .projects-map-placeholder {
+    height: 440px;
+  }
+
+  .legal-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  body::before,
+  body::after {
+    display: none;
+  }
+
+  [data-parallax] {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .site-header-feature .site-brand img {
+    width: 96px;
+  }
+}
+
 @media (max-width: 640px) {
   .wrap,
   .hero-media,
@@ -3092,7 +3240,8 @@ textarea.form-input {
   }
 
   .site-brand img {
-    width: 190px;
+    max-width: 120px;
+    width: auto;
   }
 
   .hero {
@@ -3142,6 +3291,10 @@ textarea.form-input {
   .bento,
   .hero-stats {
     grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .bento-card.span2 {

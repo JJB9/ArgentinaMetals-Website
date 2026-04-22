@@ -69,6 +69,14 @@ const {
         };
 
         const initParallax = () => {
+          const narrow = window.matchMedia("(max-width: 720px)").matches;
+          const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          if (narrow || reducedMotion) {
+            document.querySelectorAll("[data-parallax]").forEach((el) => {
+              el.style.transform = "";
+            });
+            return;
+          }
           if (typeof CSS !== "undefined" && CSS.supports && CSS.supports("animation-timeline: view()")) return;
           const targets = document.querySelectorAll("[data-parallax]");
           if (!targets.length) return;

@@ -29,9 +29,148 @@ const navItems = [
   <a class:list={["site-brand", { "site-brand-icon": !isHome }]} href="/" aria-label="Argentina Metals home">
     <Image src={brandImage} alt="Argentina Metals Corp." width={brandDims.width} height={brandDims.height} densities={[1, 2]} loading="eager" fetchpriority="high" decoding="async" />
   </a>
-  <nav class="site-nav" aria-label="Primary navigation">
+  <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+    <svg class="nav-toggle-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <line x1="4" y1="7" x2="20" y2="7" />
+      <line x1="4" y1="12" x2="20" y2="12" />
+      <line x1="4" y1="17" x2="20" y2="17" />
+    </svg>
+    <svg class="nav-toggle-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <line x1="6" y1="6" x2="18" y2="18" />
+      <line x1="18" y1="6" x2="6" y2="18" />
+    </svg>
+  </button>
+  <nav id="primary-nav" class="site-nav" aria-label="Primary navigation">
+    <button class="nav-close" type="button" aria-label="Close menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18" />
+        <line x1="18" y1="6" x2="6" y2="18" />
+      </svg>
+    </button>
     {navItems.map((item) => (
       <a class:list={{ active: normalize(item.href) === currentPath }} href={item.href}>{item.label}</a>
     ))}
   </nav>
+  <div class="nav-backdrop" hidden></div>
 </header>
+
+<script>
+  const DESKTOP_MQ = "(min-width: 769px)";
+
+  type NavState = {
+    toggle: HTMLButtonElement;
+    close: HTMLButtonElement;
+    nav: HTMLElement;
+    backdrop: HTMLElement;
+    lastFocus: HTMLElement | null;
+    keydown: ((e: KeyboardEvent) => void) | null;
+    desktopMql: MediaQueryList;
+    mqlListener: ((e: MediaQueryListEvent) => void) | null;
+  };
+
+  let state: NavState | null = null;
+
+  const focusables = (root: HTMLElement): HTMLElement[] => {
+    const selector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    return Array.from(root.querySelectorAll<HTMLElement>(selector)).filter(
+      (el) => !el.hasAttribute("hidden") && el.offsetParent !== null
+    );
+  };
+
+  const open = () => {
+    if (!state) return;
+    state.lastFocus = document.activeElement as HTMLElement;
+    document.body.classList.add("nav-open");
+    state.toggle.setAttribute("aria-expanded", "true");
+    state.toggle.setAttribute("aria-label", "Close menu");
+    state.backdrop.hidden = false;
+    state.close.focus();
+
+    const onKeydown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        close();
+        return;
+      }
+      if (e.key === "Tab" && state) {
+        const items = focusables(state.nav);
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    state.keydown = onKeydown;
+    document.addEventListener("keydown", onKeydown);
+  };
+
+  const close = () => {
+    if (!state) return;
+    document.body.classList.remove("nav-open");
+    state.toggle.setAttribute("aria-expanded", "false");
+    state.toggle.setAttribute("aria-label", "Open menu");
+    state.backdrop.hidden = true;
+    if (state.keydown) {
+      document.removeEventListener("keydown", state.keydown);
+      state.keydown = null;
+    }
+    (state.lastFocus ?? state.toggle).focus();
+    state.lastFocus = null;
+  };
+
+  const teardown = () => {
+    if (!state) return;
+    if (state.keydown) document.removeEventListener("keydown", state.keydown);
+    if (state.mqlListener) state.desktopMql.removeEventListener("change", state.mqlListener);
+    document.body.classList.remove("nav-open");
+    state = null;
+  };
+
+  const init = () => {
+    teardown();
+    const toggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
+    const closeBtn = document.querySelector<HTMLButtonElement>(".nav-close");
+    const nav = document.querySelector<HTMLElement>("#primary-nav");
+    const backdrop = document.querySelector<HTMLElement>(".nav-backdrop");
+    if (!toggle || !closeBtn || !nav || !backdrop) return;
+
+    const desktopMql = window.matchMedia(DESKTOP_MQ);
+    state = {
+      toggle,
+      close: closeBtn,
+      nav,
+      backdrop,
+      lastFocus: null,
+      keydown: null,
+      desktopMql,
+      mqlListener: null
+    };
+
+    toggle.addEventListener("click", () => {
+      if (document.body.classList.contains("nav-open")) close();
+      else open();
+    });
+    closeBtn.addEventListener("click", close);
+    backdrop.addEventListener("click", close);
+    nav.querySelectorAll<HTMLAnchorElement>("a").forEach((a) =>
+      a.addEventListener("click", close)
+    );
+
+    const mqlListener = (e: MediaQueryListEvent) => {
+      if (e.matches && document.body.classList.contains("nav-open")) close();
+    };
+    state.mqlListener = mqlListener;
+    desktopMql.addEventListener("change", mqlListener);
+
+    if (desktopMql.matches) document.body.classList.remove("nav-open");
+  };
+
+  document.addEventListener("astro:page-load", init);
+  document.addEventListener("astro:before-preparation", teardown);
+</script>
