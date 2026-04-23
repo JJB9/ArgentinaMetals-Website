@@ -10,24 +10,8 @@ import PageHeader from "@components/PageHeader.astro";
   />
   <section class="content-band">
     <div class="wrap contact-layout">
-      <aside class="contact-card contact-panel">
-        <h2>Get in Touch</h2>
-        <div class="contact-detail">
-          <span class="mi" aria-hidden="true">location_on</span>
-          <p><strong>Corporate Office</strong>Vancouver, BC, Canada</p>
-        </div>
-        <div class="contact-detail">
-          <span class="mi" aria-hidden="true">alternate_email</span>
-          <p><strong>Investor Relations</strong><a href="mailto:ir@argentinametals.com">ir@argentinametals.com</a></p>
-        </div>
-        <div class="contact-detail">
-          <span class="mi" aria-hidden="true">schedule</span>
-          <p><strong>Response Time</strong>Within 2 business days</p>
-        </div>
-        <div class="contact-detail">
-          <span class="mi" aria-hidden="true">verified</span>
-          <p><strong>Listed Company</strong>TSX-V: VLLC</p>
-        </div>
+      <aside class="contact-imagecard" aria-hidden="true">
+        <img src="/assets/images/andes-argentina-clouds.jpg" alt="" loading="lazy" decoding="async" />
       </aside>
 
       <form class="contact-form" name="contact" method="post" data-netlify="true">
@@ -47,7 +31,6 @@ import PageHeader from "@components/PageHeader.astro";
           </select></label>
           <label class="full">Message<textarea class="form-input" name="message" placeholder="How can we help?" required></textarea></label>
         </div>
-        <label class="check-row"><input type="checkbox" name="newsletter" checked /> Subscribe to our company newsletter</label>
         <button class="button primary" type="submit">Send Message <span class="mi" aria-hidden="true">arrow_forward</span></button>
       </form>
     </div>
