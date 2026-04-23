@@ -1,32 +1,35 @@
 ---
 import { Image } from "astro:assets";
-import logoCopperGreen from "@assets/images/logo-copper-green.png";
+import brandLogo from "@assets/images/argentina-metals-copper-white.webp";
 ---
 
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <Image src={logoCopperGreen} alt="Argentina Metals Corp." width={152} height={94} densities={[1, 2]} loading="lazy" decoding="async" />
+        <Image src={brandLogo} alt="Argentina Metals Corp." width={152} height={94} densities={[1, 2]} loading="lazy" decoding="async" />
       </div>
-      <div class="footer-links">
-        <div>
-          <a href="/company">Company</a>
-          <a href="/investor">Investor Relations</a>
-          <a href="/news">News</a>
-          <a href="/contact">Contact</a>
-        </div>
-        <div>
-          <a href="/projects">All Projects</a>
-          <a href="/projects/las-estrellas">Las Estrellas</a>
-        </div>
-        <div>
-          <a href="/disclaimer">Disclaimer</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms of Use</a>
-        </div>
-      </div>
+      <nav class="footer-col" aria-label="Company">
+        <h2>Company</h2>
+        <a href="/team">Team</a>
+        <a href="/news">News</a>
+        <a href="/contact">Contact</a>
+        <a href="/investor">Investor Relations</a>
+      </nav>
+      <nav class="footer-col" aria-label="Projects">
+        <h2>Projects</h2>
+        <a href="/projects">All Projects</a>
+        <a href="/projects/las-estrellas">Las Estrellas</a>
+      </nav>
+      <nav class="footer-col" aria-label="Legal">
+        <h2>Legal</h2>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+      </nav>
     </div>
-    <p class="footer-bottom">© 2026 Argentina Metals Corp. All rights reserved.</p>
+    <div class="footer-bottom">
+      <p>© 2026 Argentina Metals Corp. All rights reserved.</p>
+    </div>
   </div>
 </footer>

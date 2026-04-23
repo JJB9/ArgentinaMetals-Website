@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import logoCopperGreen from "@assets/images/logo-copper-green.png";
-import iconCopperGreen from "@assets/images/icon-copper-green.png";
+import brandLogo from "@assets/images/argentina-metals-copper-white.webp";
 
 interface Props {
   pathname: string;
@@ -11,47 +10,44 @@ const { pathname } = Astro.props;
 const normalize = (href: string) => href === "/" ? "/" : href.replace(/\/$/, "");
 const currentPath = normalize(pathname);
 
-const isHome = currentPath === "/";
-const brandImage = isHome ? logoCopperGreen : iconCopperGreen;
-const brandDims = isHome ? { width: 140, height: 87 } : { width: 69, height: 64 };
-
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "Company", href: "/company" },
+  { label: "Team", href: "/team" },
   { label: "Projects", href: "/projects" },
   { label: "Investors", href: "/investor" },
-  { label: "News", href: "/news" },
-  { label: "Contact", href: "/contact" }
+  { label: "News", href: "/news" }
 ];
 ---
 
-<header class:list={["site-header", { "site-header-feature": isHome }]}>
-  <a class:list={["site-brand", { "site-brand-icon": !isHome }]} href="/" aria-label="Argentina Metals home">
-    <Image src={brandImage} alt="Argentina Metals Corp." width={brandDims.width} height={brandDims.height} densities={[1, 2]} loading="eager" fetchpriority="high" decoding="async" />
-  </a>
-  <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
-    <svg class="nav-toggle-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-      <line x1="4" y1="7" x2="20" y2="7" />
-      <line x1="4" y1="12" x2="20" y2="12" />
-      <line x1="4" y1="17" x2="20" y2="17" />
-    </svg>
-    <svg class="nav-toggle-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-      <line x1="6" y1="6" x2="18" y2="18" />
-      <line x1="18" y1="6" x2="6" y2="18" />
-    </svg>
-  </button>
-  <nav id="primary-nav" class="site-nav" aria-label="Primary navigation">
-    <button class="nav-close" type="button" aria-label="Close menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="/" aria-label="Argentina Metals home">
+      <Image src={brandLogo} alt="Argentina Metals Corp." width={140} height={87} densities={[1, 2]} loading="eager" fetchpriority="high" decoding="async" />
+    </a>
+    <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+      <svg class="nav-toggle-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="4" y1="7" x2="20" y2="7" />
+        <line x1="4" y1="12" x2="20" y2="12" />
+        <line x1="4" y1="17" x2="20" y2="17" />
+      </svg>
+      <svg class="nav-toggle-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
         <line x1="6" y1="6" x2="18" y2="18" />
         <line x1="18" y1="6" x2="6" y2="18" />
       </svg>
     </button>
-    {navItems.map((item) => (
-      <a class:list={{ active: normalize(item.href) === currentPath }} href={item.href}>{item.label}</a>
-    ))}
-  </nav>
-  <div class="nav-backdrop" hidden></div>
+    <nav id="primary-nav" class="site-nav" aria-label="Primary navigation">
+      <button class="nav-close" type="button" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="6" y1="6" x2="18" y2="18" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+        </svg>
+      </button>
+      {navItems.map((item) => (
+        <a class:list={{ active: normalize(item.href) === currentPath }} href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+    <div class="nav-backdrop" hidden></div>
+  </div>
 </header>
 
 <script>

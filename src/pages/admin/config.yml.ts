@@ -101,37 +101,6 @@ collections:
             required: true
             default: "Q1 2026"
             hint: "Shown next to the link, e.g. 'Q1 2026'."
-
-      - name: "regulatory"
-        label: "Regulatory Filings"
-        file: "src/data/investor/regulatory.json"
-        fields:
-          - label: "Prospectus (PDF)"
-            name: "prospectus"
-            widget: "file"
-            required: false
-            media_folder: "/public/assets/documents"
-            public_folder: "/assets/documents"
-            hint: "Leave empty to disable the download link."
-          - label: "Prospectus – Label"
-            name: "prospectusPeriod"
-            widget: "string"
-            required: true
-            default: "TSXV Listing"
-            hint: "Shown next to the link, e.g. 'TSXV Listing'."
-          - label: "Information Circular / Proxy (PDF)"
-            name: "informationCircular"
-            widget: "file"
-            required: false
-            media_folder: "/public/assets/documents"
-            public_folder: "/assets/documents"
-            hint: "Leave empty to disable the download link."
-          - label: "Information Circular – AGM Label"
-            name: "informationCircularPeriod"
-            widget: "string"
-            required: true
-            default: "AGM 2026"
-            hint: "Shown next to the link, e.g. 'AGM 2026'."
 `;
 
 export function GET() {

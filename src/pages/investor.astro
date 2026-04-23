@@ -5,7 +5,6 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import PageHeader from "@components/PageHeader.astro";
 import corporateDocs from "../data/investor/corporate.json";
 import financialDocs from "../data/investor/financial.json";
-import regulatoryDocs from "../data/investor/regulatory.json";
 
 type DocItem = { icon: string; name: string; meta: string; href: string; external: boolean };
 
@@ -52,17 +51,7 @@ const documents: { title: string; items: DocItem[] }[] = [
     items: [
       pdfItem("analytics", "Annual Financial Statements (Audited)", financialDocs.annualFinancialStatements, financialDocs.annualFinancialStatementsPeriod || "FY2025"),
       pdfItem("monitoring", "Interim Financial Statements", financialDocs.interimFinancialStatements, financialDocs.interimFinancialStatementsPeriod || "Q1 2026"),
-      pdfItem("article", "Management Discussion & Analysis (MD&A)", financialDocs.mda, financialDocs.mdaPeriod || "Q1 2026"),
-      linkItem("history", "Filing Archive", "SEDAR+ / All Years", "https://www.sedarplus.ca")
-    ]
-  },
-  {
-    title: "Regulatory Filings",
-    items: [
-      pdfItem("verified", "Prospectus", regulatoryDocs.prospectus, regulatoryDocs.prospectusPeriod || "TSXV Listing"),
-      linkItem("swap_horiz", "Material Change Reports", "SEDAR+", "https://www.sedarplus.ca"),
-      pdfItem("how_to_vote", "Information Circular (Proxy)", regulatoryDocs.informationCircular, regulatoryDocs.informationCircularPeriod || "AGM 2026"),
-      linkItem("person_search", "Insider Reports", "SEDI", "https://www.sedi.ca")
+      pdfItem("article", "Management Discussion & Analysis (MD&A)", financialDocs.mda, financialDocs.mdaPeriod || "Q1 2026")
     ]
   }
 ];
@@ -110,46 +99,7 @@ const documents: { title: string; items: DocItem[] }[] = [
     </div>
   </section>
 
-  <section class="section soft" id="offering">
-    <div class="wrap">
-      <div class="section-header" data-reveal>
-        <div>
-          <h2 class="section-title">Current Offering</h2>
-          <p class="section-desc">C$2M raise at $0.60/share to fund immediate technical programs, additional license acquisition, and TSXV listing requirements.</p>
-        </div>
-      </div>
-
-      <article class="offering-card" data-reveal style="--i:1">
-        <span>Series B / Pre-Listing</span>
-        <h2>C$ 2,000,000 at $0.60 / Share</h2>
-        <p>Pre-money valuation C$ 12.3M / Post-money C$ 14.3M / Nil warrants. Proceeds fund Phase 2 field programs, additional Mendoza licenses, and the path to public listing.</p>
-        <div class="offering-grid">
-          <div>
-            <h3>Terms</h3>
-            <dl class="terms-list">
-              <div><dt>Target Raise</dt><dd>C$ 2,000,000</dd></div>
-              <div><dt>Issue Price</dt><dd>$0.60 / Share</dd></div>
-              <div><dt>Pre-Money Valuation</dt><dd>C$ 12.3M</dd></div>
-              <div><dt>Post-Money Valuation</dt><dd>C$ 14.3M</dd></div>
-              <div><dt>Warrants</dt><dd>Nil</dd></div>
-            </dl>
-          </div>
-          <div>
-            <h3>Use of Proceeds</h3>
-            <div class="progress-list" data-reveal>
-              <div style="--value: 40%"><span>Additional Licenses &amp; Acquisition</span><strong>40%</strong><i></i></div>
-              <div style="--value: 35%"><span>Technical Work &amp; Drill Prep</span><strong>35%</strong><i></i></div>
-              <div style="--value: 15%"><span>TSXV Listing &amp; Legal</span><strong>15%</strong><i></i></div>
-              <div style="--value: 10%"><span>Working Capital</span><strong>10%</strong><i></i></div>
-            </div>
-          </div>
-        </div>
-        <a class="button primary" href="mailto:contact@argentinametals.com?subject=Subscription%20Agreement%20Request">Request Subscription Agreement <span class="mi" aria-hidden="true">arrow_forward</span></a>
-      </article>
-    </div>
-  </section>
-
-  <section class="section" id="docs">
+  <section class="section soft" id="docs">
     <div class="wrap">
       <div class="section-header" data-reveal>
         <div>
