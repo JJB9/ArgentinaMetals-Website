@@ -6,31 +6,16 @@ import AndesHero from "../components/islands/AndesHero";
 const base = import.meta.env.BASE_URL;
 const asset = (path: string) => `${base}${path}`;
 
-const thesis = [
-  {
-    title: "Same Geology",
-    text: "Argentina shares the high-grade Andean belt with Chile — the world's #1 producer — yet remains chronically underexplored."
-  },
-  {
-    title: "Mining Reset",
-    text: "President Milei's pro-business reforms are sparking a structural re-rating of Argentine mining assets across every stage."
-  },
-  {
-    title: "District Scale",
-    text: "Amassing 146,000+ hectares across prime districts before the surge in major M&A activity reshapes the region."
-  }
-];
-
 const mileiItems = [
   ["Capital Controls Lifted", "Free flow of capital incentivizes major foreign direct investment."],
-  ["RIGI Implementation", "Large Investment Incentive Regime guarantees tax stability for 30 years."],
-  ["Pro-Mining Provincial Stance", "Key provinces like San Juan actively courting developers."]
+  ["RIGI Implementation", "„Large Investment Incentive Regime“ for mining projects guarantees tax stability for 30 years."],
+  ["Pro-Mining Provincial Stance", "Key provinces like Mendoza actively courting explorers & developers."]
 ];
 
 const kpi = [
   ["Global Potential", "#7", "Copper reserve ranking"],
   ["CAPEX Pipeline", "$30B", "Regional investment plans"],
-  ["Land Controlled", "146k", "Hectares across prime districts"],
+  ["Land Controlled", "~150k", "Hectares across prime districts in Mendoza"],
   ["Ownership", "~60%", "Core project interest"]
 ];
 ---
@@ -44,7 +29,7 @@ const kpi = [
       <h1 data-reveal style="--i:0">Investing in Argentina and Its Emerging <em>Copper Boom</em></h1>
       <div class="hero-actions" data-reveal style="--i:2">
         <a class="button primary shimmer" href="/projects">Explore the Opportunity <span class="mi" aria-hidden="true">arrow_forward</span></a>
-        <a class="button secondary" href="/investor#docs">View Investor Deck</a>
+        <a class="button secondary" href="/investor#docs">View Corporate Presentation</a>
       </div>
     </div>
   </section>
@@ -60,19 +45,21 @@ const kpi = [
       <div class="section-header" data-reveal>
         <span class="section-num">01</span>
         <div>
-          <h2 class="section-title">The Thesis</h2>
-          <p class="section-desc">Three unshakeable pillars define our approach to the Argentine copper boom — a strategy built on geology, policy, and scale.</p>
+          <h2 class="section-title">Copper is a Blockbuster</h2>
+          <p class="section-desc copper-blockbuster-desc">Copper needs no marketing. The world needs copper. When the world economy is growing — as it has for the last 150 years — the same happens with the demand for copper. Extra demand from electrification and data centers is creating a structural bull market for copper.</p>
         </div>
       </div>
 
-      <div class="card-grid">
-        {thesis.map((item, i) => (
-          <article class="card" data-reveal style={`--i:${i}`}>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-          </article>
-        ))}
-      </div>
+      <figure class="copper-chart" data-reveal style="--i:1">
+        <img
+          src={asset("assets/images/copper-demand-chart.webp")}
+          alt="Global copper production grew from 0.1 million metric tons in 1820 to 23.2 million metric tons in 2025, illustrating sustained, accelerating demand."
+          loading="lazy"
+          width="1280"
+          height="736"
+        />
+        <figcaption>Global copper production (approx. demand) · million metric tons, 1820–2025</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -81,8 +68,8 @@ const kpi = [
       <div class="section-header" data-reveal>
         <span class="section-num">02</span>
         <div>
-          <h2 class="section-title">From Overlooked to Essential</h2>
-          <p class="section-desc">Decades of political instability kept capital out of Argentina, creating a profound valuation gap. That gap is closing fast.</p>
+          <h2 class="section-title">Argentina is Back in Mining</h2>
+          <p class="section-desc">For decades, political mismanagement and overregulation kept miners out of Argentina, creating a profound valuation gap compared to its neighbors.</p>
         </div>
       </div>
 
@@ -96,7 +83,7 @@ const kpi = [
             <span>Global Copper Reserve Potential</span>
           </div>
           <div class="policy-card">
-            <h3>The Milei Effect</h3>
+            <h3>The Milei Effect: re-rating a century of missed opportunity.</h3>
             <ul>
               {mileiItems.map(([title, desc]) => (
                 <li>
@@ -108,68 +95,8 @@ const kpi = [
           </div>
         </div>
         <div class="split-copy" data-reveal style="--i:1">
-          <h2>Re-rating a century of missed opportunity.</h2>
-          <p>For decades, political instability kept capital out of Argentina, creating a profound valuation gap compared to its neighbors. The "Milei Effect" is rapidly closing this gap — and the early movers capture the arbitrage.</p>
+          <p>President Milei's pro-business reforms are sparking a structural re-rating of Argentina's mining and exploration assets. The "Milei Effect" is rapidly closing this gap — and the early movers capture the arbitrage.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="section-header" data-reveal>
-        <span class="section-num">03</span>
-        <div>
-          <h2 class="section-title">The Electrification Metal</h2>
-          <p class="section-desc">The world cannot decarbonize without copper. We are entering a structural deficit driven by unprecedented demand and anemic new supply.</p>
-        </div>
-      </div>
-
-      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-        <defs>
-          <linearGradient id="copperGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#C5642B" />
-            <stop offset="50%" stop-color="#D4783F" />
-            <stop offset="100%" stop-color="#FDB473" />
-          </linearGradient>
-        </defs>
-      </svg>
-
-      <div class="rings">
-        <KpiCounter
-          client:visible
-          title="New Mines Needed"
-          description="Required by 2030 to meet basic energy-transition demand."
-          ringOffset={96}
-          label="80"
-          animateTo={80}
-        />
-        <KpiCounter
-          client:visible
-          title="Copper per EV"
-          description="Electric vehicles consume multiples of the copper used in ICE vehicles."
-          ringOffset={48}
-          label="3-4×"
-        />
-        <KpiCounter
-          client:visible
-          title="Discovery to Production"
-          description="The timeline to bring new supply online is longer than ever."
-          ringOffset={170}
-          label="16y"
-          animateTo={16}
-          animateSuffix="y"
-        />
-        <KpiCounter
-          client:visible
-          title="Grade Decline"
-          description="Existing majors face sustained drops in ore quality across the board."
-          ringOffset={345}
-          label="−20%"
-          animateTo={20}
-          animatePrefix="−"
-          animateSuffix="%"
-        />
       </div>
     </div>
   </section>
@@ -177,34 +104,67 @@ const kpi = [
   <section class="section soft">
     <div class="wrap">
       <div class="section-header" data-reveal>
-        <span class="section-num">04</span>
+        <span class="section-num">03</span>
         <div>
-          <h2 class="section-title">The Rocks Don't Know They Crossed a Border</h2>
-          <p class="section-desc">The Andes host the world's greatest copper deposits. Chile has mined their side for a century. Argentina's side is virtually untouched.</p>
+          <h2 class="section-title">Geology Doesn't Stop at the Border</h2>
+          <p class="section-desc">Chile and Argentina share the same geology: the Andean Copper Belt, one of the most prolific copper regions in the world. Chile has mined their side for a century. Argentina's side is virtually untouched. Geology doesn't stop at the border — this gap will be closed, creating a once-in-a-lifetime opportunity.</p>
         </div>
       </div>
 
       <div class="rocks-layout">
-        <div class="rocks-features">
-          <article class="feature" data-reveal style="--i:0">
-            <h3>Elite prospects at entry-level pricing.</h3>
-            <p>Acquiring highly prospective ground in Argentina today costs a fraction of similar ground in Chile — despite sharing the same geological belt, the same intrusive history, and the same copper-gold endowment.</p>
-            <a class="feature-link" href="/projects">Read the technical report <span class="mi" aria-hidden="true">arrow_forward</span></a>
-            <div class="feature-metrics">
-              <div><strong>#7</strong><span>Global Copper Rank</span></div>
-              <div><strong>146k+</strong><span>Hectares Controlled</span></div>
+        <div class="rocks-left-col">
+          <div class="gap-card" data-reveal style="--i:0">
+            <header class="gap-card-head">
+              <h3>Closing the Copper Gap</h3>
+              <p>Two countries. One geology. The data tells the story.</p>
+            </header>
+            <div class="dtw gap-table-wrap">
+              <table class="dt gap-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Metric</th>
+                    <th scope="col" class="num">Chile</th>
+                    <th scope="col" class="num">Argentina</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Top 20 global copper mines</th>
+                    <td class="num">7</td>
+                    <td class="num">0</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Share of world copper production</th>
+                    <td class="num">23%</td>
+                    <td class="num">0%</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Annual production &mdash; current</th>
+                    <td class="num">5.3 Mt</td>
+                    <td class="num">0.0 Mt</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Annual production &mdash; potential</th>
+                    <td class="num">6.0 Mt</td>
+                    <td class="num hi">2.0+ Mt</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          </article>
+          </div>
 
-          <article class="feature alt" data-reveal style="--i:1">
-            <h3>One of the largest private packages in the region.</h3>
-            <p>We control district-scale ground across the most prospective belts in San Juan and Catamarca, giving us multi-decade exploration runway before the rush begins in earnest.</p>
-            <a class="feature-link" href="/projects">Explore the projects <span class="mi" aria-hidden="true">arrow_forward</span></a>
-            <div class="feature-metrics">
-              <div><strong>$30B+</strong><span>Investment Pipeline</span></div>
-              <div><strong>~60%</strong><span>Core Ownership</span></div>
+          <div class="implementation" data-reveal style="--i:1">
+            <div class="implementation-head">
+              <span class="implementation-rule" aria-hidden="true"></span>
+              <h3>The Implementation</h3>
             </div>
-          </article>
+            <p>We are searching for the big prize: world-class copper deposits. Our approach is defined by scale, technology and people.</p>
+            <ul class="implementation-pills">
+              <li>Scale</li>
+              <li>Technology</li>
+              <li>People</li>
+            </ul>
+          </div>
         </div>
 
         <div class="rocks-map" data-reveal style="--i:2">
@@ -214,12 +174,76 @@ const kpi = [
     </div>
   </section>
 
-  <section class="section compact-top">
+  <section class="section">
     <div class="wrap">
-      <div class="stats-grid" aria-label="Company highlights">
-        {kpi.map(([lbl, val, caption], i) => (
-          <div class="stat" data-reveal style={`--i:${i}`}><span>{lbl}</span><strong>{val}</strong><p>{caption}</p></div>
-        ))}
+      <div class="section-header" data-reveal>
+        <span class="section-num">04</span>
+        <div>
+          <h2 class="section-title">District Scale Exploration</h2>
+          <p class="section-desc">Amassing ca. 150,000 hectares across prime districts in Mendoza before the emerging copper boom reshapes the region.</p>
+        </div>
+      </div>
+
+      <div class="district-layout">
+        <figure class="district-map" data-reveal style="--i:0">
+          <div class="district-map-frame">
+            <img
+              src={asset("assets/images/malargue-claims-map.webp")}
+              alt="Claims map of the Malargüe District in Mendoza, Argentina, showing Argentina Metals tenures in green alongside neighbouring Kobrea Exploration tenures in blue, across 26 named licenses straddling the Chile–Argentina border."
+              loading="lazy"
+              width="889"
+              height="1287"
+            />
+          </div>
+          <figcaption>Claims map · Malargüe District, Mendoza Province</figcaption>
+        </figure>
+
+        <div class="district-info" data-reveal style="--i:1">
+          <div class="district-stats">
+            <div class="district-stat district-stat--lead">
+              <strong>~150,000</strong>
+              <span>Hectares Controlled</span>
+            </div>
+            <div class="district-stat">
+              <strong>Malargüe</strong>
+              <span>Mendoza, Argentina</span>
+            </div>
+            <div class="district-stat">
+              <strong>District-Scale</strong>
+              <span>Contiguous Land Position</span>
+            </div>
+          </div>
+
+          <p class="district-lead">A district-scale land position gives us the option for systematic, large-scale exploration — focusing capital on the most promising structures rather than chasing isolated targets.</p>
+
+          <div class="district-status">
+            <span class="district-status-dot" aria-hidden="true"></span>
+            <div>
+              <strong>More licenses under negotiation</strong>
+              <span>Strategic acquisitions actively expanding the package.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="wrap">
+      <div class="pillars">
+        <article class="pillar" data-reveal style="--i:0">
+          <span class="pillar-num" aria-hidden="true">05</span>
+          <h2 class="pillar-title">Newest Technologies</h2>
+          <p class="pillar-lead">Never before in history have so much data about the surface been available — including satellite imagery that is invaluable for early-stage exploration.</p>
+          <p class="pillar-body">It would be negligent not to use artificial intelligence and specialized software to compile and compare these data. And you don't have to hire a helicopter when a drone can do the flyover. We combine established and new technologies, and apply what makes most sense.</p>
+        </article>
+
+        <article class="pillar" data-reveal style="--i:1">
+          <span class="pillar-num" aria-hidden="true">06</span>
+          <h2 class="pillar-title">Extraordinary Team</h2>
+          <a href="/team" class="pillar-lead">We have assembled a sophisticated team of senior and junior experts, from Europe, North and South America.</a>
+          <p class="pillar-body">Our team members have different and complementary skill sets, tailored for the big task ahead of us: to find a world-class copper deposit in Argentina.</p>
+        </article>
       </div>
     </div>
   </section>
