@@ -2,95 +2,138 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PageHeader from "@components/PageHeader.astro";
 
-const executives = [
+const management = [
+  {
+    name: "Titus Gebel",
+    initials: "TG",
+    image: "/assets/images/people/Titus Gebel.webp",
+    role: "Chairman & Director",
+    mob: true,
+    bio: "Dr. Titus Gebel has over 20 years in the resource sector with deep legal and governance expertise. He was the co-founder and former CEO of Deutsche Rohstoff AG, which he took public (FSE:DR0) and also a former director at Osisko Exploration where he was instrumental in early financing for the Malartic gold mine. Dr. Gebel is chairman and major shareholder of Aumontis Holding AG, Argentina Metals' biggest shareholder."
+  },
   {
     name: "Raymond D. Harari",
     initials: "RH",
     image: "/assets/images/people/Raymond D. Harari.webp",
     role: "CEO & Director",
-    bio: "Founder of Canalis Capital. Native Spanish speaker with deep Latin America expertise. Led multiple TSXV and CSE listings including Westward Gold, Hercules Metals, and Sendero Resources."
+    mob: true,
+    bio: "Raymond D. Harari is the founder of Canalis Capital and a native Spanish speaker, focused on mining, AI, and energy investments. He led multiple TSXV and CSE listings, including Westward Gold, Hercules Metals and Sendero Resources. Mr. Harari has a strong track record in structuring early-stage public companies with tight cap tables."
   },
   {
-    name: "Dr. Titus Gebel",
-    initials: "TG",
-    image: "/assets/images/people/Titus Gebel.webp",
-    role: "Chairman",
-    bio: "Over 20 years in the resource sector. Co-founder and former CEO of Deutsche Rohstoff AG. Former Director at Osisko Exploration. Instrumental in early financing for the Malartic gold mine."
-  },
-  {
-    name: "Gabriel Feliu",
-    initials: "GF",
-    role: "VP Exploration",
-    bio: "Senior exploration leader with 30+ years across major South American jurisdictions. Experience at Barrick Gold and Los Azules (McEwen Copper). Key contributor to multiple discoveries in the El Deseado Massif."
-  },
-  {
-    name: "Carlo Rigillo",
-    initials: "CR",
-    image: "/assets/images/people/Carlo Rigillo.webp",
-    role: "Chief Financial Officer",
-    bio: "Over 20 years as CFO for TSX and CSE listed companies. Skilled in financial reporting, M&A transactions, investor relations, and growth-stage public company management."
+    name: "Julio Pulisich",
+    initials: "JP",
+    image: "/assets/images/people/Julio Pulisich.webp",
+    role: "Director",
+    mob: true,
+    bio: "Julio Pulisich is a successful Mendoza-born entrepreneur across a variety of sectors incl. mining, real estate, retail & professional services. He is the Co-Founder of Torre-Pulisich Accounting Firm, and has worked extensively with mining companies for over 30 years through his firm. Besides his work as a Director, Julio is overseeing Argentina Metals' local subsidiaries."
   },
   {
     name: "Martin Hoff",
     initials: "MH",
     image: "/assets/images/people/Martin Hoff.webp",
     role: "Director",
-    bio: "Over 20 years as a resource-focused investor and strategic advisor in Europe. Managing Partner at HuHo Capital. Head of Strategic Investment at Aumontis Holding AG. Board experience with TSXV-listed T2 Metals."
+    mob: true,
+    bio: "Martin Hoff has over 20 years of experience as a resource-focused investor and strategic advisor in Europe. He is a managing Partner at HuHo Capital and Chief Investment Officer of Aumontis Holding AG. Mr. Hoff also has experience serving as a board director with TSXV-listed T2 Metals and other early-stage explorers."
   },
   {
-    name: "Julio Pullisich",
-    initials: "JP",
-    image: "/assets/images/people/Julio Pulisich.webp",
+    name: "Tim Heenan",
+    initials: "TH",
+    image: "/assets/images/people/Timothy Heenan.webp",
     role: "Director",
-    bio: "Mendoza-born entrepreneur with experience across mining, real estate, retail, and professional services. Co-Founder of Torre-Pullisich Accounting Firm. 30+ years working with mining companies in Argentina."
+    mob: true,
+    bio: "Timothy Heenan is a geologist with over 30 years of exploration expertise and extensive background spanning junior to major multinational mining firms. As a regional specialist for Chile and Argentina, including the role as CEO of Mirasol Resources, Timothy has comprehensive experience across the full exploration lifecycle, from grassroots to advanced stages, and a proven discovery track record."
+  },
+  {
+    name: "Carlo Rigillo",
+    initials: "CR",
+    image: "/assets/images/people/Carlo Rigillo.webp",
+    role: "CFO",
+    bio: "Carlo Rigillo has over 20 years of experience as the CFO for TSX and CSE listed companies. He is skilled in financial reporting, M&A transactions, and investor relations for growth-stage and public companies."
+  },
+  {
+    name: "Mariam Farah",
+    initials: "MF",
+    role: "Manager Licenses",
+    bio: "Mariam Farah is a jurist based in Mendoza, working with Julio Pulisich. As a specialist for mining and exploration licenses, she is taking care of the good standing of Argentina Metals' license areas."
+  },
+  {
+    name: "Zach Goldenberg",
+    initials: "ZG",
+    role: "Capital Markets Advisor",
+    bio: "Zachary Goldenberg is a corporate lawyer specializing in go-public transactions on the TSXV. He is a principal at Liberty Venture Partners with deep capital markets experience. Previously, he has advised on financings, listings, and M&A for multiple resource companies."
+  },
+  {
+    name: "Joaquin Mignaquy",
+    initials: "JM",
+    role: "Argentina Advisor",
+    bio: "Joaquin Mignaquy is the Co-founder of Andina, one of the leading gold, lithium, copper and uranium ventures in Argentina. He is experienced in building and managing multidisciplinary teams, aligning technical, legal, and financial areas towards strategic objectives."
   }
 ];
 
-const advisors = [
+const technical = [
   {
-    name: "Pablo Cortegoso",
-    initials: "PC",
-    role: "Technical Advisor",
-    bio: "Co-Founder & CTO of Stardust. Co-Founder of Andina. Energy sector expertise."
-  },
-  {
-    name: "Zachary Goldenberg",
-    initials: "ZG",
-    role: "Capital Markets Advisor",
-    bio: "Corporate lawyer specializing in TSXV go-public transactions. Principal at Liberty Venture Partners."
+    name: "Gabriel Feliu",
+    initials: "GF",
+    role: "VP Exploration",
+    bio: "Gabriel Feliu is a senior exploration leader with over 30 years of experience across major mining jurisdictions in South America, including Barrick and Los Azules (McEwen Copper). He is a key contributor to multiple gold and silver discoveries in the El Deseado Massif. Mr. Feliu has deep expertise in porphyry and epithermal systems, project advancement, and technical evaluation of mineral assets."
   },
   {
     name: "Peter Geerdts",
     initials: "PG",
     image: "/assets/images/people/Peter Geerdts.webp",
     role: "Senior Geologist",
-    bio: "25+ years of exploration across Australia, Africa, and Europe. Co-founder of Alderan Resources."
-  },
-  {
-    name: "Joaquin Mignaquy",
-    initials: "JM",
-    role: "Argentina Advisor",
-    bio: "Co-founder of Andina. Bridge between foreign capital and Argentine mining projects."
+    bio: "Peter Geerdts has more than 20 years of global exploration experience across Australia, Africa, and Europe. He was the co-founder and Technical Director at Alderan Resources and has eminent experience with copper porphyries. Mr. Geerdts focuses on target generation, structural geology, and remote sensing workflows."
   },
   {
     name: "Chris Paul",
     initials: "CP",
     image: "/assets/images/people/Chris Paul.webp",
-    role: "Technical Advisor",
-    bio: "CEO of Hercules Metals. 15+ years discovery and capital markets experience. Founder of Ridgeline Exploration."
+    role: "Geological Advisor",
+    bio: "Chris Paul is the CEO of Hercules Metals and a geologist with over 15 years of discovery experience. He is the founder of Ridgeline Exploration (acquired by Goldspot in 2021) and a key contributor to copper and gold discoveries."
+  },
+  {
+    name: "Lucas Frana",
+    initials: "LF",
+    role: "Junior Geologist",
+    bio: "Lucas Frana is a geologist from Argentina. He has deep knowledge about the regional geology and the work environment in Mendoza."
+  },
+  {
+    name: "Jamil Sader",
+    initials: "JS",
+    image: "/assets/images/people/Jamil Sader.webp",
+    role: "Geologist, Head of Data Management",
+    bio: ""
+  },
+  {
+    name: "Brice Jonassen",
+    initials: "BJ",
+    image: "/assets/images/people/Brice Jonassen.webp",
+    role: "Data Expert",
+    bio: ""
+  },
+  {
+    name: "Pablo Cortegoso",
+    initials: "PC",
+    role: "Exploration Manager",
+    bio: "Pablo Cortegoso is an experienced leader and manager and Co-founder of Andina. His unique blend of technical expertise and financial acumen has driven his success across various facets of the industry. He is coordinating Argentina Metals' exploration activity."
   }
 ];
 ---
 
 <BaseLayout title="Team - Argentina Metals Corp.">
   <PageHeader
-    title="Executive Team & Board"
-    text="Combined 100+ years of experience across exploration, public markets, M&A, and Argentine operations."
+    title="Our Team"
+    text="Management and technical experts with deep experience across exploration, public markets, M&A, and Argentine operations."
   />
   <section class="section soft" id="team">
     <div class="wrap">
+      <div class="section-header" data-reveal>
+        <div>
+          <h2 class="section-title">Management Team</h2>
+        </div>
+      </div>
       <div class="team-grid">
-        {executives.map((member, i) => (
+        {management.map((member, i) => (
           <article class="team-card" data-reveal style={`--i:${i % 3}`}>
             <div class="avatar" aria-hidden="true">
               {member.image
@@ -99,8 +142,11 @@ const advisors = [
             </div>
             <div class="team-card-body">
               <h3>{member.name}</h3>
-              <p class="role">{member.role}</p>
-              <p>{member.bio}</p>
+              <div class="role-row">
+                <p class="role">{member.role}</p>
+                {member.mob && <span class="mob-tag">Member of the Board</span>}
+              </div>
+              {member.bio && <p>{member.bio}</p>}
             </div>
           </article>
         ))}
@@ -117,17 +163,17 @@ const advisors = [
       </div>
 
       <div class="ac-grid">
-        {advisors.map((advisor, i) => (
+        {technical.map((member, i) => (
           <article class="ac-card" data-reveal style={`--i:${i % 5}`}>
             <div class="ac-photo">
-              {advisor.image
-                ? <img src={advisor.image} alt={advisor.name} loading="lazy" />
-                : <span>{advisor.initials}</span>}
+              {member.image
+                ? <img src={member.image} alt={member.name} loading="lazy" />
+                : <span>{member.initials}</span>}
             </div>
             <div class="ac-body">
-              <h3>{advisor.name}</h3>
-              <p class="role">{advisor.role}</p>
-              <p class="ac-bio">{advisor.bio}</p>
+              <h3>{member.name}</h3>
+              <p class="role">{member.role}</p>
+              {member.bio && <p class="ac-bio">{member.bio}</p>}
             </div>
           </article>
         ))}
@@ -137,9 +183,33 @@ const advisors = [
 </BaseLayout>
 
 <style>
+.role-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.role-row .role {
+  margin: 0;
+}
+
+.mob-tag {
+  flex-shrink: 0;
+  padding: 2px 7px;
+  border-radius: 99px;
+  background: var(--sand);
+  color: var(--g500);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .ac-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -205,6 +275,11 @@ const advisors = [
   color: var(--g500);
   font-size: 0.78rem;
   line-height: 1.55;
+  hyphens: auto;
+}
+
+.team-card-body p:not(.role) {
+  hyphens: auto;
 }
 
 @media (max-width: 900px) {

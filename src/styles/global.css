@@ -1337,6 +1337,133 @@ body > * {
   text-transform: uppercase;
 }
 
+.copper-chart--svg {
+  margin-top: 24px;
+}
+
+.copper-chart--svg svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--font-body);
+}
+
+.copper-chart--svg .grid-line {
+  stroke: var(--g100);
+  stroke-width: 1;
+  stroke-dasharray: 4 6;
+}
+
+.copper-chart--svg .axis-line {
+  stroke: var(--g300);
+  stroke-width: 1;
+}
+
+.copper-chart--svg .axis-label {
+  fill: var(--g500);
+  font-size: 13px;
+}
+
+.copper-chart--svg .y-label {
+  text-anchor: end;
+}
+
+.copper-chart--svg .x-label {
+  text-anchor: end;
+}
+
+.copper-chart--svg .axis-title {
+  fill: var(--g600);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-anchor: middle;
+}
+
+.copper-chart--svg .data-line {
+  fill: none;
+  stroke: var(--copper);
+  stroke-width: 2.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.copper-chart--svg .data-area {
+  fill: url(#copper-area-fill);
+}
+
+.copper-chart--svg .data-marker {
+  fill: var(--copper);
+  stroke: var(--white);
+  stroke-width: 1.5;
+}
+
+.copper-chart--svg .data-marker--end {
+  fill: var(--copper-dark);
+}
+
+.copper-chart--svg .data-value {
+  fill: var(--g700);
+  font-size: 12px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+.copper-chart--svg .data-value--end {
+  fill: var(--copper-dark);
+  font-weight: 700;
+}
+
+/* Initial hidden state — applied with no transition so the line can't fade out
+   first and end up "starting halfway in" if the IntersectionObserver fires fast. */
+.has-motion .copper-chart--svg[data-reveal] .data-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.has-motion .copper-chart--svg[data-reveal] .data-area,
+.has-motion .copper-chart--svg[data-reveal] .data-marker,
+.has-motion .copper-chart--svg[data-reveal] .data-value {
+  opacity: 0;
+}
+
+/* Visible state — transitions defined here so they engage only on .is-visible. */
+.has-motion .copper-chart--svg[data-reveal].is-visible .data-line,
+.reveal-done .copper-chart--svg[data-reveal] .data-line {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.has-motion .copper-chart--svg[data-reveal].is-visible .data-area,
+.reveal-done .copper-chart--svg[data-reveal] .data-area {
+  opacity: 1;
+  transition: opacity 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Each marker + value pops in as the line reaches it. --reveal-progress is the
+   point's fraction of total path length (0 at first, 1 at last), set inline on
+   the parent <g class="data-point"> in index.astro and inherited by children. */
+.has-motion .copper-chart--svg[data-reveal].is-visible .data-marker,
+.has-motion .copper-chart--svg[data-reveal].is-visible .data-value,
+.reveal-done .copper-chart--svg[data-reveal] .data-marker,
+.reveal-done .copper-chart--svg[data-reveal] .data-value {
+  opacity: 1;
+  transition: opacity 320ms var(--ease);
+  transition-delay: calc(var(--reveal-progress, 0) * 1400ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .has-motion .copper-chart--svg[data-reveal] .data-line {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+  .has-motion .copper-chart--svg[data-reveal] .data-area,
+  .has-motion .copper-chart--svg[data-reveal] .data-marker,
+  .has-motion .copper-chart--svg[data-reveal] .data-value {
+    opacity: 1;
+  }
+}
+
 @media (max-width: 768px) {
   .copper-chart {
     padding: 20px 16px 14px;
@@ -1346,6 +1473,23 @@ body > * {
     margin-top: 14px;
     font-size: 0.6rem;
     letter-spacing: 0.14em;
+  }
+
+  .copper-chart--svg .axis-label,
+  .copper-chart--svg .axis-title {
+    font-size: 28px;
+  }
+
+  .copper-chart--svg .data-value {
+    font-size: 26px;
+  }
+
+  .copper-chart--svg .data-marker {
+    stroke-width: 2.5;
+  }
+
+  .copper-chart--svg .data-line {
+    stroke-width: 4.5;
   }
 }
 
@@ -1389,8 +1533,8 @@ body > * {
 
 .split {
   display: grid;
-  grid-template-columns: 1.7fr 1fr;
-  gap: 72px;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 56px;
   align-items: center;
 }
 
@@ -1404,7 +1548,7 @@ body > * {
 
 .split-image {
   overflow: hidden;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 5;
   border-radius: var(--radius);
   background: var(--sand);
   box-shadow: var(--shadow-lg);
@@ -1445,55 +1589,14 @@ body > * {
   text-transform: uppercase;
 }
 
-.policy-card {
-  position: absolute;
-  top: 50%;
-  left: -36px;
-  width: min(360px, 78%);
-  transform: translateY(-50%);
-  padding: 30px;
-  border-radius: var(--radius);
-  background: var(--white);
-  box-shadow: var(--shadow-lg);
-}
-
-.policy-card h3 {
-  margin: 0 0 20px;
-  color: var(--copper-dark);
-  font-size: 1.08rem;
-}
-
-.policy-card ul {
-  display: grid;
-  gap: 18px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.policy-card li {
-  display: grid;
-  grid-template-columns: 24px 1fr;
-  gap: 12px;
-  color: var(--g500);
-  font-size: 0.8rem;
-  line-height: 1.55;
-}
-
-.policy-card .mi {
-  color: var(--copper);
-  font-variation-settings: "FILL" 1;
-}
-
-.policy-card strong {
-  display: block;
-  margin-bottom: 3px;
-  color: var(--g900);
-  font-size: 0.9rem;
+.split-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .split-copy h2 {
-  margin: 0 0 18px;
+  margin: 0;
   color: var(--g900);
   font-size: clamp(1.8rem, 3vw, 2.25rem);
   line-height: 1.15;
@@ -1501,8 +1604,78 @@ body > * {
 
 .split-copy p {
   margin: 0;
-  color: var(--g500);
-  line-height: 1.8;
+  color: var(--g600);
+  line-height: 1.7;
+}
+
+.split-lead {
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--g700);
+  max-width: 38ch;
+}
+
+.split-lead em {
+  color: var(--copper-dark);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.policy-card {
+  position: relative;
+  padding: 28px 30px;
+  border-radius: var(--r-xl);
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+.policy-card h3 {
+  margin: 0 0 4px;
+  color: var(--g900);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.policy-card-sub {
+  margin: 0 0 22px;
+  color: var(--g700);
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.policy-card ul {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.policy-card li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 12px;
+  color: var(--g600);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.policy-card .mi {
+  color: var(--copper);
+  font-size: 22px;
+  line-height: 1.1;
+  font-variation-settings: "FILL" 1;
+}
+
+.policy-card strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--g900);
+  font-size: 0.92rem;
+  font-weight: 600;
 }
 
 .rings {
@@ -1868,27 +2041,13 @@ body > * {
   gap: 18px;
 }
 
-.implementation-head {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.implementation-rule {
-  display: inline-block;
-  width: 32px;
-  height: 2px;
-  background: var(--copper);
-  border-radius: 2px;
-}
-
-.implementation-head h3 {
+.implementation > h3 {
   margin: 0;
   color: var(--g900);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 .implementation > p {
@@ -1897,26 +2056,6 @@ body > * {
   color: var(--g600);
   font-size: 1.15rem;
   line-height: 1.55;
-}
-
-.implementation-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 4px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.implementation-pills li {
-  padding: 8px 16px;
-  background: var(--white);
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-full);
-  color: var(--g700);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
 }
 
 @media (max-width: 960px) {
@@ -3644,13 +3783,12 @@ textarea.form-input {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .policy-card {
-    position: relative;
-    left: auto;
-    top: auto;
-    width: auto;
-    margin: -44px 24px 0;
-    transform: none;
+  .split-image {
+    aspect-ratio: 16 / 10;
+  }
+
+  .split-lead {
+    max-width: none;
   }
 
   .footer-brand {
@@ -3946,7 +4084,6 @@ textarea.form-input {
   }
 
   .policy-card {
-    margin: -34px 12px 0;
     padding: 24px;
   }
 }

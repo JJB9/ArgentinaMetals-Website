@@ -18,6 +18,56 @@ const kpi = [
   ["Land Controlled", "~150k", "Hectares across prime districts in Mendoza"],
   ["Ownership", "~60%", "Core project interest"]
 ];
+
+const copperSeries: Array<{ year: number; value: number }> = [
+  { year: 1820, value: 0.1 },
+  { year: 1850, value: 0.1 },
+  { year: 1900, value: 0.5 },
+  { year: 1910, value: 0.9 },
+  { year: 1920, value: 1.0 },
+  { year: 1930, value: 1.6 },
+  { year: 1940, value: 2.0 },
+  { year: 1950, value: 2.4 },
+  { year: 1960, value: 3.9 },
+  { year: 1970, value: 5.9 },
+  { year: 1980, value: 7.2 },
+  { year: 1990, value: 9.2 },
+  { year: 2000, value: 13.3 },
+  { year: 2010, value: 16.1 },
+  { year: 2020, value: 20.6 },
+  { year: 2025, value: 23.2 }
+];
+
+const chartW = 1200;
+const chartH = 600;
+const padT = 40;
+const padR = 28;
+const padB = 64;
+const padL = 64;
+const plotW = chartW - padL - padR;
+const plotH = chartH - padT - padB;
+const xMin = 1820;
+const xMax = 2025;
+const yMax = 25;
+const yTicks = [0, 5, 10, 15, 20, 25];
+
+const px = (year: number) => padL + ((year - xMin) / (xMax - xMin)) * plotW;
+const py = (value: number) => padT + plotH - (value / yMax) * plotH;
+const fmt = (n: number) => n.toFixed(2);
+
+const points = copperSeries.map((d) => ({ ...d, x: px(d.year), y: py(d.value) }));
+const linePath = points.map((p, i) => `${i === 0 ? "M" : "L"}${fmt(p.x)},${fmt(p.y)}`).join(" ");
+const areaPath = `${linePath} L${fmt(points[points.length - 1].x)},${fmt(py(0))} L${fmt(points[0].x)},${fmt(py(0))} Z`;
+const lastIdx = points.length - 1;
+
+const cumulativeLengths = points.reduce<number[]>((acc, p, i) => {
+  const last = i === 0 ? 0 : acc[i - 1];
+  const seg = i === 0 ? 0 : Math.hypot(p.x - points[i - 1].x, p.y - points[i - 1].y);
+  acc.push(last + seg);
+  return acc;
+}, []);
+const totalPathLength = cumulativeLengths[cumulativeLengths.length - 1] || 1;
+const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
 ---
 
 <BaseLayout
@@ -50,14 +100,81 @@ const kpi = [
         </div>
       </div>
 
-      <figure class="copper-chart" data-reveal style="--i:1">
-        <img
-          src={asset("assets/images/copper-demand-chart.webp")}
-          alt="Global copper production grew from 0.1 million metric tons in 1820 to 23.2 million metric tons in 2025, illustrating sustained, accelerating demand."
-          loading="lazy"
-          width="1280"
-          height="736"
-        />
+      <figure class="copper-chart copper-chart--svg" data-reveal style="--i:1">
+        <svg
+          viewBox={`0 0 ${chartW} ${chartH}`}
+          role="img"
+          aria-labelledby="copper-svg-title copper-svg-desc"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <title id="copper-svg-title">Global copper production, 1820–2025</title>
+          <desc id="copper-svg-desc">Line chart of global copper production rising from 0.1 million metric tons in 1820 to 23.2 million metric tons in 2025.</desc>
+
+          <defs>
+            <linearGradient id="copper-area-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#d4783f" stop-opacity="0.28" />
+              <stop offset="100%" stop-color="#d4783f" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+
+          {yTicks.map((t) => (
+            <g class="grid-row">
+              <line
+                class="grid-line"
+                x1={padL}
+                x2={chartW - padR}
+                y1={py(t)}
+                y2={py(t)}
+              />
+              <text class="axis-label y-label" x={padL - 12} y={py(t) + 4}>{t}</text>
+            </g>
+          ))}
+
+          <line
+            class="axis-line"
+            x1={padL}
+            x2={chartW - padR}
+            y1={py(0)}
+            y2={py(0)}
+          />
+
+          <path class="data-area" d={areaPath} />
+          <path class="data-line" d={linePath} pathLength="1" />
+
+          {points.map((p, i) => {
+            const isEnd = i === lastIdx;
+            return (
+              <g class="data-point" style={`--reveal-progress: ${pointProgress[i].toFixed(4)}`}>
+                <circle
+                  class={isEnd ? "data-marker data-marker--end" : "data-marker"}
+                  cx={p.x}
+                  cy={p.y}
+                  r={isEnd ? 5.5 : 4}
+                />
+                <text
+                  class={isEnd ? "data-value data-value--end" : "data-value"}
+                  x={p.x}
+                  y={p.y - 12}
+                >
+                  {p.value.toFixed(1)}
+                </text>
+                <text
+                  class="axis-label x-label"
+                  x={p.x}
+                  y={chartH - padB + 22}
+                  transform={`rotate(-45 ${fmt(p.x)} ${chartH - padB + 22})`}
+                >
+                  {p.year}
+                </text>
+              </g>
+            );
+          })}
+
+          <text class="axis-title" x={padL - 48} y={padT + plotH / 2} transform={`rotate(-90 ${padL - 48} ${padT + plotH / 2})`}>
+            Million metric tons
+          </text>
+          <text class="axis-title" x={padL + plotW / 2} y={chartH - 6}>Year</text>
+        </svg>
         <figcaption>Global copper production (approx. demand) · million metric tons, 1820–2025</figcaption>
       </figure>
     </div>
@@ -82,8 +199,12 @@ const kpi = [
             <strong>Top 10</strong>
             <span>Global Copper Reserve Potential</span>
           </div>
+        </div>
+        <div class="split-copy" data-reveal style="--i:1">
+          <p class="split-lead">President Milei's pro-business reforms are sparking a structural re-rating of Argentina's mining and exploration assets. The <em>Milei Effect</em> is rapidly closing this gap — and early movers capture the arbitrage.</p>
           <div class="policy-card">
-            <h3>The Milei Effect: re-rating a century of missed opportunity.</h3>
+            <h3>The Milei Effect.</h3>
+            <p class="policy-card-sub">Re-rating a century of missed opportunity.</p>
             <ul>
               {mileiItems.map(([title, desc]) => (
                 <li>
@@ -93,9 +214,6 @@ const kpi = [
               ))}
             </ul>
           </div>
-        </div>
-        <div class="split-copy" data-reveal style="--i:1">
-          <p>President Milei's pro-business reforms are sparking a structural re-rating of Argentina's mining and exploration assets. The "Milei Effect" is rapidly closing this gap — and the early movers capture the arbitrage.</p>
         </div>
       </div>
     </div>
@@ -154,16 +272,8 @@ const kpi = [
           </div>
 
           <div class="implementation" data-reveal style="--i:1">
-            <div class="implementation-head">
-              <span class="implementation-rule" aria-hidden="true"></span>
-              <h3>The Implementation</h3>
-            </div>
+            <h3>The Implementation.</h3>
             <p>We are searching for the big prize: world-class copper deposits. Our approach is defined by scale, technology and people.</p>
-            <ul class="implementation-pills">
-              <li>Scale</li>
-              <li>Technology</li>
-              <li>People</li>
-            </ul>
           </div>
         </div>
 
