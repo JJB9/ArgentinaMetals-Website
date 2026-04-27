@@ -16,15 +16,6 @@ const dayNumber = (date: Date) => date.getDate();
 const monthLabel = (date: Date) =>
   date.toLocaleDateString("en-US", { month: "short" }).toUpperCase();
 
-const tagClass = (category: string) => {
-  if (category === "Press Release") return "press";
-  if (category === "Technical") return "technical";
-  return "update";
-};
-
-const filterSlug = (category: string) =>
-  category.toLowerCase().replace(/\s+/g, "-");
-
 const groupedByYear = news.reduce<Record<number, typeof news>>((acc, item) => {
   const year = item.data.date.getFullYear();
   (acc[year] ??= []).push(item);
@@ -41,12 +32,12 @@ const years = Object.keys(groupedByYear)
     <div class="wrap">
       <div class="page-hero-text">
         <h1 data-reveal style="--i:0">News</h1>
-        <p data-reveal style="--i:1">Press releases, corporate updates, and exploration progress from Argentina Metals.</p>
+        <p data-reveal style="--i:1">Press releases, corporate updates and exploration progress from Argentina Metals.</p>
       </div>
       <aside class="page-hero-subscribe" data-reveal style="--i:2">
         <div class="subscribe-head">
           <span class="subscribe-icon mi" aria-hidden="true">mail_outline</span>
-          <h2>Subscribe to Updates</h2>
+          <h2>Subscribe to Investor Alerts</h2>
         </div>
         <form class="newsletter-form" name="newsletter" method="post" data-netlify="true">
           <input type="hidden" name="form-name" value="newsletter" />
@@ -69,13 +60,6 @@ const years = Object.keys(groupedByYear)
   </section>
   <section class="content-band">
     <div class="wrap">
-      <div class="filter-row" role="tablist" aria-label="News categories">
-        <button class="filter active" type="button" data-filter="all">All</button>
-        <button class="filter" type="button" data-filter="press-release">Press Releases</button>
-        <button class="filter" type="button" data-filter="corporate-update">Corporate Updates</button>
-        <button class="filter" type="button" data-filter="technical">Technical</button>
-      </div>
-
       <div class="news-list">
         {years.map((year) => (
           <section class="news-year" data-year={year}>
@@ -85,14 +69,12 @@ const years = Object.keys(groupedByYear)
                 <a
                   class="news-row"
                   href={`/news/${item.id}`}
-                  data-category={filterSlug(item.data.category)}
                 >
                   <div class="news-row-date" aria-hidden="true">
                     <span class="news-row-day">{dayNumber(item.data.date)}</span>
                     <span class="news-row-month">{monthLabel(item.data.date)}</span>
                   </div>
                   <div class="news-row-body">
-                    <span class:list={["tag", tagClass(item.data.category)]}>{item.data.category}</span>
                     <h3>{item.data.title}</h3>
                     <p>{item.data.excerpt}</p>
                     <span class="news-row-cta">
@@ -107,8 +89,6 @@ const years = Object.keys(groupedByYear)
           </section>
         ))}
       </div>
-
-      <p class="news-empty" hidden>No items in this category.</p>
 
       <nav class="news-pagination" aria-label="News pagination" hidden>
         <button class="pagination-btn prev" type="button" aria-label="Previous page" disabled>
@@ -294,10 +274,6 @@ const years = Object.keys(groupedByYear)
       gap: 10px;
     }
 
-    .news-row-body .tag {
-      margin-bottom: 2px;
-    }
-
     .news-row-body h3 {
       margin: 0;
       max-width: 60ch;
@@ -365,12 +341,6 @@ const years = Object.keys(groupedByYear)
     .news-row.hidden,
     .news-year.hidden {
       display: none;
-    }
-
-    .news-empty {
-      margin: 24px 0 0;
-      color: var(--g500);
-      font-size: 0.9rem;
     }
 
     .news-pagination {
@@ -481,10 +451,8 @@ const years = Object.keys(groupedByYear)
 
   <script is:inline>
     (() => {
-      const buttons = document.querySelectorAll(".filter[data-filter]");
-      const rows = document.querySelectorAll(".news-row[data-category]");
+      const rows = document.querySelectorAll(".news-row");
       const years = document.querySelectorAll(".news-year");
-      const empty = document.querySelector(".news-empty");
       const pagination = document.querySelector(".news-pagination");
       const prevBtn = pagination?.querySelector(".pagination-btn.prev");
       const nextBtn = pagination?.querySelector(".pagination-btn.next");
@@ -492,28 +460,20 @@ const years = Object.keys(groupedByYear)
       const totalPagesEl = pagination?.querySelector(".total-pages");
       const newsList = document.querySelector(".news-list");
 
-      if (!buttons.length || !rows.length) return;
+      if (!rows.length) return;
 
       const perPage = 20;
-      let currentFilter = "all";
       let currentPage = 1;
 
-      const matchesFilter = (row, filter) => {
-        const cat = row.getAttribute("data-category");
-        return filter === "all" || cat === filter;
-      };
-
       const render = () => {
-        const matches = [...rows].filter((r) => matchesFilter(r, currentFilter));
-        const totalPages = Math.max(1, Math.ceil(matches.length / perPage));
+        const totalPages = Math.max(1, Math.ceil(rows.length / perPage));
         if (currentPage > totalPages) currentPage = totalPages;
 
         const start = (currentPage - 1) * perPage;
         const end = start + perPage;
-        const visibleSet = new Set(matches.slice(start, end));
 
-        rows.forEach((row) => {
-          row.classList.toggle("hidden", !visibleSet.has(row));
+        rows.forEach((row, i) => {
+          row.classList.toggle("hidden", i < start || i >= end);
         });
 
         years.forEach((year) => {
@@ -521,25 +481,14 @@ const years = Object.keys(groupedByYear)
           year.classList.toggle("hidden", !any);
         });
 
-        if (empty) empty.hidden = matches.length > 0;
-
         if (pagination) {
-          pagination.hidden = matches.length <= perPage;
+          pagination.hidden = rows.length <= perPage;
           if (currentPageEl) currentPageEl.textContent = String(currentPage);
           if (totalPagesEl) totalPagesEl.textContent = String(totalPages);
           if (prevBtn) prevBtn.disabled = currentPage <= 1;
           if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
         }
       };
-
-      buttons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          buttons.forEach((b) => b.classList.toggle("active", b === btn));
-          currentFilter = btn.getAttribute("data-filter");
-          currentPage = 1;
-          render();
-        });
-      });
 
       const goToPage = (page) => {
         currentPage = page;
@@ -552,8 +501,7 @@ const years = Object.keys(groupedByYear)
       });
 
       nextBtn?.addEventListener("click", () => {
-        const matches = [...rows].filter((r) => matchesFilter(r, currentFilter));
-        const totalPages = Math.max(1, Math.ceil(matches.length / perPage));
+        const totalPages = Math.max(1, Math.ceil(rows.length / perPage));
         if (currentPage < totalPages) goToPage(currentPage + 1);
       });
 

@@ -6,7 +6,6 @@ const news = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
-    category: z.enum(["Press Release", "Corporate Update", "Technical"]),
     excerpt: z.string(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),

@@ -1,7 +1,6 @@
 ---
 title: "Argentina Metals Corp. Announces Board Changes"
 date: 2025-11-24
-category: "Corporate Update"
 excerpt: "Argentina Metals appoints Julio César Pulisich — a Mendoza-based accountant with over 30 years in the mining sector — to its board of directors, replacing Carlo Rigillo who transitions to the CFO role."
 draft: false
 ---

@@ -3688,6 +3688,37 @@ textarea.form-input {
   margin: 0;
 }
 
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.78);
+  transition: background 200ms var(--ease), color 200ms var(--ease), transform 200ms var(--ease);
+}
+
+.footer-social a:hover {
+  background: rgba(253, 180, 115, 0.18);
+  color: var(--copper-light);
+  transform: translateY(-1px);
+}
+
+.footer-social svg {
+  width: 15px;
+  height: 15px;
+}
+
 @media (max-width: 768px) {
   .footer-top {
     grid-template-columns: 1fr;
@@ -3697,7 +3728,7 @@ textarea.form-input {
   .footer-bottom {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 16px;
   }
 }
 

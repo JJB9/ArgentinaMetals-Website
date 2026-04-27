@@ -19,11 +19,6 @@ const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
   year: "numeric"
 });
 
-const tagClass = (category: string) => {
-  if (category === "Press Release") return "press";
-  if (category === "Technical") return "technical";
-  return "update";
-};
 ---
 
 <BaseLayout title={`${item.data.title} - Argentina Metals Corp.`} description={item.data.excerpt}>
@@ -35,7 +30,6 @@ const tagClass = (category: string) => {
       </a>
 
       <header class="article-head">
-        <span class:list={["tag", tagClass(item.data.category)]}>{item.data.category}</span>
         <h1>{item.data.title}</h1>
         <p class="article-excerpt">{item.data.excerpt}</p>
         <div class="post-meta">

@@ -1,7 +1,6 @@
 ---
 title: "Argentina Metals Announces Purchase of Additional Mineral Rights in Mendoza, Argentina and Amendment to Previously Announced Acquisition Terms"
 date: 2026-04-02
-category: "Corporate Update"
 excerpt: "Argentina Metals closes the acquisition of 19,151 hectares across four properties from Andean Exploration S.A., while also amending the payment structure of the previously announced El Salado and La Quimera transaction."
 draft: false
 ---
