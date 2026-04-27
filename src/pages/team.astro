@@ -6,12 +6,14 @@ const executives = [
   {
     name: "Raymond D. Harari",
     initials: "RH",
+    image: "/assets/images/people/Raymond D. Harari.webp",
     role: "CEO & Director",
     bio: "Founder of Canalis Capital. Native Spanish speaker with deep Latin America expertise. Led multiple TSXV and CSE listings including Westward Gold, Hercules Metals, and Sendero Resources."
   },
   {
     name: "Dr. Titus Gebel",
     initials: "TG",
+    image: "/assets/images/people/Titus Gebel.webp",
     role: "Chairman",
     bio: "Over 20 years in the resource sector. Co-founder and former CEO of Deutsche Rohstoff AG. Former Director at Osisko Exploration. Instrumental in early financing for the Malartic gold mine."
   },
@@ -24,18 +26,21 @@ const executives = [
   {
     name: "Carlo Rigillo",
     initials: "CR",
+    image: "/assets/images/people/Carlo Rigillo.webp",
     role: "Chief Financial Officer",
     bio: "Over 20 years as CFO for TSX and CSE listed companies. Skilled in financial reporting, M&A transactions, investor relations, and growth-stage public company management."
   },
   {
     name: "Martin Hoff",
     initials: "MH",
+    image: "/assets/images/people/Martin Hoff.webp",
     role: "Director",
     bio: "Over 20 years as a resource-focused investor and strategic advisor in Europe. Managing Partner at HuHo Capital. Head of Strategic Investment at Aumontis Holding AG. Board experience with TSXV-listed T2 Metals."
   },
   {
     name: "Julio Pullisich",
     initials: "JP",
+    image: "/assets/images/people/Julio Pulisich.webp",
     role: "Director",
     bio: "Mendoza-born entrepreneur with experience across mining, real estate, retail, and professional services. Co-Founder of Torre-Pullisich Accounting Firm. 30+ years working with mining companies in Argentina."
   }
@@ -57,6 +62,7 @@ const advisors = [
   {
     name: "Peter Geerdts",
     initials: "PG",
+    image: "/assets/images/people/Peter Geerdts.webp",
     role: "Senior Geologist",
     bio: "25+ years of exploration across Australia, Africa, and Europe. Co-founder of Alderan Resources."
   },
@@ -69,6 +75,7 @@ const advisors = [
   {
     name: "Chris Paul",
     initials: "CP",
+    image: "/assets/images/people/Chris Paul.webp",
     role: "Technical Advisor",
     bio: "CEO of Hercules Metals. 15+ years discovery and capital markets experience. Founder of Ridgeline Exploration."
   }
@@ -85,7 +92,11 @@ const advisors = [
       <div class="team-grid">
         {executives.map((member, i) => (
           <article class="team-card" data-reveal style={`--i:${i % 3}`}>
-            <div class="avatar" aria-hidden="true">{member.initials}</div>
+            <div class="avatar" aria-hidden="true">
+              {member.image
+                ? <img src={member.image} alt={member.name} loading="lazy" />
+                : member.initials}
+            </div>
             <div class="team-card-body">
               <h3>{member.name}</h3>
               <p class="role">{member.role}</p>
@@ -105,16 +116,106 @@ const advisors = [
         </div>
       </div>
 
-      <div class="advisor-grid">
+      <div class="ac-grid">
         {advisors.map((advisor, i) => (
-          <article class="advisor-card" data-reveal style={`--i:${i % 4}`}>
-            <div class="avatar small" aria-hidden="true">{advisor.initials}</div>
-            <h3>{advisor.name}</h3>
-            <p class="role">{advisor.role}</p>
-            <p>{advisor.bio}</p>
+          <article class="ac-card" data-reveal style={`--i:${i % 5}`}>
+            <div class="ac-photo">
+              {advisor.image
+                ? <img src={advisor.image} alt={advisor.name} loading="lazy" />
+                : <span>{advisor.initials}</span>}
+            </div>
+            <div class="ac-body">
+              <h3>{advisor.name}</h3>
+              <p class="role">{advisor.role}</p>
+              <p class="ac-bio">{advisor.bio}</p>
+            </div>
           </article>
         ))}
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+.ac-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ac-card {
+  border-radius: var(--r-xl);
+  background: var(--white);
+  box-shadow: var(--s-sm);
+  overflow: hidden;
+  transition: transform 240ms var(--ease), box-shadow 240ms var(--ease);
+}
+
+.ac-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--s-lg);
+}
+
+.ac-photo {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--sand);
+  display: grid;
+  place-items: center;
+}
+
+.ac-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 500ms var(--ease);
+}
+
+.ac-card:hover .ac-photo img {
+  transform: scale(1.05);
+}
+
+.ac-photo span {
+  color: var(--g600);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.ac-body {
+  padding: 14px 16px 18px;
+}
+
+.ac-body h3 {
+  margin: 0 0 4px;
+  color: var(--g900);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.ac-body .role {
+  margin: 0 0 8px;
+  font-size: 0.58rem;
+}
+
+.ac-bio {
+  margin: 0;
+  color: var(--g500);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .ac-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 540px) {
+  .ac-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+</style>
