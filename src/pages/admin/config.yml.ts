@@ -16,10 +16,6 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
-      - label: "Category"
-        name: "category"
-        widget: "select"
-        options: ["Press Release", "Corporate Update", "Technical"]
       - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Image", name: "image", widget: "string", required: false }
       - { label: "Image Alt", name: "imageAlt", widget: "string", required: false }

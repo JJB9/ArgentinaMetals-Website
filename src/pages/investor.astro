@@ -29,13 +29,28 @@ function linkItem(icon: string, name: string, meta: string, href: string): DocIt
 }
 
 const highlights = [
-  ["category", "Pure-Play Copper", "Dedicated exposure to the critical metal driving electrification. Direct access to the geological extension of Chile's world-class copper corridor."],
-  ["flag", "First-Mover Advantage", "146,000+ hectares assembled ahead of institutional capital. 100+ GIS-identified targets in terrain never systematically explored."],
-  ["show_chart", "TSX-V Listing (VLLC)", "Clear path to public markets under ticker VLLC, providing liquidity and enhanced valuation metrics for shareholders."],
-  ["policy", "Milei Reform Tailwind", "RIGI 30-year tax stability, profit repatriation, and streamlined permitting are validated by Glencore, BHP, and Rio Tinto commitments."],
-  ["pie_chart", "Tight Capital Structure", "~60% insider ownership. Nil warrants. Top 10 shareholders own 75%+. Founder shares in 36-month escrow."],
-  ["public", "Proven LatAm Team", "Combined 100+ years of experience across exploration, public markets, M&A, and Argentine operations."]
+  ["category", "Pure-Play Copper", "Dedicated exposure to the critical metal driving electrification. Direct access to the geological extension of Chile's world-class copper belt."],
+  ["policy", "Milei Effect", "Mining-friendliness, RIGI tax regime, profit repatriation, and streamlined permitting. All validated by recent Glencore, BHP and Rio Tinto activities in Argentina."],
+  ["flag", "Early Mover Advantage", "Secured ca. 150,000 hectares across prime districts in Mendoza before the emerging copper boom reshapes the region."],
+  ["pie_chart", "Tight Capital Structure", "~50% insider ownership. Nil warrants. Top 10 shareholders own 75%+. Founder shares subject to 36-month TSXV Tier 2 escrow restrictions."],
+  ["show_chart", "TSXV Listing", "Established path to public markets under ticker VLLC at a recognized stock exchange, providing liquidity and enhanced valuation metrics for shareholders."],
+  ["public", "Team, Track Record & Technology", "Combined 100+ years of experience across exploration, public markets, M&A, and Argentine operations. Using new technologies to enhance exploration."]
 ];
+
+const capitalRows = [
+  { label: "Insiders", note: 1, shares: 11_257_855, pct: 47.19, color: "var(--copper-dark)" },
+  { label: "Institutional & HNW", shares: 12_249_926, pct: 51.34, color: "var(--green)" },
+  { label: "Non-Insider Vendors", shares: 350_000, pct: 1.47, color: "var(--slate)" }
+];
+const totalShares = capitalRows.reduce((sum, r) => sum + r.shares, 0);
+const fmtShares = (n: number) => n.toLocaleString("en-US");
+
+let donutOffset = 0;
+const donutSegments = capitalRows.map((row) => {
+  const segment = { ...row, dash: row.pct, offset: -donutOffset };
+  donutOffset += row.pct;
+  return segment;
+});
 
 const documents: { title: string; items: DocItem[] }[] = [
   {
@@ -60,14 +75,9 @@ const documents: { title: string; items: DocItem[] }[] = [
 <BaseLayout title="Investors - Argentina Metals Corp.">
   <PageHeader
     title="Investors"
-    text="Pure-play exposure to high-grade copper exploration in the world's most prospective emerging jurisdiction. TSX Venture Exchange listed."
+    text="Pure-play exposure to world-class copper exploration in one of the world's most prospective emerging jurisdictions. Listing on TSX Venture Exchange (pending). Secondary listings in Frankfurt and other places."
     image="/assets/images/andes-argentina-clouds.jpg"
     imageAlt="Andes mountains under clouds"
-    stats={[
-      { value: "TSX-V: VLLC", label: "Ticker Symbol" },
-      { value: "C$4.8M", label: "Capital Raised" },
-      { value: "~60%", label: "Insider Ownership" }
-    ]}
   >
     <div class="ticker-card ticker-card--hero">
       <div>
@@ -76,6 +86,15 @@ const documents: { title: string; items: DocItem[] }[] = [
       </div>
       <p>Live stock data will be activated upon successful listing.</p>
     </div>
+
+    <a class="alerts-link" slot="image-bottom" href="/news" data-reveal>
+      <span class="alerts-link-icon mi" aria-hidden="true">notifications_active</span>
+      <span class="alerts-link-body">
+        <strong>Investor Alerts</strong>
+        <span>Press releases &amp; corporate updates straight to your inbox</span>
+      </span>
+      <span class="alerts-link-arrow mi" aria-hidden="true">arrow_forward</span>
+    </a>
   </PageHeader>
 
   <section class="section">
@@ -83,7 +102,7 @@ const documents: { title: string; items: DocItem[] }[] = [
       <div class="section-header" data-reveal>
         <div>
           <h2 class="section-title">Investment Highlights</h2>
-          <p class="section-desc">Six core pillars defining the Argentina Metals value proposition.</p>
+          <p class="section-desc">Six core pillars defining Argentina Metals' value proposition.</p>
         </div>
       </div>
 
@@ -95,6 +114,86 @@ const documents: { title: string; items: DocItem[] }[] = [
             <p>{text}</p>
           </article>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="capital">
+    <div class="wrap">
+      <div class="section-header" data-reveal>
+        <div>
+          <h2 class="section-title">Capital Structure &amp; Ownership</h2>
+          <p class="section-desc">Tight basic share count of {fmtShares(totalShares)} with the majority held by insiders, institutional investors, and high-net-worth individuals. Nil warrants outstanding.</p>
+        </div>
+      </div>
+
+      <div class="cap-layout">
+        <div class="cap-table-wrap" data-reveal>
+          <div class="dtw">
+            <table class="dt cap-table">
+              <thead>
+                <tr>
+                  <th scope="col">Shareholders</th>
+                  <th scope="col" class="num">Shares</th>
+                  <th scope="col" class="num">% of Basic S/O</th>
+                </tr>
+              </thead>
+              <tbody>
+                {capitalRows.map((row) => (
+                  <tr>
+                    <th scope="row">
+                      <span class="cap-swatch" style={`background:${row.color}`} aria-hidden="true"></span>
+                      <span>{row.label}{row.note && (<sup>({row.note})</sup>)}</span>
+                    </th>
+                    <td class="num">{fmtShares(row.shares)}</td>
+                    <td class="num">{row.pct.toFixed(2)}%</td>
+                  </tr>
+                ))}
+                <tr class="cap-total">
+                  <th scope="row">Basic S/O</th>
+                  <td class="num hi">{fmtShares(totalShares)}</td>
+                  <td class="num hi">100.00%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cap-footnote">
+            <sup>(1)</sup> Shares subject to TSXV Tier 2 Escrow Restrictions over a 36-month escrow from listing.
+          </p>
+        </div>
+
+        <figure class="cap-donut" data-reveal>
+          <svg viewBox="0 0 220 220" role="img" aria-labelledby="cap-donut-title cap-donut-desc">
+            <title id="cap-donut-title">Ownership breakdown by shareholder group</title>
+            <desc id="cap-donut-desc">Donut chart showing 47.19% insiders, 51.34% institutional and high-net-worth, and 1.47% non-insider vendors out of {fmtShares(totalShares)} basic shares outstanding.</desc>
+            <circle cx="110" cy="110" r="78" fill="none" stroke="var(--sand)" stroke-width="26" />
+            {donutSegments.map((seg) => (
+              <circle
+                cx="110"
+                cy="110"
+                r="78"
+                fill="none"
+                stroke={seg.color}
+                stroke-width="26"
+                pathLength="100"
+                stroke-dasharray={`${seg.dash} ${100 - seg.dash}`}
+                stroke-dashoffset={seg.offset}
+                transform="rotate(-90 110 110)"
+              />
+            ))}
+            <text x="110" y="104" text-anchor="middle" class="cap-donut-num">{fmtShares(totalShares)}</text>
+            <text x="110" y="124" text-anchor="middle" class="cap-donut-label">Basic S/O</text>
+          </svg>
+          <ul class="cap-legend">
+            {capitalRows.map((row) => (
+              <li>
+                <span class="cap-swatch" style={`background:${row.color}`} aria-hidden="true"></span>
+                <span class="cap-legend-label">{row.label}</span>
+                <strong class="cap-legend-pct">{row.pct.toFixed(2)}%</strong>
+              </li>
+            ))}
+          </ul>
+        </figure>
       </div>
     </div>
   </section>
@@ -125,3 +224,247 @@ const documents: { title: string; items: DocItem[] }[] = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  :global(.page-hero--split:has(.ticker-card--hero)) :global(.page-hero-text) {
+    padding-bottom: 0;
+  }
+
+  :global(.ticker-card--hero) {
+    position: static;
+    margin-top: 28px;
+    max-width: 460px;
+  }
+
+  .alerts-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+    padding: 10px 18px 10px 10px;
+    background: var(--copper-wash);
+    border: 1px solid color-mix(in srgb, var(--copper-dark) 16%, transparent);
+    border-radius: var(--r-full);
+    color: var(--g700);
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color 200ms var(--ease-out),
+      box-shadow 200ms var(--ease-out),
+      border-color 200ms var(--ease-out);
+  }
+
+  .alerts-link:hover {
+    background: var(--white);
+    border-color: color-mix(in srgb, var(--copper-dark) 32%, transparent);
+    box-shadow: var(--s-md);
+  }
+
+  .alerts-link:focus-visible {
+    outline: 2px solid var(--ring-focus-color);
+    outline-offset: 3px;
+  }
+
+  .alerts-link-icon {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--copper-dark);
+    font-size: 20px;
+  }
+
+  .alerts-link-body {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+
+  .alerts-link-body strong {
+    color: var(--g900);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .alerts-link-body span {
+    margin-top: 2px;
+    color: var(--g500);
+    font-size: 0.74rem;
+  }
+
+  .alerts-link-arrow {
+    font-size: 18px;
+    color: var(--copper-dark);
+    transition: transform 200ms var(--ease-out);
+  }
+
+  .alerts-link:hover .alerts-link-arrow {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 480px) {
+    .alerts-link {
+      width: 100%;
+      border-radius: var(--r-lg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .alerts-link,
+    .alerts-link-arrow {
+      transition: none;
+    }
+  }
+
+  .cap-layout {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 32px;
+    align-items: stretch;
+  }
+
+  .cap-table-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cap-table thead th:first-child {
+    width: 44%;
+  }
+
+  .cap-table tbody th {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--g700);
+    font-weight: 500;
+  }
+
+  .cap-table tbody th sup {
+    margin-left: 2px;
+    color: var(--g400);
+    font-size: 0.65rem;
+    font-weight: 500;
+  }
+
+  .cap-swatch {
+    flex: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  .cap-table .cap-total th,
+  .cap-table .cap-total td {
+    background: var(--warm);
+    color: var(--g900);
+    font-weight: 600;
+  }
+
+  .cap-table .cap-total th {
+    padding-left: 20px;
+  }
+
+  .cap-footnote {
+    margin: 0;
+    padding: 0 4px;
+    color: var(--g400);
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  .cap-footnote sup {
+    margin-right: 2px;
+    color: var(--g500);
+    font-weight: 500;
+  }
+
+  .cap-donut {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin: 0;
+    padding: 36px 32px;
+    background: var(--white);
+    border-radius: var(--r-2xl);
+    box-shadow: var(--s-sm);
+  }
+
+  .cap-donut svg {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    display: block;
+  }
+
+  .cap-donut-num {
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 700;
+    fill: var(--g900);
+    letter-spacing: -0.01em;
+  }
+
+  .cap-donut-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 600;
+    fill: var(--g400);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .cap-legend {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cap-legend li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--warm);
+    border-radius: var(--r-md);
+  }
+
+  .cap-legend-label {
+    color: var(--g700);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .cap-legend-pct {
+    color: var(--g900);
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 960px) {
+    .cap-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .cap-donut {
+      padding: 28px 20px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cap-table thead th:nth-child(3),
+    .cap-table tbody td:nth-child(3) {
+      display: none;
+    }
+  }
+</style>

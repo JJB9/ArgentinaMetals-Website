@@ -1,7 +1,6 @@
 ---
 title: "Argentina Metals Corp. Announces Closing of Private Placement and Debt Settlement"
 date: 2025-07-30
-category: "Corporate Update"
 excerpt: "Argentina Metals closes a non-brokered private placement raising C$325,000 at C$0.25 per share, and settles C$5,000 in debt through share issuance, bringing total shares outstanding to 11,320,000."
 draft: false
 ---

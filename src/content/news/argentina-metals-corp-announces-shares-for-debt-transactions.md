@@ -1,7 +1,6 @@
 ---
 title: "Argentina Metals Corp. Announces Shares for Debt Transactions"
 date: 2026-02-02
-category: "Corporate Update"
 excerpt: "Argentina Metals settles C$90,000 in arms-length debt through the issuance of 180,000 common shares at C$0.50 per share, bringing total shares outstanding to 20,376,881."
 draft: false
 ---

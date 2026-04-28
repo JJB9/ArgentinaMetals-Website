@@ -2,18 +2,18 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PageHeader from "@components/PageHeader.astro";
 import AndesHero from "../components/islands/AndesHero";
-import { projects } from "../data/projects";
 const base = import.meta.env.BASE_URL;
+const asset = (path: string) => `${base}${path}`;
 ---
 
 <BaseLayout title="Projects - Argentina Metals Corp.">
   <PageHeader
     title="Projects"
-    text="Our exploration portfolio spans 146,728 hectares across the Western Malargue Mining District — one of Argentina's most prospective copper-gold corridors."
+    text="Our exploration portfolio spans 146,728 hectares across the Malargue District and the San Raphael District in one of Argentina's most prospective copper-gold corridors."
     stats={[
       { value: "146,728 ha", label: "Total Land Package" },
       { value: "26", label: "Project Areas" },
-      { value: "100+", label: "GIS Targets" }
+      { value: "20+", label: "Initial Targets" }
     ]}
   />
 
@@ -23,19 +23,87 @@ const base = import.meta.env.BASE_URL;
     </div>
   </div>
 
-  <section class="content-band content-band--spacious">
+  <section class="section soft" id="mendoza">
     <div class="wrap">
       <div class="section-header" data-reveal>
+        <span class="section-num">01</span>
         <div>
-          <h2 class="section-title">Flagship Project</h2>
-          <p class="section-desc">Our most advanced target has two distinct mineralization styles confirmed by surface geochemistry and magnetometric surveys.</p>
+          <h2 class="section-title">Province of Mendoza</h2>
+          <p class="section-desc">Argentina Metals is focusing on Mendoza exclusively — a province re-opening to mining after three decades of political and legal closure.</p>
         </div>
       </div>
 
-      <a class="project-flagship" id="las-estrellas" href="/projects/las-estrellas">
-        <div class="split-image">
-          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=80" alt="Las Estrellas project area in the Andes" loading="lazy" />
+      <div class="split">
+        <figure class="split-visual split-visual--compact" data-reveal>
+          <div class="split-image">
+            <img data-parallax src={asset("assets/images/Alfredo Cornejo and Titus Gebel.webp")} alt="Argentina Metals Chairman Titus Gebel meeting with Alfredo Cornejo, Governor of Mendoza Province" loading="lazy" />
+          </div>
+          <figcaption class="split-caption">Chairman Titus Gebel and Alfredo Cornejo, Governor of Mendoza</figcaption>
+        </figure>
+        <div class="split-copy" data-reveal style="--i:1">
+          <p class="split-lead">For 30 years, political and legal obstacles kept Mendoza factually closed for mining. <em>That era is ending.</em></p>
+          <p>The provincial government is so supportive it has established a state agency, <a href="https://impulsamendoza.com.ar/" target="_blank" rel="noopener noreferrer"><strong>Impulsa Mendoza</strong></a>, to fund the environmental impact assessments for exploration and development companies — beginning in the Western Malargüe Mining District where Argentina Metals operates.</p>
+          <p>In December 2025, parliament and senate approved with a large majority the environmental assessment of the San Jorge project — a future copper mine that had been blocked for many years. At the same time, Kobrea Exploration received the permits to begin its first drilling campaign at El Perdido, only 1.5 km from Argentina Metals' Las Estrellas project. <strong>Mendoza is back in mining.</strong></p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-band content-band--spacious">
+    <div class="wrap">
+      <div class="section-header" data-reveal>
+        <span class="section-num">02</span>
+        <div>
+          <h2 class="section-title">Malargüe District</h2>
+          <p class="section-desc">Most of our licenses sit within the Malargüe District, with the majority in the Western Malargüe Mining District — where environmental licenses are preapproved. An initial exploration campaign has targeted our Las Estrellas license in the north, adjacent to Kobrea Exploration's El Perdido project, with a copper porphyry target now confirmed in its northern part.</p>
+        </div>
+      </div>
+
+      <div class="district-layout">
+        <figure class="district-map" data-reveal style="--i:0">
+          <div class="district-map-frame">
+            <img
+              src={asset("assets/images/malargue-claims-map.webp")}
+              alt="Claims map of the Malargüe District in Mendoza, Argentina, showing Argentina Metals tenures in green alongside neighbouring Kobrea Exploration tenures in blue, across 26 named licenses straddling the Chile–Argentina border."
+              loading="lazy"
+              width="889"
+              height="1287"
+            />
+          </div>
+          <figcaption>Claims map · Malargüe District, Mendoza Province</figcaption>
+        </figure>
+
+        <div class="district-info" data-reveal style="--i:1">
+          <div class="district-stats">
+            <div class="district-stat district-stat--lead">
+              <strong>26</strong>
+              <span>Named Licenses</span>
+            </div>
+            <div class="district-stat">
+              <strong>146,728 ha</strong>
+              <span>District Land Position</span>
+            </div>
+            <div class="district-stat">
+              <strong>Western Malargüe MD</strong>
+              <span>Environmental Licenses Pre-approved</span>
+            </div>
+            <div class="district-stat">
+              <strong>1.5 km</strong>
+              <span>To Kobrea Active Drilling</span>
+            </div>
+          </div>
+
+          <div class="district-status">
+            <span class="district-status-dot" aria-hidden="true"></span>
+            <div>
+              <strong>Las Estrellas — drill-ready targets</strong>
+              <span>Copper porphyry target confirmed in the northern part of our flagship license.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a class="project-flagship project-flagship--district-flow project-flagship--reverse" id="las-estrellas" href="/projects/las-estrellas">
         <div class="project-flagship-body">
           <span class="tag press">Flagship</span>
           <h2>Las Estrellas</h2>
@@ -47,112 +115,24 @@ const base = import.meta.env.BASE_URL;
           </div>
           <span class="button primary" style="width:fit-content">View Project Details <span class="mi" aria-hidden="true">arrow_forward</span></span>
         </div>
+        <div class="split-image">
+          <img src={asset("assets/images/projects/LasEstrellasNorth2.webp")} alt="Las Estrellas project area in the Andes" loading="lazy" />
+        </div>
       </a>
     </div>
   </section>
 
   <section class="section soft">
     <div class="wrap">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Satellite &amp; Exploration Targets</h2>
-          <p class="section-desc">Priority targets across the district, each leveraging the same geological corridor that hosts Las Estrellas.</p>
-        </div>
-      </div>
-
-      <div class="project-grid">
-        {projects.map((project, i) => (
-          <article class="project-card" data-reveal style={`--i:${i % 3}`}>
-            <div class="project-card-img">
-              <img src={project.image} alt={project.imageAlt} loading="lazy" />
-            </div>
-            <div class="project-card-body">
-              <span class:list={["tag", { technical: project.tag === "Early-Stage" }]}>{project.tag}</span>
-              <h3>{project.title}</h3>
-              <p>{project.text}</p>
-              <div class="card-meta">
-                {project.meta.map(([icon, label]) => (
-                  <span>
-                    <span class="mi" aria-hidden="true">{icon}</span>
-                    {label}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
       <div class="section-header" data-reveal>
+        <span class="section-num">03</span>
         <div>
-          <h2 class="section-title">Land Position Summary</h2>
-          <p class="section-desc">Consolidated tenure across acquired and staked project areas — with the district-level work already on the ground.</p>
+          <h2 class="section-title">San Raphael District</h2>
+          <p class="section-desc">North of the Western Malargüe Mining District, we hold license areas in the San Raphael District — currently under increased scrutiny and looking very promising.</p>
         </div>
-      </div>
-
-      <div class="land-summary">
-        <article class="land-card land-card--primary" data-reveal style="--i:0">
-          <div class="land-hero">
-            <span class="land-hero-label">Consolidated Land Package</span>
-            <strong class="land-hero-value">146,728<span>ha</span></strong>
-            <span class="land-hero-sub">26 project areas across the Western Malargüe corridor</span>
-          </div>
-
-          <div class="land-bar" role="img" aria-label="Acquired: 132,155 hectares (90%). Staked: 14,573 hectares (10%).">
-            <span class="land-bar-seg land-bar-seg--acquired" style="--pct: 90.07%"></span>
-            <span class="land-bar-seg land-bar-seg--staked" style="--pct: 9.93%"></span>
-          </div>
-
-          <dl class="land-split">
-            <div class="land-split-item">
-              <span class="land-swatch land-swatch--acquired" aria-hidden="true"></span>
-              <div>
-                <dt>Acquired</dt>
-                <dd><strong>132,155 ha</strong><span>24 project areas</span></dd>
-              </div>
-            </div>
-            <div class="land-split-item">
-              <span class="land-swatch land-swatch--staked" aria-hidden="true"></span>
-              <div>
-                <dt>Staked</dt>
-                <dd><strong>14,573 ha</strong><span>2 project areas</span></dd>
-              </div>
-            </div>
-          </dl>
-        </article>
-
-        <article class="land-card land-card--status" data-reveal style="--i:1">
-          <h3 class="land-card-title">Project Readiness</h3>
-          <ul class="land-checklist">
-            <li>
-              <span class="land-check" aria-hidden="true"><span class="mi">verified</span></span>
-              <div>
-                <strong>Clean Title</strong>
-                <span>No NSRs or earn-in agreements</span>
-              </div>
-            </li>
-            <li>
-              <span class="land-check" aria-hidden="true"><span class="mi">description</span></span>
-              <div>
-                <strong>NI 43-101 Technical Report</strong>
-                <span>Completed</span>
-              </div>
-            </li>
-            <li>
-              <span class="land-check" aria-hidden="true"><span class="mi">explore</span></span>
-              <div>
-                <strong>Mapping, Geophysics &amp; Geochemistry</strong>
-                <span>Initial district program completed</span>
-              </div>
-            </li>
-          </ul>
-        </article>
       </div>
     </div>
   </section>
+
 
 </BaseLayout>
