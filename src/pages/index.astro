@@ -20,7 +20,6 @@ const kpi = [
 ];
 
 const copperSeries: Array<{ year: number; value: number }> = [
-  { year: 1820, value: 0.1 },
   { year: 1850, value: 0.1 },
   { year: 1900, value: 0.5 },
   { year: 1910, value: 0.9 },
@@ -42,11 +41,11 @@ const chartW = 1200;
 const chartH = 600;
 const padT = 40;
 const padR = 28;
-const padB = 64;
+const padB = 100;
 const padL = 64;
 const plotW = chartW - padL - padR;
 const plotH = chartH - padT - padB;
-const xMin = 1820;
+const xMin = 1850;
 const xMax = 2025;
 const yMax = 25;
 const yTicks = [0, 5, 10, 15, 20, 25];
@@ -92,29 +91,31 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
 
   <section class="section" id="thesis">
     <div class="wrap">
-      <div class="section-header" data-reveal>
-        <span class="section-num">01</span>
-        <div>
+      <div class="thesis-layout">
+        <div class="thesis-intro" data-reveal>
+          <span class="section-num">01</span>
           <h2 class="section-title">Copper is a Blockbuster</h2>
           <p class="section-desc copper-blockbuster-desc">Copper needs no marketing. The world needs copper. When the world economy is growing — as it has for the last 150 years — the same happens with the demand for copper. Extra demand from electrification and data centers is creating a structural bull market for copper.</p>
         </div>
-      </div>
 
-      <figure class="copper-chart copper-chart--svg" data-reveal style="--i:1">
+        <figure class="copper-chart copper-chart--svg copper-chart--compact" data-reveal style="--i:1">
         <svg
           viewBox={`0 0 ${chartW} ${chartH}`}
           role="img"
           aria-labelledby="copper-svg-title copper-svg-desc"
           preserveAspectRatio="xMidYMid meet"
         >
-          <title id="copper-svg-title">Global copper production, 1820–2025</title>
-          <desc id="copper-svg-desc">Line chart of global copper production rising from 0.1 million metric tons in 1820 to 23.2 million metric tons in 2025.</desc>
+          <title id="copper-svg-title">Global copper production, 1850–2025</title>
+          <desc id="copper-svg-desc">Line chart of global copper production rising from 0.1 million metric tons in 1850 to 23.2 million metric tons in 2025.</desc>
 
           <defs>
             <linearGradient id="copper-area-fill" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stop-color="#d4783f" stop-opacity="0.28" />
               <stop offset="100%" stop-color="#d4783f" stop-opacity="0" />
             </linearGradient>
+            <clipPath id="copper-area-clip" clipPathUnits="userSpaceOnUse">
+              <rect class="area-clip-rect" x={padL} y={padT} width={plotW} height={plotH} />
+            </clipPath>
           </defs>
 
           {yTicks.map((t) => (
@@ -138,7 +139,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
             y2={py(0)}
           />
 
-          <path class="data-area" d={areaPath} />
+          <path class="data-area" d={areaPath} clip-path="url(#copper-area-clip)" />
           <path class="data-line" d={linePath} pathLength="1" />
 
           {points.map((p, i) => {
@@ -175,8 +176,9 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
           </text>
           <text class="axis-title" x={padL + plotW / 2} y={chartH - 6}>Year</text>
         </svg>
-        <figcaption>Global copper production (approx. demand) · million metric tons, 1820–2025</figcaption>
+        <figcaption>Global copper production</figcaption>
       </figure>
+      </div>
     </div>
   </section>
 

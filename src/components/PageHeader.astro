@@ -35,8 +35,11 @@ const split = Boolean(image);
       <slot />
     </div>
     {image && (
-      <div class="page-hero-img" data-parallax>
-        <img src={image} alt={imageAlt ?? ""} width="1200" height="900" loading="eager" />
+      <div class="page-hero-right">
+        <div class="page-hero-img" data-parallax>
+          <img src={image} alt={imageAlt ?? ""} width="1200" height="900" loading="eager" />
+        </div>
+        <slot name="image-bottom" />
       </div>
     )}
   </div>

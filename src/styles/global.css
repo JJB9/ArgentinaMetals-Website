@@ -1421,35 +1421,45 @@ body > * {
   stroke-dashoffset: 1;
 }
 
-.has-motion .copper-chart--svg[data-reveal] .data-area,
 .has-motion .copper-chart--svg[data-reveal] .data-marker,
 .has-motion .copper-chart--svg[data-reveal] .data-value {
   opacity: 0;
+}
+
+/* Area is wiped open by scaling the clipPath rect from 0 → 1 along X, so the
+   bronze fill grows under the line with a vertical leading edge instead of
+   fading in as a flat shape. */
+.has-motion .copper-chart--svg[data-reveal] .area-clip-rect {
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  transform-box: fill-box;
 }
 
 /* Visible state — transitions defined here so they engage only on .is-visible. */
 .has-motion .copper-chart--svg[data-reveal].is-visible .data-line,
 .reveal-done .copper-chart--svg[data-reveal] .data-line {
   stroke-dashoffset: 0;
-  transition: stroke-dashoffset 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: stroke-dashoffset 1900ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.has-motion .copper-chart--svg[data-reveal].is-visible .data-area,
-.reveal-done .copper-chart--svg[data-reveal] .data-area {
-  opacity: 1;
-  transition: opacity 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+.has-motion .copper-chart--svg[data-reveal].is-visible .area-clip-rect,
+.reveal-done .copper-chart--svg[data-reveal] .area-clip-rect {
+  transform: scaleX(1);
+  transition: transform 1900ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Each marker + value pops in as the line reaches it. --reveal-progress is the
    point's fraction of total path length (0 at first, 1 at last), set inline on
-   the parent <g class="data-point"> in index.astro and inherited by children. */
+   the parent <g class="data-point"> in index.astro and inherited by children.
+   Delay is offset back by the fade duration so each label finishes appearing
+   right as the drawing line crosses it, not after. */
 .has-motion .copper-chart--svg[data-reveal].is-visible .data-marker,
 .has-motion .copper-chart--svg[data-reveal].is-visible .data-value,
 .reveal-done .copper-chart--svg[data-reveal] .data-marker,
 .reveal-done .copper-chart--svg[data-reveal] .data-value {
   opacity: 1;
-  transition: opacity 320ms var(--ease);
-  transition-delay: calc(var(--reveal-progress, 0) * 1400ms);
+  transition: opacity 200ms var(--ease);
+  transition-delay: calc(var(--reveal-progress, 0) * 1900ms - 200ms);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1457,7 +1467,9 @@ body > * {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
   }
-  .has-motion .copper-chart--svg[data-reveal] .data-area,
+  .has-motion .copper-chart--svg[data-reveal] .area-clip-rect {
+    transform: scaleX(1);
+  }
   .has-motion .copper-chart--svg[data-reveal] .data-marker,
   .has-motion .copper-chart--svg[data-reveal] .data-value {
     opacity: 1;
@@ -1489,6 +1501,89 @@ body > * {
   }
 
   .copper-chart--svg .data-line {
+    stroke-width: 4.5;
+  }
+}
+
+.thesis-layout {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.thesis-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 38ch;
+}
+
+.thesis-intro .section-num {
+  font-size: 3.25rem;
+}
+
+.thesis-intro .section-title {
+  margin: 0;
+}
+
+.thesis-intro .section-desc {
+  max-width: none;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.copper-chart--compact {
+  margin-top: 0;
+  padding: 28px 32px 22px;
+}
+
+.copper-chart--compact .axis-label {
+  font-size: 18px;
+}
+
+.copper-chart--compact .axis-title {
+  font-size: 18px;
+}
+
+.copper-chart--compact .data-value {
+  font-size: 17px;
+}
+
+.copper-chart--compact .data-line {
+  stroke-width: 3.25;
+}
+
+.copper-chart--compact .data-marker {
+  stroke-width: 2;
+}
+
+@media (max-width: 960px) {
+  .thesis-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .thesis-side {
+    max-width: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .copper-chart--compact {
+    padding: 20px 16px 14px;
+  }
+
+  .copper-chart--compact .axis-label,
+  .copper-chart--compact .axis-title {
+    font-size: 28px;
+  }
+
+  .copper-chart--compact .data-value {
+    font-size: 26px;
+  }
+
+  .copper-chart--compact .data-line {
     stroke-width: 4.5;
   }
 }
@@ -1638,8 +1733,8 @@ body > * {
   line-height: 1.2;
 }
 
-.policy-card-sub {
-  margin: 0 0 22px;
+.policy-card .policy-card-sub {
+  margin: 0 0 32px;
   color: var(--g700);
   font-size: 1.02rem;
   font-weight: 500;
@@ -2469,6 +2564,13 @@ body > * {
 
 .page-hero--split .page-hero-img {
   align-self: start;
+}
+
+.page-hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: stretch;
 }
 
 .page-hero--split p {
