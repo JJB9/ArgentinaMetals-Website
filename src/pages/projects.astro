@@ -34,7 +34,7 @@ const asset = (path: string) => `${base}${path}`;
       </div>
 
       <div class="split">
-        <figure class="split-visual" data-reveal>
+        <figure class="split-visual split-visual--compact" data-reveal>
           <div class="split-image">
             <img data-parallax src={asset("assets/images/Alfredo Cornejo and Titus Gebel.webp")} alt="Argentina Metals Chairman Titus Gebel meeting with Alfredo Cornejo, Governor of Mendoza Province" loading="lazy" />
           </div>
@@ -59,10 +59,51 @@ const asset = (path: string) => `${base}${path}`;
         </div>
       </div>
 
-      <a class="project-flagship" id="las-estrellas" href="/projects/las-estrellas">
-        <div class="split-image">
-          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=80" alt="Las Estrellas project area in the Andes" loading="lazy" />
+      <div class="district-layout">
+        <figure class="district-map" data-reveal style="--i:0">
+          <div class="district-map-frame">
+            <img
+              src={asset("assets/images/malargue-claims-map.webp")}
+              alt="Claims map of the Malargüe District in Mendoza, Argentina, showing Argentina Metals tenures in green alongside neighbouring Kobrea Exploration tenures in blue, across 26 named licenses straddling the Chile–Argentina border."
+              loading="lazy"
+              width="889"
+              height="1287"
+            />
+          </div>
+          <figcaption>Claims map · Malargüe District, Mendoza Province</figcaption>
+        </figure>
+
+        <div class="district-info" data-reveal style="--i:1">
+          <div class="district-stats">
+            <div class="district-stat district-stat--lead">
+              <strong>26</strong>
+              <span>Named Licenses</span>
+            </div>
+            <div class="district-stat">
+              <strong>146,728 ha</strong>
+              <span>District Land Position</span>
+            </div>
+            <div class="district-stat">
+              <strong>Western Malargüe MD</strong>
+              <span>Environmental Licenses Pre-approved</span>
+            </div>
+            <div class="district-stat">
+              <strong>1.5 km</strong>
+              <span>To Kobrea Active Drilling</span>
+            </div>
+          </div>
+
+          <div class="district-status">
+            <span class="district-status-dot" aria-hidden="true"></span>
+            <div>
+              <strong>Las Estrellas — drill-ready targets</strong>
+              <span>Copper porphyry target confirmed in the northern part of our flagship license.</span>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <a class="project-flagship project-flagship--district-flow project-flagship--reverse" id="las-estrellas" href="/projects/las-estrellas">
         <div class="project-flagship-body">
           <span class="tag press">Flagship</span>
           <h2>Las Estrellas</h2>
@@ -73,6 +114,9 @@ const asset = (path: string) => `${base}${path}`;
             <span><span class="mi" aria-hidden="true">my_location</span> 1.5 km to KBX drilling</span>
           </div>
           <span class="button primary" style="width:fit-content">View Project Details <span class="mi" aria-hidden="true">arrow_forward</span></span>
+        </div>
+        <div class="split-image">
+          <img src={asset("assets/images/projects/LasEstrellasNorth2.webp")} alt="Las Estrellas project area in the Andes" loading="lazy" />
         </div>
       </a>
     </div>
