@@ -872,7 +872,7 @@ textarea:focus-visible {
 .hero-media {
   position: relative;
   width: min(100% - 48px, 1120px);
-  margin: 44px auto 0;
+  margin: 44px auto 40px;
 }
 
 .hero-media-frame {
@@ -1507,20 +1507,21 @@ body > * {
 
 .thesis-layout {
   display: grid;
-  grid-template-columns: 5fr 7fr;
+  grid-template-columns: 4fr 8fr;
   gap: 56px;
-  align-items: center;
+  align-items: start;
+  padding-top: 16px;
 }
 
 .thesis-intro {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 38ch;
+  max-width: 42ch;
 }
 
 .thesis-intro .section-num {
-  font-size: 3.25rem;
+  font-size: 3.5rem;
 }
 
 .thesis-intro .section-title {
@@ -1535,7 +1536,9 @@ body > * {
 
 .copper-chart--compact {
   margin-top: 0;
-  padding: 28px 32px 22px;
+  padding: 36px 40px 28px;
+  background: linear-gradient(135deg, var(--white) 0%, #fdf8f4 100%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(180, 100, 50, 0.06);
 }
 
 .copper-chart--compact .axis-label {
@@ -1561,7 +1564,8 @@ body > * {
 @media (max-width: 960px) {
   .thesis-layout {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 36px;
+    padding-top: 0;
   }
 
   .thesis-side {
@@ -1635,6 +1639,22 @@ body > * {
 
 .split-visual {
   position: relative;
+}
+
+figure.split-visual {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.split-caption {
+  color: var(--g400);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .split-visual--full {
@@ -2062,7 +2082,6 @@ body > * {
   padding: 20px 22px;
   background: var(--green-pale);
   border-radius: var(--r-lg);
-  border-left: 3px solid var(--green);
 }
 
 .district-status-dot {
@@ -2181,14 +2200,15 @@ body > * {
 .pillars {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 32px;
+  align-items: start;
 }
 
 .pillar {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 52px 48px 48px;
+  padding: 56px 48px 48px;
   background: var(--white);
   border: 1px solid var(--hairline);
   border-radius: var(--radius);
@@ -2196,22 +2216,26 @@ body > * {
   overflow: hidden;
 }
 
+.pillar:nth-child(2) {
+  margin-top: 48px;
+}
+
 .pillar-num {
   display: block;
-  margin: 0 0 20px;
+  margin: 0 0 24px;
   background: var(--copper-grad);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  font-size: 4.25rem;
+  font-size: 3.5rem;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.03em;
 }
 
 .pillar-title {
-  margin: 0 0 24px;
+  margin: 0 0 20px;
   color: var(--g900);
   font-size: var(--fs-h2);
   font-weight: 700;
@@ -2220,13 +2244,11 @@ body > * {
 }
 
 .pillar-lead {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
   color: var(--g700);
-  font-size: 1.18rem;
+  font-size: 1.12rem;
   font-weight: 400;
-  line-height: 1.55;
-  letter-spacing: -0.005em;
-  max-width: 46ch;
+  line-height: 1.7;
 }
 
 .pillar-body {
@@ -2235,30 +2257,27 @@ body > * {
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.8;
-  max-width: 52ch;
 }
 
 @media (max-width: 960px) {
   .pillars {
     grid-template-columns: 1fr;
-    gap: 20px;
   }
 
   .pillar {
-    padding: 40px 28px 36px;
+    padding: 40px 32px 36px;
+  }
+
+  .pillar:nth-child(2) {
+    margin-top: 0;
   }
 
   .pillar-num {
     font-size: 3rem;
-    margin-bottom: 16px;
-  }
-
-  .pillar-title {
-    margin-bottom: 18px;
   }
 
   .pillar-lead {
-    font-size: 1.08rem;
+    font-size: 1.05rem;
   }
 }
 
