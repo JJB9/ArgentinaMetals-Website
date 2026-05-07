@@ -73,17 +73,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
   title="Argentina Metals Corp. - A Pure-Play on Argentina's Copper Boom"
   description="Argentina Metals Corp. is acquiring district-scale copper exploration assets across Argentina's underexplored Andean copper belts."
 >
-  <section class="hero">
-    <div class="wrap">
-      <h1 data-reveal style="--i:0">Investing in Argentina and Its Emerging <em>Copper Boom</em></h1>
-      <div class="hero-actions" data-reveal style="--i:2">
-        <a class="button primary shimmer" href="/projects">Explore the Opportunity <span class="mi" aria-hidden="true">arrow_forward</span></a>
-        <a class="button secondary" href="/investor#docs">View Corporate Presentation</a>
-      </div>
-    </div>
-  </section>
-
-  <div class="hero-media" data-reveal style="--i:3">
+  <div class="hero-media hero-media--lead" data-reveal style="--i:0">
     <div class="hero-media-frame">
       <video
         data-parallax
@@ -99,6 +89,16 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
       </button>
     </div>
   </div>
+
+  <section class="hero hero--after-media">
+    <div class="wrap">
+      <h1 data-reveal style="--i:1">Investing in Argentina and Its Emerging <em>Copper Boom</em></h1>
+      <div class="hero-actions" data-reveal style="--i:2">
+        <a class="button primary shimmer" href="/projects">Explore the Opportunity <span class="mi" aria-hidden="true">arrow_forward</span></a>
+        <a class="button secondary" href="/investor#docs">View Corporate Presentation</a>
+      </div>
+    </div>
+  </section>
 
   <script is:inline>
     (() => {
@@ -154,6 +154,21 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
       videos.forEach((v) => io.observe(v));
     })();
   </script>
+
+  <aside class="part-marker part-marker--thesis" aria-label="Part I — The Thesis">
+    <div class="wrap">
+      <div class="part-marker-inner" data-reveal>
+        <span class="part-marker-rule" aria-hidden="true"></span>
+        <span class="part-marker-label">
+          <span class="part-marker-numeral">I</span>
+          <span class="part-marker-dot" aria-hidden="true"></span>
+          <span class="part-marker-title">The Thesis</span>
+        </span>
+        <span class="part-marker-rule" aria-hidden="true"></span>
+      </div>
+      <p class="part-marker-sub" data-reveal style="--i:1">Three pillars define our approach to the Argentine copper boom — a strategy built on demand, policy and geology.</p>
+    </div>
+  </aside>
 
   <section class="section" id="thesis">
     <div class="wrap">
@@ -338,11 +353,6 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
               </table>
             </div>
           </div>
-
-          <div class="implementation" data-reveal style="--i:1">
-            <h3>The Implementation.</h3>
-            <p>We are searching for the big prize: world-class copper deposits. Our approach is defined by scale, technology and people.</p>
-          </div>
         </div>
 
         <div class="rocks-map" data-reveal style="--i:2">
@@ -360,6 +370,21 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
       </div>
     </div>
   </section>
+
+  <aside class="part-marker part-marker--implementation" aria-label="Part II — The Implementation">
+    <div class="wrap">
+      <div class="part-marker-inner" data-reveal>
+        <span class="part-marker-rule" aria-hidden="true"></span>
+        <span class="part-marker-label">
+          <span class="part-marker-numeral">II</span>
+          <span class="part-marker-dot" aria-hidden="true"></span>
+          <span class="part-marker-title">The Implementation</span>
+        </span>
+        <span class="part-marker-rule" aria-hidden="true"></span>
+      </div>
+      <p class="part-marker-sub" data-reveal style="--i:1">We are searching for the big prize: world-class copper deposits. Our approach is defined by scale, technology and people.</p>
+    </div>
+  </aside>
 
   <section class="section">
     <div class="wrap">
