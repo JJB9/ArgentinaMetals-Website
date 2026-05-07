@@ -346,8 +346,17 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
         </div>
 
         <div class="rocks-map" data-reveal style="--i:2">
-          <AndesHero client:idle />
+          <AndesHero client:visible />
         </div>
+
+        <script>
+          const warm = () => import("maplibre-gl").catch(() => {});
+          if ("requestIdleCallback" in window) {
+            (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => void }).requestIdleCallback(warm, { timeout: 2500 });
+          } else {
+            setTimeout(warm, 800);
+          }
+        </script>
       </div>
     </div>
   </section>

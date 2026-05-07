@@ -115,7 +115,7 @@ export default function AndesHero() {
           cooperativeGestures: true,
           attributionControl: { compact: true },
           maxPitch: 80,
-          antialias: true,
+          antialias: false,
         });
         mapRef.current = map;
 
@@ -126,6 +126,27 @@ export default function AndesHero() {
         let loaded = false;
         let visible = false;
         let flown = false;
+        let terrainInstalled = false;
+
+        const installTerrain = () => {
+          if (terrainInstalled || cancelled || !map) return;
+          terrainInstalled = true;
+          if (!map.getSource("amc-terrain")) {
+            map.addSource("amc-terrain", {
+              type: "raster-dem",
+              url: TERRAIN_SOURCE_URL(key),
+              tileSize: 256,
+            });
+          }
+          map.setTerrain({ source: "amc-terrain", exaggeration: 1.35 });
+          try {
+            const beforeId = map.getLayer("amc-belt-fill") ? "amc-belt-fill" : undefined;
+            map.addLayer(hillshadeLayer(), beforeId);
+          } catch (err) {
+            console.warn("[AndesHero] hillshade add failed", err);
+          }
+        };
+
         const runFly = () => {
           if (flown || cancelled || !map || !loaded || !visible) return;
           flown = true;
@@ -141,6 +162,11 @@ export default function AndesHero() {
             map.getCanvas().style.cursor = "grab";
           };
 
+          const onSettled = () => {
+            enableInteraction();
+            installTerrain();
+          };
+
           if (prefersReducedMotion()) {
             map.jumpTo({
               center: CAMERA.end.center,
@@ -148,9 +174,9 @@ export default function AndesHero() {
               pitch: CAMERA.end.pitch,
               bearing: CAMERA.end.bearing,
             });
-            enableInteraction();
+            onSettled();
           } else {
-            map.once("moveend", enableInteraction);
+            map.once("moveend", onSettled);
             map.flyTo({
               center: CAMERA.end.center,
               zoom: CAMERA.end.zoom,
@@ -188,21 +214,6 @@ export default function AndesHero() {
           if (attribEl) {
             attribEl.open = false;
             attribEl.classList.remove("maplibregl-compact-show");
-          }
-
-          if (!map.getSource("amc-terrain")) {
-            map.addSource("amc-terrain", {
-              type: "raster-dem",
-              url: TERRAIN_SOURCE_URL(key),
-              tileSize: 256,
-            });
-          }
-          map.setTerrain({ source: "amc-terrain", exaggeration: 1.35 });
-
-          try {
-            map.addLayer(hillshadeLayer());
-          } catch (err) {
-            console.warn("[AndesHero] hillshade add failed", err);
           }
 
           map.addSource("amc-belt", {
