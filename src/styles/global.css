@@ -365,6 +365,10 @@ textarea:focus-visible {
   text-align: center;
 }
 
+.hero--after-media {
+  padding: 128px 0 32px;
+}
+
 .hero > .wrap {
   position: relative;
   z-index: 1;
@@ -873,6 +877,11 @@ textarea:focus-visible {
   position: relative;
   width: min(100% - 48px, 1120px);
   margin: 44px auto 40px;
+}
+
+.hero-media--lead {
+  margin-top: 88px;
+  margin-bottom: 0;
 }
 
 .hero-media-frame {
@@ -1711,6 +1720,13 @@ figure.split-visual {
   justify-self: center;
 }
 
+.split-visual--medium {
+  max-width: 470px;
+  margin-inline: auto;
+  width: 100%;
+  justify-self: center;
+}
+
 .split-image {
   overflow: hidden;
   aspect-ratio: 4 / 5;
@@ -2202,30 +2218,108 @@ figure.split-visual {
   }
 }
 
-.implementation {
-  margin-top: 48px;
-  padding-top: 36px;
-  border-top: 1px solid var(--hairline);
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+/* Part markers — quiet inline dividers separating Thesis (01–03) from Implementation (04–06) */
+.part-marker {
+  padding: 104px 0 48px;
 }
 
-.implementation > h3 {
-  margin: 0;
-  color: var(--g900);
-  font-size: 1.5rem;
+.part-marker--implementation {
+  padding-top: 64px;
+}
+
+.part-marker + .section {
+  padding-top: 56px;
+}
+
+.part-marker-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  column-gap: 22px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.part-marker-rule {
+  display: block;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--hairline-strong) 50%,
+    transparent 100%
+  );
+}
+
+.part-marker-label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+.part-marker-numeral {
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: var(--copper-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
-.implementation > p {
+.part-marker-dot {
+  width: 3px;
+  height: 3px;
+  align-self: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--copper) 70%, transparent);
+}
+
+.part-marker-title {
   margin: 0;
-  max-width: 720px;
-  color: var(--g600);
-  font-size: 1.15rem;
-  line-height: 1.55;
+  color: var(--g700);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.part-marker-sub {
+  max-width: 580px;
+  margin: 22px auto 0;
+  color: var(--g500);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.65;
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .part-marker {
+    padding: 72px 0 36px;
+  }
+
+  .part-marker--implementation {
+    padding-top: 48px;
+  }
+
+  .part-marker-inner {
+    column-gap: 14px;
+  }
+
+  .part-marker-label {
+    gap: 10px;
+  }
+
+  .part-marker-sub {
+    margin-top: 18px;
+    font-size: 0.95rem;
+  }
 }
 
 @media (max-width: 960px) {
@@ -2240,15 +2334,6 @@ figure.split-visual {
 
   .gap-card {
     padding: 28px 22px;
-  }
-
-  .implementation {
-    margin-top: 36px;
-    padding-top: 28px;
-  }
-
-  .implementation > p {
-    font-size: 1.02rem;
   }
 }
 
@@ -4165,8 +4250,16 @@ textarea.form-input {
     padding: 48px 0 24px;
   }
 
+  .hero--after-media {
+    padding: 72px 0 20px;
+  }
+
   .hero-media {
     margin-top: 32px;
+  }
+
+  .hero-media--lead {
+    margin-top: 56px;
   }
 
   .hero-media-frame {
