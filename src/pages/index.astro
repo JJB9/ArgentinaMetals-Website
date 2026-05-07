@@ -85,9 +85,75 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
 
   <div class="hero-media" data-reveal style="--i:3">
     <div class="hero-media-frame">
-      <video data-parallax autoplay muted loop playsinline src={asset("assets/images/case-video.mp4")}></video>
+      <video
+        data-parallax
+        data-autoplay-on-scroll
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        src={asset("assets/videos/Argentina Metals_Imageclip.mp4")}
+      ></video>
+      <button type="button" class="hero-media-mute" aria-label="Unmute video" aria-pressed="true">
+        <span class="mi" aria-hidden="true">volume_off</span>
+      </button>
     </div>
   </div>
+
+  <script is:inline>
+    (() => {
+      const videos = document.querySelectorAll("video[data-autoplay-on-scroll]");
+      if (!videos.length) return;
+
+      const tryPlay = async (v) => {
+        try {
+          await v.play();
+          return;
+        } catch {}
+        v.muted = true;
+        syncMuteBtn(v);
+        try { await v.play(); } catch {}
+      };
+
+      const syncMuteBtn = (v) => {
+        const btn = v.parentElement?.querySelector(".hero-media-mute");
+        if (!btn) return;
+        const icon = btn.querySelector(".mi");
+        if (icon) icon.textContent = v.muted ? "volume_off" : "volume_up";
+        btn.setAttribute("aria-pressed", v.muted ? "true" : "false");
+        btn.setAttribute("aria-label", v.muted ? "Unmute video" : "Mute video");
+      };
+
+      videos.forEach((v) => {
+        v.style.cursor = "pointer";
+        syncMuteBtn(v);
+        v.addEventListener("click", () => {
+          if (v.paused) tryPlay(v);
+          else v.pause();
+        });
+        const btn = v.parentElement?.querySelector(".hero-media-mute");
+        btn?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          v.muted = !v.muted;
+          syncMuteBtn(v);
+        });
+      });
+
+      if (!("IntersectionObserver" in window)) {
+        videos.forEach(tryPlay);
+        return;
+      }
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) tryPlay(entry.target);
+          else entry.target.pause();
+        });
+      }, { threshold: 0.25 });
+
+      videos.forEach((v) => io.observe(v));
+    })();
+  </script>
 
   <section class="section" id="thesis">
     <div class="wrap">
