@@ -1720,6 +1720,13 @@ figure.split-visual {
   justify-self: center;
 }
 
+.split-visual--medium {
+  max-width: 470px;
+  margin-inline: auto;
+  width: 100%;
+  justify-self: center;
+}
+
 .split-image {
   overflow: hidden;
   aspect-ratio: 4 / 5;
