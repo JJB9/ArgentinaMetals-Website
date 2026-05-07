@@ -23,6 +23,15 @@ const asset = (path: string) => `${base}${path}`;
     </div>
   </div>
 
+  <script>
+    const warm = () => import("maplibre-gl").catch(() => {});
+    if ("requestIdleCallback" in window) {
+      (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => void }).requestIdleCallback(warm, { timeout: 2500 });
+    } else {
+      setTimeout(warm, 800);
+    }
+  </script>
+
   <section class="section soft" id="mendoza">
     <div class="wrap">
       <div class="section-header" data-reveal>
