@@ -81,7 +81,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
         muted
         loop
         playsinline
-        preload="metadata"
+        preload="none"
         src={asset("assets/videos/Argentina Metals_Imageclip.mp4")}
       ></video>
       <button type="button" class="hero-media-mute" aria-label="Unmute video" aria-pressed="true">
@@ -358,15 +358,6 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
         <div class="rocks-map" data-reveal style="--i:2">
           <AndesHero client:visible />
         </div>
-
-        <script>
-          const warm = () => import("maplibre-gl").catch(() => {});
-          if ("requestIdleCallback" in window) {
-            (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => void }).requestIdleCallback(warm, { timeout: 2500 });
-          } else {
-            setTimeout(warm, 800);
-          }
-        </script>
       </div>
     </div>
   </section>
