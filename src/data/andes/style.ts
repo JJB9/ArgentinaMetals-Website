@@ -33,7 +33,7 @@ export function readTokens(): AndesTokens {
 }
 
 export function maptilerStyleUrl(key: string): string {
-  return `https://api.maptiler.com/maps/dataviz/style.json?key=${encodeURIComponent(key)}`;
+  return `https://api.maptiler.com/maps/outdoor-v2/style.json?key=${encodeURIComponent(key)}`;
 }
 
 export const TERRAIN_SOURCE_URL = (key: string) =>
