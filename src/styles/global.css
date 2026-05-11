@@ -1048,6 +1048,10 @@ textarea:focus-visible {
   z-index: 1;
 }
 
+.andes-hero-marker--flagship {
+  align-items: flex-end;
+}
+
 .andes-hero-marker--flagship .andes-hero-marker-dot {
   width: 14px;
   height: 14px;
@@ -1056,11 +1060,22 @@ textarea:focus-visible {
 }
 
 .andes-hero-marker--flagship .andes-hero-marker-pulse {
+  bottom: auto;
+  left: auto;
+  top: 0;
+  right: 0;
   width: 14px;
   height: 14px;
   background: var(--green);
   opacity: 0.7;
-  animation-duration: 1800ms;
+  transform: none;
+  animation: andesPulseFlagship 1800ms cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes andesPulseFlagship {
+  0% { transform: scale(1); opacity: 0.7; }
+  70% { transform: scale(2.6); opacity: 0; }
+  100% { transform: scale(2.6); opacity: 0; }
 }
 
 .andes-hero-marker--city {
@@ -1142,6 +1157,7 @@ textarea:focus-visible {
 }
 
 .andes-hero-marker--flagship .andes-hero-marker-label {
+  margin: 8px 0 0 0;
   background: rgba(0, 61, 30, 0.95);
 }
 
@@ -1151,6 +1167,33 @@ textarea:focus-visible {
 
 .andes-hero-marker--flagship .andes-hero-marker-label em {
   color: var(--copper-light);
+}
+
+.andes-hero-marker--deposit .andes-hero-marker-label {
+  margin-bottom: 4px;
+  padding: 4px 8px 5px;
+  background: rgba(255, 248, 241, 0.92);
+}
+
+.andes-hero-marker--deposit .andes-hero-marker-star + .andes-hero-marker-label {
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+.andes-hero-marker--deposit .andes-hero-marker-label strong {
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.andes-hero-marker-star {
+  display: block;
+  width: 16px;
+  height: 16px;
+  fill: var(--copper);
+  stroke: #fff;
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 3px rgba(80, 40, 10, 0.45));
 }
 
 @keyframes andesPulse {
@@ -1208,6 +1251,16 @@ textarea:focus-visible {
   background: var(--green);
   border: 2px solid #fff;
   box-shadow: 0 0 0 1px rgba(0, 61, 30, 0.35);
+}
+
+.andes-hero-legend-swatch--deposit {
+  width: 14px;
+  height: 14px;
+  border-radius: 0;
+  border: 0;
+  background: var(--copper);
+  box-shadow: none;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
 
 .andes-hero-legend-swatch--belt {

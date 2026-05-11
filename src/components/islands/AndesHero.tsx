@@ -25,8 +25,9 @@ type MineFeature = {
     name: string;
     operator?: string;
     country: string;
-    type: "competitor" | "flagship" | "city";
+    type: "competitor" | "flagship" | "city" | "deposit";
     caption?: string;
+    labelBelow?: boolean;
   };
 };
 
@@ -62,17 +63,33 @@ function makeMarkerEl(f: MineFeature): HTMLDivElement {
     `;
     return root;
   }
-  const label = variant === "flagship"
-    ? `<span class="andes-hero-marker-label">
-        <span class="andes-hero-marker-badge">Argentina Metals</span>
-        <strong>${f.properties.name}</strong>
-        <em>${f.properties.caption ?? ""}</em>
-      </span>`
-    : `<span class="andes-hero-marker-label">
+  if (variant === "deposit") {
+    const star = `<svg class="andes-hero-marker-star" viewBox="0 0 24 24" aria-hidden="true">
+        <polygon points="12,2 14.6,8.6 22,9 16,14 18,21 12,17.5 6,21 8,14 2,9 9.4,8.6"/>
+      </svg>`;
+    const label = `<span class="andes-hero-marker-label">
         <strong>${f.properties.name}</strong>
         ${f.properties.caption ? `<em>${f.properties.caption}</em>` : ""}
       </span>`;
-  root.innerHTML = `${label}<span class="andes-hero-marker-pulse" aria-hidden="true"></span><span class="andes-hero-marker-dot" aria-hidden="true"></span>`;
+    root.innerHTML = f.properties.labelBelow ? `${star}${label}` : `${label}${star}`;
+    return root;
+  }
+  if (variant === "flagship") {
+    root.innerHTML = `
+      <span class="andes-hero-marker-pulse" aria-hidden="true"></span>
+      <span class="andes-hero-marker-dot" aria-hidden="true"></span>
+      <span class="andes-hero-marker-label">
+        <span class="andes-hero-marker-badge">Argentina Metals</span>
+        <strong>${f.properties.name}</strong>
+        <em>${f.properties.caption ?? ""}</em>
+      </span>
+    `;
+    return root;
+  }
+  root.innerHTML = `<span class="andes-hero-marker-label">
+      <strong>${f.properties.name}</strong>
+      ${f.properties.caption ? `<em>${f.properties.caption}</em>` : ""}
+    </span><span class="andes-hero-marker-pulse" aria-hidden="true"></span><span class="andes-hero-marker-dot" aria-hidden="true"></span>`;
   return root;
 }
 
@@ -237,8 +254,14 @@ export default function AndesHero() {
 
           for (const f of MINES.features) {
             const el = makeMarkerEl(f);
-            const anchor = f.properties.type === "city" ? "left" : "bottom";
-            const marker = new maplibre.Marker({ element: el, anchor })
+            const anchor =
+              f.properties.type === "city" ? "left" :
+              f.properties.type === "flagship" ? "top-right" :
+              f.properties.labelBelow ? "top" :
+              "bottom";
+            const offset: [number, number] =
+              f.properties.type === "flagship" ? [7, -7] : [0, 0];
+            const marker = new maplibre.Marker({ element: el, anchor, offset })
               .setLngLat(f.geometry.coordinates)
               .addTo(map);
             markersRef.current.push(marker);
@@ -277,6 +300,10 @@ export default function AndesHero() {
         <span className="andes-hero-legend-item">
           <span className="andes-hero-legend-swatch andes-hero-legend-swatch--competitor" aria-hidden="true" />
           World-class Chilean mine
+        </span>
+        <span className="andes-hero-legend-item">
+          <span className="andes-hero-legend-swatch andes-hero-legend-swatch--deposit" aria-hidden="true" />
+          Copper deposit
         </span>
         <span className="andes-hero-legend-item">
           <span className="andes-hero-legend-swatch andes-hero-legend-swatch--flagship" aria-hidden="true" />
