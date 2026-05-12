@@ -97,6 +97,23 @@ collections:
             required: true
             default: "Q1 2026"
             hint: "Shown next to the link, e.g. 'Q1 2026'."
+
+  - name: "projects"
+    label: "Projects"
+    editor:
+      preview: false
+    files:
+      - name: "lasEstrellas"
+        label: "Las Estrellas"
+        file: "src/data/projects/las-estrellas.json"
+        fields:
+          - label: "Technical Report (PDF)"
+            name: "technicalReport"
+            widget: "file"
+            required: false
+            media_folder: "/public/assets/documents"
+            public_folder: "/assets/documents"
+            hint: "Upload the Las Estrellas technical report PDF. Leave empty to hide the download button on the project page."
 `;
 
 export function GET() {
