@@ -1,0 +1,27 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PageHeader from "@components/PageHeader.astro";
+---
+
+<BaseLayout title="Subscription confirmed - Argentina Metals Corp.">
+  <PageHeader
+    title="You're subscribed"
+    text="Thank you — your email has been confirmed. You'll now receive Argentina Metals press releases and corporate updates as soon as they're published."
+  />
+  <section class="content-band">
+    <div class="wrap subscribe-callout">
+      <a class="button copper-grad" href="/news">
+        Read the latest news
+        <span class="mi" aria-hidden="true">arrow_forward</span>
+      </a>
+    </div>
+  </section>
+
+  <style>
+    .subscribe-callout {
+      display: flex;
+      justify-content: flex-start;
+      padding-block: 16px 48px;
+    }
+  </style>
+</BaseLayout>

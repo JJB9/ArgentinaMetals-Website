@@ -1,0 +1,27 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PageHeader from "@components/PageHeader.astro";
+---
+
+<BaseLayout title="Confirmation link invalid - Argentina Metals Corp.">
+  <PageHeader
+    title="Link invalid or expired"
+    text="This confirmation link is no longer valid. Confirmation links expire after 24 hours. You can request a new one from the subscribe form on the news page."
+  />
+  <section class="content-band">
+    <div class="wrap subscribe-callout">
+      <a class="button copper-grad" href="/news#subscribe">
+        Try subscribing again
+        <span class="mi" aria-hidden="true">arrow_forward</span>
+      </a>
+    </div>
+  </section>
+
+  <style>
+    .subscribe-callout {
+      display: flex;
+      justify-content: flex-start;
+      padding-block: 16px 48px;
+    }
+  </style>
+</BaseLayout>
