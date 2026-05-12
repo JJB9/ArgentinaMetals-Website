@@ -1855,6 +1855,68 @@ figure.split-visual {
   font-weight: 600;
 }
 
+.section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 720px;
+}
+
+.section-body > p {
+  margin: 0;
+  color: var(--g600);
+  line-height: 1.7;
+}
+
+.section-body .hero-actions {
+  margin-top: 8px;
+}
+
+.section-aside-right {
+  margin-left: auto;
+  max-width: 600px;
+}
+
+.section--has-overlap .section-body .split-lead {
+  max-width: none;
+}
+
+.section--has-overlap > .wrap {
+  position: relative;
+}
+
+.section--has-overlap .section-header,
+.section--has-overlap .section-body {
+  max-width: 600px;
+}
+
+.overlap-image {
+  position: absolute;
+  right: 0;
+  top: -200px;
+  width: 470px;
+  margin: 0;
+  z-index: 2;
+}
+
+.overlap-image .split-image {
+  width: 100%;
+}
+
+@media (max-width: 960px) {
+  .section--has-overlap .section-header,
+  .section--has-overlap .section-body {
+    max-width: none;
+  }
+
+  .overlap-image {
+    position: static;
+    margin: 32px 0 0 auto;
+    width: 100%;
+    max-width: 470px;
+  }
+}
+
 .policy-card {
   position: relative;
   padding: 28px 30px;

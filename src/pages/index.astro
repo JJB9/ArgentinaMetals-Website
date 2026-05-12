@@ -440,22 +440,45 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
     </div>
   </section>
 
-  <section class="section soft">
+  <section class="section soft section--has-overlap">
     <div class="wrap">
-      <div class="pillars">
-        <article class="pillar" data-reveal style="--i:0">
-          <span class="pillar-num" aria-hidden="true">05</span>
-          <h2 class="pillar-title">Newest Technologies</h2>
-          <p class="pillar-lead">Never before in history have so much data about the surface been available — including satellite imagery that is invaluable for early-stage exploration.</p>
-          <p class="pillar-body">It would be negligent not to use artificial intelligence and specialized software to compile and compare these data. And you don't have to hire a helicopter when a drone can do the flyover. We combine established and new technologies, and apply what makes most sense.</p>
-        </article>
+      <div class="section-header" data-reveal>
+        <span class="section-num">05</span>
+        <div>
+          <h2 class="section-title">Newest Technologies</h2>
+        </div>
+      </div>
 
-        <article class="pillar" data-reveal style="--i:1">
-          <span class="pillar-num" aria-hidden="true">06</span>
-          <h2 class="pillar-title">Extraordinary Team</h2>
-          <a href="/team" class="pillar-lead">We have assembled a sophisticated team of senior and junior experts, from Europe, North and South America.</a>
-          <p class="pillar-body">Our team members have different and complementary skill sets, tailored for the big task ahead of us: to find a world-class copper deposit in Argentina.</p>
-        </article>
+      <div class="section-body" data-reveal style="--i:1">
+        <p class="split-lead">Never before in history have so much data about the surface been available — including <em>satellite imagery</em> that is invaluable for early-stage exploration.</p>
+        <p>It would be negligent not to use artificial intelligence and specialized software to compile and compare these data. And you don't have to hire a helicopter when a drone can do the flyover. We combine established and new technologies, and apply what makes most sense.</p>
+      </div>
+
+      <figure class="overlap-image" data-reveal>
+        <div class="split-image">
+          <img data-parallax src={asset("assets/images/projects/LasEstrellasNorth1.webp")} alt="Las Estrellas North property in the Andean Copper Belt, Mendoza" loading="lazy" />
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-aside-right">
+        <div class="section-header" data-reveal>
+          <span class="section-num">06</span>
+          <div>
+            <h2 class="section-title">Extraordinary Team</h2>
+          </div>
+        </div>
+
+        <div class="section-body" data-reveal style="--i:1">
+          <p class="split-lead">We have assembled a sophisticated team of senior and junior experts, from <em>Europe, North and South America</em>.</p>
+          <p>Our team members have different and complementary skill sets, tailored for the big task ahead of us: to find a world-class copper deposit in Argentina.</p>
+          <div class="hero-actions">
+            <a class="button secondary" href="/team">Meet the Team <span class="mi" aria-hidden="true">arrow_forward</span></a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
