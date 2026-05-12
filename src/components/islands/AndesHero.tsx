@@ -292,9 +292,14 @@ export default function AndesHero() {
 
   return (
     <div className="andes-hero" data-status={status}>
-      {status === "failed" && (
-        <img className="andes-hero-fallback" src={FALLBACK_SRC} alt="Southern Andes, Chile-Argentina border region with the Andean copper belt" />
-      )}
+      <img
+        className="andes-hero-fallback"
+        src={FALLBACK_SRC}
+        alt="Southern Andes, Chile-Argentina border region with the Andean copper belt"
+        loading="eager"
+        decoding="async"
+        fetchPriority="high"
+      />
       {status !== "failed" && <div className="andes-hero-canvas" ref={containerRef} aria-hidden="true" />}
       <div className="andes-hero-legend" role="note" aria-label="Karten-Legende">
         <span className="andes-hero-legend-item">
