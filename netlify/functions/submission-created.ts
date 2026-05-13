@@ -69,9 +69,9 @@ function renderContactEmail(input: ContactFields): { html: string; text: string;
         .em-container { width:100% !important; border-radius:0 !important; border-left:0 !important; border-right:0 !important; }
         .em-pad { padding:28px 22px 4px !important; }
         .em-pad-footer { padding:20px 22px !important; }
-        .em-pad-header { padding:22px 22px !important; }
+        .em-pad-header { padding:20px 22px !important; }
         .em-h1 { font-size:22px !important; line-height:1.3 !important; }
-        .em-logo { width:128px !important; height:auto !important; }
+        .em-wordmark { font-size:12px !important; letter-spacing:0.14em !important; }
         .em-row-label { width:auto !important; display:block !important; padding:0 0 4px !important; }
         .em-row-value { display:block !important; padding:0 0 16px !important; }
       }
@@ -98,8 +98,8 @@ function renderContactEmail(input: ContactFields): { html: string; text: string;
       <tr><td align="center" style="padding:32px 16px;">
         <!--[if mso | IE]><table role="presentation" align="center" width="560" cellspacing="0" cellpadding="0" border="0"><tr><td width="560"><![endif]-->
         <table role="presentation" width="560" cellspacing="0" cellpadding="0" border="0" class="em-container" style="width:560px;max-width:560px;background-color:#ffffff;border-radius:20px;border:1px solid #e8e5dd;overflow:hidden;">
-          <tr><td class="em-pad-header" align="left" style="padding:28px 40px;background-color:#1a1917;mso-line-height-rule:exactly;">
-            <img src="https://argentinametals.com/assets/images/logo-copper-white.png" alt="Argentina Metals" width="140" height="87" class="em-logo" style="display:block;width:140px;height:auto;border:0;outline:none;text-decoration:none;">
+          <tr><td class="em-pad-header" align="left" style="padding:24px 40px;background-color:#1a1917;mso-line-height-rule:exactly;">
+            <p class="em-wordmark" style="margin:0;font-size:14px;line-height:1;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#ffffff;mso-line-height-rule:exactly;">Argentina <span style="color:#c5642b;">Metals</span></p>
           </td></tr>
           <tr><td class="em-pad" style="padding:40px 40px 8px;">
             <p class="em-muted" style="margin:0 0 4px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#c5642b;font-weight:700;mso-line-height-rule:exactly;">Contact form</p>
