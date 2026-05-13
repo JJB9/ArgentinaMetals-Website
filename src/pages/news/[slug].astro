@@ -19,9 +19,46 @@ const formatDate = (date: Date) => date.toLocaleDateString("en-US", {
   year: "numeric"
 });
 
+const siteUrl = Astro.site ?? new URL("https://argentinametals.com");
+const articleUrl = new URL(`/news/${item.id}`, siteUrl).toString();
+const articleImage = item.data.image
+  ? new URL(item.data.image, siteUrl).toString()
+  : new URL("/assets/images/preview-thumbnail.webp", siteUrl).toString();
+
+const newsArticleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  headline: item.data.title,
+  description: item.data.excerpt,
+  datePublished: item.data.date.toISOString(),
+  image: articleImage,
+  mainEntityOfPage: articleUrl,
+  url: articleUrl,
+  author: {
+    "@type": "Organization",
+    name: "Argentina Metals Corp.",
+    url: siteUrl.toString()
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Argentina Metals Corp.",
+    url: siteUrl.toString(),
+    logo: {
+      "@type": "ImageObject",
+      url: new URL("/assets/images/logo-copper-white.png", siteUrl).toString()
+    }
+  }
+};
 ---
 
-<BaseLayout title={`${item.data.title} - Argentina Metals Corp.`} description={item.data.excerpt}>
+<BaseLayout
+  title={`${item.data.title} - Argentina Metals Corp.`}
+  description={item.data.excerpt}
+  image={item.data.image}
+  imageAlt={item.data.imageAlt ?? item.data.title}
+  ogType="article"
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(newsArticleJsonLd)} />
   <article class="news-article">
     <div class="article-column" style="width:min(100% - 48px,700px);margin-inline:auto">
       <a class="back-link" href="/news">

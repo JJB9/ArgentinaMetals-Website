@@ -7,12 +7,34 @@ import "@styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  imageAlt?: string;
+  ogType?: "website" | "article";
 }
 
 const {
   title = "Argentina Metals Corp.",
-  description = "Argentina Metals Corp. is building a pure-play copper exploration platform across Argentina's most prospective mining districts."
+  description = "Argentina Metals Corp. is building a pure-play copper exploration platform across Argentina's most prospective mining districts.",
+  image = "/assets/images/preview-thumbnail.webp",
+  imageAlt = "Argentina Metals Corp.",
+  ogType = "website"
 } = Astro.props;
+
+const siteUrl = Astro.site ?? new URL("https://argentinametals.com");
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const ogImageUrl = new URL(image, siteUrl).toString();
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Argentina Metals Corp.",
+  url: siteUrl.toString(),
+  logo: new URL("/assets/images/logo-copper-white.png", siteUrl).toString(),
+  sameAs: [
+    "https://www.linkedin.com/company/argentina-metals-corp",
+    "https://x.com/ArgentinaMetals"
+  ]
+};
 ---
 
 <!doctype html>
@@ -23,6 +45,21 @@ const {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#003d1e" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Argentina Metals Corp." />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationJsonLd)} />
+    <slot name="head" />
     <title>{title}</title>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
@@ -193,34 +230,13 @@ const {
         }
       })();
     </script>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
     <SiteHeader pathname={Astro.url.pathname} />
-    <main>
+    <main id="main">
       <slot />
     </main>
     <SiteFooter />
-    <script is:inline>
-      if (window.netlifyIdentity) {
-        const goToAdmin = () => {
-          if (!window.location.pathname.startsWith("/admin")) {
-            document.location.href = "/admin/";
-          }
-        };
-
-        window.netlifyIdentity.on("init", (user) => {
-          const hasIdentityToken = /(invite_token|confirmation_token|recovery_token|email_change_token|access_token)=/.test(window.location.hash);
-
-          if (user && hasIdentityToken) {
-            goToAdmin();
-          }
-        });
-
-        window.netlifyIdentity.on("login", goToAdmin);
-        window.netlifyIdentity.on("signup", goToAdmin);
-        window.netlifyIdentity.on("confirm", goToAdmin);
-      }
-    </script>
   </body>
 </html>

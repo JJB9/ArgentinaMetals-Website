@@ -17,23 +17,23 @@ interface Props {
 const { title = "Key Facts", lede, facts, footnote, columns = 4 } = Astro.props;
 ---
 
-<aside class:list={["key-facts", `key-facts--cols-${columns}`]} data-reveal>
+<section class:list={["key-facts", `key-facts--cols-${columns}`]} aria-label={title} data-reveal>
   <div class="key-facts-head">
-    <h3>{title}</h3>
+    <h2>{title}</h2>
     {lede && <p>{lede}</p>}
   </div>
-  <dl class="key-facts-grid">
+  <div class="key-facts-grid" role="list">
     {facts.map((fact) => (
-      <div class:list={["kf-item", { "kf-item--hi": fact.highlight }]}>
+      <div class:list={["kf-item", { "kf-item--hi": fact.highlight }]} role="listitem">
         <span class="kf-icon" aria-hidden="true">
           <span class="mi">{fact.icon}</span>
         </span>
         <div class="kf-text">
-          <dt>{fact.label}</dt>
-          <dd>{fact.value}</dd>
+          <span class="kf-label">{fact.label}</span>
+          <span class="kf-value">{fact.value}</span>
         </div>
       </div>
     ))}
-  </dl>
+  </div>
   {footnote && <p class="key-facts-foot">{footnote}</p>}
-</aside>
+</section>
