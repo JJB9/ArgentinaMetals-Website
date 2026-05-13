@@ -1,3 +1,5 @@
+export const prerender = true;
+
 const config = `backend:
   name: git-gateway
   branch: main
