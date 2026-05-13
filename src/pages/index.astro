@@ -82,6 +82,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
         loop
         playsinline
         preload="metadata"
+        poster={asset("assets/images/preview-thumbnail.webp")}
         src={asset("assets/videos/Argentina Metals_Imageclip.mp4")}
       ></video>
       <button type="button" class="hero-media-mute" aria-label="Unmute video" aria-pressed="true">
@@ -319,7 +320,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
               <h3>Closing the Copper Gap</h3>
               <p>Two countries. One geology. The data tells the story.</p>
             </header>
-            <div class="dtw gap-table-wrap">
+            <div class="dtw gap-table-wrap" tabindex="0" role="region" aria-label="Copper production comparison: Chile vs Argentina">
               <table class="dt gap-table">
                 <thead>
                   <tr>
@@ -357,7 +358,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
 
         <div class="rocks-map" data-reveal style="--i:2">
           <AndesHero
-            client:idle
+            client:visible
             fallbackSrc={asset("assets/images/map_fallback_vertical.webp")}
             fallbackAlt="Southern Andes copper belt across the Chile–Argentina border with Argentina Metals' Las Estrellas flagship"
           />

@@ -3,7 +3,10 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import PageHeader from "@components/PageHeader.astro";
 ---
 
-<BaseLayout title="Contact - Argentina Metals Corp.">
+<BaseLayout
+  title="Contact - Argentina Metals Corp."
+  description="Get in touch with Argentina Metals Corp. for investor relations, partnership opportunities, media inquiries, and project information."
+>
   <PageHeader
     title="Contact"
   />
@@ -13,8 +16,11 @@ import PageHeader from "@components/PageHeader.astro";
         <img src="/assets/images/lasestrellas1.webp" alt="" loading="lazy" decoding="async" />
       </aside>
 
-      <form class="contact-form" name="contact" method="post" data-netlify="true">
+      <form class="contact-form" name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="contact" />
+        <p hidden aria-hidden="true" style="display:none">
+          <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
         <div class="form-grid">
           <label>First Name<input class="form-input" type="text" name="first-name" placeholder="John" /></label>
           <label>Last Name<input class="form-input" type="text" name="last-name" placeholder="Smith" /></label>

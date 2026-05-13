@@ -27,14 +27,17 @@ const years = Object.keys(groupedByYear)
   .sort((a, b) => b - a);
 ---
 
-<BaseLayout title="News - Argentina Metals Corp.">
+<BaseLayout
+  title="News - Argentina Metals Corp."
+  description="Press releases, corporate updates and exploration progress from Argentina Metals Corp. — a pure-play copper explorer in Argentina."
+>
   <section class="page-hero page-hero--split page-hero--news">
     <div class="wrap">
       <div class="page-hero-text">
         <h1 data-reveal style="--i:0">News</h1>
         <p data-reveal style="--i:1">Press releases, corporate updates and exploration progress from Argentina Metals.</p>
       </div>
-      <aside class="page-hero-subscribe" data-reveal style="--i:2">
+      <div class="page-hero-subscribe" data-reveal style="--i:2">
         <div class="subscribe-head">
           <span class="subscribe-icon mi" aria-hidden="true">mail_outline</span>
           <h2>Subscribe to Investor Alerts</h2>
@@ -55,7 +58,7 @@ const years = Object.keys(groupedByYear)
             <span class="mi" aria-hidden="true">arrow_forward</span>
           </button>
         </form>
-      </aside>
+      </div>
     </div>
   </section>
   <section class="content-band">
