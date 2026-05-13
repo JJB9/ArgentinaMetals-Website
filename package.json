@@ -32,6 +32,9 @@
   "overrides": {
     "@netlify/zip-it-and-ship-it": {
       "@netlify/serverless-functions-api": "2.14.0"
+    },
+    "sitemap": {
+      "@types/node": "24.12.2"
     }
   }
 }
