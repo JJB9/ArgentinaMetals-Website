@@ -75,21 +75,16 @@ const documents: { title: string; items: DocItem[] }[] = [
 ];
 ---
 
-<BaseLayout title="Investors - Argentina Metals Corp.">
+<BaseLayout
+  title="Investors - Argentina Metals Corp."
+  description="Investor information for Argentina Metals Corp. — pure-play copper exploration in Argentina, TSX-V listing pending, with corporate and financial disclosure documents."
+>
   <PageHeader
     title="Investors"
     text="Pure-play exposure to world-class copper exploration in one of the world's most prospective emerging jurisdictions. Listing on TSX Venture Exchange (pending). Secondary listings in Frankfurt and other places."
     image="/assets/images/andes-argentina-clouds.jpg"
     imageAlt="Andes mountains under clouds"
   >
-    <div class="ticker-card ticker-card--hero">
-      <div>
-        <span>TSX-V: VLLC</span>
-        <strong>Listing Pending</strong>
-      </div>
-      <p>Live stock data will be activated upon successful listing.</p>
-    </div>
-
     <a class="alerts-link" slot="image-bottom" href="/news" data-reveal>
       <span class="alerts-link-icon mi" aria-hidden="true">notifications_active</span>
       <span class="alerts-link-body">
@@ -138,7 +133,7 @@ const documents: { title: string; items: DocItem[] }[] = [
 
       <div class="cap-layout">
         <div class="cap-table-wrap" data-reveal>
-          <div class="dtw">
+          <div class="dtw" tabindex="0" role="region" aria-label="Capitalization table">
             <table class="dt cap-table">
               <thead>
                 <tr>

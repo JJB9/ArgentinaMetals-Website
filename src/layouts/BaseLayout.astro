@@ -7,12 +7,34 @@ import "@styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  imageAlt?: string;
+  ogType?: "website" | "article";
 }
 
 const {
   title = "Argentina Metals Corp.",
-  description = "Argentina Metals Corp. is building a pure-play copper exploration platform across Argentina's most prospective mining districts."
+  description = "Argentina Metals Corp. is building a pure-play copper exploration platform across Argentina's most prospective mining districts.",
+  image = "/assets/images/preview-thumbnail.webp",
+  imageAlt = "Argentina Metals Corp.",
+  ogType = "website"
 } = Astro.props;
+
+const siteUrl = Astro.site ?? new URL("https://argentinametals.com");
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const ogImageUrl = new URL(image, siteUrl).toString();
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Argentina Metals Corp.",
+  url: siteUrl.toString(),
+  logo: new URL("/assets/images/logo-copper-white.png", siteUrl).toString(),
+  sameAs: [
+    "https://www.linkedin.com/company/argentina-metals-corp",
+    "https://x.com/ArgentinaMetals"
+  ]
+};
 ---
 
 <!doctype html>
@@ -23,6 +45,21 @@ const {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#003d1e" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Argentina Metals Corp." />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationJsonLd)} />
+    <slot name="head" />
     <title>{title}</title>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
@@ -121,10 +158,70 @@ const {
           }, { passive: true });
         };
 
+        const initPageProgress = () => {
+          const bar = document.querySelector(".page-progress");
+          if (!bar) return;
+          let ticking = false;
+          const update = () => {
+            const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+            const progress = Math.min(1, Math.max(0, window.scrollY / max));
+            bar.style.setProperty("--page-progress", String(progress));
+            ticking = false;
+          };
+          update();
+          window.addEventListener("scroll", () => {
+            if (!ticking) {
+              ticking = true;
+              requestAnimationFrame(update);
+            }
+          }, { passive: true });
+          window.addEventListener("resize", update, { passive: true });
+        };
+
+        const initCountUp = () => {
+          if (reduced) return;
+          const targets = document.querySelectorAll("[data-count-to]");
+          if (!targets.length) return;
+          const formatComma = (n, decimals) => {
+            const fixed = n.toFixed(decimals);
+            const [intPart, decPart] = fixed.split(".");
+            const withSeparators = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return decPart ? withSeparators + "." + decPart : withSeparators;
+          };
+          const animate = (el) => {
+            const to = parseFloat(el.getAttribute("data-count-to") || "0");
+            const decimals = parseInt(el.getAttribute("data-count-decimals") || "0", 10);
+            const format = el.getAttribute("data-count-format") || "";
+            const suffix = el.getAttribute("data-count-suffix") || "";
+            const duration = 1200;
+            const start = performance.now();
+            const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+            const tick = (now) => {
+              const t = Math.min(1, (now - start) / duration);
+              const value = to * easeOutCubic(t);
+              const display = format === "comma" ? formatComma(value, decimals) : value.toFixed(decimals);
+              el.textContent = display + suffix;
+              if (t < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+          };
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                animate(entry.target);
+                io.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.4, rootMargin: "0px 0px -10% 0px" });
+          targets.forEach((el) => io.observe(el));
+        };
+
         const init = () => {
           observe();
           initParallax();
           initHeaderElevation();
+          initPageProgress();
+          initCountUp();
         };
         if (document.readyState === "loading") {
           document.addEventListener("DOMContentLoaded", init, { once: true });
@@ -133,34 +230,13 @@ const {
         }
       })();
     </script>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
     <SiteHeader pathname={Astro.url.pathname} />
-    <main>
+    <main id="main">
       <slot />
     </main>
     <SiteFooter />
-    <script is:inline>
-      if (window.netlifyIdentity) {
-        const goToAdmin = () => {
-          if (!window.location.pathname.startsWith("/admin")) {
-            document.location.href = "/admin/";
-          }
-        };
-
-        window.netlifyIdentity.on("init", (user) => {
-          const hasIdentityToken = /(invite_token|confirmation_token|recovery_token|email_change_token|access_token)=/.test(window.location.hash);
-
-          if (user && hasIdentityToken) {
-            goToAdmin();
-          }
-        });
-
-        window.netlifyIdentity.on("login", goToAdmin);
-        window.netlifyIdentity.on("signup", goToAdmin);
-        window.netlifyIdentity.on("confirm", goToAdmin);
-      }
-    </script>
   </body>
 </html>

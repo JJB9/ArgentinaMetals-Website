@@ -32,7 +32,12 @@ type MineFeature = {
 };
 
 const MINES = minesData as { features: MineFeature[] };
-const FALLBACK_SRC = "/assets/images/andes-hero-fallback.webp";
+const DEFAULT_FALLBACK_SRC = "/assets/images/andes-hero-fallback.webp";
+
+interface AndesHeroProps {
+  fallbackSrc?: string;
+  fallbackAlt?: string;
+}
 
 function webglAvailable(): boolean {
   if (typeof document === "undefined") return false;
@@ -93,7 +98,10 @@ function makeMarkerEl(f: MineFeature): HTMLDivElement {
   return root;
 }
 
-export default function AndesHero() {
+export default function AndesHero({
+  fallbackSrc = DEFAULT_FALLBACK_SRC,
+  fallbackAlt = "Southern Andes, Chile-Argentina border region with the Andean copper belt",
+}: AndesHeroProps = {}) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MlMap | null>(null);
   const markersRef = useRef<MlMarker[]>([]);
@@ -294,8 +302,8 @@ export default function AndesHero() {
     <div className="andes-hero" data-status={status}>
       <img
         className="andes-hero-fallback"
-        src={FALLBACK_SRC}
-        alt="Southern Andes, Chile-Argentina border region with the Andean copper belt"
+        src={fallbackSrc}
+        alt={fallbackAlt}
         loading="eager"
         decoding="async"
         fetchPriority="high"

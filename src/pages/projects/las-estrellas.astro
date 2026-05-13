@@ -1,9 +1,10 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import KeyFactsBox, { type KeyFact } from "@components/KeyFactsBox.astro";
+import lasEstrellasData from "../../data/projects/las-estrellas.json";
 
 const base = import.meta.env.BASE_URL;
-const img = (path: string) => `${base}assets/images/projects/${path}`;
+const leImg = (path: string) => `${base}assets/images/projects/LasEstrellas/${path}`;
 
 const keyFacts: KeyFact[] = [
   { icon: "location_on", label: "Location", value: "Mendoza Province, Argentina" },
@@ -19,26 +20,48 @@ const rockChips = [
   { label: "Peak — G2R-271", value: "9,978 ppm Cu", hi: true }
 ];
 
-const geophysHighlights = [
+const anomalyMaps = [
   {
-    icon: "north",
-    title: "Depth — 50–150 m",
-    text: "Main magnetic sources at 50–60 m and 120–150 m — shallow and drill-accessible."
+    src: "LE-copper.webp",
+    alt: "Property-scale copper anomaly map from the December 2025 rock chip program at Las Estrellas",
+    caption: "Copper anomalies",
+    sub: "Rock chip / talus sample values across the property"
   },
   {
-    icon: "polyline",
-    title: "Structural alignment",
-    text: "Strong correlation with NW–SE and N–S lineaments that control hydrothermal fluid pathways."
+    src: "LE-geophysics.webp",
+    alt: "Property-scale ground magnetometric signature map at Las Estrellas, January 2026 AMT survey",
+    caption: "Magnetometric signature",
+    sub: "Reduced-to-pole intensity from the January 2026 AMT survey"
   },
   {
-    icon: "sensors",
-    title: "IOCG / porphyry signature",
-    text: "Pattern consistent with IOCG-style mineralisation and/or partially buried porphyry systems."
+    src: "LE-silver.webp",
+    alt: "Property-scale silver anomaly map from the December 2025 rock chip program at Las Estrellas",
+    caption: "Silver anomalies",
+    sub: "Rock chip / talus sample values across the property"
+  }
+];
+
+const samples = [
+  {
+    src: "argentina-metals-las-estrellas-copper-sample.webp",
+    alt: "Sample G2R-271 in gloved hands — peak 9,978 ppm Cu from the northern target zone at Las Estrellas",
+    id: "G2R-271",
+    grade: "9,978 ppm Cu",
+    note: "Northern target zone"
   },
   {
-    icon: "center_focus_strong",
-    title: "Geochem–geophys overlap",
-    text: "Magnetic highs coincide with rock chip peaks in the north-central and eastern sectors."
+    src: "argentina-metals-las-estrellas-copper-sample-332.webp",
+    alt: "Sample G2R-332 held up against the property sky — 326 ppm Cu",
+    id: "G2R-332",
+    grade: "326 ppm Cu",
+    note: "Anomalous halo"
+  },
+  {
+    src: "argentina-metals-las-estrellas-copper-sample-size.webp",
+    alt: "Large oxidised copper-bearing sample with orange pen for scale, collected at Las Estrellas",
+    id: "Bulk sample",
+    grade: "Oxidised Cu",
+    note: "Pen for scale"
   }
 ];
 
@@ -47,27 +70,34 @@ const roadmap = [
     phase: "Phase 01",
     status: "Completed",
     title: "Surface & Geophysics",
-    text: "Initial mapping, geochemistry, property-scale magnetometric survey. 144 rock chips plus 14 stream-sediment samples defined the primary targeting zone."
+    text: "Initial mapping, geochemistry, property-scale magnetometric survey. 144 rock chips plus 14 stream-sediment samples defined the primary targeting zone.",
+    state: "done"
   },
   {
     phase: "Phase 02",
     status: "Current",
     title: "Target Definition",
-    text: "IP surveys, target refinement, and pre-drill work across the north-central and eastern anomalies. Additional license acquisition in the satellite corridor."
+    text: "IP surveys, target refinement, and pre-drill work across the north-central and eastern anomalies. Additional license acquisition in the satellite corridor.",
+    state: "current"
   },
   {
     phase: "Phase 03",
     status: "Next",
     title: "Maiden Drill Program",
-    text: "Drill-testing of highest-priority targets confirmed through Phase 2 — with access and logistics staged from Malargüe town."
+    text: "Drill-testing of highest-priority targets confirmed through Phase 2 — with access and logistics staged from Malargüe town.",
+    state: "next"
   }
 ];
+
+const technicalReport = lasEstrellasData.technicalReport;
 ---
 
 <BaseLayout
   title="Las Estrellas — Flagship Cu-Au Project | Argentina Metals Corp."
-  description="Las Estrellas is Argentina Metals' flagship copper-gold project in the Western Malargüe Mining District, Mendoza. Two mineralisation models confirmed by surface geochemistry and magnetometric surveys, with drill-ready targets at 50–150 m."
+  description="Las Estrellas is Argentina Metals' flagship copper-gold project in the Western Malargüe Mining District, Mendoza. Surface geochemistry and a property-scale magnetometric survey define drill-ready targets at 50–150 m depth across two distinct zones."
 >
+  <div class="page-progress" aria-hidden="true"><span></span></div>
+
   <section class="page-hero page-hero--split page-hero--project">
     <div class="wrap">
       <div class="page-hero-text">
@@ -76,97 +106,46 @@ const roadmap = [
           All Projects
         </a>
         <h1 data-reveal style="--i:1">Las Estrellas</h1>
-        <p data-reveal style="--i:2">The flagship of Argentina Metals' 146,728-hectare Western Malargüe land position — a copper-gold project where two distinct mineralising systems have been confirmed by surface geochemistry and property-scale geophysics.</p>
+        <p data-reveal style="--i:2">The flagship of Argentina Metals' 146,728-hectare Western Malargüe land position — a copper-gold project where surface geochemistry and a property-scale magnetometric survey have defined drill-ready targets in two distinct zones.</p>
       </div>
-      <aside class="page-hero-aside" data-reveal style="--i:2">
+      <div class="page-hero-aside" data-reveal style="--i:2">
         <KeyFactsBox
           title="Project Snapshot"
           facts={keyFacts}
           columns={2}
         />
-      </aside>
-    </div>
-  </section>
-
-  <section class="section compact-top">
-    <div class="wrap">
-      <div class="section-header" data-reveal>
-        <div>
-          <h2 class="section-title">A corridor that hosts world-class copper</h2>
-          <p class="section-desc">Las Estrellas sits inside the same Andean copper belt that hosts Chile's producing super-giants — yet the Argentine side of the divide has remained largely untested. The project is 1.5 km from an actively drilled porphyry target operated by a neighbour.</p>
-        </div>
-      </div>
-
-      <div class="lede-grid" data-reveal>
-        <div class="lede-grid-text">
-          <p>Acquired in <strong>November 2025</strong> as one of Argentina Metals' four founding properties, Las Estrellas quickly emerged as the flagship on the strength of its early field results. Two distinct copper mineralising systems have been recognised on the property — each expanding the discovery envelope on its own terms.</p>
-          <p>Having two independent models inside a single land position is uncommon. It meaningfully broadens the opportunity and means the project can deliver value under more than one geological outcome.</p>
-        </div>
-        <figure class="lede-grid-img">
-          <img src={img("andes-argentina-clouds.jpg")} alt="Moody clouds over the Argentine Andes, characteristic of the Western Malargüe setting" loading="lazy" />
-        </figure>
+        {technicalReport && (
+          <a class="report-box" href={technicalReport} download>
+            <span class="report-box-icon" aria-hidden="true">
+              <span class="mi">picture_as_pdf</span>
+            </span>
+            <span class="report-box-text">
+              <strong>Technical report</strong>
+              <span>Full geological summary, geochemistry tables and figures.</span>
+            </span>
+            <span class="report-box-action">
+              <span>Download PDF</span>
+              <span class="mi" aria-hidden="true">arrow_forward</span>
+            </span>
+          </a>
+        )}
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--sand" id="exploration">
     <div class="wrap">
-      <div class="section-header" data-reveal>
-        <div>
-          <h2 class="section-title">Two mineralising systems, one property</h2>
-          <p class="section-desc">The discovery case rests on two independent copper styles — both present at surface, both drill-targetable, and each capable of carrying the project on its own.</p>
+      <div class="spread-4-4-4" data-reveal>
+        <header class="spread-4-4-4-title">
+          <h2 class="section-title">Exploration</h2>
+          <span class="section-rule" aria-hidden="true"></span>
+          <p class="spread-4-4-4-tag">December 2025 field program</p>
+        </header>
+        <div class="spread-4-4-4-narrative">
+          <p>The initial exploration work carried out in Las Estrellas in December 2025 identified a large area occupied by volcanic rocks of andesitic-basaltic composition. Geological mapping, ground-based magnetometry and sampling were carried out throughout the property area.</p>
+          <p>The four highest-copper samples cluster in a single target zone in the <span class="text-accent">northern sector</span> of the property.</p>
         </div>
-      </div>
-
-      <div class="model-grid">
-        <article class="model-card" data-reveal style="--i:0">
-          <div class="model-card-img">
-            <img src={img("distant-mountain-arid-rocky.jpg")} alt="Rocky desert and distant arid mountains — the kind of setting hosting manto-type copper in the Río Damas Formation" loading="lazy" />
-            <span class="model-card-tag">Model 01</span>
-          </div>
-          <div class="model-card-body">
-            <span class="mi model-card-icon" aria-hidden="true">layers</span>
-            <h3>Manto-type Copper</h3>
-            <p class="model-card-lead">Copper oxides linked to andesitic flows intruding Jurassic red sandstones of the <strong>Río Damas Formation</strong>, with possible skarn-style mineralisation at depth.</p>
-            <ul class="model-card-bullets">
-              <li><span class="mi" aria-hidden="true">check_circle</span> Stratabound, accessible at surface</li>
-              <li><span class="mi" aria-hidden="true">check_circle</span> Historic small-scale Cu workings in the district</li>
-              <li><span class="mi" aria-hidden="true">check_circle</span> Skarn potential at depth adds upside</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="model-card" data-reveal style="--i:1">
-          <div class="model-card-img">
-            <img src={img("stunning-arid-mountain-daylight.jpg")} alt="Arid mountain terrain in daylight — terrain style typical of Neogene porphyry settings" loading="lazy" />
-            <span class="model-card-tag">Model 02</span>
-          </div>
-          <div class="model-card-body">
-            <span class="mi model-card-icon" aria-hidden="true">volcano</span>
-            <h3>Porphyry Copper-Gold</h3>
-            <p class="model-card-lead">Andesitic outcrops and dacitic bodies of the <strong>Huincán Formation</strong> with geological similarities to nearby Neogene porphyry systems — including the El Perdido prospect being drilled 1.5 km west.</p>
-            <ul class="model-card-bullets">
-              <li><span class="mi" aria-hidden="true">check_circle</span> Analogous to Chilean-side producing belts</li>
-              <li><span class="mi" aria-hidden="true">check_circle</span> Neighbouring drill activity validates thesis</li>
-              <li><span class="mi" aria-hidden="true">check_circle</span> Scale potential for a Tier-1 discovery</li>
-            </ul>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="section-header" data-reveal>
-        <div>
-          <h2 class="section-title">Rock chip highlights</h2>
-          <p class="section-desc">The December 2025 field program collected 144 surface rock chip and talus samples plus 14 stream-sediment samples across the property — and the four highest-copper samples cluster in a single target zone in the <strong>northern sector</strong>.</p>
-        </div>
-      </div>
-
-      <div class="geo-layout">
-        <div class="dtw" data-reveal>
+        <div class="spread-4-4-4-table dtw" tabindex="0" role="region" aria-label="Highest copper sample results from December 2025 field program">
           <table class="dt">
             <thead>
               <tr>
@@ -188,76 +167,178 @@ const roadmap = [
             </tbody>
           </table>
         </div>
-        <figure class="geo-img" data-reveal>
-          <img src={img("copper-mineral-close-up.jpg")} alt="Close-up of copper mineralisation in rock — representative of the oxide copper encountered at Las Estrellas" loading="lazy" />
-          <figcaption>
-            <strong>Peak 9,978 ppm Cu</strong>
-            <span>Sample G2R-271 — northern target zone</span>
-          </figcaption>
-        </figure>
+      </div>
+
+      <div class="sample-strip">
+        {samples.map((s, i) => (
+          <figure class="sample-strip-item" data-reveal style={`--i:${i}`}>
+            <div class="sample-strip-frame">
+              <img src={leImg(s.src)} alt={s.alt} loading="lazy" />
+            </div>
+            <figcaption>
+              <span class="code-pill">{s.id}</span>
+              <strong>{s.grade}</strong>
+              <span class="sample-strip-note">{s.note}</span>
+            </figcaption>
+          </figure>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="anomaly-maps">
     <div class="wrap">
-      <div class="section-header" data-reveal>
+      <div class="maps-sticky">
+        <header class="maps-sticky-header" data-reveal>
+          <h2 class="section-title">Project maps</h2>
+          <span class="section-rule" aria-hidden="true"></span>
+          <p class="section-desc">Surface geochemistry and ground magnetometry produced three property-scale plates that together frame the discovery case — copper and silver from rock chip sampling, alongside the magnetic signature of the underlying intrusive bodies.</p>
+          <p class="maps-sticky-meta">Plates · January 2026</p>
+        </header>
+        <div class="maps-sticky-body">
+          <div class="maps-grid">
+            {anomalyMaps.map((m, i) => (
+              <figure
+                class="maps-grid-item"
+                data-reveal
+                style={`--i:${i}`}
+                tabindex="0"
+                role="button"
+                aria-label={`Open ${m.caption} map at full size`}
+                data-map-src={leImg(m.src)}
+                data-map-alt={m.alt}
+                data-map-caption={m.caption}
+                data-map-sub={m.sub}
+              >
+                <div class="maps-grid-frame">
+                  <span class="maps-grid-corner maps-grid-corner--n" aria-hidden="true">N ↑</span>
+                  <img src={leImg(m.src)} alt={m.alt} loading="lazy" width="1061" height="1500" />
+                </div>
+                <figcaption>
+                  <strong>{m.caption}</strong>
+                  <span>{m.sub}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <dialog class="maps-lightbox" id="maps-lightbox" aria-labelledby="maps-lightbox-caption">
+      <button class="maps-lightbox-close" type="button" aria-label="Close map preview">
+        <span class="mi" aria-hidden="true">close</span>
+      </button>
+      <figure class="maps-lightbox-figure">
+        <img src="" alt="" />
+        <figcaption id="maps-lightbox-caption">
+          <strong></strong>
+          <span></span>
+        </figcaption>
+      </figure>
+    </dialog>
+
+    <script is:inline>
+      (() => {
+        const dialog = document.getElementById("maps-lightbox");
+        if (!dialog || typeof dialog.showModal !== "function") return;
+        const img = dialog.querySelector("img");
+        const captionStrong = dialog.querySelector("figcaption strong");
+        const captionSpan = dialog.querySelector("figcaption span");
+        const closeBtn = dialog.querySelector(".maps-lightbox-close");
+
+        const open = (el) => {
+          img.src = el.dataset.mapSrc;
+          img.alt = el.dataset.mapAlt;
+          captionStrong.textContent = el.dataset.mapCaption;
+          captionSpan.textContent = el.dataset.mapSub;
+          dialog.showModal();
+        };
+
+        document.querySelectorAll(".maps-grid-item").forEach((el) => {
+          el.addEventListener("click", () => open(el));
+          el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              open(el);
+            }
+          });
+        });
+
+        closeBtn.addEventListener("click", () => dialog.close());
+        dialog.addEventListener("click", (e) => {
+          if (e.target === dialog) dialog.close();
+        });
+      })();
+    </script>
+  </section>
+
+  <section class="section section--sand" id="conclusion">
+    <div class="wrap">
+      <div class="section-header section-header--single" data-reveal>
         <div>
-          <h2 class="section-title">Magnetometric signature</h2>
-          <p class="section-desc">The January 2026 property-scale AMT magnetometric survey (RTP, Analytical Signal, TDR, SPI, Euler, spectral) returned amplitudes from approximately −1,050 to +800 nT — consistent with ferromagnetic minerals linked to mafic-to-intermediate intrusive bodies.</p>
+          <h2 class="section-title">Conclusion</h2>
+          <span class="section-rule" aria-hidden="true"></span>
+          <p class="section-desc">Two distinct interpretations emerge along the property — a mineralised target in the north, and the periphery of a porphyry system in the south.</p>
         </div>
       </div>
 
-      <div class="geophys-grid">
-        {geophysHighlights.map((item, i) => (
-          <article class="geophys-card" data-reveal style={`--i:${i}`}>
-            <span class="geophys-icon" aria-hidden="true">
-              <span class="mi">{item.icon}</span>
-            </span>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-          </article>
-        ))}
+      <div class="conclusion-pair">
+        <article class="conclusion-card conclusion-card--north" data-reveal style="--i:0">
+          <div class="conclusion-card-photo">
+            <img src={leImg("argentina-metals-las-estrellas.webp")} alt="Copper-mineralised rock outcrop with rock hammer for scale, Las Estrellas northern zone" loading="lazy" />
+          </div>
+          <div class="conclusion-card-body">
+            <span class="conclusion-tag">Northern zone</span>
+            <h3>El Burrero-style copper-silver mantle</h3>
+            <p>In the northern part, there is a potential mineralized zone that would correspond to the <span class="text-accent">El Burrero</span> mine model — a volcanic mantle-type deposit of copper and silver, with some indications of a possible skarn or IOCG as well.</p>
+          </div>
+        </article>
+        <article class="conclusion-card conclusion-card--south" data-reveal style="--i:1">
+          <div class="conclusion-card-photo">
+            <img src={leImg("argentina-metals-coppoer-opportunity.webp")} alt="Altered yellow-orange slope at Las Estrellas — characteristic of the porphyry-margin alteration in the southern zone" loading="lazy" />
+          </div>
+          <div class="conclusion-card-body">
+            <span class="conclusion-tag">Southern zone</span>
+            <h3>Porphyry copper system periphery</h3>
+            <p>In the southern part, geochemistry indicates a peripheral zone of a porphyry copper system — relatively high values of arsenic and lead, and low values of copper and molybdenum.</p>
+          </div>
+        </article>
       </div>
-
-      <p class="geophys-note" data-reveal>Surface geochemistry and geophysics are aligned — both point to the same zones for follow-up.</p>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="roadmap">
     <div class="wrap">
-      <div class="section-header" data-reveal>
+      <div class="section-header section-header--single" data-reveal>
         <div>
           <h2 class="section-title">Exploration roadmap</h2>
+          <span class="section-rule" aria-hidden="true"></span>
           <p class="section-desc">Three phases from consolidation through discovery. Phase 2 is underway, with drill targets refined through IP and continued geochemical work.</p>
         </div>
       </div>
 
-      <div class="timeline-grid">
-        {roadmap.map((item, i) => (
-          <article class="timeline-card" data-reveal style={`--i:${i}`}>
-            <div class="timeline-top">
-              <span>{item.phase}</span>
-              <strong>{item.status}</strong>
+      <div class="h-timeline" data-reveal data-timeline>
+        <div class="h-timeline-track" aria-hidden="true">
+          <div class="h-timeline-line"></div>
+          {roadmap.map((item) => (
+            <span class:list={["h-timeline-dot", `h-timeline-dot--${item.state}`]}></span>
+          ))}
+        </div>
+        <div class="h-timeline-labels">
+          {roadmap.map((item, i) => (
+            <div class:list={["h-timeline-node", `h-timeline-node--${item.state}`]} style={`--i:${i}`}>
+              <div class="h-timeline-phase">
+                <span class="h-timeline-phase-num">{item.phase}</span>
+                <strong class="h-timeline-phase-status">{item.status}</strong>
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
             </div>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-          </article>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <div class="callout" data-reveal>
-        <div>
-          <span>District context</span>
-          <h2>Las Estrellas anchors a 146,728-hectare consolidated land position.</h2>
-          <p>Assembled from 24 fragmented private holdings plus 2 newly staked properties, with 100+ GIS-identified targets across the wider Western Malargüe Mining District. Drill success by neighbours validates the geological thesis for the entire corridor.</p>
-        </div>
-        <a class="button primary" href="/projects">See the portfolio <span class="mi" aria-hidden="true">arrow_forward</span></a>
-      </div>
-    </div>
-  </section>
 </BaseLayout>
