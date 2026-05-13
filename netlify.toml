@@ -4,6 +4,9 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  # Non-secret config values (recipient/sender email addresses) that
+  # legitimately appear in .env.example and as fallbacks in source.
+  SECRETS_SCAN_OMIT_KEYS = "CONTACT_TO_ADDRESS,RESEND_CONTACT_FROM_ADDRESS,RESEND_FROM_ADDRESS"
 
 [functions]
   directory = "netlify/functions"
