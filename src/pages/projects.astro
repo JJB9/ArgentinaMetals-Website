@@ -19,7 +19,11 @@ const asset = (path: string) => `${base}${path}`;
 
   <div class="hero-media" data-reveal>
     <div class="hero-media-frame hero-media-frame--map">
-      <AndesHero client:idle />
+      <AndesHero
+        client:idle
+        fallbackSrc={asset("assets/images/map_fallback_horizontal.webp")}
+        fallbackAlt="Southern Andes copper belt with Argentina Metals project locations across the Malargüe and San Raphael Districts"
+      />
     </div>
   </div>
 
