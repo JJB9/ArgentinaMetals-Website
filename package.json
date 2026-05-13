@@ -26,6 +26,7 @@
     "resend": "^4.0.0"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^3.7.2"
+    "@astrojs/sitemap": "^3.7.2",
+    "@types/node": "^22.10.0"
   }
 }
