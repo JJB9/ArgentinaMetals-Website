@@ -3965,6 +3965,23 @@ textarea.form-input {
   padding-left: 20px;
 }
 
+.legal-content ul.credits-list {
+  display: block;
+  columns: 2;
+  column-gap: 32px;
+}
+
+.legal-content ul.credits-list li {
+  break-inside: avoid;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 640px) {
+  .legal-content ul.credits-list {
+    columns: 1;
+  }
+}
+
 .legal-content a {
   color: var(--green);
   font-weight: 700;
