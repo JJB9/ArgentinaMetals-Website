@@ -28,5 +28,10 @@
   "devDependencies": {
     "@astrojs/sitemap": "^3.7.2",
     "@types/node": "^22.10.0"
+  },
+  "overrides": {
+    "@netlify/zip-it-and-ship-it": {
+      "@netlify/serverless-functions-api": "2.14.0"
+    }
   }
 }
