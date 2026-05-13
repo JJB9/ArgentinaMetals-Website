@@ -1,0 +1,76 @@
+name: News broadcast
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/content/news/**.md"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: news-broadcast-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Detect newly-added news files
+        id: changed
+        uses: tj-actions/changed-files@v45
+        with:
+          files: src/content/news/**.md
+
+      - name: Stop if no additions
+        if: steps.changed.outputs.added_files == ''
+        run: |
+          echo "No newly-added news files in this push — nothing to broadcast."
+          exit 0
+
+      - name: Wait for Netlify deploy
+        if: steps.changed.outputs.added_files != ''
+        uses: JakePartusch/wait-for-netlify-action@v1.4
+        with:
+          site_name: ${{ secrets.NETLIFY_SITE_NAME }}
+          max_timeout: 600
+
+      - name: Setup Node
+        if: steps.changed.outputs.added_files != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        if: steps.changed.outputs.added_files != ''
+        run: npm ci
+
+      - name: Send broadcasts for each new release
+        if: steps.changed.outputs.added_files != ''
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
+          RESEND_FROM_ADDRESS: ${{ secrets.RESEND_FROM_ADDRESS }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: |
+          set -euo pipefail
+          for file in ${{ steps.changed.outputs.added_files }}; do
+            echo "::group::Broadcast for $file"
+            node scripts/send-news-broadcast.mjs "$file"
+            echo "::endgroup::"
+          done
+
+      - name: Commit broadcast log
+        if: steps.changed.outputs.added_files != ''
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: log news broadcast send [skip ci]"
+          file_pattern: ".news-broadcasts.json"

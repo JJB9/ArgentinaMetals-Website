@@ -42,21 +42,22 @@ const years = Object.keys(groupedByYear)
           <span class="subscribe-icon mi" aria-hidden="true">mail_outline</span>
           <h2>Subscribe to Investor Alerts</h2>
         </div>
-        <form class="newsletter-form" name="newsletter" method="post" data-netlify="true">
-          <input type="hidden" name="form-name" value="newsletter" />
+        <form class="newsletter-form" data-newsletter-form novalidate>
           <label class="sr-only" for="newsletter-email">Email address</label>
           <input
             id="newsletter-email"
             class="form-input"
             type="email"
             name="email"
+            autocomplete="email"
             placeholder="you@email.com"
             required
           />
           <button class="button copper-grad" type="submit">
-            Subscribe
+            <span class="newsletter-btn-label">Subscribe</span>
             <span class="mi" aria-hidden="true">arrow_forward</span>
           </button>
+          <p class="newsletter-status" data-newsletter-status role="status" aria-live="polite" hidden></p>
         </form>
       </div>
     </div>
@@ -179,6 +180,31 @@ const years = Object.keys(groupedByYear)
 
     .page-hero-subscribe .button.copper-grad:hover .mi {
       transform: translateX(3px);
+    }
+
+    .newsletter-status {
+      margin: 4px 0 0;
+      padding: 10px 12px;
+      border-radius: var(--r-md);
+      background: var(--copper-wash);
+      color: var(--copper-dark);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    .newsletter-status.err {
+      background: #fdecec;
+      color: #b1322f;
+    }
+
+    .newsletter-form[data-state="loading"] .button {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .newsletter-form[data-state="success"] .form-input,
+    .newsletter-form[data-state="success"] .button {
+      display: none;
     }
 
     @media (max-width: 960px) {
@@ -451,6 +477,48 @@ const years = Object.keys(groupedByYear)
       }
     }
   </style>
+
+  <script is:inline>
+    (() => {
+      const form = document.querySelector("[data-newsletter-form]");
+      if (!form) return;
+      const status = form.querySelector("[data-newsletter-status]");
+      const input = form.querySelector('input[type="email"]');
+
+      const show = (msg, kind) => {
+        if (!status) return;
+        status.textContent = msg;
+        status.classList.toggle("err", kind === "err");
+        status.hidden = false;
+      };
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (form.dataset.state === "loading" || form.dataset.state === "success") return;
+
+        const email = (input && input.value || "").trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          show("Please enter a valid email address.", "err");
+          return;
+        }
+
+        form.dataset.state = "loading";
+        try {
+          const res = await fetch("/api/subscribe", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email })
+          });
+          if (!res.ok) throw new Error("Request failed");
+          form.dataset.state = "success";
+          show("Thanks — check your inbox for a confirmation link to finish subscribing.", "ok");
+        } catch {
+          form.dataset.state = "";
+          show("Something went wrong. Please try again in a moment.", "err");
+        }
+      });
+    })();
+  </script>
 
   <script is:inline>
     (() => {
