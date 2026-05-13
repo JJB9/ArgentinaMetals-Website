@@ -6222,7 +6222,7 @@ textarea.form-input {
   background: linear-gradient(90deg, var(--copper) 0%, var(--copper) 66%, color-mix(in srgb, var(--copper) 35%, transparent) 100%);
   transform: scaleX(0);
   transform-origin: 0 50%;
-  transition: transform 900ms var(--ease-out) 120ms;
+  transition: transform 450ms var(--ease-out) 60ms;
 }
 
 .h-timeline.is-visible .h-timeline-line {
@@ -6289,7 +6289,7 @@ textarea.form-input {
   padding: 0 8px;
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity 500ms var(--ease) calc(420ms + var(--i, 0) * 120ms), transform 500ms var(--ease) calc(420ms + var(--i, 0) * 120ms);
+  transition: opacity 360ms var(--ease) calc(120ms + var(--i, 0) * 80ms), transform 360ms var(--ease) calc(120ms + var(--i, 0) * 80ms);
 }
 
 .h-timeline.is-visible .h-timeline-node {
