@@ -1668,7 +1668,7 @@ body > * {
 
 @media (max-width: 960px) {
   .thesis-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 36px;
     padding-top: 0;
   }
@@ -2212,7 +2212,7 @@ figure.split-visual {
 
 .district-stats {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0;
   background: var(--white);
   border-radius: var(--r-2xl);
@@ -2242,7 +2242,7 @@ figure.split-visual {
   display: block;
   margin-top: 6px;
   color: var(--g500);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -2332,7 +2332,7 @@ figure.split-visual {
 
 @media (max-width: 960px) {
   .district-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 36px;
   }
 
@@ -2452,7 +2452,7 @@ figure.split-visual {
 
 @media (max-width: 960px) {
   .rocks-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .rocks-map {
@@ -2530,7 +2530,7 @@ figure.split-visual {
 
 @media (max-width: 960px) {
   .pillars {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .pillar {
@@ -3080,7 +3080,7 @@ figure.split-visual {
 .role {
   margin: 0 0 12px;
   color: var(--copper-dark);
-  font-size: 0.66rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -4062,6 +4062,8 @@ textarea.form-input {
 .footer-col a {
   width: fit-content;
   position: relative;
+  display: inline-block;
+  padding: 6px 0;
   color: rgba(255, 255, 255, 0.88);
   font-size: 0.86rem;
   transition: color 180ms var(--ease);
@@ -4076,7 +4078,7 @@ textarea.form-input {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -2px;
+  bottom: 4px;
   height: 1px;
   background: currentColor;
   transform: scaleX(0);
@@ -4115,8 +4117,8 @@ textarea.form-input {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.06);
   color: rgba(255, 255, 255, 0.78);
@@ -4136,7 +4138,7 @@ textarea.form-input {
 
 @media (max-width: 768px) {
   .footer-top {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 32px;
   }
 
@@ -4194,7 +4196,7 @@ textarea.form-input {
   .contact-layout,
   .offering-grid,
   .newsletter {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .page-hero--split {
@@ -4202,7 +4204,7 @@ textarea.form-input {
   }
 
   .page-hero--split .wrap {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 40px;
   }
 
@@ -4217,11 +4219,11 @@ textarea.form-input {
   }
 
   .timeline-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .legal-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .legal-nav {
@@ -4251,7 +4253,7 @@ textarea.form-input {
   }
 
   .milei-header {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .milei-badge {
@@ -4260,7 +4262,7 @@ textarea.form-input {
   }
 
   .milei-timeline {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .milei-timeline::before {
@@ -4417,7 +4419,7 @@ textarea.form-input {
   }
 
   .section-header {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 10px;
     margin-bottom: 42px;
   }
@@ -4437,7 +4439,7 @@ textarea.form-input {
   .project-grid,
   .document-grid,
   .footer-top {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .footer-top {
@@ -4445,12 +4447,12 @@ textarea.form-input {
   }
 
   .check-panel ul {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .bento,
   .hero-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .stats-grid {
@@ -4480,7 +4482,7 @@ textarea.form-input {
 
   .callout,
   .ticker-card {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     padding: 30px 24px;
   }
 
@@ -4515,11 +4517,11 @@ textarea.form-input {
   }
 
   .form-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .legal-nav {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .feature {
@@ -4948,7 +4950,7 @@ textarea.form-input {
 
 @media (max-width: 960px) {
   .lede-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 32px;
   }
 
@@ -5095,7 +5097,7 @@ textarea.form-input {
 
 @media (max-width: 960px) {
   .model-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -5160,7 +5162,7 @@ textarea.form-input {
 
 @media (max-width: 960px) {
   .geo-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -5225,7 +5227,7 @@ textarea.form-input {
 
 @media (max-width: 640px) {
   .geophys-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -5283,7 +5285,7 @@ textarea.form-input {
 
 @media (max-width: 900px) {
   .maps-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 28px;
   }
 
@@ -5355,7 +5357,7 @@ textarea.form-input {
 
 @media (max-width: 720px) {
   .conclusion-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -5547,7 +5549,7 @@ textarea.form-input {
 
 @media (max-width: 960px) {
   .page-hero--editorial-wrap {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 36px;
   }
 
@@ -5737,7 +5739,7 @@ textarea.form-input {
 
 @media (max-width: 960px) {
   .lede-7-5 {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 36px;
   }
 
@@ -5798,7 +5800,7 @@ textarea.form-input {
 
 @media (max-width: 960px) {
   .spread-4-4-4 {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
   }
 }
@@ -5873,7 +5875,7 @@ textarea.form-input {
 
 @media (max-width: 720px) {
   .sample-strip {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -5956,7 +5958,7 @@ textarea.form-input {
 
 @media (max-width: 960px) {
   .maps-sticky {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 32px;
   }
 
@@ -6170,7 +6172,7 @@ textarea.form-input {
 
 @media (max-width: 720px) {
   .conclusion-pair {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -6371,7 +6373,7 @@ textarea.form-input {
 
   .h-timeline-labels {
     flex: 1;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: repeat(3, minmax(0, 1fr));
     gap: 24px;
     padding-left: 18px;
@@ -6631,14 +6633,14 @@ textarea.form-input {
 
 @media (max-width: 960px) {
   .land-summary {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .land-card {
     padding: 28px 24px;
     gap: 24px;
   }
   .land-split {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 16px;
   }
 }
