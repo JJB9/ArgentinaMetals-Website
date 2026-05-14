@@ -1,0 +1,144 @@
+media:
+  - name: uploads
+    label: Image Uploads
+    input: public/assets/uploads
+    output: /assets/uploads
+  - name: documents
+    label: Documents (PDFs)
+    input: public/assets/documents
+    output: /assets/documents
+
+content:
+  - name: news
+    label: News
+    type: collection
+    path: src/content/news
+    filename: '{primary}.md'
+    view:
+      fields: [title, date, draft]
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: date
+        label: Date
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: excerpt
+        label: Excerpt
+        type: text
+      - name: image
+        label: Image
+        type: string
+        required: false
+      - name: imageAlt
+        label: Image Alt
+        type: string
+        required: false
+      - name: readTime
+        label: Read Time
+        type: string
+        required: false
+      - name: draft
+        label: Draft
+        type: boolean
+        default: false
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: investor-corporate
+    label: Investor — Corporate Documents
+    type: file
+    path: src/data/investor/corporate.json
+    format: json
+    fields:
+      - name: corporatePresentation
+        label: Corporate Presentation (PDF)
+        type: file
+        options:
+          media: documents
+          extensions: [pdf]
+        required: false
+        description: Leave empty to disable the download link.
+      - name: factSheet
+        label: Fact Sheet / 1-Pager (PDF)
+        type: file
+        options:
+          media: documents
+          extensions: [pdf]
+        required: false
+        description: Leave empty to disable the download link.
+      - name: technicalReport
+        label: NI 43-101 Technical Report (PDF)
+        type: file
+        options:
+          media: documents
+          extensions: [pdf]
+        required: false
+        description: Leave empty to disable the download link.
+
+  - name: investor-financial
+    label: Investor — Financial Statements
+    type: file
+    path: src/data/investor/financial.json
+    format: json
+    fields:
+      - name: annualFinancialStatements
+        label: Annual Financial Statements / Audited (PDF)
+        type: file
+        options:
+          media: documents
+          extensions: [pdf]
+        required: false
+        description: Leave empty to disable the download link.
+      - name: annualFinancialStatementsPeriod
+        label: Annual Financial Statements – Period Label
+        type: string
+        required: true
+        default: FY2025
+        description: "Shown next to the link, e.g. 'FY2025' or 'FY2026'."
+      - name: interimFinancialStatements
+        label: Interim Financial Statements (PDF)
+        type: file
+        options:
+          media: documents
+          extensions: [pdf]
+        required: false
+        description: Leave empty to disable the download link.
+      - name: interimFinancialStatementsPeriod
+        label: Interim Financial Statements – Period Label
+        type: string
+        required: true
+        default: Q1 2026
+        description: "Shown next to the link, e.g. 'Q1 2026', 'Q2 2026', 'Q3 2026'."
+      - name: mda
+        label: Management Discussion & Analysis / MD&A (PDF)
+        type: file
+        options:
+          media: documents
+          extensions: [pdf]
+        required: false
+        description: Leave empty to disable the download link.
+      - name: mdaPeriod
+        label: MD&A – Period Label
+        type: string
+        required: true
+        default: Q1 2026
+        description: "Shown next to the link, e.g. 'Q1 2026'."
+
+  - name: projects-las-estrellas
+    label: Projects — Las Estrellas
+    type: file
+    path: src/data/projects/las-estrellas.json
+    format: json
+    fields:
+      - name: technicalReport
+        label: Technical Report (PDF)
+        type: file
+        options:
+          media: documents
+          extensions: [pdf]
+        required: false
+        description: Upload the Las Estrellas technical report PDF. Leave empty to hide the download button on the project page.
