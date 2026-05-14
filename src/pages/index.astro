@@ -76,7 +76,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
   <script is:inline slot="head" src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
 
   <div class="hero-media hero-media--lead" data-reveal style="--i:0">
-    <div class="hero-media-frame">
+    <div class="hero-media-frame" id="hero-media-frame">
       <mux-player
         data-parallax
         playback-id={import.meta.env.PUBLIC_MUX_HERO_PLAYBACK_ID}
@@ -87,8 +87,35 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
         loop
         playsinline
       ></mux-player>
+      <video
+        class="hero-media-fallback"
+        src={asset("assets/videos/Argentina%20Metals_Imageclip.mp4")}
+        poster={asset("assets/images/preview-thumbnail.webp")}
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="none"
+        style="display: none;"
+      ></video>
     </div>
   </div>
+  <script is:inline>
+    (function () {
+      var frame = document.getElementById("hero-media-frame");
+      if (!frame) return;
+      var player = frame.querySelector("mux-player");
+      var fallback = frame.querySelector(".hero-media-fallback");
+      if (!player || !fallback) return;
+      function showFallback() {
+        player.style.display = "none";
+        fallback.style.display = "";
+        var p = fallback.play();
+        if (p && typeof p.catch === "function") p.catch(function () {});
+      }
+      player.addEventListener("error", showFallback);
+    })();
+  </script>
 
   <section class="hero hero--after-media">
     <div class="wrap">
