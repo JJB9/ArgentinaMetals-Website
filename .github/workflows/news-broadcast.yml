@@ -37,10 +37,27 @@ jobs:
 
       - name: Wait for Netlify deploy
         if: steps.changed.outputs.added_files != ''
-        uses: JakePartusch/wait-for-netlify-action@v1.4
-        with:
-          site_name: ${{ secrets.NETLIFY_SITE_NAME }}
-          max_timeout: 600
+        env:
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: |
+          set -euo pipefail
+          for file in ${{ steps.changed.outputs.added_files }}; do
+            slug=$(basename "$file" .md)
+            url="${SITE_URL%/}/news/$slug/"
+            echo "Waiting for $url ..."
+            for i in $(seq 1 60); do
+              code=$(curl -s -o /dev/null -w "%{http_code}" "$url" || echo "000")
+              if [ "$code" = "200" ]; then
+                echo "Live ($code)."
+                break
+              fi
+              if [ "$i" = "60" ]; then
+                echo "Timed out waiting for $url (last status: $code)"
+                exit 1
+              fi
+              sleep 10
+            done
+          done
 
       - name: Setup Node
         if: steps.changed.outputs.added_files != ''
