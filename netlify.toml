@@ -27,15 +27,7 @@
     X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://identity.netlify.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob: https://*.mux.com; connect-src 'self' https://api.maptiler.com https://identity.netlify.com https://*.mux.com https://*.litix.io; worker-src 'self' blob:; frame-src 'self' https://identity.netlify.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
-
-[[headers]]
-  for = "/admin/*"
-  [headers.values]
-    # Decap CMS parses config.yml at runtime via `new Function()`, which
-    # requires 'unsafe-eval' in script-src. Scoped to /admin/* so the
-    # rest of the site keeps the stricter policy above.
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://identity.netlify.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://api.github.com https://identity.netlify.com; worker-src 'self' blob:; frame-src 'self' https://identity.netlify.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob: https://*.mux.com; connect-src 'self' https://api.maptiler.com https://*.mux.com https://*.litix.io; worker-src 'self' blob:; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
 
 [[headers]]
   for = "/_astro/*"

@@ -76,16 +76,6 @@ const organizationJsonLd = {
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=block" rel="stylesheet" />
     <script is:inline>
       (() => {
-        const normalizedHash = window.location.hash.replace(/^#\//, "#");
-        const identityTokenPattern = /^#(invite_token|confirmation_token|recovery_token|email_change_token|access_token)=/;
-
-        if (!window.location.pathname.startsWith("/admin") && identityTokenPattern.test(normalizedHash)) {
-          window.location.replace(`/admin/${normalizedHash}`);
-        }
-      })();
-    </script>
-    <script is:inline>
-      (() => {
         const root = document.documentElement;
         root.classList.add("has-motion");
         const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
