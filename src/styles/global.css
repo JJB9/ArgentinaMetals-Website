@@ -324,59 +324,6 @@ textarea:focus-visible {
   height: auto;
 }
 
-.ticker-pill {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 6px;
-  padding: 5px 10px 5px 10px;
-  border: 1px solid rgba(253, 180, 115, 0.32);
-  border-radius: var(--r-sm);
-  background: rgba(0, 61, 30, 0.32);
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.78);
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.ticker-pill-exch {
-  color: rgba(255, 255, 255, 0.62);
-  letter-spacing: 0.08em;
-}
-
-.ticker-pill-sym {
-  color: var(--copper-light);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.02em;
-}
-
-.ticker-pill-status {
-  margin-left: 4px;
-  padding: 2px 6px;
-  border-radius: var(--r-sm);
-  background: rgba(253, 180, 115, 0.16);
-  color: var(--copper-light);
-  font-size: 0.58rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-@media (max-width: 640px) {
-  .ticker-pill-status {
-    display: none;
-  }
-  .site-brand {
-    gap: 10px;
-  }
-  .ticker-pill {
-    padding: 4px 8px;
-    font-size: 0.6rem;
-  }
-}
-
 .site-nav {
   display: flex;
   align-items: center;
@@ -938,73 +885,6 @@ body .closing-cta-copy h2 {
 .button.ghost.on-dark:hover {
   color: #fff;
   background: rgba(255, 255, 255, 0.06);
-}
-
-/* ---- Thesis transition CTA (quiet, between sec 03 and Part II) ---- */
-.thesis-cta {
-  margin: 24px 0 8px;
-}
-
-.thesis-cta .wrap {
-  display: flex;
-  justify-content: center;
-}
-
-.thesis-cta-inner {
-  display: flex;
-  gap: 32px;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 28px 36px;
-  border: 1px solid color-mix(in srgb, var(--copper) 24%, transparent);
-  border-radius: var(--r-xl);
-  background: var(--copper-wash);
-  width: 100%;
-  max-width: 920px;
-}
-
-.thesis-cta-copy {
-  flex: 1 1 360px;
-  min-width: 0;
-}
-
-.thesis-cta-eyebrow {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--copper-dark);
-  font-size: var(--label-sm);
-  font-weight: 700;
-  letter-spacing: var(--label-track);
-  text-transform: uppercase;
-}
-
-.thesis-cta-copy p {
-  margin: 0;
-  color: var(--g700);
-  font-size: 1rem;
-  line-height: 1.6;
-  max-width: 52ch;
-}
-
-.thesis-cta-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  flex-shrink: 0;
-}
-
-@media (max-width: 640px) {
-  .thesis-cta-inner {
-    padding: 22px 24px;
-    gap: 20px;
-  }
-  .thesis-cta-actions {
-    width: 100%;
-  }
-  .thesis-cta-actions .button {
-    flex: 1 1 auto;
-  }
 }
 
 /* ---- Tech capabilities (Section 05) ---- */
