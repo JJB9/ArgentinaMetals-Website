@@ -1,43 +1,3 @@
-@font-face {
-  font-family: "Sora";
-  src: url("/assets/fonts/sora/sora-latin-300-normal.woff2") format("woff2");
-  font-display: block;
-  font-style: normal;
-  font-weight: 300;
-}
-
-@font-face {
-  font-family: "Sora";
-  src: url("/assets/fonts/sora/sora-latin-400-normal.woff2") format("woff2");
-  font-display: block;
-  font-style: normal;
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "Sora";
-  src: url("/assets/fonts/sora/sora-latin-500-normal.woff2") format("woff2");
-  font-display: block;
-  font-style: normal;
-  font-weight: 500;
-}
-
-@font-face {
-  font-family: "Sora";
-  src: url("/assets/fonts/sora/sora-latin-600-normal.woff2") format("woff2");
-  font-display: block;
-  font-style: normal;
-  font-weight: 600;
-}
-
-@font-face {
-  font-family: "Sora";
-  src: url("/assets/fonts/sora/sora-latin-700-normal.woff2") format("woff2");
-  font-display: block;
-  font-style: normal;
-  font-weight: 700;
-}
-
 :root {
   --copper-dark: #a8521f;
   --copper: #d4783f;
@@ -78,8 +38,10 @@
   --info-bg: #edf3fa;
   --stock-up: #2a7d4f;
   --stock-down: #c03028;
-  --font-body: "Sora", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
   --font-display: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-label: var(--font-mono);
   --fb: var(--font-body);
   --r-sm: 6px;
   --r-md: 10px;
@@ -134,6 +96,8 @@ html {
   scrollbar-gutter: stable;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  font-optical-sizing: auto;
+  font-kerning: normal;
 }
 
 body {
@@ -889,50 +853,60 @@ body .closing-cta-copy h2 {
 
 /* ---- Tech capabilities (Section 05) ---- */
 .tech-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px 28px;
-  margin: 32px 0 0;
-  padding: 28px 0 0;
-  border-top: 1px solid var(--hairline);
+  display: flex;
+  flex-direction: column;
+  margin: 8px 0 0;
+  padding: 0;
   list-style: none;
 }
 
 .tech-stats li {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 20px;
+  row-gap: 4px;
+  padding: 20px 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.tech-stats li:last-child {
+  border-bottom: 1px solid var(--hairline);
 }
 
 .tech-stats > li > .mi {
+  grid-row: span 2;
+  align-self: center;
   color: var(--copper-dark);
-  font-size: 1.45rem;
+  font-size: 1.4rem;
+  line-height: 1;
 }
 
 .tech-stats strong {
   color: var(--g900);
-  font-size: 0.95rem;
+  font-size: 1.02rem;
   font-weight: 600;
   letter-spacing: -0.005em;
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 .tech-stats span:not(.mi) {
   color: var(--g500);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   line-height: 1.55;
 }
 
 @media (max-width: 720px) {
-  .tech-stats {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
+  .tech-stats li {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    column-gap: 12px;
+    padding: 16px 0;
   }
 }
 
 /* ---- Team preview strip (Section 06) ---- */
 .team-strip {
-  margin-top: 40px;
+  margin-top: 0;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -1650,6 +1624,140 @@ body .section-num {
   line-height: 1.8;
 }
 
+/* ── Unified section spread (homepage editorial pattern) ─────
+   One grid + one intro + one evidence column, used by every
+   front-page section. Variants reverse direction or stack. */
+.section-spread {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: clamp(40px, 5vw, 72px);
+  row-gap: clamp(36px, 4vw, 56px);
+  align-items: start;
+}
+
+.section-spread--wide-evidence {
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+}
+
+.section-spread--reverse > .section-intro {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.section-spread--reverse > .section-evidence {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.section-spread--stack {
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: clamp(40px, 5vw, 64px);
+}
+
+.section-spread--stack > .section-intro {
+  max-width: 64ch;
+}
+
+.section-intro {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 1.2vw + 0.3rem, 22px);
+  min-width: 0;
+  padding-top: 4px;
+}
+
+.section-intro > .policy-card,
+.section-intro > .gap-card,
+.section-intro > .tech-stats,
+.section-intro > .hectares-banner,
+.section-intro > .district-status {
+  margin-top: clamp(12px, 1.4vw, 22px);
+}
+
+.section-intro > .district-status {
+  margin-top: clamp(8px, 1vw, 14px);
+}
+
+.section-intro .section-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.018em;
+  color: var(--g900);
+  text-wrap: balance;
+}
+
+.section-intro .section-title em {
+  font-style: italic;
+  color: var(--copper-dark);
+}
+
+.section-lead {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.004em;
+  color: var(--g600);
+  max-width: 46ch;
+  text-wrap: pretty;
+}
+
+.section-spread--wide-evidence .section-lead {
+  max-width: 36ch;
+}
+
+.section-spread--stack .section-lead {
+  max-width: 58ch;
+  font-size: 1.13rem;
+}
+
+.section-lead em {
+  color: var(--copper-dark);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.section-evidence {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 2.5vw, 40px);
+}
+
+.section-evidence--stack {
+  display: grid;
+  gap: clamp(40px, 4.5vw, 56px);
+}
+
+@media (max-width: 960px) {
+  .section-spread,
+  .section-spread--wide-evidence {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: clamp(32px, 5vw, 48px);
+  }
+
+  .section-spread--reverse > .section-intro,
+  .section-spread--reverse > .section-evidence {
+    grid-column: 1;
+  }
+
+  .section-spread--reverse > .section-intro {
+    grid-row: 1;
+  }
+
+  .section-spread--reverse > .section-evidence {
+    grid-row: 2;
+  }
+
+  .section-intro {
+    max-width: 60ch;
+  }
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1736,7 +1844,7 @@ body .section-num {
 
 /* ---- Hectares banner (Section 04 hero number) ---- */
 .hectares-banner {
-  margin: 8px 0 48px;
+  margin: 0;
   padding: 36px 40px;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -1746,6 +1854,21 @@ body .section-num {
   background: linear-gradient(160deg, var(--cream) 0%, var(--warm) 100%);
   border: 1px solid var(--hairline);
   box-shadow: var(--shadow-sm);
+}
+
+.hectares-banner--column {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  padding: 30px 32px;
+  align-items: start;
+}
+
+.hectares-banner--column .hectares-banner-figure strong {
+  font-size: clamp(2.85rem, 5vw, 4.25rem);
+}
+
+.hectares-banner--column .hectares-banner-lead {
+  font-size: 1.08rem;
 }
 
 .hectares-banner-figure {
@@ -2267,43 +2390,49 @@ figure.split-visual {
   max-width: 600px;
 }
 
-.section--has-overlap .section-body .split-lead {
+.tech-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 440px;
+  gap: 56px;
+  align-items: center;
+}
+
+.tech-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.tech-copy .split-lead {
   max-width: none;
 }
 
-.section--has-overlap > .wrap {
-  position: relative;
-}
-
-.section--has-overlap .section-header,
-.section--has-overlap .section-body {
-  max-width: 600px;
-}
-
-.overlap-image {
-  position: absolute;
-  right: 0;
-  top: -200px;
-  width: 470px;
+.tech-image {
   margin: 0;
-  z-index: 2;
+  width: 100%;
+  max-width: 440px;
+  justify-self: end;
 }
 
-.overlap-image .split-image {
-  width: 100%;
+.section-evidence .tech-image {
+  max-width: none;
 }
 
 @media (max-width: 960px) {
-  .section--has-overlap .section-header,
-  .section--has-overlap .section-body {
-    max-width: none;
+  .tech-split {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: start;
   }
 
-  .overlap-image {
-    position: static;
-    margin: 32px 0 0 auto;
-    width: 100%;
-    max-width: 470px;
+  .tech-image {
+    margin-inline: auto;
+    max-width: 340px;
+    justify-self: center;
+  }
+
+  .section-evidence .tech-image {
+    max-width: 480px;
   }
 }
 
@@ -7345,5 +7474,59 @@ button.surface:hover {
   .content-band--spacious {
     padding-top: 144px;
   }
+}
+
+/* ============================================================
+   Mono accent — JetBrains Mono on technical-detail surfaces.
+   Labels, ticker, drill tables, small data readouts.
+   Big editorial figures stay in the display serif.
+   The `body ` prefix is required to win specificity over the
+   `body :where(*):not(.mi)` font-family inherit reset above.
+   ============================================================ */
+
+body .hero-stat-lbl,
+body .hectares-banner-unit,
+body .page-hero-stat-label,
+body .part-marker-numeral,
+body .part-marker-title,
+body .policy-card .policy-date,
+body .district-stat span,
+body .andes-hero-marker-label em,
+body .andes-hero-marker-badge,
+body .dt thead th {
+  font-family: var(--font-label);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+body .ticker-item,
+body .ticker-item strong {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+body .dt tbody th,
+body .dt tbody td {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+}
+
+body .dt .hi {
+  font-weight: 600;
+}
+
+body .page-hero-stat-value,
+body .hero-stat-val {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+body .u-mono,
+body .u-data {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
 }
 

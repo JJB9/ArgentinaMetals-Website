@@ -320,7 +320,7 @@ export default function AndesHero({
         </span>
         <span className="andes-hero-legend-item">
           <span className="andes-hero-legend-swatch andes-hero-legend-swatch--flagship" aria-hidden="true" />
-          Argentina Metals — Las Estrellas
+          Argentina Metals, Las Estrellas
         </span>
         <span className="andes-hero-legend-item">
           <span className="andes-hero-legend-swatch andes-hero-legend-swatch--belt" aria-hidden="true" />
