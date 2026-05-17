@@ -712,18 +712,6 @@ body .closing-cta-copy h2 {
 .hero h1 em {
   font-style: italic;
   color: var(--copper-dark);
-  background: var(--copper-grad);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-@supports not (background-clip: text) {
-  .hero h1 em {
-    color: var(--copper-dark);
-    background: none;
-    -webkit-text-fill-color: initial;
-  }
 }
 
 .hero p {
@@ -1850,10 +1838,9 @@ body .section-num {
   grid-template-columns: auto minmax(0, 1fr);
   gap: 40px;
   align-items: center;
-  border-radius: var(--radius);
-  background: linear-gradient(160deg, var(--cream) 0%, var(--warm) 100%);
-  border: 1px solid var(--hairline);
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--r-2xl);
+  background: linear-gradient(135deg, var(--copper-wash) 0%, var(--white) 100%);
+  box-shadow: var(--s-md);
 }
 
 .hectares-banner--column {
@@ -1883,25 +1870,13 @@ body .section-num {
   font-size: clamp(3.5rem, 8vw, 5.5rem);
   font-weight: 600;
   color: var(--copper-dark);
-  background: var(--copper-grad);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
 }
 
-@supports not (background-clip: text) {
-  .hectares-banner-figure strong {
-    color: var(--copper-dark);
-    background: none;
-    -webkit-text-fill-color: initial;
-  }
-}
-
 .hectares-banner-unit {
   margin-top: 4px;
-  color: var(--g600);
+  color: var(--copper-dark);
   font-size: var(--label-md);
   font-weight: 600;
   letter-spacing: var(--label-track);
