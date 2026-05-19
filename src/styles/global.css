@@ -795,7 +795,7 @@ body .closing-cta-copy h2 {
 }
 
 .hero h1 em {
-  font-style: italic;
+  font-style: normal;
   color: var(--copper-dark);
 }
 
