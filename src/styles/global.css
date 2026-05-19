@@ -4984,6 +4984,12 @@ textarea.form-input {
     aspect-ratio: 16 / 10;
   }
 
+  .split-visual--compact .split-image {
+    aspect-ratio: 4 / 5;
+    max-width: 360px;
+    margin-inline: auto;
+  }
+
   .split-lead {
     max-width: none;
   }
