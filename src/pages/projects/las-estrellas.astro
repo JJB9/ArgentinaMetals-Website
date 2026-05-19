@@ -65,34 +65,10 @@ const samples = [
   }
 ];
 
-const roadmap = [
-  {
-    phase: "Phase 01",
-    status: "Completed",
-    title: "Surface & Geophysics",
-    text: "Initial mapping, geochemistry, property-scale magnetometric survey. 144 rock chips plus 14 stream-sediment samples defined the primary targeting zone.",
-    state: "done"
-  },
-  {
-    phase: "Phase 02",
-    status: "Current",
-    title: "Target Definition",
-    text: "IP surveys, target refinement, and pre-drill work across the north-central and eastern anomalies. Additional license acquisition in the satellite corridor.",
-    state: "current"
-  },
-  {
-    phase: "Phase 03",
-    status: "Next",
-    title: "Maiden Drill Program",
-    text: "Drill-testing of highest-priority targets confirmed through Phase 2 — with access and logistics staged from Malargüe town.",
-    state: "next"
-  }
-];
-
 const technicalReport = lasEstrellasData.technicalReport;
 ---
 
-<BaseLayout title="Las Estrellas — Flagship Cu-Au Project | Argentina Metals">
+<BaseLayout title="Las Estrellas — Cu-Au Project | Argentina Metals">
   <div class="page-progress" aria-hidden="true"><span></span></div>
 
   <section class="page-hero page-hero--split page-hero--project">
@@ -103,7 +79,7 @@ const technicalReport = lasEstrellasData.technicalReport;
           All Projects
         </a>
         <h1 data-reveal style="--i:1">Las Estrellas</h1>
-        <p data-reveal style="--i:2">The flagship of Argentina Metals' 146,728-hectare Western Malargüe land position — a copper-gold project where surface geochemistry and a property-scale magnetometric survey have defined drill-ready targets in two distinct zones.</p>
+        <p data-reveal style="--i:2">Argentina Metals' lead copper-gold project on the 146,728-hectare Western Malargüe land position — surface geochemistry and a property-scale magnetometric survey have defined targets in two distinct zones.</p>
       </div>
       <div class="page-hero-aside" data-reveal style="--i:2">
         <KeyFactsBox
@@ -301,39 +277,6 @@ const technicalReport = lasEstrellasData.technicalReport;
             <p>In the southern part, geochemistry indicates a peripheral zone of a porphyry copper system — relatively high values of arsenic and lead, and low values of copper and molybdenum.</p>
           </div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="roadmap">
-    <div class="wrap">
-      <div class="section-header section-header--single" data-reveal>
-        <div>
-          <h2 class="section-title">Exploration roadmap</h2>
-          <span class="section-rule" aria-hidden="true"></span>
-          <p class="section-desc">Three phases from consolidation through discovery. Phase 2 is underway, with drill targets refined through IP and continued geochemical work.</p>
-        </div>
-      </div>
-
-      <div class="h-timeline" data-reveal data-timeline>
-        <div class="h-timeline-track" aria-hidden="true">
-          <div class="h-timeline-line"></div>
-          {roadmap.map((item) => (
-            <span class:list={["h-timeline-dot", `h-timeline-dot--${item.state}`]}></span>
-          ))}
-        </div>
-        <div class="h-timeline-labels">
-          {roadmap.map((item, i) => (
-            <div class:list={["h-timeline-node", `h-timeline-node--${item.state}`]} style={`--i:${i}`}>
-              <div class="h-timeline-phase">
-                <span class="h-timeline-phase-num">{item.phase}</span>
-                <strong class="h-timeline-phase-status">{item.status}</strong>
-              </div>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   </section>
