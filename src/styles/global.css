@@ -4491,7 +4491,7 @@ textarea.form-input {
   padding: 32px 0 36px;
   background: var(--green-dark);
   color: rgba(255, 255, 255, 0.82);
-  overflow: visible;
+  overflow: hidden;
 }
 
 .site-footer::before {
