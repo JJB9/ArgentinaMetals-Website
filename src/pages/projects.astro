@@ -136,6 +136,7 @@ const asset = (path: string) => `${base}${path}`;
         <figure class="district-map" data-reveal style="--i:0">
           <div class="district-map-frame">
             <img
+              data-parallax
               src={asset("assets/images/malargue-claims-map.webp")}
               alt="Claims map of the Malargüe District in Mendoza, Argentina, showing Argentina Metals tenures in green alongside neighbouring Kobrea Exploration tenures in blue, across 26 named licenses straddling the Chile–Argentina border."
               loading="lazy"
@@ -149,11 +150,11 @@ const asset = (path: string) => `${base}${path}`;
         <div class="district-info" data-reveal style="--i:1">
           <div class="district-stats">
             <div class="district-stat district-stat--lead">
-              <strong>26</strong>
+              <strong><span data-count-to="26" data-count-from="0">26</span></strong>
               <span>Named Licenses</span>
             </div>
             <div class="district-stat">
-              <strong>146,728 ha</strong>
+              <strong><span data-count-to="146728" data-count-from="0" data-count-format="comma" data-count-suffix=" ha">146,728 ha</span></strong>
               <span>District Land Position</span>
             </div>
             <div class="district-stat">
@@ -161,7 +162,7 @@ const asset = (path: string) => `${base}${path}`;
               <span>Environmental Licenses Pre-approved</span>
             </div>
             <div class="district-stat">
-              <strong>1.5 km</strong>
+              <strong><span data-count-to="1.5" data-count-from="0" data-count-decimals="1" data-count-suffix=" km">1.5 km</span></strong>
               <span>To Kobrea Active Drilling</span>
             </div>
           </div>
@@ -191,6 +192,7 @@ const asset = (path: string) => `${base}${path}`;
         <figure class="district-map district-map--water" data-reveal style="--i:1">
           <div class="district-map-frame">
             <img
+              data-parallax
               src={asset("assets/images/Mendoza Water Sources.webp")}
               alt="Map of Mendoza Province showing Argentina Metals mineral tenures in orange overlaid on the surrounding water network — streams, water reservoirs, and glaciers — across the Andean cordillera at the Chile–Argentina border."
               loading="lazy"

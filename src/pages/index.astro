@@ -269,22 +269,22 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr data-reveal data-reveal-effect="fade" style="--i:0">
                     <th scope="row">Top 20 global copper mines</th>
                     <td class="num">7</td>
                     <td class="num">0</td>
                   </tr>
-                  <tr>
+                  <tr data-reveal data-reveal-effect="fade" style="--i:1">
                     <th scope="row">Share of world copper production</th>
                     <td class="num">23%</td>
                     <td class="num">0%</td>
                   </tr>
-                  <tr>
+                  <tr data-reveal data-reveal-effect="fade" style="--i:2">
                     <th scope="row">Annual production, current</th>
                     <td class="num">5.3 Mt</td>
                     <td class="num">0.0 Mt</td>
                   </tr>
-                  <tr>
+                  <tr data-reveal data-reveal-effect="fade" class="row-emphasis" style="--i:3">
                     <th scope="row">Annual production, potential</th>
                     <td class="num">6.0 Mt</td>
                     <td class="num hi">2.0+ Mt</td>
@@ -342,7 +342,9 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
           <p class="section-lead">A contiguous land position across Argentina's Malargüe District lets us focus capital on the most promising structures across an entire belt, rather than chasing isolated targets in a single licence.</p>
           <div class="hectares-banner hectares-banner--column">
             <div class="hectares-banner-figure">
-              <strong>~150,000</strong>
+              <strong>
+                <span aria-hidden="true">~</span><span data-count-to="150000" data-count-from="120000" data-count-format="comma" aria-label="approximately 150,000">120,000</span>
+              </strong>
               <span class="hectares-banner-unit">hectares</span>
             </div>
             <div class="hectares-banner-body">
@@ -384,17 +386,17 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
           <h2 class="section-title">Newest Technologies</h2>
           <p class="section-lead">Never before in history have so much data about the surface been available. We combine sophisticated satellite imagery, invaluable for early-stage exploration, with specialized software to compile and compare the data.</p>
           <ul class="tech-stats">
-            <li>
+            <li data-reveal data-reveal-effect="quiet" style="--i:0">
               <span class="mi" aria-hidden="true">satellite_alt</span>
               <strong>Multispectral &amp; hyperspectral imagery</strong>
               <span>Stacked satellite passes across the licence area for alteration mapping.</span>
             </li>
-            <li>
+            <li data-reveal data-reveal-effect="quiet" style="--i:1">
               <span class="mi" aria-hidden="true">flight</span>
               <strong>Drone magnetic &amp; photogrammetric surveys</strong>
               <span>High-resolution coverage of priority targets, without chartering a helicopter.</span>
             </li>
-            <li>
+            <li data-reveal data-reveal-effect="quiet" style="--i:2">
               <span class="mi" aria-hidden="true">insights</span>
               <strong>Machine-learning target generation</strong>
               <span>Geophysics + remote sensing fused to rank targets before boots-on-the-ground.</span>
@@ -405,8 +407,9 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
         <div class="section-evidence" data-reveal style="--i:1">
           <figure class="tech-image">
             <div class="split-image">
-              <img data-parallax src={asset("assets/images/projects/aconcagua-provincial-park.jpg")} alt="Aconcagua Provincial Park — rugged Andean terrain near Argentina Metals' Mendoza licences" loading="lazy" width="500" height="750" />
+              <img data-parallax src={asset("assets/images/Spectral-evaluation.webp")} alt="Multispectral satellite evaluation of alteration zones across Argentina Metals' Mendoza licences" loading="lazy" width="731" height="512" />
             </div>
+            <figcaption>Spectral based target evaluation</figcaption>
           </figure>
         </div>
       </div>
@@ -421,41 +424,41 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
           <p class="section-lead">A team of senior and junior geologists drawn from Europe, North and South America. Different and complementary skill sets, organised around one task: to find world-class copper deposits in Argentina.</p>
         </header>
 
-        <div class="section-evidence" data-reveal style="--i:1">
+        <div class="section-evidence">
           <div class="team-strip" aria-label="Board of Directors">
             <ul class="team-strip-faces" role="list">
-              <li>
+              <li data-reveal data-reveal-effect="quiet" style="--i:0">
                 <a href="/team#raymond-d-harari" aria-label="Raymond D. Harari, CEO">
                   <img src={asset("assets/images/people/Raymond D. Harari.webp")} alt="Portrait of Raymond D. Harari" loading="lazy" width="96" height="96" />
                   <span class="team-strip-name">Raymond D. Harari</span>
                 </a>
               </li>
-              <li>
+              <li data-reveal data-reveal-effect="quiet" style="--i:1">
                 <a href="/team#titus-gebel" aria-label="Titus Gebel, Chairman">
                   <img src={asset("assets/images/people/Titus Gebel.webp")} alt="Portrait of Titus Gebel" loading="lazy" width="96" height="96" />
                   <span class="team-strip-name">Titus Gebel</span>
                 </a>
               </li>
-              <li>
+              <li data-reveal data-reveal-effect="quiet" style="--i:2">
                 <a href="/team#julio-pulisich" aria-label="Julio Pulisich, Director">
                   <img src={asset("assets/images/people/Julio Pulisich.webp")} alt="Portrait of Julio Pulisich" loading="lazy" width="96" height="96" />
                   <span class="team-strip-name">Julio Pulisich</span>
                 </a>
               </li>
-              <li>
+              <li data-reveal data-reveal-effect="quiet" style="--i:3">
                 <a href="/team#tim-heenan" aria-label="Tim Heenan, Director">
                   <img src={asset("assets/images/people/Timothy Heenan.webp")} alt="Portrait of Tim Heenan" loading="lazy" width="96" height="96" />
                   <span class="team-strip-name">Tim Heenan</span>
                 </a>
               </li>
-              <li>
+              <li data-reveal data-reveal-effect="quiet" style="--i:4">
                 <a href="/team#martin-hoff" aria-label="Martin Hoff, Director">
                   <img src={asset("assets/images/people/Martin Hoff.webp")} alt="Portrait of Martin Hoff" loading="lazy" width="96" height="96" />
                   <span class="team-strip-name">Martin Hoff</span>
                 </a>
               </li>
             </ul>
-            <a class="team-strip-link" href="/team">Meet the full team <span class="mi" aria-hidden="true">arrow_forward</span></a>
+            <a class="team-strip-link" href="/team" data-reveal data-reveal-effect="quiet" style="--i:5">Meet the full team <span class="mi" aria-hidden="true">arrow_forward</span></a>
           </div>
         </div>
       </div>
@@ -464,12 +467,12 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
 
   <section class="closing-cta" id="invest" aria-label="Next steps for investors">
     <div class="wrap">
-      <div class="closing-cta-inner" data-reveal>
-        <div class="closing-cta-copy">
+      <div class="closing-cta-inner">
+        <div class="closing-cta-copy" data-reveal style="--i:0">
           <h2>Build conviction at your own pace.</h2>
           <p>Read the corporate presentation or subscribe to drilling and news alerts.</p>
         </div>
-        <div class="closing-cta-actions">
+        <div class="closing-cta-actions" data-reveal style="--i:1">
           <a class="button copper" href="/investor#docs">Corporate Presentation</a>
           <a class="button secondary on-dark" href="/subscribe">Subscribe to Alerts</a>
         </div>

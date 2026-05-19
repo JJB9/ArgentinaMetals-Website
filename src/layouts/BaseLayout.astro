@@ -173,23 +173,31 @@ const organizationJsonLd = {
             const withSeparators = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return decPart ? withSeparators + "." + decPart : withSeparators;
           };
-          const animate = (el) => {
-            const to = parseFloat(el.getAttribute("data-count-to") || "0");
+          const readDisplay = (el, value) => {
             const decimals = parseInt(el.getAttribute("data-count-decimals") || "0", 10);
             const format = el.getAttribute("data-count-format") || "";
             const suffix = el.getAttribute("data-count-suffix") || "";
+            const body = format === "comma" ? formatComma(value, decimals) : value.toFixed(decimals);
+            return body + suffix;
+          };
+          const animate = (el) => {
+            const to = parseFloat(el.getAttribute("data-count-to") || "0");
+            const from = parseFloat(el.getAttribute("data-count-from") || "0");
             const duration = 1200;
             const start = performance.now();
             const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
             const tick = (now) => {
               const t = Math.min(1, (now - start) / duration);
-              const value = to * easeOutCubic(t);
-              const display = format === "comma" ? formatComma(value, decimals) : value.toFixed(decimals);
-              el.textContent = display + suffix;
+              const value = from + (to - from) * easeOutCubic(t);
+              el.textContent = readDisplay(el, value);
               if (t < 1) requestAnimationFrame(tick);
             };
             requestAnimationFrame(tick);
           };
+          targets.forEach((el) => {
+            const from = parseFloat(el.getAttribute("data-count-from") || "0");
+            el.textContent = readDisplay(el, from);
+          });
           const io = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
