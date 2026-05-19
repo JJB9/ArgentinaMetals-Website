@@ -2707,7 +2707,8 @@ body .gap-card-head h3 {
 
 /* Water-in-Mendoza section — reversed district layout + water-source list */
 .district-layout--reverse {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
 }
 
 .district-layout--reverse > .water-copy {
@@ -2716,6 +2717,39 @@ body .gap-card-head h3 {
 
 .district-layout--reverse > .district-map {
   grid-column: 2;
+  justify-self: end;
+  max-width: 460px;
+  width: 100%;
+}
+
+.water-layout {
+  align-items: start;
+}
+
+.water-layout > .district-map--water {
+  align-self: start;
+  margin-top: clamp(-280px, -16vw, -120px);
+  position: relative;
+  z-index: 1;
+}
+
+.water-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 8px;
+}
+
+.water-header .section-title {
+  margin: 0;
+}
+
+.water-header .section-rule {
+  margin: 18px 0 18px;
+}
+
+.water-header .section-desc {
+  max-width: 38ch;
 }
 
 .district-map--water .district-map-frame {
@@ -2725,9 +2759,9 @@ body .gap-card-head h3 {
 .water-copy {
   display: flex;
   flex-direction: column;
-  gap: 36px;
-  padding-top: 8px;
-  align-self: center;
+  gap: 32px;
+  padding-top: 0;
+  align-self: start;
 }
 
 .water-copy .split-lead {
@@ -2750,12 +2784,23 @@ body .gap-card-head h3 {
     grid-column: 1;
   }
 
+  .district-layout--reverse > .district-map,
+  .water-layout > .district-map--water {
+    justify-self: stretch;
+    max-width: none;
+    margin-top: 0;
+  }
+
   .water-copy {
     padding-top: 0;
     gap: 28px;
   }
 
   .water-copy .split-lead {
+    max-width: none;
+  }
+
+  .water-header .section-desc {
     max-width: none;
   }
 }
@@ -7704,27 +7749,6 @@ body .u-data {
   min-width: 0;
 }
 
-.portfolio-entry-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  width: fit-content;
-  color: var(--green);
-  font-family: var(--font-label);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.portfolio-entry-status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 16%, transparent);
-}
-
 .portfolio-entry-title {
   margin: 0;
   color: var(--g900);
@@ -7790,21 +7814,68 @@ body .u-data {
 .portfolio-entry-cta {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 6px;
-  color: var(--copper-dark);
-  font-size: 0.92rem;
+  gap: 14px;
+  margin-top: 10px;
+  padding-top: 18px;
+  border-top: 1px solid var(--sand);
+  width: fit-content;
+}
+
+.portfolio-entry-cta-label {
+  position: relative;
+  color: var(--g900);
+  font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: 0;
+  letter-spacing: -0.005em;
 }
 
-.portfolio-entry-cta .mi {
-  font-size: 1.05rem;
-  transition: transform 320ms var(--ease);
+.portfolio-entry-cta-label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 420ms var(--ease);
 }
 
-.portfolio-entry-link:hover .portfolio-entry-cta .mi,
-.portfolio-entry-link:focus-visible .portfolio-entry-cta .mi {
+.portfolio-entry-link:hover .portfolio-entry-cta-label::after,
+.portfolio-entry-link:focus-visible .portfolio-entry-cta-label::after {
+  transform: scaleX(1);
+}
+
+.portfolio-entry-cta-arrow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--copper-dark);
+  color: var(--white);
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: background 320ms var(--ease), box-shadow 320ms var(--ease);
+  box-shadow: 0 1px 2px rgba(168, 82, 31, 0.18), 0 4px 14px rgba(168, 82, 31, 0.16);
+}
+
+.portfolio-entry-cta-arrow .mi {
+  font-size: 1.15rem;
+  transition: transform 420ms var(--ease);
+}
+
+.portfolio-entry-link:hover .portfolio-entry-cta-arrow,
+.portfolio-entry-link:focus-visible .portfolio-entry-cta-arrow {
+  background: var(--g900);
+  box-shadow: 0 2px 4px rgba(14, 13, 12, 0.16), 0 8px 22px rgba(14, 13, 12, 0.2);
+}
+
+.portfolio-entry-link:hover .portfolio-entry-cta-arrow .mi,
+.portfolio-entry-link:focus-visible .portfolio-entry-cta-arrow .mi {
   transform: translateX(4px);
 }
 

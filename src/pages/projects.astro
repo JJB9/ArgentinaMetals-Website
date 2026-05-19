@@ -60,10 +60,6 @@ const asset = (path: string) => `${base}${path}`;
               />
             </figure>
             <div class="portfolio-entry-body">
-              <span class="portfolio-entry-status">
-                <span class="portfolio-entry-status-dot" aria-hidden="true"></span>
-                Phase 2 · Drill-ready targets defined
-              </span>
               <h3 class="portfolio-entry-title">Las Estrellas</h3>
               <p class="portfolio-entry-lead">Manto-type copper oxides in the Rio Damas Formation and porphyry copper-gold signatures in the Huincan Formation. Surface sampling returned up to <strong>9,978 ppm Cu</strong>, with magnetometry defining drill-ready targets at 50–150 m depth.</p>
               <dl class="portfolio-entry-facts">
@@ -85,8 +81,10 @@ const asset = (path: string) => `${base}${path}`;
                 </div>
               </dl>
               <span class="portfolio-entry-cta">
-                View project details
-                <span class="mi" aria-hidden="true">arrow_forward</span>
+                <span class="portfolio-entry-cta-label">View project details</span>
+                <span class="portfolio-entry-cta-arrow" aria-hidden="true">
+                  <span class="mi">arrow_forward</span>
+                </span>
               </span>
             </div>
           </a>
@@ -182,15 +180,13 @@ const asset = (path: string) => `${base}${path}`;
 
   <section class="section soft" id="water">
     <div class="wrap">
-      <div class="section-header" data-reveal>
-        <div>
-          <h2 class="section-title">Water in Mendoza</h2>
-          <p class="section-desc">Behind every tenure map sits a second one: the water that decides which deposits can actually be built.</p>
-        </div>
-      </div>
-
-      <div class="district-layout district-layout--reverse">
+      <div class="district-layout district-layout--reverse water-layout">
         <div class="water-copy" data-reveal style="--i:0">
+          <header class="water-header">
+            <h2 class="section-title">Water in Mendoza</h2>
+            <span class="section-rule" aria-hidden="true"></span>
+            <p class="section-desc">Behind every tenure map sits a second one: the water that decides which deposits can actually be built.</p>
+          </header>
           <p class="split-lead">The availability of water is significantly better in Mendoza than other union provinces of Argentina. <em>This is helping with CAPEX and the realization of larger mining projects.</em></p>
         </div>
 
