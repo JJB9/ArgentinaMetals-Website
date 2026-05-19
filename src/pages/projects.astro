@@ -38,6 +38,69 @@ const asset = (path: string) => `${base}${path}`;
     }
   </script>
 
+  <section class="section portfolio" id="portfolio">
+    <div class="wrap">
+      <div class="section-header section-header--single" data-reveal>
+        <div>
+          <h2 class="section-title">The portfolio</h2>
+          <span class="section-rule" aria-hidden="true"></span>
+          <p class="section-desc">A register of the named projects emerging from our 26 licenses across the Malargüe District. Initial exploration began at Las Estrellas; further projects are added as work advances.</p>
+        </div>
+      </div>
+
+      <ol class="portfolio-register" role="list">
+        <li class="portfolio-entry portfolio-entry--featured" data-reveal style="--i:0">
+          <a class="portfolio-entry-link" href="/projects/las-estrellas" aria-label="View Las Estrellas project details">
+            <span class="portfolio-entry-index" aria-hidden="true">01</span>
+            <figure class="portfolio-entry-image">
+              <img
+                src={asset("assets/images/projects/LasEstrellasNorth2.webp")}
+                alt="Las Estrellas project area in the northern Malargüe District, with copper-mineralised outcrops along the andesitic-basaltic volcanic cover"
+                loading="lazy"
+              />
+              <span class="tag press portfolio-entry-flag">Flagship</span>
+            </figure>
+            <div class="portfolio-entry-body">
+              <span class="portfolio-entry-status">
+                <span class="portfolio-entry-status-dot" aria-hidden="true"></span>
+                Phase 2 · Drill-ready targets defined
+              </span>
+              <h3 class="portfolio-entry-title">Las Estrellas</h3>
+              <p class="portfolio-entry-lead">Manto-type copper oxides in the Rio Damas Formation and porphyry copper-gold signatures in the Huincan Formation. Surface sampling returned up to <strong>9,978 ppm Cu</strong>, with magnetometry defining drill-ready targets at 50–150 m depth.</p>
+              <dl class="portfolio-entry-facts">
+                <div>
+                  <dt>Location</dt>
+                  <dd>Western Malargüe MD</dd>
+                </div>
+                <div>
+                  <dt>Commodities</dt>
+                  <dd>Cu · Au · Ag</dd>
+                </div>
+                <div>
+                  <dt>Deposit style</dt>
+                  <dd>Manto + Porphyry Cu-Au</dd>
+                </div>
+                <div>
+                  <dt>Adjacency</dt>
+                  <dd>1.5 km to KBX drilling</dd>
+                </div>
+              </dl>
+              <span class="portfolio-entry-cta">
+                View project details
+                <span class="mi" aria-hidden="true">arrow_forward</span>
+              </span>
+            </div>
+          </a>
+        </li>
+      </ol>
+
+      <p class="portfolio-pipeline" data-reveal style="--i:1">
+        <span class="portfolio-pipeline-marker" aria-hidden="true"></span>
+        <span><strong>Pipeline.</strong> Further targets under evaluation across the remaining 25 named licenses. New projects will be listed here as exploration advances.</span>
+      </p>
+    </div>
+  </section>
+
   <section class="section soft" id="mendoza">
     <div class="wrap">
       <div class="section-header" data-reveal>
@@ -110,28 +173,11 @@ const asset = (path: string) => `${base}${path}`;
             <span class="district-status-dot" aria-hidden="true"></span>
             <div>
               <strong>Las Estrellas: drill-ready targets</strong>
-              <span>Copper porphyry target confirmed in the northern part of our flagship license.</span>
+              <span>Copper porphyry target confirmed in the northern part of our Las Estrellas license. <a href="#portfolio" class="district-status-link">See project register <span class="mi" aria-hidden="true">arrow_forward</span></a></span>
             </div>
           </div>
         </div>
       </div>
-
-      <a class="project-flagship project-flagship--district-flow project-flagship--reverse" id="las-estrellas" href="/projects/las-estrellas">
-        <div class="project-flagship-body">
-          <span class="tag press">Flagship</span>
-          <h2>Las Estrellas</h2>
-          <p>Manto-type copper oxides in the Rio Damas Formation and porphyry copper-gold signatures in the Huincan Formation. Surface sampling returned up to 9,978 ppm Cu. Magnetometric survey complete with drill-ready targets defined at 50-150 m depth.</p>
-          <div class="detail-list">
-            <span><span class="mi" aria-hidden="true">layers</span> Manto-type + Porphyry Cu-Au</span>
-            <span><span class="mi" aria-hidden="true">science</span> 144 rock chips collected</span>
-            <span><span class="mi" aria-hidden="true">my_location</span> 1.5 km to KBX drilling</span>
-          </div>
-          <span class="project-flagship-cta">View project details <span class="mi" aria-hidden="true">arrow_forward</span></span>
-        </div>
-        <div class="split-image">
-          <img src={asset("assets/images/projects/LasEstrellasNorth2.webp")} alt="Las Estrellas project area in the Andes" loading="lazy" />
-        </div>
-      </a>
     </div>
   </section>
 
