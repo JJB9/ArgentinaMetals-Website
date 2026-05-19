@@ -215,4 +215,53 @@ const technical = [
 .team-card-body p:not(.role) {
   hyphens: auto;
 }
+
+@media (max-width: 640px) {
+  .team-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .team-card .avatar {
+    width: 88px;
+    height: 88px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    font-size: 1.1rem;
+  }
+
+  .team-card-body {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+  }
+
+  .team-card h3 {
+    margin: 0 0 6px;
+    font-size: 1.02rem;
+  }
+
+  .role-row {
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .role {
+    margin-bottom: 8px;
+    font-size: 0.66rem;
+  }
+
+  .mob-tag {
+    padding: 2px 6px;
+    font-size: 0.62rem;
+  }
+
+  .team-card-body p:not(.role) {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+}
 </style>
