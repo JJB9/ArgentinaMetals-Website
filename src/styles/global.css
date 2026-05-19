@@ -1851,21 +1851,6 @@ body .section-num {
   display: block;
 }
 
-/* ---- Policy-card date stamp ---- */
-.policy-card .policy-date {
-  margin-left: 10px;
-  padding: 2px 7px;
-  border-radius: var(--r-sm);
-  background: color-mix(in srgb, var(--copper) 12%, transparent);
-  color: var(--copper-dark);
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  vertical-align: middle;
-}
-
 /* ---- Hectares banner (Section 04 hero number) ---- */
 .hectares-banner {
   margin: 0;
@@ -2156,8 +2141,8 @@ body .section-num {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(180, 100, 50, 0.06);
 }
 
-.thesis-quote {
-  margin: 0 auto;
+.pull-quote.thesis-quote {
+  margin: 64px 0 0;
 }
 
 .thesis-quote p {
@@ -2311,6 +2296,10 @@ figure.split-visual {
   margin-inline: auto;
   width: 100%;
   justify-self: center;
+}
+
+.split-visual--compact .split-image img {
+  object-position: center top;
 }
 
 .split-visual--medium {
@@ -7521,7 +7510,6 @@ body .hectares-banner-unit,
 body .page-hero-stat-label,
 body .part-marker-numeral,
 body .part-marker-title,
-body .policy-card .policy-date,
 body .district-stat span,
 body .andes-hero-marker-label em,
 body .andes-hero-marker-badge,
