@@ -4,20 +4,20 @@ import PageHeader from "@components/PageHeader.astro";
 
 const management = [
   {
-    name: "Titus Gebel",
-    initials: "TG",
-    image: "/assets/images/people/Titus Gebel.webp",
-    role: "Chairman & Director",
-    mob: true,
-    bio: "Dr. Titus Gebel has over 20 years in the resource sector with deep legal and governance expertise. He was the co-founder and former CEO of Deutsche Rohstoff AG, which he took public (FSE:DR0) and also a former director at Osisko Exploration where he was instrumental in early financing for the Malartic gold mine. Dr. Gebel is chairman and major shareholder of Aumontis Holding AG, Argentina Metals' biggest shareholder."
-  },
-  {
     name: "Raymond D. Harari",
     initials: "RH",
     image: "/assets/images/people/Raymond D. Harari.webp",
     role: "CEO & Director",
     mob: true,
     bio: "Raymond D. Harari is the founder of Canalis Capital and a native Spanish speaker, focused on mining, AI, and energy investments. He led multiple TSXV and CSE listings, including Westward Gold, Hercules Metals and Sendero Resources. Mr. Harari has a strong track record in structuring early-stage public companies with tight cap tables."
+  },
+  {
+    name: "Titus Gebel",
+    initials: "TG",
+    image: "/assets/images/people/Titus Gebel.webp",
+    role: "Chairman & Director",
+    mob: true,
+    bio: "Dr. Titus Gebel has over 20 years in the resource sector with deep legal and governance expertise. He was the co-founder and former CEO of Deutsche Rohstoff AG, which he took public (FSE:DR0) and also a former director at Osisko Exploration where he was instrumental in early financing for the Malartic gold mine. Dr. Gebel is chairman and major shareholder of Aumontis Holding AG, Argentina Metals' biggest shareholder."
   },
   {
     name: "Julio Pulisich",
@@ -28,20 +28,20 @@ const management = [
     bio: "Julio Pulisich is a successful Mendoza-born entrepreneur across a variety of sectors incl. mining, real estate, retail & professional services. He is the Co-Founder of Torre-Pulisich Accounting Firm, and has worked extensively with mining companies for over 30 years through his firm. Besides his work as a Director, Julio is overseeing Argentina Metals' local subsidiaries."
   },
   {
-    name: "Martin Hoff",
-    initials: "MH",
-    image: "/assets/images/people/Martin Hoff.webp",
-    role: "Director",
-    mob: true,
-    bio: "Martin Hoff has over 20 years of experience as a resource-focused investor and strategic advisor in Europe. He is a managing Partner at HuHo Capital and Chief Investment Officer of Aumontis Holding AG. Mr. Hoff also has experience serving as a board director with TSXV-listed T2 Metals and other early-stage explorers."
-  },
-  {
     name: "Tim Heenan",
     initials: "TH",
     image: "/assets/images/people/Timothy Heenan.webp",
     role: "Director",
     mob: true,
     bio: "Timothy Heenan is a geologist with over 30 years of exploration expertise and extensive background spanning junior to major multinational mining firms. As a regional specialist for Chile and Argentina, including the role as CEO of Mirasol Resources, Timothy has comprehensive experience across the full exploration lifecycle, from grassroots to advanced stages, and a proven discovery track record."
+  },
+  {
+    name: "Martin Hoff",
+    initials: "MH",
+    image: "/assets/images/people/Martin Hoff.webp",
+    role: "Director",
+    mob: true,
+    bio: "Martin Hoff has over 20 years of experience as a resource-focused investor and strategic advisor in Europe. He is a managing Partner at HuHo Capital and Chief Investment Officer of Aumontis Holding AG. Mr. Hoff also has experience serving as a board director with TSXV-listed T2 Metals and other early-stage explorers."
   },
   {
     name: "Carlo Rigillo",
@@ -79,7 +79,7 @@ const technical = [
     initials: "GF",
     image: "/assets/images/people/Gabriel Feliu.webp",
     role: "VP Exploration",
-    bio: "Gabriel Feliu is a senior exploration leader with over 30 years of experience across major mining jurisdictions in South America, including Barrick and Los Azules (McEwen Copper). Mr. Feliu has deep expertise in porphyry and epithermal systems, project advancement, and technical evaluation of mineral assets."
+    bio: "Gabriel Feliu is a senior exploration leader with over 30 years of experience across major mining jurisdictions in South America, including with Barrick and Los Azules (McEwen Copper). Mr. Feliu has deep expertise in porphyry and epithermal systems, project advancement, and technical evaluation of mineral assets."
   },
   {
     name: "Peter Geerdts",
@@ -139,7 +139,7 @@ const technical = [
       </div>
       <div class="team-grid">
         {management.map((member, i) => (
-          <article class="team-card" data-reveal style={`--i:${i % 3}`}>
+          <article class="team-card" data-reveal data-reveal-effect="quiet" style={`--i:${i}`}>
             <div class="avatar" aria-hidden="true">
               {member.image
                 ? <img src={member.image} alt={member.name} loading="lazy" />
@@ -167,18 +167,18 @@ const technical = [
         </div>
       </div>
 
-      <div class="ac-grid">
+      <div class="team-grid">
         {technical.map((member, i) => (
-          <article class="ac-card" data-reveal style={`--i:${i % 5}`}>
-            <div class="ac-photo">
+          <article class="team-card" data-reveal data-reveal-effect="quiet" style={`--i:${i}`}>
+            <div class="avatar" aria-hidden="true">
               {member.image
                 ? <img src={member.image} alt={member.name} loading="lazy" />
-                : <span>{member.initials}</span>}
+                : member.initials}
             </div>
-            <div class="ac-body">
+            <div class="team-card-body">
               <h3>{member.name}</h3>
               <p class="role">{member.role}</p>
-              {member.bio && <p class="ac-bio">{member.bio}</p>}
+              {member.bio && <p>{member.bio}</p>}
             </div>
           </article>
         ))}
@@ -212,90 +212,56 @@ const technical = [
   white-space: nowrap;
 }
 
-.ac-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.ac-card {
-  border-radius: var(--r-xl);
-  background: var(--white);
-  box-shadow: var(--s-sm);
-  overflow: hidden;
-  transition: transform 240ms var(--ease), box-shadow 240ms var(--ease);
-}
-
-.ac-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--s-lg);
-}
-
-.ac-photo {
-  width: 100%;
-  aspect-ratio: 1;
-  overflow: hidden;
-  background: var(--sand);
-  display: grid;
-  place-items: center;
-}
-
-.ac-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  transition: transform 500ms var(--ease);
-}
-
-.ac-card:hover .ac-photo img {
-  transform: scale(1.05);
-}
-
-.ac-photo span {
-  color: var(--g600);
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-
-.ac-body {
-  padding: 14px 16px 18px;
-}
-
-.ac-body h3 {
-  margin: 0 0 4px;
-  color: var(--g900);
-  font-size: 0.9rem;
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-.ac-body .role {
-  margin: 0 0 8px;
-  font-size: 0.66rem;
-}
-
-.ac-bio {
-  margin: 0;
-  color: var(--g500);
-  font-size: 0.78rem;
-  line-height: 1.55;
-  hyphens: auto;
-}
-
 .team-card-body p:not(.role) {
   hyphens: auto;
 }
 
-@media (max-width: 900px) {
-  .ac-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+@media (max-width: 640px) {
+  .team-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px;
   }
-}
 
-@media (max-width: 540px) {
-  .ac-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .team-card .avatar {
+    width: 88px;
+    height: 88px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    font-size: 1.1rem;
+  }
+
+  .team-card-body {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+  }
+
+  .team-card h3 {
+    margin: 0 0 6px;
+    font-size: 1.02rem;
+  }
+
+  .role-row {
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .role {
+    margin-bottom: 8px;
+    font-size: 0.66rem;
+  }
+
+  .mob-tag {
+    padding: 2px 6px;
+    font-size: 0.62rem;
+  }
+
+  .team-card-body p:not(.role) {
+    font-size: 0.78rem;
+    line-height: 1.6;
   }
 }
 </style>

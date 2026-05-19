@@ -2,6 +2,7 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PageHeader from "@components/PageHeader.astro";
 import AndesHero from "../components/islands/AndesHero";
+import MapLegend from "../components/MapLegend.astro";
 const base = import.meta.env.BASE_URL;
 const asset = (path: string) => `${base}${path}`;
 ---
@@ -9,7 +10,7 @@ const asset = (path: string) => `${base}${path}`;
 <BaseLayout title="Projects - Argentina Metals">
   <PageHeader
     title="Projects"
-    text="Our exploration portfolio spans 146,728 hectares across the Malargue District and the San Raphael District in one of Argentina's most prospective copper-gold corridors."
+    text="Our exploration portfolio spans 146,728 hectares across the Malargüe District in one of Argentina's most prospective copper-gold corridors."
     stats={[
       { value: "146,728 ha", label: "Total Land Package" },
       { value: "26", label: "Project Areas" },
@@ -20,11 +21,12 @@ const asset = (path: string) => `${base}${path}`;
   <div class="hero-media" data-reveal>
     <div class="hero-media-frame hero-media-frame--map">
       <AndesHero
-        client:idle
+        client:visible
         fallbackSrc={asset("assets/images/map_fallback_horizontal.webp")}
         fallbackAlt="Southern Andes copper belt with Argentina Metals project locations across the Malargüe and San Raphael Districts"
       />
     </div>
+    <MapLegend />
   </div>
 
   <script>
@@ -36,13 +38,71 @@ const asset = (path: string) => `${base}${path}`;
     }
   </script>
 
+  <section class="section portfolio" id="portfolio">
+    <div class="wrap">
+      <div class="section-header section-header--single" data-reveal>
+        <div>
+          <h2 class="section-title">The portfolio</h2>
+          <p class="section-desc">A register of the named projects emerging from our 26 licenses across the Malargüe District. Initial exploration began at Las Estrellas; further projects are added as work advances.</p>
+        </div>
+      </div>
+
+      <ol class="portfolio-register" role="list">
+        <li class="portfolio-entry portfolio-entry--featured" data-reveal style="--i:0">
+          <a class="portfolio-entry-link" href="/projects/las-estrellas" aria-label="View Las Estrellas project details">
+            <span class="portfolio-entry-index" aria-hidden="true">01</span>
+            <figure class="portfolio-entry-image">
+              <img
+                src={asset("assets/images/projects/LasEstrellasNorth2.webp")}
+                alt="Las Estrellas project area in the northern Malargüe District, with copper-mineralised outcrops along the andesitic-basaltic volcanic cover"
+                loading="lazy"
+              />
+            </figure>
+            <div class="portfolio-entry-body">
+              <h3 class="portfolio-entry-title">Las Estrellas</h3>
+              <p class="portfolio-entry-lead">Manto-type copper oxides in the Rio Damas Formation and porphyry copper-gold signatures in the Huincan Formation. Surface sampling returned up to <strong>9,978 ppm Cu</strong>, with magnetometry defining drill-ready targets at 50–150 m depth.</p>
+              <dl class="portfolio-entry-facts">
+                <div>
+                  <dt>Location</dt>
+                  <dd>Western Malargüe MD</dd>
+                </div>
+                <div>
+                  <dt>Commodities</dt>
+                  <dd>Cu · Au · Ag</dd>
+                </div>
+                <div>
+                  <dt>Deposit style</dt>
+                  <dd>Manto + Porphyry Cu-Au</dd>
+                </div>
+                <div>
+                  <dt>Adjacency</dt>
+                  <dd>1.5 km to KBX drilling</dd>
+                </div>
+              </dl>
+              <span class="portfolio-entry-cta">
+                <span class="portfolio-entry-cta-label">View project details</span>
+                <span class="portfolio-entry-cta-arrow" aria-hidden="true">
+                  <span class="mi">arrow_forward</span>
+                </span>
+              </span>
+            </div>
+          </a>
+        </li>
+      </ol>
+
+      <p class="portfolio-pipeline" data-reveal style="--i:1">
+        <span class="portfolio-pipeline-marker" aria-hidden="true"></span>
+        <span><strong>Pipeline.</strong> Further targets under evaluation across the remaining 25 named licenses. New projects will be listed here as exploration advances.</span>
+      </p>
+    </div>
+  </section>
+
   <section class="section soft" id="mendoza">
     <div class="wrap">
       <div class="section-header" data-reveal>
-        <span class="section-num">01</span>
         <div>
           <h2 class="section-title">Province of Mendoza</h2>
-          <p class="section-desc">Argentina Metals is focusing on Mendoza exclusively — a province re-opening to mining after three decades of political and legal closure.</p>
+          <p class="section-desc">Argentina Metals is focusing on Mendoza exclusively, a province re-opening to mining after three decades of political and legal closure.</p>
         </div>
       </div>
 
@@ -51,12 +111,12 @@ const asset = (path: string) => `${base}${path}`;
           <div class="split-image">
             <img data-parallax src={asset("assets/images/Alfredo Cornejo and Titus Gebel.webp")} alt="Argentina Metals Chairman Titus Gebel meeting with Alfredo Cornejo, Governor of Mendoza Province" loading="lazy" />
           </div>
-          <figcaption class="split-caption">Chairman Titus Gebel and Alfredo Cornejo, Governor of Mendoza</figcaption>
+          <figcaption class="split-caption">Alfredo Cornejo, Governor of Mendoza and Titus Gebel, Chairman of Argentina Metals</figcaption>
         </figure>
         <div class="split-copy" data-reveal style="--i:1">
           <p class="split-lead">For 30 years, political and legal obstacles kept Mendoza factually closed for mining. <em>That era is ending.</em></p>
-          <p>The provincial government is so supportive it has established a state agency, <a href="https://impulsamendoza.com.ar/" target="_blank" rel="noopener noreferrer"><strong>Impulsa Mendoza</strong></a>, to fund the environmental impact assessments for exploration and development companies — beginning in the Western Malargüe Mining District where Argentina Metals operates.</p>
-          <p>In December 2025, parliament and senate approved with a large majority the environmental assessment of the San Jorge project — a future copper mine that had been blocked for many years. At the same time, Kobrea Exploration received the permits to begin its first drilling campaign at El Perdido, only 1.5 km from Argentina Metals' Las Estrellas project. <strong>Mendoza is back in mining.</strong></p>
+          <p>The provincial government is so supportive it has established a state agency, <a href="https://impulsamendoza.com.ar/" target="_blank" rel="noopener noreferrer"><strong>Impulsa Mendoza</strong></a>, to fund environmental impact assessments for exploration and development companies, beginning in the Western Malargüe Mining District where Argentina Metals operates.</p>
+          <p>In December 2025, parliament and senate approved with a large majority the environmental assessment of the San Jorge project, a future copper mine that had been blocked for many years. At the same time, Kobrea Exploration received the permits to begin its first drilling campaign at El Perdido, only 1.5 km from Argentina Metals' Las Estrellas project. <strong>Mendoza is back in mining.</strong></p>
         </div>
       </div>
     </div>
@@ -65,10 +125,9 @@ const asset = (path: string) => `${base}${path}`;
   <section class="content-band content-band--spacious">
     <div class="wrap">
       <div class="section-header" data-reveal>
-        <span class="section-num">02</span>
         <div>
           <h2 class="section-title">Malargüe District</h2>
-          <p class="section-desc">Most of our licenses sit within the Malargüe District, with the majority in the Western Malargüe Mining District — where environmental licenses are preapproved. An initial exploration campaign has targeted our Las Estrellas license in the north, adjacent to Kobrea Exploration's El Perdido project, with a copper porphyry target now confirmed in its northern part.</p>
+          <p class="section-desc">Most of our licenses sit within the Malargüe District, with the majority in the Western Malargüe Mining District, where environmental licenses are preapproved. An initial exploration campaign has targeted our Las Estrellas license in the north, adjacent to Kobrea Exploration's El Perdido project, with a copper porphyry target now confirmed in its northern part.</p>
         </div>
       </div>
 
@@ -76,6 +135,7 @@ const asset = (path: string) => `${base}${path}`;
         <figure class="district-map" data-reveal style="--i:0">
           <div class="district-map-frame">
             <img
+              data-parallax
               src={asset("assets/images/malargue-claims-map.webp")}
               alt="Claims map of the Malargüe District in Mendoza, Argentina, showing Argentina Metals tenures in green alongside neighbouring Kobrea Exploration tenures in blue, across 26 named licenses straddling the Chile–Argentina border."
               loading="lazy"
@@ -89,11 +149,11 @@ const asset = (path: string) => `${base}${path}`;
         <div class="district-info" data-reveal style="--i:1">
           <div class="district-stats">
             <div class="district-stat district-stat--lead">
-              <strong>26</strong>
+              <strong><span data-count-to="26" data-count-from="0">26</span></strong>
               <span>Named Licenses</span>
             </div>
             <div class="district-stat">
-              <strong>146,728 ha</strong>
+              <strong><span data-count-to="146728" data-count-from="0" data-count-format="comma" data-count-suffix=" ha">146,728 ha</span></strong>
               <span>District Land Position</span>
             </div>
             <div class="district-stat">
@@ -101,7 +161,7 @@ const asset = (path: string) => `${base}${path}`;
               <span>Environmental Licenses Pre-approved</span>
             </div>
             <div class="district-stat">
-              <strong>1.5 km</strong>
+              <strong><span data-count-to="1.5" data-count-from="0" data-count-decimals="1" data-count-suffix=" km">1.5 km</span></strong>
               <span>To Kobrea Active Drilling</span>
             </div>
           </div>
@@ -109,40 +169,38 @@ const asset = (path: string) => `${base}${path}`;
           <div class="district-status">
             <span class="district-status-dot" aria-hidden="true"></span>
             <div>
-              <strong>Las Estrellas — drill-ready targets</strong>
-              <span>Copper porphyry target confirmed in the northern part of our flagship license.</span>
+              <strong>Las Estrellas: drill-ready targets</strong>
+              <span>Copper porphyry target confirmed in the northern part of our Las Estrellas license. <a href="#portfolio" class="district-status-link">See project register <span class="mi" aria-hidden="true">arrow_forward</span></a></span>
             </div>
           </div>
         </div>
       </div>
-
-      <a class="project-flagship project-flagship--district-flow project-flagship--reverse" id="las-estrellas" href="/projects/las-estrellas">
-        <div class="project-flagship-body">
-          <span class="tag press">Flagship</span>
-          <h2>Las Estrellas</h2>
-          <p>Manto-type copper oxides in the Rio Damas Formation and porphyry copper-gold signatures in the Huincan Formation. Surface sampling returned up to 9,978 ppm Cu. Magnetometric survey complete with drill-ready targets defined at 50-150 m depth.</p>
-          <div class="detail-list">
-            <span><span class="mi" aria-hidden="true">layers</span> Manto-type + Porphyry Cu-Au</span>
-            <span><span class="mi" aria-hidden="true">science</span> 144 rock chips collected</span>
-            <span><span class="mi" aria-hidden="true">my_location</span> 1.5 km to KBX drilling</span>
-          </div>
-          <span class="button primary" style="width:fit-content">View Project Details <span class="mi" aria-hidden="true">arrow_forward</span></span>
-        </div>
-        <div class="split-image">
-          <img src={asset("assets/images/projects/LasEstrellasNorth2.webp")} alt="Las Estrellas project area in the Andes" loading="lazy" />
-        </div>
-      </a>
     </div>
   </section>
 
-  <section class="section soft">
+  <section class="section soft" id="water">
     <div class="wrap">
-      <div class="section-header" data-reveal>
-        <span class="section-num">03</span>
-        <div>
-          <h2 class="section-title">San Raphael District</h2>
-          <p class="section-desc">North of the Western Malargüe Mining District, we hold license areas in the San Raphael District — currently under increased scrutiny and looking very promising.</p>
+      <div class="district-layout district-layout--reverse water-layout">
+        <div class="water-copy" data-reveal style="--i:0">
+          <header class="water-header">
+            <h2 class="section-title">Water in Mendoza</h2>
+          </header>
+          <p class="split-lead">The availability of water is significantly better in Mendoza than other union provinces of Argentina. <em>This is helping with CAPEX and the realization of larger mining projects.</em></p>
         </div>
+
+        <figure class="district-map district-map--water" data-reveal style="--i:1">
+          <div class="district-map-frame">
+            <img
+              data-parallax
+              src={asset("assets/images/Mendoza Water Sources.webp")}
+              alt="Map of Mendoza Province showing Argentina Metals mineral tenures in orange overlaid on the surrounding water network — streams, water reservoirs, and glaciers — across the Andean cordillera at the Chile–Argentina border."
+              loading="lazy"
+              width="905"
+              height="1280"
+            />
+          </div>
+          <figcaption>Water sources · Argentina Metals tenure block, Mendoza Province</figcaption>
+        </figure>
       </div>
     </div>
   </section>

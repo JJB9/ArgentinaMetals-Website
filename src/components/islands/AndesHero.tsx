@@ -304,34 +304,10 @@ export default function AndesHero({
         className="andes-hero-fallback"
         src={fallbackSrc}
         alt={fallbackAlt}
-        loading="eager"
+        loading="lazy"
         decoding="async"
-        fetchPriority="high"
       />
       {status !== "failed" && <div className="andes-hero-canvas" ref={containerRef} aria-hidden="true" />}
-      <div className="andes-hero-legend" role="note" aria-label="Karten-Legende">
-        <span className="andes-hero-legend-item">
-          <span className="andes-hero-legend-swatch andes-hero-legend-swatch--competitor" aria-hidden="true" />
-          World-class Chilean mine
-        </span>
-        <span className="andes-hero-legend-item">
-          <span className="andes-hero-legend-swatch andes-hero-legend-swatch--deposit" aria-hidden="true" />
-          Copper deposit
-        </span>
-        <span className="andes-hero-legend-item">
-          <span className="andes-hero-legend-swatch andes-hero-legend-swatch--flagship" aria-hidden="true" />
-          Argentina Metals — Las Estrellas
-        </span>
-        <span className="andes-hero-legend-item">
-          <span className="andes-hero-legend-swatch andes-hero-legend-swatch--belt" aria-hidden="true" />
-          Andean Copper Belt
-        </span>
-        <span className="andes-hero-legend-item">
-          <span className="andes-hero-legend-swatch andes-hero-legend-swatch--border" aria-hidden="true" />
-          Chile–Argentina Border
-        </span>
-        <span className="andes-hero-legend-note">Indicative belt extent · after USGS / SERNAGEOMIN</span>
-      </div>
     </div>
   );
 }

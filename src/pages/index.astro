@@ -1,22 +1,15 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import KpiCounter from "../components/islands/KpiCounter";
 import AndesHero from "../components/islands/AndesHero";
+import MapLegend from "../components/MapLegend.astro";
 
 const base = import.meta.env.BASE_URL;
 const asset = (path: string) => `${base}${path}`;
 
 const mileiItems = [
-  ["Capital Controls Lifted", "Free flow of capital incentivizes major foreign direct investment."],
-  ["RIGI Implementation", "„Large Investment Incentive Regime“ for mining projects guarantees tax stability for 30 years."],
-  ["Pro-Mining Provincial Stance", "Key provinces like Mendoza actively courting explorers & developers."]
-];
-
-const kpi = [
-  ["Global Potential", "#7", "Copper reserve ranking"],
-  ["CAPEX Pipeline", "$30B", "Regional investment plans"],
-  ["Land Controlled", "~150k", "Hectares across prime districts in Mendoza"],
-  ["Ownership", "~60%", "Core project interest"]
+  ["Capital Controls Lifted", "Free flow of capital, opening the door to major foreign direct investment."],
+  ["RIGI Implementation", "Régimen de Incentivo para Grandes Inversiones. Guarantees 30 years of tax stability for qualifying mining projects."],
+  ["Pro-Mining Provincial Stance", "Mendoza and neighbouring provinces are actively courting explorers and developers."]
 ];
 
 const copperSeries: Array<{ year: number; value: number }> = [
@@ -72,19 +65,21 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
 <BaseLayout
   title="Investing in Argentina and Its Emerging Copper Boom - Argentina Metals"
 >
-  <script is:inline slot="head" src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
+  <link rel="preload" as="image" href={asset("assets/images/preview-thumbnail.webp")} fetchpriority="high" slot="head" />
+  <script is:inline slot="head" defer src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
 
   <div class="hero-media hero-media--lead" data-reveal style="--i:0">
     <div class="hero-media-frame" id="hero-media-frame">
       <mux-player
+        id="hero-mux-player"
         data-parallax
         playback-id={import.meta.env.PUBLIC_MUX_HERO_PLAYBACK_ID}
-        metadata-video-title="Argentina Metals — Image Clip"
+        metadata-video-title="Argentina Metals, hero image clip"
         poster={asset("assets/images/preview-thumbnail.webp")}
         stream-type="on-demand"
         loop
         playsinline
-        preload="auto"
+        preload="metadata"
       ></mux-player>
     </div>
   </div>
@@ -93,13 +88,13 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
     <div class="wrap">
       <h1 data-reveal style="--i:1">Investing in Argentina and Its Emerging <em>Copper Boom</em></h1>
       <div class="hero-actions" data-reveal style="--i:2">
-        <a class="button primary shimmer" href="/projects">Explore the Opportunity <span class="mi" aria-hidden="true">arrow_forward</span></a>
+        <a class="button primary" href="/projects">Explore the Opportunity <span class="mi" aria-hidden="true">arrow_forward</span></a>
         <a class="button secondary" href="/investor#docs">View Corporate Presentation</a>
       </div>
     </div>
   </section>
 
-  <aside class="part-marker part-marker--thesis" aria-label="Part I — The Thesis">
+  <aside class="part-marker part-marker--thesis" aria-label="Part I, The Thesis">
     <div class="wrap">
       <div class="part-marker-inner" data-reveal>
         <span class="part-marker-rule" aria-hidden="true"></span>
@@ -110,161 +105,163 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
         </span>
         <span class="part-marker-rule" aria-hidden="true"></span>
       </div>
-      <p class="part-marker-sub" data-reveal style="--i:1">Three pillars define our approach to the Argentine copper boom — a strategy built on demand, policy and geology.</p>
+      <p class="part-marker-sub" data-reveal style="--i:1">Three pillars define our approach to the Argentine copper boom: demand, policy, geology.</p>
     </div>
   </aside>
 
   <section class="section" id="thesis">
     <div class="wrap">
-      <div class="thesis-layout">
-        <div class="thesis-intro" data-reveal>
-          <span class="section-num">01</span>
+      <div class="section-spread section-spread--wide-evidence">
+        <header class="section-intro" data-reveal>
           <h2 class="section-title">Copper is a Blockbuster</h2>
-          <p class="section-desc copper-blockbuster-desc">Copper needs no marketing. The world needs copper. When the world economy is growing — as it has for the last 150 years — the same happens with the demand for copper. Extra demand from electrification and data centers is creating a structural bull market for copper.</p>
-        </div>
+          <p class="section-lead">Copper needs no marketing. When the world economy grows, so does copper demand, and the world economy has grown for 150 years straight. Electrification and data centers now add a second, durable layer of demand on top.</p>
+        </header>
 
-        <figure class="copper-chart copper-chart--svg copper-chart--compact" data-reveal style="--i:1">
-        <svg
-          viewBox={`0 0 ${chartW} ${chartH}`}
-          role="img"
-          aria-labelledby="copper-svg-title copper-svg-desc"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <title id="copper-svg-title">Global copper production, 1850–2025</title>
-          <desc id="copper-svg-desc">Line chart of global copper production rising from 0.1 million metric tons in 1850 to 23.2 million metric tons in 2025.</desc>
+        <div class="section-evidence" data-reveal style="--i:1">
+          <figure class="copper-chart copper-chart--svg copper-chart--compact">
+            <svg
+              viewBox={`0 0 ${chartW} ${chartH}`}
+              role="img"
+              aria-labelledby="copper-svg-title copper-svg-desc"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <title id="copper-svg-title">Global copper production, 1850–2025</title>
+              <desc id="copper-svg-desc">Line chart of global copper production rising from 0.1 million metric tons in 1850 to 23.2 million metric tons in 2025.</desc>
 
-          <defs>
-            <linearGradient id="copper-area-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#d4783f" stop-opacity="0.28" />
-              <stop offset="100%" stop-color="#d4783f" stop-opacity="0" />
-            </linearGradient>
-            <clipPath id="copper-area-clip" clipPathUnits="userSpaceOnUse">
-              <rect class="area-clip-rect" x={padL} y={padT} width={plotW} height={plotH} />
-            </clipPath>
-          </defs>
+              <defs>
+                <linearGradient id="copper-area-fill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#d4783f" stop-opacity="0.28" />
+                  <stop offset="100%" stop-color="#d4783f" stop-opacity="0" />
+                </linearGradient>
+                <clipPath id="copper-area-clip" clipPathUnits="userSpaceOnUse">
+                  <rect class="area-clip-rect" x={padL} y={padT} width={plotW} height={plotH} />
+                </clipPath>
+              </defs>
 
-          {yTicks.map((t) => (
-            <g class="grid-row">
+              {yTicks.map((t) => (
+                <g class="grid-row">
+                  <line
+                    class="grid-line"
+                    x1={padL}
+                    x2={chartW - padR}
+                    y1={py(t)}
+                    y2={py(t)}
+                  />
+                  <text class="axis-label y-label" x={padL - 12} y={py(t) + 4}>{t}</text>
+                </g>
+              ))}
+
               <line
-                class="grid-line"
+                class="axis-line"
                 x1={padL}
                 x2={chartW - padR}
-                y1={py(t)}
-                y2={py(t)}
+                y1={py(0)}
+                y2={py(0)}
               />
-              <text class="axis-label y-label" x={padL - 12} y={py(t) + 4}>{t}</text>
-            </g>
-          ))}
 
-          <line
-            class="axis-line"
-            x1={padL}
-            x2={chartW - padR}
-            y1={py(0)}
-            y2={py(0)}
-          />
+              <path class="data-area" d={areaPath} clip-path="url(#copper-area-clip)" />
+              <path class="data-line" d={linePath} pathLength="1" />
 
-          <path class="data-area" d={areaPath} clip-path="url(#copper-area-clip)" />
-          <path class="data-line" d={linePath} pathLength="1" />
+              {points.map((p, i) => {
+                const isEnd = i === lastIdx;
+                return (
+                  <g class="data-point" style={`--reveal-progress: ${pointProgress[i].toFixed(4)}`}>
+                    <circle
+                      class={isEnd ? "data-marker data-marker--end" : "data-marker"}
+                      cx={p.x}
+                      cy={p.y}
+                      r={isEnd ? 5.5 : 4}
+                    />
+                    <text
+                      class={isEnd ? "data-value data-value--end" : "data-value"}
+                      x={p.x}
+                      y={p.y - 12}
+                    >
+                      {p.value.toFixed(1)}
+                    </text>
+                    <text
+                      class="axis-label x-label"
+                      x={p.x}
+                      y={chartH - padB + 22}
+                      transform={`rotate(-45 ${fmt(p.x)} ${chartH - padB + 22})`}
+                    >
+                      {p.year}
+                    </text>
+                  </g>
+                );
+              })}
 
-          {points.map((p, i) => {
-            const isEnd = i === lastIdx;
-            return (
-              <g class="data-point" style={`--reveal-progress: ${pointProgress[i].toFixed(4)}`}>
-                <circle
-                  class={isEnd ? "data-marker data-marker--end" : "data-marker"}
-                  cx={p.x}
-                  cy={p.y}
-                  r={isEnd ? 5.5 : 4}
-                />
-                <text
-                  class={isEnd ? "data-value data-value--end" : "data-value"}
-                  x={p.x}
-                  y={p.y - 12}
-                >
-                  {p.value.toFixed(1)}
-                </text>
-                <text
-                  class="axis-label x-label"
-                  x={p.x}
-                  y={chartH - padB + 22}
-                  transform={`rotate(-45 ${fmt(p.x)} ${chartH - padB + 22})`}
-                >
-                  {p.year}
-                </text>
-              </g>
-            );
-          })}
+              <text class="axis-title" x={padL - 48} y={padT + plotH / 2} transform={`rotate(-90 ${padL - 48} ${padT + plotH / 2})`}>
+                Million metric tons
+              </text>
+              <text class="axis-title" x={padL + plotW / 2} y={chartH - 6}>Year</text>
+            </svg>
+            <figcaption>
+              <span>Global copper production</span>
+              <cite>U.S. Geological Survey, Mineral Commodity Summaries, 1850–2025</cite>
+            </figcaption>
+          </figure>
 
-          <text class="axis-title" x={padL - 48} y={padT + plotH / 2} transform={`rotate(-90 ${padL - 48} ${padT + plotH / 2})`}>
-            Million metric tons
-          </text>
-          <text class="axis-title" x={padL + plotW / 2} y={chartH - 6}>Year</text>
-        </svg>
-        <figcaption>Global copper production</figcaption>
-      </figure>
+          <blockquote class="pull-quote thesis-quote" data-reveal style="--i:2">
+            <p>In order to maintain our global economic growth at 3%, we have to mine as much copper in the next 18 years as we have mined in the past 10,000 years.</p>
+            <cite>Robert Friedland, <span>Mining Legend</span></cite>
+          </blockquote>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section soft">
+  <section class="section soft" id="policy">
     <div class="wrap">
-      <div class="section-header" data-reveal>
-        <span class="section-num">02</span>
-        <div>
+      <div class="section-spread section-spread--reverse">
+        <header class="section-intro" data-reveal>
           <h2 class="section-title">Argentina is Back in Mining</h2>
-          <p class="section-desc">For decades, political mismanagement and overregulation kept miners out of Argentina, creating a profound valuation gap compared to its neighbors.</p>
-        </div>
-      </div>
-
-      <div class="split">
-        <div class="split-visual split-visual--medium" data-reveal>
-          <div class="split-image">
-            <img data-parallax src={asset("assets/images/projects/distant-mountain-arid-rocky.jpg")} alt="Distant arid rocky mountains in an Andean copper exploration district" loading="lazy" />
-          </div>
-          <div class="split-badge">
-            <strong>Top 10</strong>
-            <span>Global Copper Reserve Potential</span>
-          </div>
-        </div>
-        <div class="split-copy" data-reveal style="--i:1">
-          <p class="split-lead">President Milei's pro-business reforms are sparking a structural re-rating of Argentina's mining and exploration assets. The <em>Milei Effect</em> is rapidly closing this gap — and early movers capture the arbitrage.</p>
+          <p class="section-lead">For decades, political mismanagement and overregulation kept miners out of Argentina, creating a profound valuation gap compared to its neighbors. President Milei's pro-business reforms are re-rating Argentina's mining and exploration assets.</p>
           <div class="policy-card">
-            <h3>The Milei Effect.</h3>
+            <h3>The Milei Effect</h3>
             <p class="policy-card-sub">Re-rating a century of missed opportunity.</p>
             <ul>
               {mileiItems.map(([title, desc]) => (
                 <li>
                   <span class="mi" aria-hidden="true">check_circle</span>
-                  <div><strong>{title}</strong>{desc}</div>
+                  <div>
+                    <strong>{title}</strong>
+                    {desc}
+                  </div>
                 </li>
               ))}
             </ul>
+          </div>
+        </header>
+
+        <div class="section-evidence section-evidence--policy" data-reveal style="--i:1">
+          <div class="split-visual split-visual--medium">
+            <div class="split-image">
+              <img data-parallax src={asset("assets/images/projects/LasEstrellasNorth1.webp")} alt="Las Estrellas North property in the Andean Copper Belt, Mendoza" loading="lazy" width="1500" height="843" />
+            </div>
+            <div class="split-badge">
+              <strong>Top 5</strong>
+              <span>Argentina's Potential as a Global Copper Producer</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section soft">
+  <section class="section soft" id="geology">
     <div class="wrap">
-      <div class="section-header" data-reveal>
-        <span class="section-num">03</span>
-        <div>
+      <div class="section-spread">
+        <header class="section-intro" data-reveal>
           <h2 class="section-title">Geology Doesn't Stop at the Border</h2>
-        </div>
-      </div>
-
-      <div class="rocks-layout">
-        <div class="rocks-left-col">
-          <p class="rocks-intro" data-reveal>Chile and Argentina share the same geology: the Andean Copper Belt, one of the most prolific copper regions in the world. Chile has mined their side for a century. Argentina's side is virtually untouched. Geology doesn't stop at the border — this gap will be closed, creating a once-in-a-lifetime opportunity.</p>
-          <div class="gap-card" data-reveal style="--i:1">
+          <p class="section-lead">Chile and Argentina share the same geology: the Andean Copper Belt, one of the most prolific copper regions in the world. Chile has mined its side for a century. Argentina's is virtually untouched.</p>
+          <div class="gap-card">
             <header class="gap-card-head">
               <h3>Closing the Copper Gap</h3>
               <p>Two countries. One geology. The data tells the story.</p>
             </header>
             <div class="dtw gap-table-wrap" tabindex="0" role="region" aria-label="Copper production comparison: Chile vs Argentina">
-              <table class="dt gap-table">
+              <table class="dt gap-table" aria-describedby="gap-table-source">
                 <thead>
                   <tr>
                     <th scope="col">Metric</th>
@@ -273,38 +270,42 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr data-reveal data-reveal-effect="fade" style="--i:0">
                     <th scope="row">Top 20 global copper mines</th>
                     <td class="num">7</td>
                     <td class="num">0</td>
                   </tr>
-                  <tr>
+                  <tr data-reveal data-reveal-effect="fade" style="--i:1">
                     <th scope="row">Share of world copper production</th>
                     <td class="num">23%</td>
                     <td class="num">0%</td>
                   </tr>
-                  <tr>
-                    <th scope="row">Annual production &mdash; current</th>
+                  <tr data-reveal data-reveal-effect="fade" style="--i:2">
+                    <th scope="row">Annual production, current</th>
                     <td class="num">5.3 Mt</td>
                     <td class="num">0.0 Mt</td>
                   </tr>
-                  <tr>
-                    <th scope="row">Annual production &mdash; potential</th>
+                  <tr data-reveal data-reveal-effect="fade" class="row-emphasis" style="--i:3">
+                    <th scope="row">Annual production, potential</th>
                     <td class="num">6.0 Mt</td>
                     <td class="num hi">2.0+ Mt</td>
                   </tr>
                 </tbody>
               </table>
             </div>
+            <p class="source-note" id="gap-table-source">COCHILCO 2024, Cámara Argentina de Empresarios Mineros; potential figures based on independent geological-belt analysis. As of Q1 2026.</p>
           </div>
-        </div>
+        </header>
 
-        <div class="rocks-map" data-reveal style="--i:2">
-          <AndesHero
-            client:visible
-            fallbackSrc={asset("assets/images/map_fallback_vertical.webp")}
-            fallbackAlt="Southern Andes copper belt across the Chile–Argentina border with Argentina Metals' Las Estrellas flagship"
-          />
+        <div class="section-evidence" data-reveal style="--i:1">
+          <div class="rocks-map">
+            <AndesHero
+              client:visible
+              fallbackSrc={asset("assets/images/map_fallback_vertical.webp")}
+              fallbackAlt="Southern Andes copper belt across the Chile–Argentina border with Argentina Metals' Las Estrellas flagship"
+            />
+          </div>
+          <MapLegend />
         </div>
 
         <script>
@@ -319,7 +320,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
     </div>
   </section>
 
-  <aside class="part-marker part-marker--implementation" aria-label="Part II — The Implementation">
+  <aside class="part-marker part-marker--implementation" aria-label="Part II, The Implementation">
     <div class="wrap">
       <div class="part-marker-inner" data-reveal>
         <span class="part-marker-rule" aria-hidden="true"></span>
@@ -330,99 +331,151 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
         </span>
         <span class="part-marker-rule" aria-hidden="true"></span>
       </div>
-      <p class="part-marker-sub" data-reveal style="--i:1">We are searching for the big prize: world-class copper deposits. Our approach is defined by scale, technology and people.</p>
+      <p class="part-marker-sub" data-reveal style="--i:1">We are searching for tier-one copper deposits. Our approach is defined by scale, technology, and people.</p>
     </div>
   </aside>
 
-  <section class="section">
+  <section class="section" id="land">
     <div class="wrap">
-      <div class="section-header" data-reveal>
-        <span class="section-num">04</span>
-        <div>
+      <div class="section-spread section-spread--reverse">
+        <header class="section-intro" data-reveal>
           <h2 class="section-title">District Scale Exploration</h2>
-          <p class="section-desc">Amassing ca. 150,000 hectares across prime districts in Mendoza before the emerging copper boom reshapes the region.</p>
-        </div>
-      </div>
-
-      <div class="district-layout">
-        <figure class="district-map" data-reveal style="--i:0">
-          <div class="district-map-frame">
-            <img
-              src={asset("assets/images/malargue-claims-map.webp")}
-              alt="Claims map of the Malargüe District in Mendoza, Argentina, showing Argentina Metals tenures in green alongside neighbouring Kobrea Exploration tenures in blue, across 26 named licenses straddling the Chile–Argentina border."
-              loading="lazy"
-              width="889"
-              height="1287"
-            />
-          </div>
-          <figcaption>Claims map · Malargüe District, Mendoza Province</figcaption>
-        </figure>
-
-        <div class="district-info" data-reveal style="--i:1">
-          <div class="district-stats">
-            <div class="district-stat district-stat--lead">
-              <strong>~150,000</strong>
-              <span>Hectares Controlled</span>
+          <p class="section-lead">A contiguous land position across Argentina's Malargüe District lets us focus capital on the most promising structures across an entire belt, rather than chasing isolated targets in a single licence.</p>
+          <div class="hectares-banner hectares-banner--column">
+            <div class="hectares-banner-figure">
+              <strong>
+                <span aria-hidden="true">~</span><span data-count-to="150000" data-count-from="120000" data-count-format="comma" aria-label="approximately 150,000">120,000</span>
+              </strong>
+              <span class="hectares-banner-unit">hectares</span>
             </div>
-            <div class="district-stat">
-              <strong>Malargüe</strong>
-              <span>Mendoza, Argentina</span>
-            </div>
-            <div class="district-stat">
-              <strong>District-Scale</strong>
-              <span>Contiguous Land Position</span>
+            <div class="hectares-banner-body">
+              <p class="hectares-banner-lead">Contiguous land position in Mendoza Province.</p>
+              <p class="hectares-banner-context">For context: the Escondida mine concession in Chile, the world's largest copper operation, covers approximately 14,500 ha.</p>
             </div>
           </div>
-
-          <p class="district-lead">A district-scale land position gives us the option for systematic, large-scale exploration — focusing capital on the most promising structures rather than chasing isolated targets.</p>
-
           <div class="district-status">
             <span class="district-status-dot" aria-hidden="true"></span>
             <div>
-              <strong>More licenses under negotiation</strong>
+              <strong>More licences under negotiation</strong>
               <span>Strategic acquisitions actively expanding the package.</span>
             </div>
           </div>
+        </header>
+
+        <div class="section-evidence" data-reveal style="--i:1">
+          <figure class="district-map">
+            <div class="district-map-frame">
+              <img
+                src={asset("assets/images/malargue-claims-map.webp")}
+                alt="Claims map of the Malargüe District in Mendoza, Argentina, showing Argentina Metals tenures in green alongside neighbouring Kobrea Exploration tenures in blue, across 26 named licenses straddling the Chile–Argentina border."
+                loading="lazy"
+                width="889"
+                height="1287"
+              />
+            </div>
+            <figcaption>Claims map, Malargüe District, Mendoza Province</figcaption>
+          </figure>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section soft section--has-overlap">
+  <section class="section soft" id="technology">
     <div class="wrap">
-      <div class="section-header" data-reveal>
-        <span class="section-num">05</span>
-        <div>
+      <div class="section-spread">
+        <header class="section-intro" data-reveal>
           <h2 class="section-title">Newest Technologies</h2>
+          <p class="section-lead">Never before in history have so much data about the surface been available. We combine sophisticated satellite imagery, invaluable for early-stage exploration, with specialized software to compile and compare the data.</p>
+          <ul class="tech-stats">
+            <li data-reveal data-reveal-effect="quiet" style="--i:0">
+              <span class="mi" aria-hidden="true">satellite_alt</span>
+              <strong>Multispectral &amp; hyperspectral imagery</strong>
+              <span>Stacked satellite passes across the licence area for alteration mapping.</span>
+            </li>
+            <li data-reveal data-reveal-effect="quiet" style="--i:1">
+              <span class="mi" aria-hidden="true">flight</span>
+              <strong>Drone magnetic &amp; photogrammetric surveys</strong>
+              <span>High-resolution coverage of priority targets, without chartering a helicopter.</span>
+            </li>
+            <li data-reveal data-reveal-effect="quiet" style="--i:2">
+              <span class="mi" aria-hidden="true">insights</span>
+              <strong>Machine-learning target generation</strong>
+              <span>Geophysics + remote sensing fused to rank targets before boots-on-the-ground.</span>
+            </li>
+          </ul>
+        </header>
+
+        <div class="section-evidence" data-reveal style="--i:1">
+          <figure class="tech-image">
+            <div class="split-image">
+              <img data-parallax src={asset("assets/images/Spectral-evaluation.webp")} alt="Multispectral satellite evaluation of alteration zones across Argentina Metals' Mendoza licences" loading="lazy" width="731" height="512" />
+            </div>
+            <figcaption>Spectral based target evaluation</figcaption>
+          </figure>
         </div>
       </div>
-
-      <div class="section-body" data-reveal style="--i:1">
-        <p class="split-lead">Never before in history have so much data about the surface been available — including <em>satellite imagery</em> that is invaluable for early-stage exploration.</p>
-        <p>It would be negligent not to use artificial intelligence and specialized software to compile and compare these data. And you don't have to hire a helicopter when a drone can do the flyover. We combine established and new technologies, and apply what makes most sense.</p>
-      </div>
-
-      <figure class="overlap-image" data-reveal>
-        <div class="split-image">
-          <img data-parallax src={asset("assets/images/projects/LasEstrellasNorth1.webp")} alt="Las Estrellas North property in the Andean Copper Belt, Mendoza" loading="lazy" />
-        </div>
-      </figure>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section compact-top" id="team">
     <div class="wrap">
-      <div class="section-aside-right">
-        <div class="section-header" data-reveal>
-          <span class="section-num">06</span>
-          <div>
-            <h2 class="section-title">Extraordinary Team</h2>
+      <div class="section-spread section-spread--stack">
+        <header class="section-intro" data-reveal>
+          <h2 class="section-title">Extraordinary Team</h2>
+          <p class="section-lead">A team of senior and junior geologists drawn from Europe, North and South America. Different and complementary skill sets, organised around one task: to find world-class copper deposits in Argentina.</p>
+        </header>
+
+        <div class="section-evidence">
+          <div class="team-strip" aria-label="Board of Directors">
+            <ul class="team-strip-faces" role="list">
+              <li data-reveal data-reveal-effect="quiet" style="--i:0">
+                <a href="/team#raymond-d-harari" aria-label="Raymond D. Harari, CEO">
+                  <img src={asset("assets/images/people/Raymond D. Harari.webp")} alt="Portrait of Raymond D. Harari" loading="lazy" width="96" height="96" />
+                  <span class="team-strip-name">Raymond D. Harari</span>
+                </a>
+              </li>
+              <li data-reveal data-reveal-effect="quiet" style="--i:1">
+                <a href="/team#titus-gebel" aria-label="Titus Gebel, Chairman">
+                  <img src={asset("assets/images/people/Titus Gebel.webp")} alt="Portrait of Titus Gebel" loading="lazy" width="96" height="96" />
+                  <span class="team-strip-name">Titus Gebel</span>
+                </a>
+              </li>
+              <li data-reveal data-reveal-effect="quiet" style="--i:2">
+                <a href="/team#julio-pulisich" aria-label="Julio Pulisich, Director">
+                  <img src={asset("assets/images/people/Julio Pulisich.webp")} alt="Portrait of Julio Pulisich" loading="lazy" width="96" height="96" />
+                  <span class="team-strip-name">Julio Pulisich</span>
+                </a>
+              </li>
+              <li data-reveal data-reveal-effect="quiet" style="--i:3">
+                <a href="/team#tim-heenan" aria-label="Tim Heenan, Director">
+                  <img src={asset("assets/images/people/Timothy Heenan.webp")} alt="Portrait of Tim Heenan" loading="lazy" width="96" height="96" />
+                  <span class="team-strip-name">Tim Heenan</span>
+                </a>
+              </li>
+              <li data-reveal data-reveal-effect="quiet" style="--i:4">
+                <a href="/team#martin-hoff" aria-label="Martin Hoff, Director">
+                  <img src={asset("assets/images/people/Martin Hoff.webp")} alt="Portrait of Martin Hoff" loading="lazy" width="96" height="96" />
+                  <span class="team-strip-name">Martin Hoff</span>
+                </a>
+              </li>
+            </ul>
+            <a class="team-strip-link" href="/team" data-reveal data-reveal-effect="quiet" style="--i:5">Meet the full team <span class="mi" aria-hidden="true">arrow_forward</span></a>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="section-body" data-reveal style="--i:1">
-          <p class="split-lead">We have assembled a sophisticated team of senior and junior experts, from <em>Europe, North and South America</em>.</p>
-          <p>Our team members have different and complementary skill sets, tailored for the big task ahead of us: to find a world-class copper deposit in Argentina.</p>
+  <section class="closing-cta" id="invest" aria-label="Next steps for investors">
+    <div class="wrap">
+      <div class="closing-cta-inner">
+        <div class="closing-cta-copy" data-reveal style="--i:0">
+          <h2>Build conviction at your own pace.</h2>
+          <p>Read the corporate presentation or subscribe to drilling and news alerts.</p>
+        </div>
+        <div class="closing-cta-actions" data-reveal style="--i:1">
+          <a class="button copper" href="/investor#docs">Corporate Presentation</a>
+          <a class="button secondary on-dark" href="/subscribe">Subscribe to Alerts</a>
         </div>
       </div>
     </div>
