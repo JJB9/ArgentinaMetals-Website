@@ -304,9 +304,8 @@ export default function AndesHero({
         className="andes-hero-fallback"
         src={fallbackSrc}
         alt={fallbackAlt}
-        loading="eager"
+        loading="lazy"
         decoding="async"
-        fetchPriority="high"
       />
       {status !== "failed" && <div className="andes-hero-canvas" ref={containerRef} aria-hidden="true" />}
     </div>

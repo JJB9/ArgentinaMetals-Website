@@ -65,7 +65,8 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
 <BaseLayout
   title="Home - Argentina Metals"
 >
-  <script is:inline slot="head" async src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
+  <link rel="preload" as="image" href={asset("assets/images/preview-thumbnail.webp")} fetchpriority="high" slot="head" />
+  <script is:inline slot="head" defer src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
 
   <div class="hero-media hero-media--lead" data-reveal style="--i:0">
     <div class="hero-media-frame" id="hero-media-frame">
@@ -78,7 +79,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
         stream-type="on-demand"
         loop
         playsinline
-        preload="auto"
+        preload="metadata"
       ></mux-player>
     </div>
   </div>
