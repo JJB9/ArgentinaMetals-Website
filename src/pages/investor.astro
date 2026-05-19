@@ -2,7 +2,7 @@
 import { statSync } from "node:fs";
 import { resolve } from "node:path";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import PageHeader from "@components/PageHeader.astro";
+import SubscribeCard from "@components/SubscribeCard.astro";
 import corporateDocs from "../data/investor/corporate.json";
 import financialDocs from "../data/investor/financial.json";
 
@@ -76,21 +76,17 @@ const documents: { title: string; items: DocItem[] }[] = [
 ---
 
 <BaseLayout title="Investors - Argentina Metals">
-  <PageHeader
-    title="Investors"
-    text="Pure-play exposure to world-class copper exploration in one of the world's most prospective emerging jurisdictions. Listing on TSX Venture Exchange (pending). Secondary listings in Frankfurt and other places."
-    image="/assets/images/andes-argentina-clouds.jpg"
-    imageAlt="Andes mountains under clouds"
-  >
-    <a class="alerts-link" slot="image-bottom" href="/news" data-reveal>
-      <span class="alerts-link-icon mi" aria-hidden="true">notifications_active</span>
-      <span class="alerts-link-body">
-        <strong>Investor Alerts</strong>
-        <span>Press releases &amp; corporate updates straight to your inbox</span>
-      </span>
-      <span class="alerts-link-arrow mi" aria-hidden="true">arrow_forward</span>
-    </a>
-  </PageHeader>
+  <section class="page-hero page-hero--split page-hero--investor">
+    <div class="wrap">
+      <div class="page-hero-text">
+        <h1 data-reveal style="--i:0">Investors</h1>
+        <p data-reveal style="--i:1">Pure-play exposure to world-class copper exploration in one of the world's most prospective emerging jurisdictions. Listing on TSX Venture Exchange (pending). Secondary listings in Frankfurt and other places.</p>
+      </div>
+      <div class="page-hero-subscribe">
+        <SubscribeCard reveal revealIndex={2} />
+      </div>
+    </div>
+  </section>
 
   <div class="hero-media" data-reveal>
     <div class="hero-media-frame">
@@ -237,85 +233,17 @@ const documents: { title: string; items: DocItem[] }[] = [
     max-width: 460px;
   }
 
-  .alerts-link {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin: 0;
-    padding: 10px 18px 10px 10px;
-    background: var(--copper-wash);
-    border: 1px solid color-mix(in srgb, var(--copper-dark) 16%, transparent);
-    border-radius: var(--r-full);
-    color: var(--g700);
-    text-decoration: none;
-    cursor: pointer;
-    transition:
-      background-color 200ms var(--ease-out),
-      box-shadow 200ms var(--ease-out),
-      border-color 200ms var(--ease-out);
+  .page-hero-subscribe {
+    justify-self: end;
+    align-self: center;
+    width: 100%;
+    max-width: 420px;
   }
 
-  .alerts-link:hover {
-    background: var(--white);
-    border-color: color-mix(in srgb, var(--copper-dark) 32%, transparent);
-    box-shadow: var(--s-md);
-  }
-
-  .alerts-link:focus-visible {
-    outline: 2px solid var(--ring-focus-color);
-    outline-offset: 3px;
-  }
-
-  .alerts-link-icon {
-    display: grid;
-    width: 36px;
-    height: 36px;
-    place-items: center;
-    border-radius: 50%;
-    background: var(--white);
-    color: var(--copper-dark);
-    font-size: 20px;
-  }
-
-  .alerts-link-body {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.3;
-  }
-
-  .alerts-link-body strong {
-    color: var(--g900);
-    font-size: 0.85rem;
-    font-weight: 600;
-  }
-
-  .alerts-link-body span {
-    margin-top: 2px;
-    color: var(--g500);
-    font-size: 0.74rem;
-  }
-
-  .alerts-link-arrow {
-    font-size: 18px;
-    color: var(--copper-dark);
-    transition: transform 200ms var(--ease-out);
-  }
-
-  .alerts-link:hover .alerts-link-arrow {
-    transform: translateX(3px);
-  }
-
-  @media (max-width: 480px) {
-    .alerts-link {
-      width: 100%;
-      border-radius: var(--r-lg);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .alerts-link,
-    .alerts-link-arrow {
-      transition: none;
+  @media (max-width: 960px) {
+    .page-hero-subscribe {
+      justify-self: stretch;
+      max-width: none;
     }
   }
 
