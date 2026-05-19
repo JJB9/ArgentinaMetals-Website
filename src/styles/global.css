@@ -1217,6 +1217,10 @@ body .closing-cta-copy h2 {
   --media-object-position: center;
 }
 
+.hero-media-frame--map {
+  aspect-ratio: 2 / 1;
+}
+
 .hero-media-frame--map::after {
   display: none;
 }
@@ -1688,6 +1692,10 @@ body .section-num {
 .section-intro > .hectares-banner,
 .section-intro > .district-status {
   margin-top: clamp(12px, 1.4vw, 22px);
+}
+
+.section-intro > .gap-card {
+  margin-top: clamp(24px, 2.4vw, 40px);
 }
 
 .section-intro > .district-status {
@@ -2306,10 +2314,7 @@ figure.split-visual {
 }
 
 .split-visual--medium {
-  max-width: 470px;
-  margin-inline: auto;
   width: 100%;
-  justify-self: center;
 }
 
 .split-image {
@@ -2621,7 +2626,7 @@ body .gap-card-head h3 {
 
 .rocks-map {
   position: relative;
-  aspect-ratio: 13 / 20;
+  aspect-ratio: 13 / 17;
   border-radius: 8px;
   overflow: hidden;
   background: var(--sand);

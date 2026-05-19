@@ -48,7 +48,7 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [-70.420, -35.180] },
+      "geometry": { "type": "Point", "coordinates": [-70.275, -35.180] },
       "properties": {
         "id": "cerro-amarillo",
         "name": "Cerro Amarillo",
