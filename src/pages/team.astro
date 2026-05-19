@@ -139,7 +139,7 @@ const technical = [
       </div>
       <div class="team-grid">
         {management.map((member, i) => (
-          <article class="team-card" data-reveal style={`--i:${i % 3}`}>
+          <article class="team-card" data-reveal data-reveal-effect="quiet" style={`--i:${i}`}>
             <div class="avatar" aria-hidden="true">
               {member.image
                 ? <img src={member.image} alt={member.name} loading="lazy" />
@@ -169,7 +169,7 @@ const technical = [
 
       <div class="team-grid">
         {technical.map((member, i) => (
-          <article class="team-card" data-reveal style={`--i:${i % 3}`}>
+          <article class="team-card" data-reveal data-reveal-effect="quiet" style={`--i:${i}`}>
             <div class="avatar" aria-hidden="true">
               {member.image
                 ? <img src={member.image} alt={member.name} loading="lazy" />
