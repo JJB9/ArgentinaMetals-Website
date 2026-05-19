@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import AndesHero from "../components/islands/AndesHero";
+import MapLegend from "../components/MapLegend.astro";
 
 const base = import.meta.env.BASE_URL;
 const asset = (path: string) => `${base}${path}`;
@@ -238,9 +239,8 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
               <img data-parallax src={asset("assets/images/projects/LasEstrellasNorth1.webp")} alt="Las Estrellas North property in the Andean Copper Belt, Mendoza" loading="lazy" width="1500" height="843" />
             </div>
             <div class="split-badge">
-              <strong>Top 10</strong>
-              <span>Global Copper Reserve Potential</span>
-              <cite class="split-badge-source">USGS Mineral Commodity Summaries 2025</cite>
+              <strong>Top 5</strong>
+              <span>Argentina's Potential as a Global Copper Producer</span>
             </div>
           </div>
         </div>
@@ -304,6 +304,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
               fallbackAlt="Southern Andes copper belt across the Chile–Argentina border with Argentina Metals' Las Estrellas flagship"
             />
           </div>
+          <MapLegend />
         </div>
 
         <script>
