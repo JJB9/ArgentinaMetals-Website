@@ -2299,7 +2299,7 @@ figure.split-visual {
 }
 
 .split-visual--compact .split-image img {
-  object-position: center top;
+  object-position: center 25%;
 }
 
 .split-visual--medium {
