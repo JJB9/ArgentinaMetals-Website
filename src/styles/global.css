@@ -1,3 +1,43 @@
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/fonts/sora/sora-latin-300-normal.woff2") format("woff2");
+  font-display: block;
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/fonts/sora/sora-latin-400-normal.woff2") format("woff2");
+  font-display: block;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/fonts/sora/sora-latin-500-normal.woff2") format("woff2");
+  font-display: block;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/fonts/sora/sora-latin-600-normal.woff2") format("woff2");
+  font-display: block;
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/fonts/sora/sora-latin-700-normal.woff2") format("woff2");
+  font-display: block;
+  font-style: normal;
+  font-weight: 700;
+}
+
 :root {
   --copper-dark: #a8521f;
   --copper: #d4783f;

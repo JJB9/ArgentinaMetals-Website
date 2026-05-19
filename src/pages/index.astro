@@ -83,15 +83,6 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
     </div>
   </div>
 
-  <script is:inline>
-    (() => {
-      const player = document.getElementById("hero-mux-player");
-      if (!player) return;
-      const ok = window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
-      if (ok) player.setAttribute("autoplay", "any");
-    })();
-  </script>
-
   <section class="hero hero--after-media">
     <div class="wrap">
       <h1 data-reveal style="--i:1">Investing in Argentina and Its Emerging <em>Copper Boom</em></h1>
