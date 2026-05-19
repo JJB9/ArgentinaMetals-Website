@@ -10,7 +10,7 @@ const asset = (path: string) => `${base}${path}`;
 <BaseLayout title="Projects - Argentina Metals">
   <PageHeader
     title="Projects"
-    text="Our exploration portfolio spans 146,728 hectares across the Malargue District and the San Raphael District in one of Argentina's most prospective copper-gold corridors."
+    text="Our exploration portfolio spans 146,728 hectares across the Malargüe District in one of Argentina's most prospective copper-gold corridors."
     stats={[
       { value: "146,728 ha", label: "Total Land Package" },
       { value: "26", label: "Project Areas" },
@@ -135,13 +135,32 @@ const asset = (path: string) => `${base}${path}`;
     </div>
   </section>
 
-  <section class="section soft">
+  <section class="section soft" id="water">
     <div class="wrap">
       <div class="section-header" data-reveal>
         <div>
-          <h2 class="section-title">San Raphael District</h2>
-          <p class="section-desc">North of the Western Malargüe Mining District, we hold license areas in the San Raphael District, currently under increased scrutiny and looking very promising.</p>
+          <h2 class="section-title">Water in Mendoza</h2>
+          <p class="section-desc">Behind every tenure map sits a second one: the water that decides which deposits can actually be built.</p>
         </div>
+      </div>
+
+      <div class="district-layout district-layout--reverse">
+        <div class="water-copy" data-reveal style="--i:0">
+          <p class="split-lead">The availability of water is significantly better in Mendoza than other union provinces of Argentina. <em>This is helping with CAPEX and the realization of larger mining projects.</em></p>
+        </div>
+
+        <figure class="district-map district-map--water" data-reveal style="--i:1">
+          <div class="district-map-frame">
+            <img
+              src={asset("assets/images/Mendoza Water Sources.webp")}
+              alt="Map of Mendoza Province showing Argentina Metals mineral tenures in orange overlaid on the surrounding water network — streams, water reservoirs, and glaciers — across the Andean cordillera at the Chile–Argentina border."
+              loading="lazy"
+              width="905"
+              height="1280"
+            />
+          </div>
+          <figcaption>Water sources · Argentina Metals tenure block, Mendoza Province</figcaption>
+        </figure>
       </div>
     </div>
   </section>

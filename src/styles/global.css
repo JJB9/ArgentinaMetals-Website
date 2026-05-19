@@ -2705,6 +2705,61 @@ body .gap-card-head h3 {
   width: 100%;
 }
 
+/* Water-in-Mendoza section — reversed district layout + water-source list */
+.district-layout--reverse {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+}
+
+.district-layout--reverse > .water-copy {
+  grid-column: 1;
+}
+
+.district-layout--reverse > .district-map {
+  grid-column: 2;
+}
+
+.district-map--water .district-map-frame {
+  background: var(--slate-pale);
+}
+
+.water-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  padding-top: 8px;
+  align-self: center;
+}
+
+.water-copy .split-lead {
+  max-width: 38ch;
+}
+
+.water-copy .split-lead em {
+  color: var(--slate-dark);
+  font-style: normal;
+  font-weight: 600;
+}
+
+@media (max-width: 960px) {
+  .district-layout--reverse {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .district-layout--reverse > .water-copy,
+  .district-layout--reverse > .district-map {
+    grid-column: 1;
+  }
+
+  .water-copy {
+    padding-top: 0;
+    gap: 28px;
+  }
+
+  .water-copy .split-lead {
+    max-width: none;
+  }
+}
+
 .district-info {
   display: flex;
   flex-direction: column;
