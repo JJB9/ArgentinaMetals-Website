@@ -1091,7 +1091,24 @@ body .closing-cta-copy h2 {
   background: var(--green-dark);
   color: #fff;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
+}
+
+.closing-cta::after {
+  content: "";
+  position: absolute;
+  right: -10%;
+  bottom: -440px;
+  width: 880px;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(253, 180, 115, 0.13) 0%, rgba(253, 180, 115, 0.05) 35%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.closing-cta > * {
+  position: relative;
+  z-index: 1;
 }
 
 .closing-cta-inner {
@@ -4698,7 +4715,7 @@ textarea.form-input {
   content: "";
   position: absolute;
   right: -10%;
-  top: -360px;
+  top: -440px;
   width: 880px;
   aspect-ratio: 1;
   background: radial-gradient(circle, rgba(253, 180, 115, 0.13) 0%, rgba(253, 180, 115, 0.05) 35%, transparent 65%);
