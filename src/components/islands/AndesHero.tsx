@@ -32,7 +32,7 @@ type MineFeature = {
 };
 
 const MINES = minesData as { features: MineFeature[] };
-const DEFAULT_FALLBACK_SRC = "/assets/images/andes-hero-fallback.webp";
+const DEFAULT_FALLBACK_SRC = "/images/projects/map_fallback_horizontal.webp";
 
 interface AndesHeroProps {
   fallbackSrc?: string;

@@ -19,7 +19,7 @@ function signToken(payload: SignedPayload, secret: string): string {
 
 function renderConfirmEmail(confirmUrl: string, siteUrl: string): { html: string; text: string } {
   const base = siteUrl.replace(/\/$/, "");
-  const logoUrl = `${base}/assets/images/logo-copper-white.png`;
+  const logoUrl = `${base}/images/brand/logo-copper-white.png`;
   const preheader = "Confirm your subscription to Argentina Metals investor alerts.";
 
   const html = `<!doctype html>

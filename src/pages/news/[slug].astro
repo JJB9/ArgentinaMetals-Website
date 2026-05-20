@@ -23,7 +23,7 @@ const siteUrl = Astro.site ?? new URL("https://argentinametals.com");
 const articleUrl = new URL(`/news/${item.id}`, siteUrl).toString();
 const articleImage = item.data.image
   ? new URL(item.data.image, siteUrl).toString()
-  : new URL("/assets/images/preview-thumbnail.webp", siteUrl).toString();
+  : new URL("/images/brand/preview-thumbnail.webp", siteUrl).toString();
 
 const newsArticleJsonLd = {
   "@context": "https://schema.org",
@@ -45,7 +45,7 @@ const newsArticleJsonLd = {
     url: siteUrl.toString(),
     logo: {
       "@type": "ImageObject",
-      url: new URL("/assets/images/logo-copper-white.png", siteUrl).toString()
+      url: new URL("/images/brand/logo-copper-white.png", siteUrl).toString()
     }
   }
 };

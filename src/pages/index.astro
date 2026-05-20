@@ -65,7 +65,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
 <BaseLayout
   title="Investing in Argentina and Its Emerging Copper Boom - Argentina Metals"
 >
-  <link rel="preload" as="image" href={asset("assets/images/preview-thumbnail.webp")} fetchpriority="high" slot="head" />
+  <link rel="preload" as="image" href={asset("images/brand/preview-thumbnail.webp")} fetchpriority="high" slot="head" />
   <script is:inline slot="head" defer src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
 
   <div class="hero-media hero-media--lead" data-reveal style="--i:0">
@@ -75,7 +75,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
         data-parallax
         playback-id={import.meta.env.PUBLIC_MUX_HERO_PLAYBACK_ID}
         metadata-video-title="Argentina Metals, hero image clip"
-        poster={asset("assets/images/preview-thumbnail.webp")}
+        poster={asset("images/brand/preview-thumbnail.webp")}
         stream-type="on-demand"
         loop
         playsinline
@@ -100,6 +100,11 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
         <header class="section-intro" data-reveal>
           <h2 class="section-title">Copper is a Blockbuster</h2>
           <p class="section-lead">Copper needs no marketing. When the world economy grows, so does copper demand, and the world economy has grown for 150 years straight. Electrification and data centers now add a second, durable layer of demand on top.</p>
+          <figure class="split-visual split-visual--medium thesis-image">
+            <div class="split-image">
+              <img data-parallax src={asset("images/general/mining-haul-trucks-pit.webp")} alt="Haul trucks descending an open-pit copper mine, illustrating the scale of modern copper production" loading="lazy" width="1600" height="2133" />
+            </div>
+          </figure>
         </header>
 
         <div class="section-evidence" data-reveal style="--i:1">
@@ -222,7 +227,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
         <div class="section-evidence section-evidence--policy" data-reveal style="--i:1">
           <div class="split-visual split-visual--medium">
             <div class="split-image">
-              <img data-parallax src={asset("assets/images/projects/LasEstrellasNorth1.webp")} alt="Las Estrellas North property in the Andean Copper Belt, Mendoza" loading="lazy" width="1500" height="843" />
+              <img data-parallax src={asset("images/projects/LasEstrellas/LasEstrellasNorth1.webp")} alt="Las Estrellas North property in the Andean Copper Belt, Mendoza" loading="lazy" width="1500" height="843" />
             </div>
             <div class="split-badge">
               <strong>Top 5</strong>
@@ -286,7 +291,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
           <div class="rocks-map">
             <AndesHero
               client:visible
-              fallbackSrc={asset("assets/images/map_fallback_vertical.webp")}
+              fallbackSrc={asset("images/projects/map_fallback_vertical.webp")}
               fallbackAlt="Southern Andes copper belt across the Chile–Argentina border with Argentina Metals' Las Estrellas flagship"
             />
           </div>
@@ -336,7 +341,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
           <figure class="district-map">
             <div class="district-map-frame">
               <img
-                src={asset("assets/images/malargue-claims-map.webp")}
+                src={asset("images/projects/malargue-claims-map.webp")}
                 alt="Claims map of the Malargüe District in Mendoza, Argentina, showing Argentina Metals tenures in green alongside neighbouring Kobrea Exploration tenures in blue, across 26 named licenses straddling the Chile–Argentina border."
                 loading="lazy"
                 width="889"
@@ -378,7 +383,7 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
         <div class="section-evidence" data-reveal style="--i:1">
           <figure class="tech-image">
             <div class="split-image">
-              <img data-parallax src={asset("assets/images/Spectral-evaluation.webp")} alt="Multispectral satellite evaluation of alteration zones across Argentina Metals' Mendoza licences" loading="lazy" width="731" height="512" />
+              <img data-parallax src={asset("images/projects/Spectral-evaluation.webp")} alt="Multispectral satellite evaluation of alteration zones across Argentina Metals' Mendoza licences" loading="lazy" width="731" height="512" />
             </div>
             <figcaption>Spectral based target evaluation</figcaption>
           </figure>
@@ -400,31 +405,31 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
             <ul class="team-strip-faces" role="list">
               <li data-reveal data-reveal-effect="quiet" style="--i:0">
                 <a href="/team#raymond-d-harari" aria-label="Raymond D. Harari, CEO">
-                  <img src={asset("assets/images/people/Raymond D. Harari.webp")} alt="Portrait of Raymond D. Harari" loading="lazy" width="96" height="96" />
+                  <img src={asset("images/people/Raymond D. Harari.webp")} alt="Portrait of Raymond D. Harari" loading="lazy" width="96" height="96" />
                   <span class="team-strip-name">Raymond D. Harari</span>
                 </a>
               </li>
               <li data-reveal data-reveal-effect="quiet" style="--i:1">
                 <a href="/team#titus-gebel" aria-label="Titus Gebel, Chairman">
-                  <img src={asset("assets/images/people/Titus Gebel.webp")} alt="Portrait of Titus Gebel" loading="lazy" width="96" height="96" />
+                  <img src={asset("images/people/Titus Gebel.webp")} alt="Portrait of Titus Gebel" loading="lazy" width="96" height="96" />
                   <span class="team-strip-name">Titus Gebel</span>
                 </a>
               </li>
               <li data-reveal data-reveal-effect="quiet" style="--i:2">
                 <a href="/team#julio-pulisich" aria-label="Julio Pulisich, Director">
-                  <img src={asset("assets/images/people/Julio Pulisich.webp")} alt="Portrait of Julio Pulisich" loading="lazy" width="96" height="96" />
+                  <img src={asset("images/people/Julio Pulisich.webp")} alt="Portrait of Julio Pulisich" loading="lazy" width="96" height="96" />
                   <span class="team-strip-name">Julio Pulisich</span>
                 </a>
               </li>
               <li data-reveal data-reveal-effect="quiet" style="--i:3">
                 <a href="/team#tim-heenan" aria-label="Tim Heenan, Director">
-                  <img src={asset("assets/images/people/Timothy Heenan.webp")} alt="Portrait of Tim Heenan" loading="lazy" width="96" height="96" />
+                  <img src={asset("images/people/Timothy Heenan.webp")} alt="Portrait of Tim Heenan" loading="lazy" width="96" height="96" />
                   <span class="team-strip-name">Tim Heenan</span>
                 </a>
               </li>
               <li data-reveal data-reveal-effect="quiet" style="--i:4">
                 <a href="/team#martin-hoff" aria-label="Martin Hoff, Director">
-                  <img src={asset("assets/images/people/Martin Hoff.webp")} alt="Portrait of Martin Hoff" loading="lazy" width="96" height="96" />
+                  <img src={asset("images/people/Martin Hoff.webp")} alt="Portrait of Martin Hoff" loading="lazy" width="96" height="96" />
                   <span class="team-strip-name">Martin Hoff</span>
                 </a>
               </li>

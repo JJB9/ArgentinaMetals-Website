@@ -15,7 +15,7 @@ interface Props {
 const {
   title = "Argentina Metals",
   description = "Investing in Argentina and Its Emerging Copper Boom",
-  image = "/assets/images/preview-thumbnail.webp",
+  image = "/images/brand/preview-thumbnail.webp",
   imageAlt = "Argentina Metals Corp.",
   ogType = "website"
 } = Astro.props;
@@ -29,7 +29,7 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: "Argentina Metals Corp.",
   url: siteUrl.toString(),
-  logo: new URL("/assets/images/logo-copper-white.png", siteUrl).toString(),
+  logo: new URL("/images/brand/logo-copper-white.png", siteUrl).toString(),
   sameAs: [
     "https://www.linkedin.com/company/argentina-metals-corp",
     "https://x.com/ArgentinaMetals"
@@ -61,9 +61,9 @@ const organizationJsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(organizationJsonLd)} />
     <slot name="head" />
     <title>{title}</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/brand/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/brand/favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/brand/apple-touch-icon.png" />
     <ClientRouter fallback="swap" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
