@@ -5,6 +5,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import minesData from "../../data/andes/mines.json";
 import beltData from "../../data/andes/copper-belt.json";
 import borderData from "../../data/andes/border.json";
+import tenuresData from "../../data/andes/tenures.json";
 import {
   readTokens,
   maptilerStyleUrl,
@@ -14,6 +15,8 @@ import {
   beltFillLayer,
   beltOutlineLayer,
   borderLayer,
+  tenureFillLayer,
+  tenureOutlineLayer,
   type AndesTokens,
 } from "../../data/andes/style";
 
@@ -28,6 +31,9 @@ type MineFeature = {
     type: "competitor" | "flagship" | "city" | "deposit";
     caption?: string;
     labelBelow?: boolean;
+    labelPos?: "2";
+    compact?: boolean;
+    minZoom?: number;
   };
 };
 
@@ -57,7 +63,27 @@ function prefersReducedMotion(): boolean {
 function makeMarkerEl(f: MineFeature): HTMLDivElement {
   const root = document.createElement("div");
   const variant = f.properties.type;
-  root.className = `andes-hero-marker andes-hero-marker--${variant}`;
+  const compact = f.properties.compact === true;
+  const labelPos = f.properties.labelPos;
+  root.className = `andes-hero-marker andes-hero-marker--${variant}${compact ? " andes-hero-marker--compact" : ""}${labelPos ? ` andes-hero-marker--pos-${labelPos}` : ""}`;
+  if (compact) {
+    root.innerHTML = `<svg class="andes-hero-marker-star" viewBox="0 0 24 24" aria-hidden="true">
+        <polygon points="12,2 14.6,8.6 22,9 16,14 18,21 12,17.5 6,21 8,14 2,9 9.4,8.6"/>
+      </svg>
+      <span class="visually-hidden">${f.properties.name}</span>`;
+    return root;
+  }
+  if (labelPos === "2" && variant === "deposit") {
+    const star = `<svg class="andes-hero-marker-star" viewBox="0 0 24 24" aria-hidden="true">
+        <polygon points="12,2 14.6,8.6 22,9 16,14 18,21 12,17.5 6,21 8,14 2,9 9.4,8.6"/>
+      </svg>`;
+    const label = `<span class="andes-hero-marker-label">
+        <strong>${f.properties.name}</strong>
+        ${f.properties.caption ? `<em>${f.properties.caption}</em>` : ""}
+      </span>`;
+    root.innerHTML = `${star}${label}`;
+    return root;
+  }
   if (variant === "city") {
     root.innerHTML = `
       <span class="andes-hero-marker-dot" aria-hidden="true"></span>
@@ -243,6 +269,13 @@ export default function AndesHero({
           });
           map.addLayer(borderLayer());
 
+          map.addSource("amc-tenure", {
+            type: "geojson",
+            data: tenuresData as unknown as GeoJSON.FeatureCollection,
+          });
+          map.addLayer(tenureFillLayer(tokens));
+          map.addLayer(tenureOutlineLayer(tokens));
+
           const setSky = (map as unknown as { setSky?: (s: Record<string, unknown>) => void }).setSky;
           if (typeof setSky === "function") {
             try {
@@ -260,19 +293,50 @@ export default function AndesHero({
             }
           }
 
+          const visibilityEntries: Array<{ marker: MlMarker; minZoom: number }> = [];
           for (const f of MINES.features) {
             const el = makeMarkerEl(f);
             const anchor =
+              f.properties.compact ? "center" :
+              f.properties.labelPos === "2" ? "left" :
               f.properties.type === "city" ? "left" :
               f.properties.type === "flagship" ? "top-right" :
               f.properties.labelBelow ? "top" :
               "bottom";
             const offset: [number, number] =
-              f.properties.type === "flagship" ? [7, -7] : [0, 0];
-            const marker = new maplibre.Marker({ element: el, anchor, offset })
+              f.properties.type === "flagship" ? [7, -7] :
+              f.properties.labelPos === "2" ? [6, 0] :
+              [0, 0];
+            const marker = new maplibre.Marker({
+              element: el,
+              anchor,
+              offset,
+              pitchAlignment: "viewport",
+              rotationAlignment: "viewport",
+            })
               .setLngLat(f.geometry.coordinates)
               .addTo(map);
             markersRef.current.push(marker);
+            const minZoom = typeof f.properties.minZoom === "number" ? f.properties.minZoom : 0;
+            if (minZoom > 0) visibilityEntries.push({ marker, minZoom });
+          }
+
+          if (visibilityEntries.length > 0) {
+            const applyZoomVisibility = () => {
+              if (!map) return;
+              const z = map.getZoom();
+              for (const { marker, minZoom } of visibilityEntries) {
+                const node = marker.getElement();
+                const shouldShow = z >= minZoom;
+                if (node.dataset.zoomHidden !== (shouldShow ? "false" : "true")) {
+                  node.dataset.zoomHidden = shouldShow ? "false" : "true";
+                  node.style.display = shouldShow ? "" : "none";
+                }
+              }
+            };
+            applyZoomVisibility();
+            map.on("zoom", applyZoomVisibility);
+            map.on("zoomend", applyZoomVisibility);
           }
 
           setStatus("ready");
