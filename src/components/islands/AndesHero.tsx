@@ -34,8 +34,18 @@ type MineFeature = {
     labelPos?: "2";
     compact?: boolean;
     minZoom?: number;
+    tagline?: string;
   };
 };
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
 
 const MINES = minesData as { features: MineFeature[] };
 const DEFAULT_FALLBACK_SRC = "/images/projects/map_fallback_horizontal.webp";
@@ -117,10 +127,14 @@ function makeMarkerEl(f: MineFeature): HTMLDivElement {
     `;
     return root;
   }
+  const tagline = f.properties.tagline
+    ? `<span class="andes-hero-marker-tagline" role="tooltip">${escapeHtml(f.properties.tagline)}</span>`
+    : "";
   root.innerHTML = `<span class="andes-hero-marker-label">
       <strong>${f.properties.name}</strong>
       ${f.properties.caption ? `<em>${f.properties.caption}</em>` : ""}
-    </span><span class="andes-hero-marker-pulse" aria-hidden="true"></span><span class="andes-hero-marker-dot" aria-hidden="true"></span>`;
+    </span>${tagline}<span class="andes-hero-marker-pulse" aria-hidden="true"></span><span class="andes-hero-marker-dot" aria-hidden="true"></span>`;
+  if (f.properties.tagline) root.classList.add("andes-hero-marker--has-tagline");
   return root;
 }
 

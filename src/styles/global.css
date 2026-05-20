@@ -1568,6 +1568,59 @@ body .closing-cta-copy h2 {
   border: 0;
 }
 
+.andes-hero-marker--has-tagline {
+  cursor: help;
+}
+
+.andes-hero-marker-tagline {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translate(-50%, 4px);
+  width: max-content;
+  max-width: 260px;
+  padding: 8px 11px 9px;
+  background: rgba(26, 25, 23, 0.96);
+  color: #fdf6ec;
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.005em;
+  text-align: left;
+  white-space: normal;
+  border-radius: 6px;
+  box-shadow: 0 6px 22px rgba(20, 12, 4, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 140ms ease, transform 140ms ease;
+  z-index: 10;
+}
+
+.andes-hero-marker-tagline::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -5px;
+  border: 5px solid transparent;
+  border-top-color: rgba(26, 25, 23, 0.96);
+}
+
+.andes-hero-marker--has-tagline:hover .andes-hero-marker-tagline,
+.andes-hero-marker--has-tagline:focus-within .andes-hero-marker-tagline {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .andes-hero-marker-tagline {
+    transition: opacity 60ms linear;
+    transform: translate(-50%, 0);
+  }
+}
+
 @keyframes andesPulse {
   0% { transform: translate(-50%, 0) scale(1); opacity: 0.55; }
   70% { transform: translate(-50%, 0) scale(2.6); opacity: 0; }

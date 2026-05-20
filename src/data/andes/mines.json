@@ -12,7 +12,8 @@
         "type": "competitor",
         "caption": "Antofagasta · Chile",
         "labelBelow": true,
-        "minZoom": 7.0
+        "minZoom": 7.0,
+        "tagline": "Top-10 global copper mine; 319.6 kt Cu produced in 2024 with 2024 reserves of ~2.1 Bt; life-extension project pushes operations to 2051."
       }
     },
     {
@@ -24,7 +25,8 @@
         "operator": "Anglo American · Chile",
         "country": "Chile",
         "type": "competitor",
-        "caption": "Anglo American · Chile"
+        "caption": "Anglo American · Chile",
+        "tagline": "Open-pit Cu mine 132 km north of Santiago; ~48 kt Cu in 2024; US$295 M investment is extending mine life from 2027 to 2037."
       }
     },
     {
@@ -36,7 +38,8 @@
         "operator": "Anglo American · Codelco · Chile",
         "country": "Chile",
         "type": "competitor",
-        "caption": "Anglo American · Codelco"
+        "caption": "Anglo American · Codelco",
+        "tagline": "Adjacent giants now under a joint mine plan; together hold ~60 Mt contained Cu — roughly 2% of global copper reserves and resources."
       }
     },
     {
@@ -48,7 +51,8 @@
         "operator": "Codelco · Chile",
         "country": "Chile",
         "type": "competitor",
-        "caption": "Codelco · Chile"
+        "caption": "Codelco · Chile",
+        "tagline": "Largest underground copper mine in the world; ~310 kt Cu produced in 2025 (impacted by July collapse); sixth-largest copper reserve globally."
       }
     },
     {
