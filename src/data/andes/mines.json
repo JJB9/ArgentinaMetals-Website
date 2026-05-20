@@ -12,7 +12,7 @@
         "type": "competitor",
         "caption": "Antofagasta · Chile",
         "labelBelow": true,
-        "minZoom": 7.5
+        "minZoom": 7.0
       }
     },
     {
@@ -70,7 +70,7 @@
         "country": "Chile",
         "type": "deposit",
         "compact": true,
-        "minZoom": 8
+        "minZoom": 7.0
       }
     },
     {
@@ -82,7 +82,7 @@
         "country": "Chile",
         "type": "deposit",
         "compact": true,
-        "minZoom": 8
+        "minZoom": 7.0
       }
     },
     {
@@ -114,7 +114,7 @@
         "name": "Cerro Amarillo",
         "country": "Argentina",
         "type": "deposit",
-        "minZoom": 7.6
+        "minZoom": 7.0
       }
     },
     {
@@ -136,7 +136,7 @@
         "country": "Argentina",
         "type": "deposit",
         "compact": true,
-        "minZoom": 8
+        "minZoom": 7.0
       }
     },
     {
