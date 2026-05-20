@@ -2728,10 +2728,6 @@ body .gap-card-head h3 {
   border-radius: 0;
 }
 
-.gap-table thead th {
-  background: var(--warm);
-}
-
 .gap-table thead th.num,
 .gap-table tbody td.num {
   text-align: right;
@@ -3972,8 +3968,8 @@ body .pillar-num {
 
 .dt thead th {
   padding: 14px 20px;
-  background: var(--warm);
-  border-bottom: 2px solid var(--sand);
+  background: var(--sand);
+  border-bottom: 1px solid var(--g100);
   color: var(--g500);
   font-size: 0.62rem;
   font-weight: 600;
@@ -4322,8 +4318,8 @@ body .pillar-num {
 .document-card h3 {
   padding: 20px 22px;
   margin: 0;
-  background: var(--slate-pale);
-  color: var(--slate-dark);
+  background: var(--sand);
+  color: var(--g700);
   font-size: 1rem;
 }
 
@@ -4339,11 +4335,11 @@ body .pillar-num {
 }
 
 .document-card a:hover {
-  background: var(--slate-pale);
+  background: var(--warm);
 }
 
 .document-card .doc-icon {
-  color: var(--slate);
+  color: var(--g500);
   font-size: 1.15rem;
 }
 
