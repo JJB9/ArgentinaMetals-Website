@@ -1360,7 +1360,9 @@ body .closing-cta-copy h2 {
 /* ---- Markers ------------------------------------------------------------- */
 
 .andes-hero-marker {
-  position: relative;
+  /* MapLibre needs the marker to be absolutely-positioned so it's removed
+     from the document flow; with position:relative the markers stack in
+     the canvas-container and the transform places them outside the map. */
   display: flex;
   flex-direction: column;
   align-items: center;
