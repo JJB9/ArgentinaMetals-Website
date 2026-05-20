@@ -319,7 +319,7 @@ textarea:focus-visible {
 }
 
 .wrap {
-  width: min(100% - 48px, 1120px);
+  width: min(100% - 80px, 1120px);
   margin: 0 auto;
 }
 
