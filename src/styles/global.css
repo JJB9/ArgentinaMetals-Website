@@ -6473,6 +6473,46 @@ textarea.form-input {
   line-height: 1;
 }
 
+.thesis-quote {
+  max-width: none;
+}
+
+.thesis-quote p,
+.thesis-quote cite {
+  max-width: 52ch;
+}
+
+.thesis-quote::after {
+  content: "\201D";
+  position: absolute;
+  right: clamp(-25px, -1.8vw, 0px);
+  bottom: 0;
+  color: var(--copper-dark);
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-style: normal;
+  line-height: 1;
+}
+
+@media (max-width: 960px) {
+  .thesis-quote::after {
+    display: none;
+  }
+
+  .thesis-quote p::after {
+    content: "\201D";
+    display: inline-block;
+    margin-left: 0.08em;
+    color: var(--copper-dark);
+    font-family: var(--font-display);
+    font-size: 1.7em;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 0;
+    vertical-align: -0.34em;
+  }
+}
+
 .lede-7-5-stat {
   align-self: center;
 }
