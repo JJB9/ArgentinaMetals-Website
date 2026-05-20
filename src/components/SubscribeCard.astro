@@ -173,7 +173,7 @@ const revealAttrs = reveal ? { "data-reveal": "", style: `--i:${revealIndex}` } 
           });
           if (!res.ok) throw new Error("Request failed");
           form.dataset.state = "success";
-          show("Thanks — check your inbox for a confirmation link to finish subscribing.", "ok");
+          show("Thanks. Check your inbox for a confirmation link to finish subscribing.", "ok");
         } catch {
           form.dataset.state = "";
           show("Something went wrong. Please try again in a moment.", "err");

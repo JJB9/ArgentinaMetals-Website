@@ -40,7 +40,7 @@
         "country": "Chile",
         "type": "competitor",
         "caption": "Anglo American · Codelco",
-        "tagline": "Adjacent giants now under a joint mine plan; together hold ~60 Mt contained Cu — roughly 2% of global copper reserves and resources."
+        "tagline": "Adjacent giants now under a joint mine plan; together hold ~60 Mt contained Cu, roughly 2% of global copper reserves and resources."
       }
     },
     {
@@ -77,7 +77,7 @@
         "type": "deposit",
         "compact": true,
         "minZoom": 7.0,
-        "tagline": "Northern half of the Rio Blanco–Los Bronces district — the world's greatest known concentration of copper."
+        "tagline": "Northern half of the Rio Blanco–Los Bronces district: the world's greatest known concentration of copper."
       }
     },
     {
@@ -102,7 +102,7 @@
         "country": "Chile",
         "type": "deposit",
         "labelPos": "2",
-        "tagline": "Chile's largest undeveloped oxide-copper resource — 426 Mt at 0.37% Cu inferred (~3.45 Blb Cu); 35 km east of El Teniente."
+        "tagline": "Chile's largest undeveloped oxide-copper resource: 426 Mt at 0.37% Cu inferred (~3.45 Blb Cu); 35 km east of El Teniente."
       }
     },
     {
@@ -113,7 +113,7 @@
         "name": "Infiernillo",
         "country": "Argentina",
         "type": "deposit",
-        "tagline": "Cu-(Mo) porphyry deposit in the San Rafael Massif, southern Mendoza — geologically defined, undeveloped."
+        "tagline": "Cu-(Mo) porphyry deposit in the San Rafael Massif, southern Mendoza; geologically defined, undeveloped."
       }
     },
     {
@@ -176,7 +176,7 @@
         "country": "Argentina",
         "type": "flagship",
         "caption": "Río Damas · Argentina",
-        "tagline": "Stacked copper systems — manto-type oxides in the Río Damas Formation plus porphyry Cu-Au signatures in the overlying Huincan; 144 surface rock chips returned up to 9,978 ppm Cu."
+        "tagline": "Stacked copper systems: manto-type oxides in the Río Damas Formation plus porphyry Cu-Au signatures in the overlying Huincan; 144 surface rock chips returned up to 9,978 ppm Cu."
       }
     }
   ]
