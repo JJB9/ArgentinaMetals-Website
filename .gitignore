@@ -26,3 +26,4 @@ yarn-error.log*
 !.env.example
 blocked/
 .impeccable/
+temp_map/

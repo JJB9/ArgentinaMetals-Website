@@ -3,11 +3,25 @@
   "features": [
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [-70.291, -33.148] },
+      "geometry": { "type": "Point", "coordinates": [-70.4907, -31.7194] },
       "properties": {
-        "id": "los-bronces",
-        "name": "Los Bronces",
-        "operator": "Anglo American",
+        "id": "los-pelambres",
+        "name": "Los Pelambres",
+        "operator": "Antofagasta · Chile",
+        "country": "Chile",
+        "type": "competitor",
+        "caption": "Antofagasta · Chile",
+        "labelBelow": true,
+        "minZoom": 7.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-71.1061, -32.652] },
+      "properties": {
+        "id": "el-soldado",
+        "name": "El Soldado",
+        "operator": "Anglo American · Chile",
         "country": "Chile",
         "type": "competitor",
         "caption": "Anglo American · Chile"
@@ -15,11 +29,23 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [-70.355, -34.083] },
+      "geometry": { "type": "Point", "coordinates": [-70.2624, -33.1203] },
+      "properties": {
+        "id": "los-bronces-andina",
+        "name": "Los Bronces / Andina",
+        "operator": "Anglo American · Codelco · Chile",
+        "country": "Chile",
+        "type": "competitor",
+        "caption": "Anglo American · Codelco"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-70.3722, -34.0999] },
       "properties": {
         "id": "el-teniente",
         "name": "El Teniente",
-        "operator": "Codelco",
+        "operator": "Codelco · Chile",
         "country": "Chile",
         "type": "competitor",
         "caption": "Codelco · Chile"
@@ -27,18 +53,52 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [-70.000, -34.070] },
+      "geometry": { "type": "Point", "coordinates": [-69.4412, -32.2455] },
+      "properties": {
+        "id": "san-jorge",
+        "name": "San Jorge",
+        "country": "Argentina",
+        "type": "deposit"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-70.2849, -33.1549] },
+      "properties": {
+        "id": "rio-blanco",
+        "name": "Rio Blanco",
+        "country": "Chile",
+        "type": "deposit",
+        "compact": true,
+        "minZoom": 7.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-70.257, -33.2003] },
+      "properties": {
+        "id": "los-sulfatos",
+        "name": "Los Sulfatos",
+        "country": "Chile",
+        "type": "deposit",
+        "compact": true,
+        "minZoom": 7.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-69.9591, -34.1172] },
       "properties": {
         "id": "escalones",
         "name": "Escalones",
         "country": "Chile",
         "type": "deposit",
-        "labelBelow": true
+        "labelPos": "2"
       }
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [-69.320, -34.550] },
+      "geometry": { "type": "Point", "coordinates": [-68.7955, -34.6405] },
       "properties": {
         "id": "infiernillo",
         "name": "Infiernillo",
@@ -48,28 +108,52 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [-70.275, -35.180] },
+      "geometry": { "type": "Point", "coordinates": [-70.1572, -35.2769] },
       "properties": {
         "id": "cerro-amarillo",
         "name": "Cerro Amarillo",
+        "country": "Argentina",
+        "type": "deposit",
+        "minZoom": 7.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-70.077, -34.8682] },
+      "properties": {
+        "id": "el-perdido",
+        "name": "El Perdido",
         "country": "Argentina",
         "type": "deposit"
       }
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [-69.585, -35.475] },
+      "geometry": { "type": "Point", "coordinates": [-70.1667, -35.8049] },
       "properties": {
-        "id": "malargue",
-        "name": "Malargüe",
+        "id": "el-destino",
+        "name": "El Destino",
         "country": "Argentina",
-        "type": "city",
-        "caption": "Ciudad · Mendoza"
+        "type": "deposit",
+        "compact": true,
+        "minZoom": 7.0
       }
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [-70.380, -35.350] },
+      "geometry": { "type": "Point", "coordinates": [-70.2259, -35.5334] },
+      "properties": {
+        "id": "el-seguro",
+        "name": "El Seguro",
+        "country": "Argentina",
+        "type": "deposit",
+        "labelBelow": true,
+        "minZoom": 7.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-70.05, -34.95] },
       "properties": {
         "id": "las-estrellas",
         "name": "Las Estrellas",

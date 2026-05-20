@@ -12,6 +12,8 @@ export type AndesTokens = {
   warm: string;
   g700: string;
   g500: string;
+  tenure: string;
+  tenureDark: string;
 };
 
 export function readTokens(): AndesTokens {
@@ -29,6 +31,8 @@ export function readTokens(): AndesTokens {
     warm: v("--warm", "#f8f6f1"),
     g700: v("--g700", "#504b3f"),
     g500: v("--g500", "#7d766a"),
+    tenure: v("--tenure", "#e6b720"),
+    tenureDark: v("--tenure-dark", "#6b4a0a"),
   };
 }
 
@@ -129,11 +133,39 @@ export function beltOutlineLayer(tokens: AndesTokens): StyleSpecification["layer
     id: "amc-belt-outline",
     type: "line",
     source: "amc-belt",
-    filter: ["==", ["get", "id"], "belt-main"] as unknown as never,
+    filter: ["in", ["get", "id"],
+      ["literal", ["belt-mendoza-0", "belt-mendoza-1", "belt-mendoza-2", "belt-mendoza-3"]]
+    ] as unknown as never,
     paint: {
       "line-color": tokens.copperDark,
-      "line-width": 1.2,
-      "line-opacity": 0.55,
+      "line-width": 1.0,
+      "line-opacity": 0.45,
+    },
+  } as unknown as StyleSpecification["layers"][number];
+}
+
+export function tenureFillLayer(tokens: AndesTokens): StyleSpecification["layers"][number] {
+  return {
+    id: "amc-tenure-fill",
+    type: "fill",
+    source: "amc-tenure",
+    paint: {
+      "fill-color": tokens.green,
+      "fill-opacity": 0.55,
+      "fill-antialias": true,
+    },
+  } as unknown as StyleSpecification["layers"][number];
+}
+
+export function tenureOutlineLayer(tokens: AndesTokens): StyleSpecification["layers"][number] {
+  return {
+    id: "amc-tenure-outline",
+    type: "line",
+    source: "amc-tenure",
+    paint: {
+      "line-color": tokens.greenDark,
+      "line-width": 1.4,
+      "line-opacity": 0.95,
     },
   } as unknown as StyleSpecification["layers"][number];
 }

@@ -4,7 +4,7 @@ import KeyFactsBox, { type KeyFact } from "@components/KeyFactsBox.astro";
 import lasEstrellasData from "../../data/projects/las-estrellas.json";
 
 const base = import.meta.env.BASE_URL;
-const leImg = (path: string) => `${base}assets/images/projects/LasEstrellas/${path}`;
+const leImg = (path: string) => `${base}images/projects/LasEstrellas/${path}`;
 
 const keyFacts: KeyFact[] = [
   { icon: "location_on", label: "Location", value: "Mendoza Province, Argentina" },
