@@ -5438,7 +5438,7 @@ textarea.form-input {
 }
 
 .projects-map .leaflet-container {
-  font-family: var(--ff);
+  font-family: var(--font-body);
   background: #f4efe8;
 }
 

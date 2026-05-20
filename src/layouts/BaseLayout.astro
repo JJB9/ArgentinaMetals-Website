@@ -71,9 +71,17 @@ const organizationJsonLd = {
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="preconnect" href="https://stream.mux.com" crossorigin />
     <link
-      rel="stylesheet"
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=analytics,arrow_back,arrow_forward,article,calendar_today,category,check_circle,chevron_left,chevron_right,close,description,flag,flight,insights,landscape,location_on,mail,monitoring,picture_as_pdf,pie_chart,policy,public,satellite_alt,schedule,science,show_chart&display=swap"
+      onload="this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=analytics,arrow_back,arrow_forward,article,calendar_today,category,check_circle,chevron_left,chevron_right,close,description,flag,flight,insights,landscape,location_on,mail,monitoring,picture_as_pdf,pie_chart,policy,public,satellite_alt,schedule,science,show_chart&display=swap"
+      />
+    </noscript>
     <script is:inline>
       (() => {
         const root = document.documentElement;

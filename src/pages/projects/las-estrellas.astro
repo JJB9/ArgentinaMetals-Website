@@ -142,10 +142,14 @@ const technicalReport = lasEstrellasData.technicalReport;
       </div>
 
       <div class="sample-strip">
-        {samples.map((s, i) => (
+        {samples.map((s, i) => {
+          const dims = s.src === "argentina-metals-las-estrellas-copper-sample.webp"
+            ? { width: 733, height: 1300 }
+            : { width: 1000, height: 562 };
+          return (
           <figure class="sample-strip-item" data-reveal style={`--i:${i}`}>
             <div class="sample-strip-frame">
-              <img src={leImg(s.src)} alt={s.alt} loading="lazy" />
+              <img src={leImg(s.src)} alt={s.alt} loading="lazy" decoding="async" width={dims.width} height={dims.height} />
             </div>
             <figcaption>
               <span class="code-pill">{s.id}</span>
@@ -153,7 +157,8 @@ const technicalReport = lasEstrellasData.technicalReport;
               <span class="sample-strip-note">{s.note}</span>
             </figcaption>
           </figure>
-        ))}
+          );
+        })}
       </div>
     </div>
   </section>
@@ -183,7 +188,7 @@ const technicalReport = lasEstrellasData.technicalReport;
               >
                 <div class="maps-grid-frame">
                   <span class="maps-grid-corner maps-grid-corner--n" aria-hidden="true">N ↑</span>
-                  <img src={leImg(m.src)} alt={m.alt} loading="lazy" width="1061" height="1500" />
+                  <img src={leImg(m.src)} alt={m.alt} loading="lazy" decoding="async" width="1061" height="1500" />
                 </div>
                 <figcaption>
                   <strong>{m.caption}</strong>
@@ -256,7 +261,7 @@ const technicalReport = lasEstrellasData.technicalReport;
       <div class="conclusion-pair">
         <article class="conclusion-card conclusion-card--north" data-reveal style="--i:0">
           <div class="conclusion-card-photo">
-            <img src={leImg("argentina-metals-las-estrellas.webp")} alt="Copper-mineralised rock outcrop with rock hammer for scale, Las Estrellas northern zone" loading="lazy" />
+            <img src={leImg("argentina-metals-las-estrellas.webp")} alt="Copper-mineralised rock outcrop with rock hammer for scale, Las Estrellas northern zone" loading="lazy" decoding="async" width="1000" height="562" />
           </div>
           <div class="conclusion-card-body">
             <span class="conclusion-tag">Northern zone</span>
@@ -266,7 +271,7 @@ const technicalReport = lasEstrellasData.technicalReport;
         </article>
         <article class="conclusion-card conclusion-card--south" data-reveal style="--i:1">
           <div class="conclusion-card-photo">
-            <img src={leImg("argentina-metals-copper-opportunity.webp")} alt="Altered yellow-orange slope at Las Estrellas, characteristic of the porphyry-margin alteration in the southern zone" loading="lazy" />
+            <img src={leImg("argentina-metals-copper-opportunity.webp")} alt="Altered yellow-orange slope at Las Estrellas, characteristic of the porphyry-margin alteration in the southern zone" loading="lazy" decoding="async" width="731" height="1300" />
           </div>
           <div class="conclusion-card-body">
             <span class="conclusion-tag">Southern zone</span>
