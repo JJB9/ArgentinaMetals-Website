@@ -103,8 +103,7 @@
         "id": "infiernillo",
         "name": "Infiernillo",
         "country": "Argentina",
-        "type": "deposit",
-        "minZoom": 7.5
+        "type": "deposit"
       }
     },
     {
@@ -149,7 +148,7 @@
         "country": "Argentina",
         "type": "deposit",
         "labelBelow": true,
-        "minZoom": 7.3
+        "minZoom": 7.0
       }
     },
     {
