@@ -303,10 +303,17 @@ export default function AndesHero({
               f.properties.type === "flagship" ? "top-right" :
               f.properties.labelBelow ? "top" :
               "bottom";
+            // Offsets shift the box so the visible dot/star CENTER lands on lat/lng.
+            // Dot (competitor): 12×12 → half = 6.  Star (deposit): 16×16 → half = 8.
+            // Flagship dot: 14×14 → half = 7.
+            const halfDot = f.properties.type === "competitor" ? 6 : 8;
             const offset: [number, number] =
+              f.properties.compact ? [0, 0] :
               f.properties.type === "flagship" ? [7, -7] :
-              f.properties.labelPos === "2" ? [6, 0] :
-              [0, 0];
+              f.properties.labelPos === "2" ? [-halfDot, 0] :
+              f.properties.type === "city" ? [-halfDot, 0] :
+              f.properties.labelBelow ? [0, -halfDot] :
+              [0, halfDot];
             const marker = new maplibre.Marker({
               element: el,
               anchor,
