@@ -203,7 +203,7 @@ export const handler: Handler = async (event) => {
 
   const apiKey = process.env.RESEND_API_KEY;
   const fromAddr = process.env.RESEND_CONTACT_FROM_ADDRESS ?? "contact@argentinametals.com";
-  const toAddr = process.env.CONTACT_TO_ADDRESS ?? "amc@janbertram.com";
+  const toAddr = process.env.CONTACT_TO_ADDRESS ?? "contact@argentinametals.com";
 
   if (!apiKey) {
     console.error("submission-created: missing RESEND_API_KEY");
