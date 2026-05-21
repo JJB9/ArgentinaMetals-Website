@@ -1,4 +1,4 @@
-import type { Context } from "@netlify/functions";
+import type { Handler } from "@netlify/functions";
 import { Resend } from "resend";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -170,20 +170,23 @@ TSX-V: VLLC`;
   return { html, text, subject };
 }
 
-export default async (req: Request, _context: Context): Promise<Response> => {
-  if (req.method !== "POST") {
-    return new Response("Method not allowed", { status: 405 });
+const OK = { statusCode: 200, body: JSON.stringify({ ok: true }) };
+
+export const handler: Handler = async (event) => {
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method not allowed" };
   }
 
   let body: SubmissionPayload;
   try {
-    body = (await req.json()) as SubmissionPayload;
+    body = JSON.parse(event.body ?? "{}") as SubmissionPayload;
   } catch {
-    return Response.json({ ok: true });
+    console.error("submission-created: invalid JSON body");
+    return OK;
   }
 
   if (body?.payload?.form_name !== "contact") {
-    return Response.json({ ok: true });
+    return OK;
   }
 
   const data = body.payload.data ?? {};
@@ -194,7 +197,8 @@ export default async (req: Request, _context: Context): Promise<Response> => {
   const message = String(data.message ?? "").trim().slice(0, 10000);
 
   if (!email || !EMAIL_RE.test(email) || !message) {
-    return Response.json({ ok: true });
+    console.error("submission-created: payload failed validation", { hasEmail: !!email, emailValid: EMAIL_RE.test(email), hasMessage: !!message });
+    return OK;
   }
 
   const apiKey = process.env.RESEND_API_KEY;
@@ -203,7 +207,7 @@ export default async (req: Request, _context: Context): Promise<Response> => {
 
   if (!apiKey) {
     console.error("submission-created: missing RESEND_API_KEY");
-    return Response.json({ ok: true });
+    return OK;
   }
 
   const topicLabel = TOPIC_LABELS[topicKey] ?? (topicKey || "—");
@@ -228,7 +232,9 @@ export default async (req: Request, _context: Context): Promise<Response> => {
 
   if (sent.error) {
     console.error("submission-created: resend send error", sent.error);
+  } else {
+    console.log("submission-created: sent", { id: sent.data?.id, to: toAddr, from: fromAddr });
   }
 
-  return Response.json({ ok: true });
+  return OK;
 };
