@@ -44,6 +44,13 @@ const management = [
     bio: "Martin Hoff has over 20 years of experience as a resource-focused investor and strategic advisor in Europe. He is a managing Partner at HuHo Capital and Chief Investment Officer of Aumontis Holding AG. Mr. Hoff also has experience serving as a board director with TSXV-listed T2 Metals and other early-stage explorers."
   },
   {
+    name: "Gabriel Feliu",
+    initials: "GF",
+    image: "/images/people/Gabriel Feliu.webp",
+    role: "VP Exploration",
+    bio: "Gabriel Feliu is a senior exploration leader with over 30 years of experience across major mining jurisdictions in South America, including with Barrick and Los Azules (McEwen Copper). Mr. Feliu has deep expertise in porphyry and epithermal systems, project advancement, and technical evaluation of mineral assets."
+  },
+  {
     name: "Carlo Rigillo",
     initials: "CR",
     image: "/images/people/Carlo Rigillo.webp",
@@ -59,28 +66,7 @@ const management = [
   },
 ];
 
-const technical = [
-  {
-    name: "Zach Goldenberg",
-    initials: "ZG",
-    image: "/images/people/Zachary Goldenberg.webp",
-    role: "Capital Markets Advisor",
-    bio: "Zachary Goldenberg is a corporate lawyer specializing in go-public transactions on the TSXV. He is a principal at Liberty Venture Partners with deep capital markets experience. Previously, he has advised on financings, listings, and M&A for multiple resource companies."
-  },
-  {
-    name: "Joaquin Mignaquy",
-    initials: "JM",
-    image: "/images/people/Joaquin Mignaquy.webp",
-    role: "Argentina Advisor",
-    bio: "Joaquin Mignaquy is the Co-founder of Andina, one of the leading gold, lithium, copper and uranium ventures in Argentina. He is experienced in building and managing multidisciplinary teams, aligning technical, legal, and financial areas towards strategic objectives."
-  },
-  {
-    name: "Gabriel Feliu",
-    initials: "GF",
-    image: "/images/people/Gabriel Feliu.webp",
-    role: "VP Exploration",
-    bio: "Gabriel Feliu is a senior exploration leader with over 30 years of experience across major mining jurisdictions in South America, including with Barrick and Los Azules (McEwen Copper). Mr. Feliu has deep expertise in porphyry and epithermal systems, project advancement, and technical evaluation of mineral assets."
-  },
+const advisory = [
   {
     name: "Peter Geerdts",
     initials: "PG",
@@ -96,11 +82,11 @@ const technical = [
     bio: "Chris Paul is the CEO of Hercules Metals and a geologist with over 15 years of discovery experience. He is the founder of Ridgeline Exploration (acquired by Goldspot in 2021) and a key contributor to copper and gold discoveries."
   },
   {
-    name: "Lucas Frana",
-    initials: "LF",
-    image: "/images/people/Lucas Frana.webp",
-    role: "Project Manager",
-    bio: "Lucas Frana is a geologist from Argentina. He has deep knowledge about the regional geology and the work environment in Mendoza."
+    name: "Zach Goldenberg",
+    initials: "ZG",
+    image: "/images/people/Zachary Goldenberg.webp",
+    role: "Capital Markets Advisor",
+    bio: "Zachary Goldenberg is a corporate lawyer specializing in go-public transactions on the TSXV. He is a principal at Liberty Venture Partners with deep capital markets experience. Previously, he has advised on financings, listings, and M&A for multiple resource companies."
   },
   {
     name: "Jamil Sader",
@@ -110,6 +96,13 @@ const technical = [
     bio: "Dr. Jamil Sader is a geoscience professional with over 26 years of experience driving discovery and innovation in the global mining and metals sector. His expertise spans the entire mineral exploration value chain, from technical field programs to executive leadership."
   },
   {
+    name: "Pablo Cortegoso",
+    initials: "PC",
+    image: "/images/people/Pablo Cortegoso.webp",
+    role: "Exploration Manager",
+    bio: "Pablo Cortegoso is an experienced leader and manager and Co-founder of Andina. His unique blend of technical expertise and financial acumen has driven his success across various facets of the industry. He is coordinating Argentina Metals' exploration activity."
+  },
+  {
     name: "Brice Jonassen",
     initials: "BJ",
     image: "/images/people/Brice Jonassen.webp",
@@ -117,11 +110,18 @@ const technical = [
     bio: "Brice Jonassen is a GIS specialist with expertise in remote sensing, multispectral and hyperspectral imagery, and geospatial data analysis. Mr. Jonassen has applied spectral imaging workflows to support mineral exploration and target generation across North and South America."
   },
   {
-    name: "Pablo Cortegoso",
-    initials: "PC",
-    image: "/images/people/Pablo Cortegoso.webp",
-    role: "Exploration Manager",
-    bio: "Pablo Cortegoso is an experienced leader and manager and Co-founder of Andina. His unique blend of technical expertise and financial acumen has driven his success across various facets of the industry. He is coordinating Argentina Metals' exploration activity."
+    name: "Joaquin Mignaquy",
+    initials: "JM",
+    image: "/images/people/Joaquin Mignaquy.webp",
+    role: "Argentina Advisor",
+    bio: "Joaquin Mignaquy is the Co-founder of Andina, one of the leading gold, lithium, copper and uranium ventures in Argentina. He is experienced in building and managing multidisciplinary teams, aligning technical, legal, and financial areas towards strategic objectives."
+  },
+  {
+    name: "Lucas Frana",
+    initials: "LF",
+    image: "/images/people/Lucas Frana.webp",
+    role: "Project Manager",
+    bio: "Lucas Frana is a geologist from Argentina. He has deep knowledge about the regional geology and the work environment in Mendoza."
   }
 ];
 ---
@@ -135,7 +135,7 @@ const technical = [
     <div class="wrap">
       <div class="section-header" data-reveal>
         <div>
-          <h2 class="section-title">Management and Board Team</h2>
+          <h2 class="section-title">Management Team and Board</h2>
         </div>
       </div>
       <div class="team-grid">
@@ -164,12 +164,12 @@ const technical = [
     <div class="wrap">
       <div class="section-header" data-reveal>
         <div>
-          <h2 class="section-title">Technical Team and Advisors</h2>
+          <h2 class="section-title">Advisory Board</h2>
         </div>
       </div>
 
       <div class="team-grid">
-        {technical.map((member, i) => (
+        {advisory.map((member, i) => (
           <article class="team-card" data-reveal data-reveal-effect="quiet" style={`--i:${i}`}>
             <div class="avatar" aria-hidden="true">
               {member.image
