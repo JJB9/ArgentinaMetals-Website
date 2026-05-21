@@ -147,19 +147,6 @@ body {
   color: var(--g800);
   background:
     linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.55) 0%,
-      rgba(255, 255, 255, 0.25) 30%,
-      rgba(255, 255, 255, 0) 60%
-    ) 0 0 / 100% 480px no-repeat,
-    linear-gradient(
-      180deg,
-      rgba(0, 61, 30, 0.92) 0%,
-      rgba(0, 86, 43, 0.60) 140px,
-      rgba(0, 86, 43, 0.25) 300px,
-      rgba(0, 86, 43, 0) 480px
-    ) 0 0 / 100% 480px no-repeat,
-    linear-gradient(
       180deg,
       #ffffff 0%,
       #ffffff 420px,
@@ -332,7 +319,7 @@ textarea:focus-visible {
 }
 
 .wrap {
-  width: min(100% - 48px, 1120px);
+  width: min(100% - 80px, 1120px);
   margin: 0 auto;
 }
 
@@ -340,8 +327,10 @@ textarea:focus-visible {
   position: relative;
   z-index: 20;
   width: 100%;
-  padding-top: 18px;
+  padding-top: 16px;
+  padding-bottom: 16px;
   overflow: visible;
+  background: linear-gradient(180deg, #002d17 0%, #004626 100%);
   transition: backdrop-filter 220ms var(--ease);
 }
 
@@ -1554,8 +1543,22 @@ body .closing-cta-copy h2 {
   transform: translateY(-130%);
 }
 
+/* True 3 o'clock: star on the lat/lng with the label horizontally to the right. */
+.andes-hero-marker--pos-3 {
+  flex-direction: row;
+  align-items: center;
+}
+
+.andes-hero-marker--pos-3 .andes-hero-marker-label {
+  margin: 0 0 0 6px;
+}
+
 .andes-hero-marker--compact {
   pointer-events: none;
+}
+
+.andes-hero-marker--compact.andes-hero-marker--has-tagline {
+  pointer-events: auto;
 }
 
 .andes-hero-marker--compact .andes-hero-marker-star {
@@ -1577,6 +1580,90 @@ body .closing-cta-copy h2 {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+.andes-hero-marker--has-tagline {
+  cursor: help;
+}
+
+/* Lift the hovered marker above all sibling markers so the tooltip can never
+   be overlapped by adjacent pin stars or labels. MapLibre attaches its
+   maplibregl-marker class to our element directly (no wrapper), so we target
+   it here instead of a parent. */
+.andes-hero-marker--has-tagline:hover,
+.andes-hero-marker--has-tagline:focus-within {
+  z-index: 9999 !important;
+}
+
+.andes-hero-marker-tagline {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translate(-50%, 4px);
+  width: max-content;
+  max-width: 280px;
+  padding: 10px 13px 11px;
+  background: rgba(26, 25, 23, 0.96);
+  color: #fdf6ec;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.005em;
+  text-align: left;
+  white-space: normal;
+  border-radius: 7px;
+  box-shadow: 0 6px 22px rgba(20, 12, 4, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 140ms ease, transform 140ms ease;
+  z-index: 10;
+}
+
+/* The JS positioner sets --tip-arrow-shift to keep the arrow anchored on
+   the marker when the tooltip is shifted horizontally to fit inside the map. */
+.andes-hero-marker-tagline::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: calc(50% - var(--tip-arrow-shift, 0px));
+  width: 0;
+  height: 0;
+  margin-left: -5px;
+  border: 5px solid transparent;
+  border-top-color: rgba(26, 25, 23, 0.96);
+}
+
+.andes-hero-marker--has-tagline:hover .andes-hero-marker-tagline,
+.andes-hero-marker--has-tagline:focus-within .andes-hero-marker-tagline {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* Flip below the marker when there isn't room above. */
+.andes-hero-marker[data-tagline-pos="below"] .andes-hero-marker-tagline {
+  bottom: auto;
+  top: calc(100% + 8px);
+  transform: translate(-50%, -4px);
+}
+
+.andes-hero-marker[data-tagline-pos="below"]:hover .andes-hero-marker-tagline,
+.andes-hero-marker[data-tagline-pos="below"]:focus-within .andes-hero-marker-tagline {
+  transform: translate(-50%, 0);
+}
+
+.andes-hero-marker[data-tagline-pos="below"] .andes-hero-marker-tagline::after {
+  top: auto;
+  bottom: 100%;
+  border-top-color: transparent;
+  border-bottom-color: rgba(26, 25, 23, 0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .andes-hero-marker-tagline,
+  .andes-hero-marker[data-tagline-pos="below"] .andes-hero-marker-tagline {
+    transition: opacity 60ms linear;
+    transform: translate(-50%, 0);
+  }
 }
 
 @keyframes andesPulse {
@@ -5351,7 +5438,7 @@ textarea.form-input {
 }
 
 .projects-map .leaflet-container {
-  font-family: var(--ff);
+  font-family: var(--font-body);
   background: #f4efe8;
 }
 
@@ -6462,13 +6549,13 @@ textarea.form-input {
 .pull-quote {
   position: relative;
   margin: 28px 0;
-  padding: 4px 0 4px 56px;
+  padding: 4px 56px;
   color: var(--g800);
   font-size: 1.36rem;
   font-style: italic;
   font-weight: 400;
   line-height: 1.45;
-  max-width: 52ch;
+  max-width: calc(52ch + 56px);
   letter-spacing: -0.005em;
 }
 
@@ -6478,7 +6565,24 @@ textarea.form-input {
   left: 0;
   top: -0.25em;
   color: var(--copper-dark);
-  font-family: Georgia, "Source Serif 4", serif;
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-style: normal;
+  line-height: 1;
+}
+
+.pull-quote p {
+  position: relative;
+  margin: 0;
+}
+
+.pull-quote p::after {
+  content: "\201D";
+  position: absolute;
+  right: -56px;
+  bottom: -0.8em;
+  color: var(--copper-dark);
+  font-family: var(--font-display);
   font-size: 3.2rem;
   font-style: normal;
   line-height: 1;

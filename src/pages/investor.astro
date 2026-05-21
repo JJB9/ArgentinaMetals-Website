@@ -80,7 +80,7 @@ const documents: { title: string; items: DocItem[] }[] = [
     <div class="wrap">
       <div class="page-hero-text">
         <h1 data-reveal style="--i:0">Investors</h1>
-        <p data-reveal style="--i:1">Pure-play exposure to world-class copper exploration in one of the world's most prospective emerging jurisdictions. Listing on TSX Venture Exchange (pending). Secondary listings in Frankfurt and other places.</p>
+        <p data-reveal style="--i:1">Pure-play exposure to world-class copper exploration in one of the world's most prospective emerging jurisdictions. Listing on TSX Venture Exchange (pending), with a secondary listing on the Frankfurt Stock Exchange to follow.</p>
       </div>
       <div class="page-hero-subscribe">
         <SubscribeCard reveal revealIndex={2} />
@@ -90,9 +90,54 @@ const documents: { title: string; items: DocItem[] }[] = [
 
   <div class="hero-media" data-reveal>
     <div class="hero-media-frame">
-      <video data-parallax autoplay muted loop playsinline src={asset("videos/case-video.mp4")}></video>
+      <video
+        data-parallax
+        data-lazy-src={asset("videos/case-video.mp4")}
+        poster={asset("images/brand/preview-thumbnail.webp")}
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="none"
+      ></video>
     </div>
   </div>
+
+  <script is:inline>
+    (() => {
+      const init = () => {
+        const video = document.querySelector("video[data-lazy-src]");
+        if (!video || video.dataset.lazyBound === "1") return;
+        const src = video.getAttribute("data-lazy-src");
+        if (!src) return;
+        video.dataset.lazyBound = "1";
+        const load = () => {
+          if (video.src) return;
+          video.src = src;
+          video.load();
+          const tryPlay = () => video.play().catch(() => {});
+          if (video.readyState >= 2) tryPlay();
+          else video.addEventListener("loadeddata", tryPlay, { once: true });
+        };
+        if (!("IntersectionObserver" in window)) {
+          load();
+          return;
+        }
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              io.disconnect();
+              load();
+              break;
+            }
+          }
+        }, { rootMargin: "200px 0px" });
+        io.observe(video);
+      };
+      init();
+      document.addEventListener("astro:page-load", init);
+    })();
+  </script>
 
   <section class="section">
     <div class="wrap">

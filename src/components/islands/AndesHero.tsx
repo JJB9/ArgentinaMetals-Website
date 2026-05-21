@@ -31,9 +31,10 @@ type MineFeature = {
     type: "competitor" | "flagship" | "city" | "deposit";
     caption?: string;
     labelBelow?: boolean;
-    labelPos?: "2";
+    labelPos?: "2" | "3";
     compact?: boolean;
     minZoom?: number;
+    tagline?: string;
   };
 };
 
@@ -71,9 +72,7 @@ function makeMarkerEl(f: MineFeature): HTMLDivElement {
         <polygon points="12,2 14.6,8.6 22,9 16,14 18,21 12,17.5 6,21 8,14 2,9 9.4,8.6"/>
       </svg>
       <span class="visually-hidden">${f.properties.name}</span>`;
-    return root;
-  }
-  if (labelPos === "2" && variant === "deposit") {
+  } else if ((labelPos === "2" || labelPos === "3") && variant === "deposit") {
     const star = `<svg class="andes-hero-marker-star" viewBox="0 0 24 24" aria-hidden="true">
         <polygon points="12,2 14.6,8.6 22,9 16,14 18,21 12,17.5 6,21 8,14 2,9 9.4,8.6"/>
       </svg>`;
@@ -82,9 +81,7 @@ function makeMarkerEl(f: MineFeature): HTMLDivElement {
         ${f.properties.caption ? `<em>${f.properties.caption}</em>` : ""}
       </span>`;
     root.innerHTML = `${star}${label}`;
-    return root;
-  }
-  if (variant === "city") {
+  } else if (variant === "city") {
     root.innerHTML = `
       <span class="andes-hero-marker-dot" aria-hidden="true"></span>
       <span class="andes-hero-marker-label">
@@ -92,9 +89,7 @@ function makeMarkerEl(f: MineFeature): HTMLDivElement {
         ${f.properties.caption ? `<em>${f.properties.caption}</em>` : ""}
       </span>
     `;
-    return root;
-  }
-  if (variant === "deposit") {
+  } else if (variant === "deposit") {
     const star = `<svg class="andes-hero-marker-star" viewBox="0 0 24 24" aria-hidden="true">
         <polygon points="12,2 14.6,8.6 22,9 16,14 18,21 12,17.5 6,21 8,14 2,9 9.4,8.6"/>
       </svg>`;
@@ -103,9 +98,7 @@ function makeMarkerEl(f: MineFeature): HTMLDivElement {
         ${f.properties.caption ? `<em>${f.properties.caption}</em>` : ""}
       </span>`;
     root.innerHTML = f.properties.labelBelow ? `${star}${label}` : `${label}${star}`;
-    return root;
-  }
-  if (variant === "flagship") {
+  } else if (variant === "flagship") {
     root.innerHTML = `
       <span class="andes-hero-marker-pulse" aria-hidden="true"></span>
       <span class="andes-hero-marker-dot" aria-hidden="true"></span>
@@ -115,12 +108,20 @@ function makeMarkerEl(f: MineFeature): HTMLDivElement {
         <em>${f.properties.caption ?? ""}</em>
       </span>
     `;
-    return root;
+  } else {
+    root.innerHTML = `<span class="andes-hero-marker-label">
+        <strong>${f.properties.name}</strong>
+        ${f.properties.caption ? `<em>${f.properties.caption}</em>` : ""}
+      </span><span class="andes-hero-marker-pulse" aria-hidden="true"></span><span class="andes-hero-marker-dot" aria-hidden="true"></span>`;
   }
-  root.innerHTML = `<span class="andes-hero-marker-label">
-      <strong>${f.properties.name}</strong>
-      ${f.properties.caption ? `<em>${f.properties.caption}</em>` : ""}
-    </span><span class="andes-hero-marker-pulse" aria-hidden="true"></span><span class="andes-hero-marker-dot" aria-hidden="true"></span>`;
+  if (f.properties.tagline) {
+    const tip = document.createElement("span");
+    tip.className = "andes-hero-marker-tagline";
+    tip.setAttribute("role", "tooltip");
+    tip.textContent = f.properties.tagline;
+    root.appendChild(tip);
+    root.classList.add("andes-hero-marker--has-tagline");
+  }
   return root;
 }
 
@@ -296,9 +297,10 @@ export default function AndesHero({
           const visibilityEntries: Array<{ marker: MlMarker; minZoom: number }> = [];
           for (const f of MINES.features) {
             const el = makeMarkerEl(f);
+            const horizontalLabel = f.properties.labelPos === "2" || f.properties.labelPos === "3";
             const anchor =
               f.properties.compact ? "center" :
-              f.properties.labelPos === "2" ? "left" :
+              horizontalLabel ? "left" :
               f.properties.type === "city" ? "left" :
               f.properties.type === "flagship" ? "top-right" :
               f.properties.labelBelow ? "top" :
@@ -310,7 +312,7 @@ export default function AndesHero({
             const offset: [number, number] =
               f.properties.compact ? [0, 0] :
               f.properties.type === "flagship" ? [7, -7] :
-              f.properties.labelPos === "2" ? [-halfDot, 0] :
+              horizontalLabel ? [-halfDot, 0] :
               f.properties.type === "city" ? [-halfDot, 0] :
               f.properties.labelBelow ? [0, -halfDot] :
               [0, halfDot];
@@ -326,6 +328,54 @@ export default function AndesHero({
             markersRef.current.push(marker);
             const minZoom = typeof f.properties.minZoom === "number" ? f.properties.minZoom : 0;
             if (minZoom > 0) visibilityEntries.push({ marker, minZoom });
+
+            if (f.properties.tagline) {
+              const positionTagline = () => {
+                const mapEl = containerRef.current;
+                const tip = el.querySelector<HTMLElement>(".andes-hero-marker-tagline");
+                if (!mapEl || !tip) return;
+                el.removeAttribute("data-tagline-pos");
+                tip.style.removeProperty("left");
+                tip.style.removeProperty("--tip-arrow-shift");
+                const mapRect = mapEl.getBoundingClientRect();
+                const markerRect = el.getBoundingClientRect();
+                const tipW = tip.offsetWidth;
+                const tipH = tip.offsetHeight;
+                const gap = 8;
+                const pad = 4;
+                const centerX = markerRect.left + markerRect.width / 2;
+                const topIfAbove = markerRect.top - gap - tipH;
+                const topIfBelow = markerRect.bottom + gap;
+                let pos: "above" | "below" = "above";
+                if (topIfAbove < mapRect.top + pad && topIfBelow + tipH <= mapRect.bottom - pad) {
+                  pos = "below";
+                }
+                const naturalLeft = centerX - tipW / 2;
+                let shiftX = 0;
+                if (naturalLeft + tipW > mapRect.right - pad) {
+                  shiftX = mapRect.right - pad - (naturalLeft + tipW);
+                } else if (naturalLeft < mapRect.left + pad) {
+                  shiftX = mapRect.left + pad - naturalLeft;
+                }
+                if (pos === "below") el.setAttribute("data-tagline-pos", "below");
+                if (shiftX !== 0) {
+                  tip.style.left = `calc(50% + ${shiftX}px)`;
+                  tip.style.setProperty("--tip-arrow-shift", `${shiftX}px`);
+                }
+              };
+              const clearTagline = () => {
+                el.removeAttribute("data-tagline-pos");
+                const tip = el.querySelector<HTMLElement>(".andes-hero-marker-tagline");
+                if (tip) {
+                  tip.style.removeProperty("left");
+                  tip.style.removeProperty("--tip-arrow-shift");
+                }
+              };
+              el.addEventListener("mouseenter", positionTagline);
+              el.addEventListener("focusin", positionTagline);
+              el.addEventListener("mouseleave", clearTagline);
+              el.addEventListener("focusout", clearTagline);
+            }
           }
 
           if (visibilityEntries.length > 0) {

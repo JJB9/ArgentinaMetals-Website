@@ -9,15 +9,15 @@ const leImg = (path: string) => `${base}images/projects/LasEstrellas/${path}`;
 const keyFacts: KeyFact[] = [
   { icon: "location_on", label: "Location", value: "Mendoza Province, Argentina" },
   { icon: "science", label: "Commodities", value: "Copper (primary), gold, silver" },
-  { icon: "schedule", label: "Current Phase", value: "Phase 2 — Target Definition" },
+  { icon: "schedule", label: "Current Phase", value: "Phase 2: Target Definition" },
   { icon: "landscape", label: "District Land Package", value: "146,728 ha consolidated" }
 ];
 
 const rockChips = [
   { label: "Samples > 50 ppm Cu", value: "17", hi: false },
   { label: "Samples > 100 ppm Cu", value: "5", hi: false },
-  { label: "Peak — G2R-287", value: "6,673 ppm Cu", hi: true },
-  { label: "Peak — G2R-271", value: "9,978 ppm Cu", hi: true }
+  { label: "Peak (G2R-287)", value: "6,673 ppm Cu", hi: true },
+  { label: "Peak (G2R-271)", value: "9,978 ppm Cu", hi: true }
 ];
 
 const anomalyMaps = [
@@ -44,14 +44,14 @@ const anomalyMaps = [
 const samples = [
   {
     src: "argentina-metals-las-estrellas-copper-sample.webp",
-    alt: "Sample G2R-271 in gloved hands — peak 9,978 ppm Cu from the northern target zone at Las Estrellas",
+    alt: "Sample G2R-271 in gloved hands, peak 9,978 ppm Cu from the northern target zone at Las Estrellas",
     id: "G2R-271",
     grade: "9,978 ppm Cu",
     note: "Northern target zone"
   },
   {
     src: "argentina-metals-las-estrellas-copper-sample-332.webp",
-    alt: "Sample G2R-332 held up against the property sky — 326 ppm Cu",
+    alt: "Sample G2R-332 held up against the property sky, 326 ppm Cu",
     id: "G2R-332",
     grade: "326 ppm Cu",
     note: "Anomalous halo"
@@ -68,7 +68,7 @@ const samples = [
 const technicalReport = lasEstrellasData.technicalReport;
 ---
 
-<BaseLayout title="Las Estrellas — Cu-Au Project | Argentina Metals">
+<BaseLayout title="Las Estrellas · Cu-Au Project | Argentina Metals">
   <div class="page-progress" aria-hidden="true"><span></span></div>
 
   <section class="page-hero page-hero--split page-hero--project">
@@ -79,7 +79,7 @@ const technicalReport = lasEstrellasData.technicalReport;
           All Projects
         </a>
         <h1 data-reveal style="--i:1">Las Estrellas</h1>
-        <p data-reveal style="--i:2">Argentina Metals' lead copper-gold project on the 146,728-hectare Western Malargüe land position — surface geochemistry and a property-scale magnetometric survey have defined targets in two distinct zones.</p>
+        <p data-reveal style="--i:2">Argentina Metals' lead copper-gold project on the 146,728-hectare Western Malargüe land position. Surface geochemistry and a property-scale magnetometric survey have defined targets in two distinct zones.</p>
       </div>
       <div class="page-hero-aside" data-reveal style="--i:2">
         <KeyFactsBox
@@ -142,10 +142,14 @@ const technicalReport = lasEstrellasData.technicalReport;
       </div>
 
       <div class="sample-strip">
-        {samples.map((s, i) => (
+        {samples.map((s, i) => {
+          const dims = s.src === "argentina-metals-las-estrellas-copper-sample.webp"
+            ? { width: 733, height: 1300 }
+            : { width: 1000, height: 562 };
+          return (
           <figure class="sample-strip-item" data-reveal style={`--i:${i}`}>
             <div class="sample-strip-frame">
-              <img src={leImg(s.src)} alt={s.alt} loading="lazy" />
+              <img src={leImg(s.src)} alt={s.alt} loading="lazy" decoding="async" width={dims.width} height={dims.height} />
             </div>
             <figcaption>
               <span class="code-pill">{s.id}</span>
@@ -153,7 +157,8 @@ const technicalReport = lasEstrellasData.technicalReport;
               <span class="sample-strip-note">{s.note}</span>
             </figcaption>
           </figure>
-        ))}
+          );
+        })}
       </div>
     </div>
   </section>
@@ -163,7 +168,7 @@ const technicalReport = lasEstrellasData.technicalReport;
       <div class="maps-sticky">
         <header class="maps-sticky-header" data-reveal>
           <h2 class="section-title">Project maps</h2>
-          <p class="section-desc">Surface geochemistry and ground magnetometry produced three property-scale plates that together frame the discovery case — copper and silver from rock chip sampling, alongside the magnetic signature of the underlying intrusive bodies.</p>
+          <p class="section-desc">Surface geochemistry and ground magnetometry produced three property-scale plates that together frame the discovery case: copper and silver from rock chip sampling, alongside the magnetic signature of the underlying intrusive bodies.</p>
           <p class="maps-sticky-meta">Plates · January 2026</p>
         </header>
         <div class="maps-sticky-body">
@@ -183,7 +188,7 @@ const technicalReport = lasEstrellasData.technicalReport;
               >
                 <div class="maps-grid-frame">
                   <span class="maps-grid-corner maps-grid-corner--n" aria-hidden="true">N ↑</span>
-                  <img src={leImg(m.src)} alt={m.alt} loading="lazy" width="1061" height="1500" />
+                  <img src={leImg(m.src)} alt={m.alt} loading="lazy" decoding="async" width="1061" height="1500" />
                 </div>
                 <figcaption>
                   <strong>{m.caption}</strong>
@@ -249,29 +254,29 @@ const technicalReport = lasEstrellasData.technicalReport;
       <div class="section-header section-header--single" data-reveal>
         <div>
           <h2 class="section-title">Conclusion</h2>
-          <p class="section-desc">Two distinct interpretations emerge along the property — a mineralised target in the north, and the periphery of a porphyry system in the south.</p>
+          <p class="section-desc">Two distinct interpretations emerge along the property: a mineralised target in the north, and the periphery of a porphyry system in the south.</p>
         </div>
       </div>
 
       <div class="conclusion-pair">
         <article class="conclusion-card conclusion-card--north" data-reveal style="--i:0">
           <div class="conclusion-card-photo">
-            <img src={leImg("argentina-metals-las-estrellas.webp")} alt="Copper-mineralised rock outcrop with rock hammer for scale, Las Estrellas northern zone" loading="lazy" />
+            <img src={leImg("argentina-metals-las-estrellas.webp")} alt="Copper-mineralised rock outcrop with rock hammer for scale, Las Estrellas northern zone" loading="lazy" decoding="async" width="1000" height="562" />
           </div>
           <div class="conclusion-card-body">
             <span class="conclusion-tag">Northern zone</span>
             <h3>El Burrero-style copper-silver mantle</h3>
-            <p>In the northern part, there is a potential mineralized zone that would correspond to the <span class="text-accent">El Burrero</span> mine model — a volcanic mantle-type deposit of copper and silver, with some indications of a possible skarn or IOCG as well.</p>
+            <p>In the northern part, there is a potential mineralized zone that would correspond to the <span class="text-accent">El Burrero</span> mine model: a volcanic mantle-type deposit of copper and silver, with some indications of a possible skarn or IOCG as well.</p>
           </div>
         </article>
         <article class="conclusion-card conclusion-card--south" data-reveal style="--i:1">
           <div class="conclusion-card-photo">
-            <img src={leImg("argentina-metals-coppoer-opportunity.webp")} alt="Altered yellow-orange slope at Las Estrellas — characteristic of the porphyry-margin alteration in the southern zone" loading="lazy" />
+            <img src={leImg("argentina-metals-copper-opportunity.webp")} alt="Altered yellow-orange slope at Las Estrellas, characteristic of the porphyry-margin alteration in the southern zone" loading="lazy" decoding="async" width="731" height="1300" />
           </div>
           <div class="conclusion-card-body">
             <span class="conclusion-tag">Southern zone</span>
             <h3>Porphyry copper system periphery</h3>
-            <p>In the southern part, geochemistry indicates a peripheral zone of a porphyry copper system — relatively high values of arsenic and lead, and low values of copper and molybdenum.</p>
+            <p>In the southern part, geochemistry indicates a peripheral zone of a porphyry copper system: relatively high values of arsenic and lead, and low values of copper and molybdenum.</p>
           </div>
         </article>
       </div>

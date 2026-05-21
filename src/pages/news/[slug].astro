@@ -85,7 +85,15 @@ const newsArticleJsonLd = {
 
       {item.data.image && (
         <figure class="article-hero">
-          <img src={item.data.image} alt={item.data.imageAlt ?? item.data.title} />
+          <img
+            src={item.data.image}
+            alt={item.data.imageAlt ?? item.data.title}
+            width="1200"
+            height="675"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
         </figure>
       )}
 
