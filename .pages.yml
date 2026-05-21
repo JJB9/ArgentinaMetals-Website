@@ -62,16 +62,8 @@ content:
           extensions: [pdf]
         required: false
         description: Leave empty to disable the download link.
-      - name: factSheet
-        label: Fact Sheet / 1-Pager (PDF)
-        type: file
-        options:
-          media: documents
-          extensions: [pdf]
-        required: false
-        description: Leave empty to disable the download link.
       - name: technicalReport
-        label: NI 43-101 Technical Report (PDF)
+        label: Technical Report Las Estrellas (PDF)
         type: file
         options:
           media: documents
