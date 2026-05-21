@@ -57,11 +57,10 @@ const donutSegments = capitalRows.map((row) => {
 
 const documents: { title: string; items: DocItem[] }[] = [
   {
-    title: "Corporate Documents",
+    title: "Corporate Materials",
     items: [
       pdfItem("picture_as_pdf", "Corporate Presentation", corporateDocs.corporatePresentation),
-      pdfItem("description", "Fact Sheet (1-Pager)", corporateDocs.factSheet),
-      pdfItem("science", "NI 43-101 Technical Report", corporateDocs.technicalReport)
+      pdfItem("science", "NI 43-101 Technical Report: Las Estrellas", corporateDocs.technicalReport)
     ]
   },
   {
@@ -80,7 +79,7 @@ const documents: { title: string; items: DocItem[] }[] = [
     <div class="wrap">
       <div class="page-hero-text">
         <h1 data-reveal style="--i:0">Investors</h1>
-        <p data-reveal style="--i:1">Pure-play exposure to world-class copper exploration in one of the world's most prospective emerging jurisdictions. Listing on TSX Venture Exchange (pending), with a secondary listing on the Frankfurt Stock Exchange to follow.</p>
+        <p data-reveal style="--i:1">Pure-play exposure to world-class copper exploration in one of the world's most prospective emerging jurisdictions. Listing on the TSX Venture Exchange imminently, with secondary listings on the Frankfurt and OTC Stock Exchanges to follow.</p>
       </div>
       <div class="page-hero-subscribe">
         <SubscribeCard reveal revealIndex={2} />
@@ -245,9 +244,30 @@ const documents: { title: string; items: DocItem[] }[] = [
       <div class="section-header" data-reveal>
         <div>
           <h2 class="section-title">Documents &amp; Filings</h2>
-          <p class="section-desc">All continuous disclosure documents are filed on <a href="https://www.sedarplus.ca" target="_blank" rel="noopener">SEDAR+</a>. Downloads and stock information are available below.</p>
+          <p class="section-desc">Argentina Metals is a reporting issuer in Canada. The complete record of continuous disclosure filings is available on SEDAR+, with key downloads mirrored below.</p>
         </div>
       </div>
+
+      <a
+        class="sedar-card"
+        href="https://www.sedarplus.ca/csa-party/records/profile.html?id=becc77e21599325466cffb9a998a42d3"
+        target="_blank"
+        rel="noopener"
+        data-reveal
+        aria-label="View Argentina Metals' company profile on SEDAR+"
+      >
+        <div class="sedar-card-icon" aria-hidden="true">
+          <span class="mi">verified</span>
+        </div>
+        <div class="sedar-card-body">
+          <h3>View Company Profile on SEDAR+</h3>
+          <p>Access the official record of news releases, financial statements, material change reports, and insider filings filed by Argentina Metals with the Canadian Securities Administrators.</p>
+        </div>
+        <div class="sedar-card-cta" aria-hidden="true">
+          <span class="sedar-card-cta-label">Open SEDAR+</span>
+          <span class="mi sedar-card-cta-icon">north_east</span>
+        </div>
+      </a>
 
       <div class="document-grid">
         {documents.map((group, i) => (
@@ -439,6 +459,98 @@ const documents: { title: string; items: DocItem[] }[] = [
     .cap-table thead th:nth-child(3),
     .cap-table tbody td:nth-child(3) {
       display: none;
+    }
+  }
+
+  .sedar-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    padding: 26px 32px;
+    margin-bottom: 28px;
+    border-radius: var(--radius);
+    background: var(--green-grad);
+    color: #fff;
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .sedar-card:hover,
+  .sedar-card:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md, var(--shadow-sm));
+  }
+
+  .sedar-card-icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .sedar-card-icon .mi {
+    font-size: 1.5rem;
+    color: var(--copper-light);
+  }
+
+  .sedar-card-body {
+    flex: 1 1 320px;
+    min-width: 0;
+  }
+
+  .sedar-card-body h3 {
+    margin: 0 0 6px;
+    color: #fff;
+    font-size: 1.2rem;
+    line-height: 1.3;
+  }
+
+  .sedar-card-body p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.84rem;
+    line-height: 1.65;
+    max-width: 620px;
+  }
+
+  .sedar-card-cta {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .sedar-card:hover .sedar-card-cta,
+  .sedar-card:focus-visible .sedar-card-cta {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.32);
+  }
+
+  .sedar-card-cta-icon {
+    font-size: 1rem;
+    color: var(--copper-light);
+  }
+
+  @media (max-width: 768px) {
+    .sedar-card {
+      gap: 18px;
+      padding: 22px;
     }
   }
 </style>
