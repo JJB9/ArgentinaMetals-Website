@@ -80,7 +80,7 @@
   --stock-down: #c03028;
   --font-body: "Sora", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-display: "Sora", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-mono: "Sora", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-label: var(--font-mono);
   --fb: var(--font-body);
   --r-sm: 6px;
@@ -6515,7 +6515,7 @@ textarea.form-input {
   border-radius: 4px;
   background: var(--sand);
   color: var(--g700);
-  font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  font-family: var(--font-body);
   font-size: 0.82em;
   font-weight: 500;
   letter-spacing: 0;
@@ -7885,9 +7885,8 @@ button.surface:hover {
 }
 
 /* ============================================================
-   Mono accent — JetBrains Mono on technical-detail surfaces.
-   Labels, ticker, drill tables, small data readouts.
-   Big editorial figures stay in the display serif.
+   Data accent — Sora with tabular numerals on technical-detail
+   surfaces. Labels, ticker, drill tables, small data readouts.
    The `body ` prefix is required to win specificity over the
    `body :where(*):not(.mi)` font-family inherit reset above.
    ============================================================ */
