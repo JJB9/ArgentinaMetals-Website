@@ -1496,6 +1496,7 @@ body .closing-cta-copy h2 {
   margin: 8px 0 0 0;
   align-self: flex-start;
   background: rgba(0, 61, 30, 0.95);
+  transform: translateX(-14px);
 }
 
 .andes-hero-marker--flagship .andes-hero-marker-label strong {
