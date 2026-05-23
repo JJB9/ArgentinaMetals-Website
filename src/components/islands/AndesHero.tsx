@@ -100,13 +100,13 @@ function makeMarkerEl(f: MineFeature): HTMLDivElement {
     root.innerHTML = f.properties.labelBelow ? `${star}${label}` : `${label}${star}`;
   } else if (variant === "flagship") {
     root.innerHTML = `
+      <span class="andes-hero-marker-pulse" aria-hidden="true"></span>
+      <span class="andes-hero-marker-dot" aria-hidden="true"></span>
       <span class="andes-hero-marker-label">
         <span class="andes-hero-marker-badge">Argentina Metals</span>
         <strong>${f.properties.name}</strong>
         <em>${f.properties.caption ?? ""}</em>
       </span>
-      <span class="andes-hero-marker-dot" aria-hidden="true"></span>
-      <span class="andes-hero-marker-pulse" aria-hidden="true"></span>
     `;
   } else {
     root.innerHTML = `<span class="andes-hero-marker-label">
@@ -302,7 +302,7 @@ export default function AndesHero({
               f.properties.compact ? "center" :
               horizontalLabel ? "left" :
               f.properties.type === "city" ? "left" :
-              f.properties.type === "flagship" ? "right" :
+              f.properties.type === "flagship" ? "top-right" :
               f.properties.labelBelow ? "top" :
               "bottom";
             // Offsets shift the box so the visible dot/star CENTER lands on lat/lng.
@@ -311,7 +311,7 @@ export default function AndesHero({
             const halfDot = f.properties.type === "competitor" ? 6 : 8;
             const offset: [number, number] =
               f.properties.compact ? [0, 0] :
-              f.properties.type === "flagship" ? [7, 0] :
+              f.properties.type === "flagship" ? [7, -7] :
               horizontalLabel ? [-halfDot, 0] :
               f.properties.type === "city" ? [-halfDot, 0] :
               f.properties.labelBelow ? [0, -halfDot] :
