@@ -43,9 +43,17 @@ export function maptilerStyleUrl(key: string): string {
 export const TERRAIN_SOURCE_URL = (key: string) =>
   `https://api.maptiler.com/tiles/terrain-rgb-v2/tiles.json?key=${encodeURIComponent(key)}`;
 
+export type CameraView = {
+  center: [number, number];
+  zoom: number;
+  pitch: number;
+  bearing: number;
+};
+
 export const CAMERA = {
   start: { center: [-71.2, -40.2] as [number, number], zoom: 4.3, pitch: 38, bearing: 0 },
-  end: { center: [-70.5, -34.6] as [number, number], zoom: 7.0, pitch: 50, bearing: 0 },
+  end: { center: [-70.15, -33.75] as [number, number], zoom: 7.4, pitch: 45, bearing: 0 },
+  endLandscape: { center: [-70.15, -33.75] as [number, number], zoom: 7.2, pitch: 45, bearing: 0 },
   flyDurationMs: 2500,
 };
 
