@@ -13,7 +13,7 @@
         "caption": "Antofagasta · Chile",
         "labelBelow": true,
         "minZoom": 7.0,
-        "tagline": "Top-10 global copper mine; 319.6 kt Cu produced in 2024 with 2024 reserves of ~2.1 Bt; life-extension project pushes operations to 2051."
+        "tagline": "Ranked ~#10–12 worldwide by mined copper output; 319.6 kt Cu produced in 2024 with 2024 reserves of ~2.1 Bt; life-extension project pushes operations to 2051."
       }
     },
     {
@@ -27,7 +27,7 @@
         "type": "competitor",
         "caption": "Anglo American · Chile",
         "minZoom": 7.0,
-        "tagline": "Open-pit Cu mine 132 km north of Santiago; ~48 kt Cu in 2024; US$295 M investment is extending mine life from 2027 to 2037."
+        "tagline": "Open-pit Cu mine 132 km north of Santiago and Anglo's smallest Chilean asset (outside the global top 20); ~48 kt Cu in 2024; US$295 M investment is extending mine life from 2027 to 2037."
       }
     },
     {
@@ -40,7 +40,7 @@
         "country": "Chile",
         "type": "competitor",
         "caption": "Anglo American · Codelco",
-        "tagline": "Adjacent giants now under a joint mine plan; together hold ~60 Mt contained Cu, roughly 2% of global copper reserves and resources."
+        "tagline": "Adjacent giants now under a joint mine plan — combined already a top-10 operation (Los Bronces alone ~172 kt Cu in 2024) and projected to reach top-5 globally once the +120 kt/yr synergy lands; together hold ~60 Mt contained Cu, roughly 2% of global copper reserves and resources."
       }
     },
     {
@@ -53,7 +53,7 @@
         "country": "Chile",
         "type": "competitor",
         "caption": "Codelco · Chile",
-        "tagline": "Largest underground copper mine in the world; ~310 kt Cu produced in 2025 (impacted by July collapse); sixth-largest copper reserve globally."
+        "tagline": "#3 copper mine worldwide and the largest underground operation; ~310 kt Cu produced in 2025 (impacted by July collapse); sixth-largest copper reserve globally."
       }
     },
     {
@@ -63,8 +63,7 @@
         "id": "san-jorge",
         "name": "San Jorge",
         "country": "Argentina",
-        "type": "deposit",
-        "tagline": "Mendoza's first major modern Cu project; 1.2 Mt Cu resource at 0.48% Cu; US$559M capex, ~40 kt Cu/yr planned from 2029; RIGI-approved."
+        "type": "deposit"
       }
     },
     {
@@ -76,8 +75,7 @@
         "country": "Chile",
         "type": "deposit",
         "compact": true,
-        "minZoom": 7.0,
-        "tagline": "Northern half of the Rio Blanco–Los Bronces district: the world's greatest known concentration of copper."
+        "minZoom": 7.0
       }
     },
     {
@@ -89,20 +87,18 @@
         "country": "Chile",
         "type": "deposit",
         "compact": true,
-        "minZoom": 7.0,
-        "tagline": "High-grade hypogene Cu-Mo porphyry 6 km south of Los Bronces; 1.2 Bt inferred at 1.46% Cu (~17.5 Mt contained Cu); exploration target 4–5 Bt."
+        "minZoom": 7.0
       }
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [-69.9591, -34.1172] },
+      "geometry": { "type": "Point", "coordinates": [-69.965000, -34.119722] },
       "properties": {
         "id": "escalones",
         "name": "Escalones",
         "country": "Chile",
         "type": "deposit",
-        "labelPos": "2",
-        "tagline": "Chile's largest undeveloped oxide-copper resource: 426 Mt at 0.37% Cu inferred (~3.45 Blb Cu); 35 km east of El Teniente."
+        "labelPos": "2"
       }
     },
     {
@@ -112,8 +108,7 @@
         "id": "infiernillo",
         "name": "Infiernillo",
         "country": "Argentina",
-        "type": "deposit",
-        "tagline": "Cu-(Mo) porphyry deposit in the San Rafael Massif, southern Mendoza; geologically defined, undeveloped."
+        "type": "deposit"
       }
     },
     {
@@ -125,8 +120,7 @@
         "country": "Argentina",
         "type": "deposit",
         "labelPos": "3",
-        "minZoom": 7.0,
-        "tagline": "Cluster of five Cu-Mo-Au porphyry intrusions in Malargüe, southern Mendoza; >2,000 ha; early-stage drilling underway."
+        "minZoom": 7.0
       }
     },
     {
@@ -136,8 +130,7 @@
         "id": "el-perdido",
         "name": "El Perdido",
         "country": "Argentina",
-        "type": "deposit",
-        "tagline": "2 km × 2 km Cu-Au-Mo porphyry footprint in Western Malargüe; Phase 1 diamond drilling began January 2026."
+        "type": "deposit"
       }
     },
     {
@@ -149,8 +142,7 @@
         "country": "Argentina",
         "type": "deposit",
         "compact": true,
-        "minZoom": 7.0,
-        "tagline": "9,487-ha Cu-Au-Mo porphyry system mapped at surface in Western Malargüe; classic porphyry alteration, drill-ready, not yet tested."
+        "minZoom": 7.0
       }
     },
     {
@@ -162,8 +154,7 @@
         "country": "Argentina",
         "type": "deposit",
         "labelBelow": true,
-        "minZoom": 7.0,
-        "tagline": "Cu porphyry target within the 733 km² Western Malargüe project portfolio."
+        "minZoom": 7.0
       }
     },
     {
@@ -175,8 +166,7 @@
         "operator": "Argentina Metals",
         "country": "Argentina",
         "type": "flagship",
-        "caption": "Río Damas · Argentina",
-        "tagline": "Stacked copper systems: manto-type oxides in the Río Damas Formation plus porphyry Cu-Au signatures in the overlying Huincan; 144 surface rock chips returned up to 9,978 ppm Cu."
+        "caption": "Río Damas · Argentina"
       }
     }
   ]

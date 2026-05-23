@@ -18,6 +18,7 @@ import {
   tenureFillLayer,
   tenureOutlineLayer,
   type AndesTokens,
+  type CameraView,
 } from "../../data/andes/style";
 
 type MineFeature = {
@@ -44,6 +45,7 @@ const DEFAULT_FALLBACK_SRC = "/images/projects/map_fallback_horizontal.webp";
 interface AndesHeroProps {
   fallbackSrc?: string;
   fallbackAlt?: string;
+  cameraEnd?: CameraView;
 }
 
 function webglAvailable(): boolean {
@@ -128,6 +130,7 @@ function makeMarkerEl(f: MineFeature): HTMLDivElement {
 export default function AndesHero({
   fallbackSrc = DEFAULT_FALLBACK_SRC,
   fallbackAlt = "Southern Andes, Chile-Argentina border region with the Andean copper belt",
+  cameraEnd = CAMERA.end,
 }: AndesHeroProps = {}) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MlMap | null>(null);
@@ -195,19 +198,19 @@ export default function AndesHero({
 
           if (prefersReducedMotion()) {
             map.jumpTo({
-              center: CAMERA.end.center,
-              zoom: CAMERA.end.zoom,
-              pitch: CAMERA.end.pitch,
-              bearing: CAMERA.end.bearing,
+              center: cameraEnd.center,
+              zoom: cameraEnd.zoom,
+              pitch: cameraEnd.pitch,
+              bearing: cameraEnd.bearing,
             });
             enableInteraction();
           } else {
             map.once("moveend", enableInteraction);
             map.flyTo({
-              center: CAMERA.end.center,
-              zoom: CAMERA.end.zoom,
-              pitch: CAMERA.end.pitch,
-              bearing: CAMERA.end.bearing,
+              center: cameraEnd.center,
+              zoom: cameraEnd.zoom,
+              pitch: cameraEnd.pitch,
+              bearing: cameraEnd.bearing,
               duration: CAMERA.flyDurationMs,
               essential: true,
             });
