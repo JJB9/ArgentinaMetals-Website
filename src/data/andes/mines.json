@@ -95,7 +95,7 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [-69.9591, -34.1172] },
+      "geometry": { "type": "Point", "coordinates": [-69.965000, -34.119722] },
       "properties": {
         "id": "escalones",
         "name": "Escalones",
