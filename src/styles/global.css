@@ -1385,7 +1385,9 @@ body .closing-cta-copy h2 {
 }
 
 .andes-hero-marker--flagship {
-  align-items: flex-end;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
 }
 
 .andes-hero-marker--flagship .andes-hero-marker-dot {
@@ -1398,20 +1400,20 @@ body .closing-cta-copy h2 {
 .andes-hero-marker--flagship .andes-hero-marker-pulse {
   bottom: auto;
   left: auto;
-  top: 0;
+  top: 50%;
   right: 0;
   width: 14px;
   height: 14px;
   background: var(--green);
   opacity: 0.7;
-  transform: none;
+  transform: translate(0, -50%);
   animation: andesPulseFlagship 1800ms cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
 @keyframes andesPulseFlagship {
-  0% { transform: scale(1); opacity: 0.7; }
-  70% { transform: scale(2.6); opacity: 0; }
-  100% { transform: scale(2.6); opacity: 0; }
+  0% { transform: translate(0, -50%) scale(1); opacity: 0.7; }
+  70% { transform: translate(0, -50%) scale(2.6); opacity: 0; }
+  100% { transform: translate(0, -50%) scale(2.6); opacity: 0; }
 }
 
 .andes-hero-marker--city {
@@ -1493,8 +1495,7 @@ body .closing-cta-copy h2 {
 }
 
 .andes-hero-marker--flagship .andes-hero-marker-label {
-  margin: 8px 0 0 0;
-  align-self: flex-start;
+  margin: 0;
   background: rgba(0, 61, 30, 0.95);
 }
 
