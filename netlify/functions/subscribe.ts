@@ -5,16 +5,41 @@ import crypto from "node:crypto";
 
 const TOKEN_TTL_MS = 24 * 60 * 60 * 1000;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const RATE_LIMIT_MAX = 3;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 
 interface SignedPayload {
   email: string;
   expiresAt: number;
 }
 
+interface RateLimitEntry {
+  count: number;
+  windowStart: number;
+}
+
 function signToken(payload: SignedPayload, secret: string): string {
   const body = Buffer.from(JSON.stringify(payload)).toString("base64url");
   const sig = crypto.createHmac("sha256", secret).update(body).digest("base64url");
   return `${body}.${sig}`;
+}
+
+function hashIp(ip: string, secret: string): string {
+  return crypto.createHmac("sha256", secret).update(ip).digest("base64url");
+}
+
+async function consumeRateLimit(ip: string, secret: string): Promise<boolean> {
+  const key = hashIp(ip, secret);
+  const store = getStore("rate-limit-subscribe");
+  const existing = (await store.get(key, { type: "json" })) as RateLimitEntry | null;
+  const now = Date.now();
+  if (!existing || now - existing.windowStart > RATE_LIMIT_WINDOW_MS) {
+    await store.setJSON(key, { count: 1, windowStart: now });
+    return true;
+  }
+  if (existing.count >= RATE_LIMIT_MAX) return false;
+  await store.setJSON(key, { count: existing.count + 1, windowStart: existing.windowStart });
+  return true;
 }
 
 function renderConfirmEmail(confirmUrl: string, siteUrl: string): { html: string; text: string } {
@@ -114,7 +139,7 @@ TSX-V: VLLC`;
   return { html, text };
 }
 
-export default async (req: Request, _context: Context): Promise<Response> => {
+export default async (req: Request, context: Context): Promise<Response> => {
   if (req.method !== "POST") {
     return new Response("Method not allowed", { status: 405 });
   }
@@ -138,6 +163,13 @@ export default async (req: Request, _context: Context): Promise<Response> => {
 
   if (!apiKey || !secret || !siteUrl) {
     console.error("subscribe: missing required env vars");
+    return Response.json({ ok: true });
+  }
+
+  const ip = context.ip || req.headers.get("x-nf-client-connection-ip") || req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const allowed = await consumeRateLimit(ip, secret);
+  if (!allowed) {
+    console.warn("subscribe: rate limit exceeded");
     return Response.json({ ok: true });
   }
 

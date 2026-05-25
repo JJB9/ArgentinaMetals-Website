@@ -3,7 +3,11 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import PageHeader from "@components/PageHeader.astro";
 ---
 
-<BaseLayout title="Page not found - Argentina Metals">
+<BaseLayout
+  title="Page not found - Argentina Metals"
+  description="The page you were looking for has moved or no longer exists. Return to Argentina Metals' home page."
+>
+  <meta slot="head" name="robots" content="noindex" />
   <PageHeader
     title="Page not found"
     text="The page you're looking for has moved or no longer exists."
