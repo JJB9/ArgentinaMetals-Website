@@ -32,6 +32,13 @@ function verifyAndDecode(token: string, secret: string): DecodedPayload | null {
   }
 }
 
+function redirect(target: string, reason: string): Response {
+  return new Response(null, {
+    status: 302,
+    headers: { Location: target, "x-confirm-reason": reason }
+  });
+}
+
 export default async (req: Request, _context: Context): Promise<Response> => {
   const siteUrl = (process.env.SITE_URL ?? "").replace(/\/$/, "");
   const invalidRedirect = `${siteUrl}/subscribe/invalid`;
@@ -39,7 +46,7 @@ export default async (req: Request, _context: Context): Promise<Response> => {
 
   const url = new URL(req.url);
   const token = url.searchParams.get("t");
-  if (!token) return Response.redirect(invalidRedirect, 302);
+  if (!token) return redirect(invalidRedirect, "no-token");
 
   const secret = process.env.CONFIRM_TOKEN_SECRET;
   const apiKey = process.env.RESEND_API_KEY;
@@ -49,37 +56,47 @@ export default async (req: Request, _context: Context): Promise<Response> => {
     !apiKey && "RESEND_API_KEY",
     !audienceId && "RESEND_AUDIENCE_ID",
     !siteUrl && "SITE_URL"
-  ].filter(Boolean);
+  ].filter(Boolean) as string[];
   if (missing.length) {
-    console.error(`confirm: missing required env vars: ${missing.join(", ")}`);
-    return Response.redirect(invalidRedirect, 302);
+    const reason = `missing-env:${missing.join(",")}`;
+    console.error(`confirm: ${reason}`);
+    return redirect(invalidRedirect, reason);
   }
 
   const decoded = verifyAndDecode(token, secret!);
   if (!decoded) {
     console.error("confirm: token signature/format invalid");
-    return Response.redirect(invalidRedirect, 302);
+    return redirect(invalidRedirect, "bad-signature-or-format");
   }
   if (Date.now() > decoded.expiresAt) {
     console.error(`confirm: token expired for ${decoded.email} (expiresAt=${decoded.expiresAt})`);
-    return Response.redirect(invalidRedirect, 302);
+    return redirect(invalidRedirect, "expired");
   }
 
   const resend = new Resend(apiKey);
-  const created = await resend.contacts.create({
-    email: decoded.email,
-    unsubscribed: false,
-    audienceId: audienceId!
-  });
+  let resendStatus = "ok";
+  try {
+    const created = await resend.contacts.create({
+      email: decoded.email,
+      unsubscribed: false,
+      audienceId: audienceId!
+    });
 
-  if (created.error) {
-    const msg = typeof created.error === "object" && created.error && "message" in created.error
-      ? String((created.error as { message?: unknown }).message ?? "")
-      : "";
-    if (!/already exists/i.test(msg)) {
-      console.error("confirm: resend contacts.create error", created.error);
-      return Response.redirect(invalidRedirect, 302);
+    if (created.error) {
+      const msg = typeof created.error === "object" && created.error && "message" in created.error
+        ? String((created.error as { message?: unknown }).message ?? "")
+        : "";
+      if (/already exists/i.test(msg)) {
+        resendStatus = "already-exists";
+      } else {
+        console.error("confirm: resend contacts.create error", created.error);
+        return redirect(invalidRedirect, `resend-error:${msg.slice(0, 80) || "unknown"}`);
+      }
     }
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("confirm: resend threw", err);
+    return redirect(invalidRedirect, `resend-throw:${msg.slice(0, 80)}`);
   }
 
   try {
@@ -89,5 +106,5 @@ export default async (req: Request, _context: Context): Promise<Response> => {
     console.warn("confirm: pending-subscribers cleanup failed (non-fatal)", err);
   }
 
-  return Response.redirect(confirmedRedirect, 302);
+  return redirect(confirmedRedirect, `confirmed:${resendStatus}`);
 };
