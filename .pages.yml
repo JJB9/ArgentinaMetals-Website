@@ -44,6 +44,11 @@ content:
         label: Draft
         type: boolean
         default: false
+      - name: broadcastDraft
+        label: Send broadcast as draft (review in Resend before sending)
+        type: boolean
+        default: false
+        description: "When checked, the investor-alert broadcast is created in Resend but NOT auto-sent. Review and send manually from the Resend dashboard. Default: send immediately on publish."
       - name: body
         label: Body
         type: rich-text

@@ -27,3 +27,4 @@ yarn-error.log*
 blocked/
 .impeccable/
 temp_map/
+.broadcast-preview/
