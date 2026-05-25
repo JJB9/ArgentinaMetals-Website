@@ -66,7 +66,14 @@ const pointProgress = cumulativeLengths.map((c) => c / totalPathLength);
   title="Investing in Argentina and Its Emerging Copper Boom - Argentina Metals"
 >
   <link rel="preload" as="image" href={asset("images/brand/preview-thumbnail.webp")} fetchpriority="high" slot="head" />
-  <script is:inline slot="head" defer src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
+  <script
+    is:inline
+    slot="head"
+    defer
+    src="https://cdn.jsdelivr.net/npm/@mux/mux-player@3.13.0"
+    integrity="sha384-ZY32fzVtu/3Zj6BAXLdLXZMx4k1yuSlY0Uc2yQAbR2NZfah3kIq6140hnJGuO20B"
+    crossorigin="anonymous"
+  ></script>
 
   <div class="hero-media hero-media--lead" data-reveal style="--i:0">
     <div class="hero-media-frame" id="hero-media-frame">
