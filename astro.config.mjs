@@ -9,6 +9,6 @@ export default defineConfig({
   trailingSlash: "never",
   integrations: [
     react(),
-    sitemap({ filter: (page) => !page.includes("/admin") })
+    sitemap({ filter: (page) => !page.includes("/admin") && !page.includes("/subscribe/") })
   ]
 });

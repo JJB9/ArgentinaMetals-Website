@@ -19,6 +19,11 @@
   to = "/.netlify/functions/confirm"
   status = 200
 
+[[redirects]]
+  from = "/api/csp-report"
+  to = "/.netlify/functions/csp-report"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]
@@ -27,7 +32,9 @@
     X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob: https://*.mux.com; connect-src 'self' https://api.maptiler.com https://*.mux.com https://*.litix.io; worker-src 'self' blob:; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Reporting-Endpoints = "csp-endpoint=\"https://argentinametals.com/api/csp-report\""
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob: https://*.mux.com; connect-src 'self' https://api.maptiler.com https://*.mux.com https://*.litix.io; worker-src 'self' blob:; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; report-uri /api/csp-report; report-to csp-endpoint"
 
 [[headers]]
   for = "/_astro/*"

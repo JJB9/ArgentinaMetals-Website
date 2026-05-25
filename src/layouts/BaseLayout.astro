@@ -21,14 +21,15 @@ const {
 } = Astro.props;
 
 const siteUrl = Astro.site ?? new URL("https://argentinametals.com");
-const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const pathname = Astro.url.pathname === "/" ? "" : Astro.url.pathname.replace(/\/$/, "");
+const canonicalUrl = `${siteUrl.origin}${pathname}`;
 const ogImageUrl = new URL(image, siteUrl).toString();
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "Corporation",
   name: "Argentina Metals Corp.",
-  url: siteUrl.toString(),
+  url: siteUrl.origin,
   logo: new URL("/images/brand/logo-copper-white.png", siteUrl).toString(),
   sameAs: [
     "https://www.linkedin.com/company/argentina-metals-corp",
@@ -47,6 +48,7 @@ const organizationJsonLd = {
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Argentina Metals" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -64,6 +66,7 @@ const organizationJsonLd = {
     <link rel="icon" type="image/png" sizes="32x32" href="/images/brand/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/images/brand/favicon-192.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/images/brand/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <ClientRouter fallback="swap" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

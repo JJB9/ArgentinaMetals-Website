@@ -66,9 +66,23 @@ const samples = [
 ];
 
 const technicalReport = lasEstrellasData.technicalReport;
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://argentinametals.com" },
+    { "@type": "ListItem", position: 2, name: "Projects", item: "https://argentinametals.com/projects" },
+    { "@type": "ListItem", position: 3, name: "Las Estrellas", item: "https://argentinametals.com/projects/las-estrellas" }
+  ]
+};
 ---
 
-<BaseLayout title="Las Estrellas · Cu-Au Project | Argentina Metals">
+<BaseLayout
+  title="Las Estrellas · Cu-Au Project | Argentina Metals"
+  description="Las Estrellas — Argentina Metals' Cu-Au project in the Malargüe District, with surface sampling up to 9,978 ppm Cu and a confirmed porphyry target."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
   <div class="page-progress" aria-hidden="true"><span></span></div>
 
   <section class="page-hero page-hero--split page-hero--project">

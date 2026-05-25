@@ -201,6 +201,12 @@ export const handler: Handler = async (event) => {
     return OK;
   }
 
+  const topicLabel = TOPIC_LABELS[topicKey];
+  if (!topicLabel) {
+    console.error("submission-created: invalid topic, rejecting", { topicKey });
+    return OK;
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
   const fromAddr = process.env.RESEND_CONTACT_FROM_ADDRESS ?? "contact@argentinametals.com";
   const toAddr = process.env.CONTACT_TO_ADDRESS ?? "contact@argentinametals.com";
@@ -209,8 +215,6 @@ export const handler: Handler = async (event) => {
     console.error("submission-created: missing RESEND_API_KEY");
     return OK;
   }
-
-  const topicLabel = TOPIC_LABELS[topicKey] ?? (topicKey || "—");
 
   const { html, text, subject } = renderContactEmail({
     firstName,
