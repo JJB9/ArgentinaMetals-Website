@@ -4,5 +4,12 @@
     "broadcast_id": "9f01480b-7330-46a1-b8eb-62c88b3c1a8b",
     "title": "Argentina Metals Test",
     "sentAt": "2026-05-25T08:19:46.894Z"
+  },
+  {
+    "slug": "argentina-metals-investor-news-test",
+    "broadcast_id": "09e8996d-e3c6-4bee-962c-f482c82921b9",
+    "title": "Argentina Metals Investor News Test",
+    "status": "sent",
+    "sentAt": "2026-05-25T08:59:35.852Z"
   }
 ]
