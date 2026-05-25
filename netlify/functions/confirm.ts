@@ -3,6 +3,13 @@ import { getStore } from "@netlify/blobs";
 import { Resend } from "resend";
 import crypto from "node:crypto";
 
+interface PendingEntry {
+  email: string;
+  token: string;
+  expiresAt: number;
+  createdAt: number;
+}
+
 interface DecodedPayload {
   email: string;
   expiresAt: number;
@@ -51,44 +58,34 @@ export default async (req: Request, _context: Context): Promise<Response> => {
   const secret = process.env.CONFIRM_TOKEN_SECRET;
   const apiKey = process.env.RESEND_API_KEY;
   const audienceId = process.env.RESEND_AUDIENCE_ID;
-  const missing = [
-    !secret && "CONFIRM_TOKEN_SECRET",
-    !apiKey && "RESEND_API_KEY",
-    !audienceId && "RESEND_AUDIENCE_ID",
-    !siteUrl && "SITE_URL"
-  ].filter(Boolean) as string[];
-  if (missing.length) {
-    const reason = `missing-env:${missing.join(",")}`;
-    console.error(`confirm: ${reason}`);
-    return redirect(invalidRedirect, reason);
+  if (!secret || !apiKey || !audienceId || !siteUrl) {
+    console.error("confirm: missing required env vars");
+    return redirect(invalidRedirect, "missing-env");
   }
 
-  const decoded = verifyAndDecode(token, secret!);
-  if (!decoded) {
-    console.error("confirm: token signature/format invalid");
-    return redirect(invalidRedirect, "bad-signature-or-format");
-  }
-  if (Date.now() > decoded.expiresAt) {
-    console.error(`confirm: token expired for ${decoded.email} (expiresAt=${decoded.expiresAt})`);
-    return redirect(invalidRedirect, "expired");
+  const decoded = verifyAndDecode(token, secret);
+  if (!decoded) return redirect(invalidRedirect, "bad-signature-or-format");
+  if (Date.now() > decoded.expiresAt) return redirect(invalidRedirect, "expired");
+
+  const store = getStore("pending-subscribers");
+  const pending = (await store.get(decoded.email, { type: "json" })) as PendingEntry | null;
+  if (!pending || pending.token !== token) {
+    return redirect(invalidRedirect, "no-pending-or-token-mismatch");
   }
 
   const resend = new Resend(apiKey);
-  let resendStatus = "ok";
   try {
     const created = await resend.contacts.create({
       email: decoded.email,
       unsubscribed: false,
-      audienceId: audienceId!
+      audienceId
     });
 
     if (created.error) {
       const msg = typeof created.error === "object" && created.error && "message" in created.error
         ? String((created.error as { message?: unknown }).message ?? "")
         : "";
-      if (/already exists/i.test(msg)) {
-        resendStatus = "already-exists";
-      } else {
+      if (!/already exists/i.test(msg)) {
         console.error("confirm: resend contacts.create error", created.error);
         return redirect(invalidRedirect, `resend-error:${msg.slice(0, 80) || "unknown"}`);
       }
@@ -99,12 +96,6 @@ export default async (req: Request, _context: Context): Promise<Response> => {
     return redirect(invalidRedirect, `resend-throw:${msg.slice(0, 80)}`);
   }
 
-  try {
-    const store = getStore("pending-subscribers");
-    await store.delete(decoded.email);
-  } catch (err) {
-    console.warn("confirm: pending-subscribers cleanup failed (non-fatal)", err);
-  }
-
-  return redirect(confirmedRedirect, `confirmed:${resendStatus}`);
+  await store.delete(decoded.email);
+  return redirect(confirmedRedirect, "confirmed");
 };
