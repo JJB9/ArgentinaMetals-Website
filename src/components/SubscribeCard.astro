@@ -1,19 +1,28 @@
 ---
 interface Props {
   title?: string;
+  description?: string;
+  variant?: "card" | "inline";
   reveal?: boolean;
   revealIndex?: number;
 }
 
-const { title = "Subscribe to Investor Alerts", reveal = false, revealIndex = 0 } = Astro.props;
+const {
+  title = "Subscribe to Investor Alerts",
+  description,
+  variant = "card",
+  reveal = false,
+  revealIndex = 0
+} = Astro.props;
 const revealAttrs = reveal ? { "data-reveal": "", style: `--i:${revealIndex}` } : {};
 ---
 
-<div class="subscribe-card" {...revealAttrs}>
+<div class:list={["subscribe-card", { "subscribe-card--inline": variant === "inline" }]} {...revealAttrs}>
   <div class="subscribe-head">
-    <span class="subscribe-icon mi" aria-hidden="true">mail</span>
+    {variant === "card" && <span class="subscribe-icon mi" aria-hidden="true">mail</span>}
     <h2>{title}</h2>
   </div>
+  {description && <p class="subscribe-desc">{description}</p>}
   <form class="newsletter-form" data-newsletter-form novalidate>
     <label class="sr-only" for="newsletter-email">Email address</label>
     <input
@@ -96,6 +105,71 @@ const revealAttrs = reveal ? { "data-reveal": "", style: `--i:${revealIndex}` } 
 
   .subscribe-card .button.copper:hover .mi {
     transform: translateX(3px);
+  }
+
+  .subscribe-desc {
+    margin: 0 0 22px;
+    color: var(--g500);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    max-width: 42ch;
+  }
+
+  .subscribe-card--inline {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .subscribe-card--inline:hover {
+    box-shadow: none;
+  }
+
+  .subscribe-card--inline h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    line-height: 1.2;
+  }
+
+  .subscribe-card--inline .newsletter-form {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .subscribe-card--inline .form-input {
+    flex: 1 1 180px;
+    width: auto;
+    min-width: 0;
+    border: none;
+    border-bottom: 1px solid var(--g200);
+    border-radius: 0;
+    background: transparent;
+    padding: 11px 2px;
+    font-size: 0.92rem;
+  }
+
+  .subscribe-card--inline .form-input:focus,
+  .subscribe-card--inline .form-input:focus-visible {
+    outline: none;
+    border-color: var(--copper-dark);
+    box-shadow: 0 1px 0 0 var(--copper-dark);
+    background: transparent;
+  }
+
+  .subscribe-card--inline .button.copper {
+    flex: none;
+    width: auto;
+    padding: 12px 24px;
+    border-radius: var(--r-full);
+  }
+
+  .subscribe-card--inline .newsletter-status {
+    flex-basis: 100%;
   }
 
   .newsletter-status {
