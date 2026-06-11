@@ -3,6 +3,7 @@ import { statSync } from "node:fs";
 import { resolve } from "node:path";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import SubscribeCard from "@components/SubscribeCard.astro";
+import KeyFactsBox, { type KeyFact } from "@components/KeyFactsBox.astro";
 import corporateDocs from "../data/investor/corporate.json";
 import financialDocs from "../data/investor/financial.json";
 
@@ -30,6 +31,13 @@ function pdfItem(icon: string, name: string, path: string | undefined, baseLabel
 function linkItem(icon: string, name: string, meta: string, href: string): DocItem {
   return { icon, name, meta, href, external: true };
 }
+
+const shareFacts: KeyFact[] = [
+  { label: "Exchange", value: "TSX Venture Exchange" },
+  { label: "Ticker Symbol", value: "VLLC", highlight: true },
+  { label: "CUSIP", value: "04022C109" },
+  { label: "ISIN", value: "CA04022C1095" }
+];
 
 const highlights = [
   ["category", "Pure-Play Copper", "Dedicated exposure to the critical metal driving electrification. Direct access to the geological extension of Chile's world-class copper belt."],
@@ -87,6 +95,17 @@ const documents: { title: string; items: DocItem[] }[] = [
       <div class="page-hero-subscribe">
         <SubscribeCard reveal revealIndex={2} />
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="share-information">
+    <div class="wrap">
+      <KeyFactsBox
+        title="Share Information"
+        facts={shareFacts}
+        columns={4}
+        footnote="Listing conditionally approved by the TSX Venture Exchange. Trading is expected to commence on or about June 16, 2026."
+      />
     </div>
   </section>
 
@@ -291,6 +310,10 @@ const documents: { title: string; items: DocItem[] }[] = [
 </BaseLayout>
 
 <style>
+  #share-information {
+    padding: 16px 0 0;
+  }
+
   :global(.page-hero--split:has(.ticker-card--hero)) :global(.page-hero-text) {
     padding-bottom: 0;
   }
