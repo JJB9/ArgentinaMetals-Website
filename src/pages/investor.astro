@@ -3,6 +3,7 @@ import { statSync } from "node:fs";
 import { resolve } from "node:path";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import SubscribeCard from "@components/SubscribeCard.astro";
+import { type KeyFact } from "@components/KeyFactsBox.astro";
 import corporateDocs from "../data/investor/corporate.json";
 import financialDocs from "../data/investor/financial.json";
 
@@ -30,6 +31,16 @@ function pdfItem(icon: string, name: string, path: string | undefined, baseLabel
 function linkItem(icon: string, name: string, meta: string, href: string): DocItem {
   return { icon, name, meta, href, external: true };
 }
+
+const shareFacts: KeyFact[] = [
+  { label: "Exchange", value: "TSX Venture Exchange" },
+  { label: "Ticker Symbol", value: "VLLC", highlight: true },
+  { label: "CUSIP", value: "04022C109" },
+  { label: "ISIN", value: "CA04022C1095" }
+];
+
+const shareFootnote =
+  "Listing conditionally approved by the TSX Venture Exchange. Trading is expected to commence on or about June 16, 2026.";
 
 const highlights = [
   ["category", "Pure-Play Copper", "Dedicated exposure to the critical metal driving electrification. Direct access to the geological extension of Chile's world-class copper belt."],
@@ -82,10 +93,27 @@ const documents: { title: string; items: DocItem[] }[] = [
     <div class="wrap">
       <div class="page-hero-text">
         <h1 data-reveal style="--i:0">Investors</h1>
-        <p data-reveal style="--i:1">Pure-play exposure to world-class copper exploration in one of the world's most prospective emerging jurisdictions. Listing on the TSX Venture Exchange imminently, with secondary listings on the Frankfurt and OTC Stock Exchanges to follow.</p>
+        <p data-reveal style="--i:1">Pure-play exposure to world-class copper exploration in one of the world's most prospective emerging jurisdictions. Listing on the TSX Venture Exchange imminently, with a Frankfurt Stock Exchange listing and OTC Markets quotation to follow.</p>
       </div>
       <div class="page-hero-subscribe">
-        <SubscribeCard reveal revealIndex={2} />
+        <SubscribeCard variant="inline" title="Investor Alerts" reveal revealIndex={2} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="share-information">
+    <div class="wrap">
+      <div class="share-strip" data-reveal>
+        <h2 class="share-strip-title">Share Information</h2>
+        <dl class="share-strip-list">
+          {shareFacts.map((fact) => (
+            <div class:list={["share-strip-item", { "share-strip-item--hi": fact.highlight }]}>
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="share-strip-foot">{shareFootnote}</p>
       </div>
     </div>
   </section>
@@ -291,6 +319,121 @@ const documents: { title: string; items: DocItem[] }[] = [
 </BaseLayout>
 
 <style>
+  #share-information {
+    padding: 56px 0 80px;
+  }
+
+  @media (max-width: 640px) {
+    #share-information {
+      padding: 40px 0 56px;
+    }
+  }
+
+  .share-strip {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    column-gap: 56px;
+    row-gap: 14px;
+    padding: 26px 0;
+    border-top: 1px solid var(--sand);
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .share-strip-title {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    margin: 0;
+    color: var(--g900);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .share-strip-list {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 0;
+    margin: 0;
+  }
+
+  .share-strip-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 2px 40px;
+    border-left: 1px solid var(--sand);
+  }
+
+  .share-strip-item:first-child {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .share-strip-item dt {
+    color: var(--g500);
+    font-family: var(--font-label);
+    font-size: 0.64rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .share-strip-item dd {
+    margin: 0;
+    color: var(--g900);
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .share-strip-item--hi dd {
+    color: var(--copper-dark);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .share-strip-foot {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    color: var(--g400);
+    font-size: 0.76rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 960px) {
+    .share-strip {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+    }
+
+    .share-strip-title,
+    .share-strip-list,
+    .share-strip-foot {
+      grid-column: 1;
+      grid-row: auto;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .share-strip-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 24px;
+    }
+
+    .share-strip-item {
+      padding: 0;
+      border-left: none;
+    }
+  }
+
   :global(.page-hero--split:has(.ticker-card--hero)) :global(.page-hero-text) {
     padding-bottom: 0;
   }

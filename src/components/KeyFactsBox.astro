@@ -1,6 +1,5 @@
 ---
 export interface KeyFact {
-  icon: string;
   label: string;
   value: string;
   highlight?: boolean;
@@ -22,18 +21,13 @@ const { title = "Key Facts", lede, facts, footnote, columns = 4 } = Astro.props;
     <h2>{title}</h2>
     {lede && <p>{lede}</p>}
   </div>
-  <div class="key-facts-grid" role="list">
+  <dl class="key-facts-grid">
     {facts.map((fact) => (
-      <div class:list={["kf-item", { "kf-item--hi": fact.highlight }]} role="listitem">
-        <span class="kf-icon" aria-hidden="true">
-          <span class="mi">{fact.icon}</span>
-        </span>
-        <div class="kf-text">
-          <span class="kf-label">{fact.label}</span>
-          <span class="kf-value">{fact.value}</span>
-        </div>
+      <div class:list={["kf-item", { "kf-item--hi": fact.highlight }]}>
+        <dt class="kf-label">{fact.label}</dt>
+        <dd class="kf-value">{fact.value}</dd>
       </div>
     ))}
-  </div>
+  </dl>
   {footnote && <p class="key-facts-foot">{footnote}</p>}
 </section>
