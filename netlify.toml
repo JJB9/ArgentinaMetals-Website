@@ -24,6 +24,11 @@
   to = "/.netlify/functions/csp-report"
   status = 200
 
+[[redirects]]
+  from = "/api/quote"
+  to = "/.netlify/functions/quote"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]

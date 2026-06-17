@@ -28,3 +28,8 @@ blocked/
 .impeccable/
 temp_map/
 .broadcast-preview/
+
+# Local Netlify folder
+.netlify
+# Netlify dev edge-runtime artifact
+deno.lock

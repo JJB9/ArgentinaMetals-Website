@@ -8346,3 +8346,396 @@ body .u-data {
   }
 }
 
+/* ============================================================
+   Live quote (VLLC / TSX-V) + copper
+   ============================================================ */
+
+/* Directional badge — shared: investor / hero / footer / news */
+.quote-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.quote-badge[data-dir="up"] {
+  color: var(--stock-up);
+}
+.quote-badge[data-dir="down"] {
+  color: var(--stock-down);
+}
+.quote-badge[data-dir="flat"] {
+  color: var(--g500);
+}
+.quote-badge-pct {
+  opacity: 0.85;
+}
+
+/* Investor live-quote block */
+.quote-live {
+  padding: 30px 0 26px;
+  border-top: 1px solid var(--sand);
+  border-bottom: 1px solid var(--sand);
+}
+
+.quote-id {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.quote-id-ticker {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--g500);
+}
+.quote-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--g400);
+}
+.quote-state::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: var(--r-full);
+  background: var(--g300);
+}
+.quote-state[data-state="open"] {
+  color: var(--stock-up);
+}
+.quote-state[data-state="open"]::before {
+  background: var(--stock-up);
+}
+
+.quote-price-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.quote-price {
+  font-size: clamp(2.2rem, 1.2vw + 1.8rem, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--g900);
+  font-variant-numeric: tabular-nums;
+}
+.quote-price-row .quote-badge {
+  font-size: 1rem;
+}
+
+.quote-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin: 12px 0 0;
+  font-size: 0.76rem;
+  color: var(--g400);
+}
+.quote-delay {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--r-sm);
+  background: var(--warm);
+  color: var(--g500);
+  font-family: var(--font-label);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.quote-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 24px 0 0;
+}
+.quote-stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0 24px;
+  border-left: 1px solid var(--sand);
+}
+.quote-stats > div:first-child {
+  padding-left: 0;
+  border-left: none;
+}
+.quote-stats dt {
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--g500);
+}
+.quote-stats dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--g900);
+}
+
+@media (max-width: 640px) {
+  .quote-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 0;
+  }
+  .quote-stats > div {
+    padding: 0 18px;
+  }
+  .quote-stats > div:nth-child(odd) {
+    padding-left: 0;
+    border-left: none;
+  }
+}
+
+/* Price chart island */
+.quote-chart {
+  margin: 28px 0 0;
+  padding: 22px 24px 16px;
+  background: var(--white);
+  border-radius: var(--r-2xl);
+  box-shadow: var(--s-sm);
+}
+.quote-chart-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.quote-chart-cap {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--g500);
+}
+.quote-chart-cur {
+  color: var(--g400);
+  font-weight: 500;
+}
+.quote-chart-tabs {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--r-full);
+  background: var(--warm);
+}
+.quote-chart-tab {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 5px 14px;
+  border-radius: var(--r-full);
+  font-family: var(--font-label);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--g500);
+  cursor: pointer;
+  transition: background 200ms var(--ease), color 200ms var(--ease);
+}
+.quote-chart-tab:hover {
+  color: var(--g700);
+}
+.quote-chart-tab.is-active {
+  background: var(--white);
+  color: var(--copper-dark);
+  box-shadow: var(--s-xs);
+}
+.quote-chart-plot {
+  position: relative;
+}
+.quote-chart-canvas {
+  width: 100%;
+  height: 260px;
+}
+.quote-chart-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  padding: 3px 8px;
+  border-radius: var(--r-sm);
+  background: var(--g900);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 120ms ease;
+  z-index: 2;
+}
+.quote-chart-note {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0 16px;
+  color: var(--g400);
+  font-size: 0.82rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Copper strip — unboxed, mirrors .share-strip */
+.copper-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 32px;
+  margin: 24px 0 0;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--sand);
+}
+.copper-strip-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 130px;
+}
+.copper-strip-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--g900);
+}
+.copper-strip-mkt {
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--g400);
+}
+.copper-strip-val {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+.copper-price {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--copper-dark);
+}
+.copper-unit {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--g400);
+}
+.copper-strip-val .quote-badge {
+  font-size: 0.85rem;
+}
+
+.quote-disclaimer {
+  margin: 22px 0 0;
+  color: var(--g400);
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+.quote-disclaimer a {
+  color: var(--g500);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.quote-disclaimer a:hover {
+  color: var(--copper-dark);
+}
+
+/* Footer live ticker */
+.footer-ticker em.footer-ticker-price {
+  margin-left: 4px;
+  padding: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+}
+/* Hero listing live price */
+.hero-listing-price {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.hero-listing-badge {
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.hero-listing-badge[data-dir="up"] {
+  color: var(--stock-up);
+}
+.hero-listing-badge[data-dir="down"] {
+  color: var(--stock-down);
+}
+.hero-listing-badge[data-dir="flat"] {
+  color: var(--g400);
+}
+
+/* News header quote line */
+.news-quote {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+.news-quote-ticker {
+  font-family: var(--font-label);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--g500);
+}
+.news-quote-price {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--g900);
+}
+.news-quote-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.news-quote-badge[data-dir="up"] {
+  color: var(--stock-up);
+}
+.news-quote-badge[data-dir="down"] {
+  color: var(--stock-down);
+}
+.news-quote-badge[data-dir="flat"] {
+  color: var(--g400);
+}
+
