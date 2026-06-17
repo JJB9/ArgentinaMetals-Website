@@ -123,6 +123,11 @@ function applyQuote(root: ParentNode, p: QuotePayload): void {
     el.setAttribute("data-state", p.market.state);
   });
 
+  // "Delayed 15 min" only makes sense while the market is open; otherwise it's the last close.
+  root.querySelectorAll("[data-quote-delay]").forEach((el) => {
+    el.textContent = p.market.state === "open" ? "Delayed 15 min" : "At close";
+  });
+
   const c = p.copper;
   if (c && p.status !== "unavailable") {
     setAll(root, '[data-copper="price"]', money(c.price, c.currency));
